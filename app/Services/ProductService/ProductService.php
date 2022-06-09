@@ -130,7 +130,7 @@ class ProductService implements ProductServiceContract
 //                    dd($size['id'],['flavor_id' => $flavor['id'], 'price' => $flavor['product']['price']]);
 //                    $product->size()->updateExistingPivot($size['id'], ['flavor_id' => $flavor['id'], 'price' => $flavor['product']['price']]);
 //                    $product->size()->updateExistingPivot($size['id'], ['flavor_id' => $flavor['id'], 'price' => $flavor['product']['price']]);
-                    $sdf = $product->sraka()->save( ['size_id'=>$size['id'],'flavor_id' => $flavor['id'], 'price' => $flavor['product']['price']]);
+//                    $sdf = $product->attributeProduct()->save( ['size_id'=>$size['id'],'flavor_id' => $flavor['id'], 'price' => $flavor['product']['price']]);
 //                    dd($sdf);
                 }
             }
