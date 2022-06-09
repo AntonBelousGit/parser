@@ -31,4 +31,10 @@ return [
         'region' => env('AWS_DEFAULT_REGION', 'us-east-1'),
     ],
 
+    'parser' => [
+        'url' => env('PARSE_URL','https://dominos.ua/uk/chornomorsk/'),
+        'product_attribute' => env('PRODUCT_ATTRIBUTE','sizes'),
+        'product_relations_attribute' => env('PRODUCT_RELATION_ATTRIBUTE','flavors'),
+        'product_topping' => env('PRODUCT_TOPPING','toppings')
+    ]
 ];
