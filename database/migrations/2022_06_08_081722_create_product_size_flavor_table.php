@@ -15,9 +15,9 @@ return new class extends Migration
     {
         Schema::create('product_size_flavor', function (Blueprint $table) {
             $table->id();
-            $table->string('product_id', 50)->references('id')->on('products')->onUpdate('cascade');
-            $table->string('size_id', 50)->references('id')->on('sizes')->onUpdate('cascade');;
-            $table->string('flavor_id', 50)->references('id')->on('flavors')->onUpdate('cascade');;
+            $table->string('product_id', 50)->references('id')->on('products')->onUpdate('cascade')->index();
+            $table->string('size_id', 50)->references('id')->on('sizes')->onUpdate('cascade')->index();
+            $table->string('flavor_id', 50)->references('id')->on('flavors')->onUpdate('cascade')->index();
             $table->float('price')->nullable();
             $table->timestamps();
         });
