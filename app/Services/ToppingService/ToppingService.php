@@ -13,9 +13,6 @@ use Throwable;
 
 class ToppingService implements ToppingServiceContract
 {
-
-    protected array $sizes = [];
-
     /**
      * @param ToppingValidatorContract $toppingValidatorContract
      * @param ToppingRepositories $toppingRepositories
@@ -29,45 +26,12 @@ class ToppingService implements ToppingServiceContract
 
     /**
      * @param array $array
-     * @return mixed
-     */
-    public function store(array $array = []): bool
-    {
-        try {
-
-            foreach ($array as $topping) {
-
-                $topping = $this->toppingValidatorContract->validate($topping);
-                $data = [
-                    'id' => $topping['id'],
-                    'name' => html_entity_decode($topping['name']),
-                ];
-
-                try {
-                    (new Topping())->create($data);
-                } catch (Throwable $e) {
-
-                    report($e);
-                    abort(400);
-                }
-            }
-        } catch (Throwable $e) {
-            report($e);
-            return false;
-        }
-        return true;
-    }
-
-    /**
-     * @param array $array
      * @return bool
      */
     public function update(array $array = []): bool
     {
         try {
-
             foreach ($array as $topping) {
-
                 $topping = $this->toppingValidatorContract->validate($topping);
 
                 $data = [
@@ -76,21 +40,19 @@ class ToppingService implements ToppingServiceContract
                 ];
 
                 try {
-                    $update_size = $this->toppingRepositories->getToppingByID($data['id']);
-                    if ($update_size) {
-                        $update_size->update($data);
+                    $updateTopping = $this->toppingRepositories->getToppingByID($data['id']);
+                    if ($updateTopping) {
+                        $updateTopping->update($data);
                     } else {
-                        (new Topping())->create($data);
+                        Topping::create($data);
                     }
-
-                } catch (Throwable $e) {
-
-                    report($e);
+                } catch (Throwable $exception) {
+                    report('ToppingService error create/update'. $exception);
                     continue;
                 }
             }
-        } catch (Throwable $e) {
-            report($e);
+        } catch (Throwable) {
+            report('ToppingService update error');
             return false;
         }
         return true;

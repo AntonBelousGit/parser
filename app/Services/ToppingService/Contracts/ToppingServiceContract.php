@@ -7,7 +7,9 @@ namespace App\Services\ToppingService\Contracts;
 
 interface ToppingServiceContract
 {
-    public function store(array $array = []);
-
-    public function update(array $array = []);
+    /**
+     * @param array $array
+     * @return mixed
+     */
+    public function update(array $array = []): mixed;
 }
