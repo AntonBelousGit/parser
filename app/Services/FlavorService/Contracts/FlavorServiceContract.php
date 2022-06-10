@@ -7,7 +7,9 @@ namespace App\Services\FlavorService\Contracts;
 
 interface FlavorServiceContract
 {
-    public function store(array $array = []);
-
-    public function update(array $array = []);
+    /**
+     * @param array $array
+     * @return bool
+     */
+    public function update(array $array = []): bool;
 }

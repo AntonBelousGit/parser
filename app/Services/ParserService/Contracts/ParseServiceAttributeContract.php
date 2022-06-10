@@ -10,7 +10,7 @@ interface ParseServiceAttributeContract
     /**
      * Parse Product Attribute
      * @param array $array
-     * @return mixed
+     * @return array
      */
     public function parseAttribute( array $array = []) : array;
 

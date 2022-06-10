@@ -7,7 +7,9 @@ namespace App\Services\ProductService\Contracts;
 
 interface ProductServiceContract
 {
-    public function store(array $array = []);
-
-    public function update(array $array = []);
+    /**
+     * @param array $array
+     * @return bool
+     */
+    public function update(array $array = []): bool;
 }
