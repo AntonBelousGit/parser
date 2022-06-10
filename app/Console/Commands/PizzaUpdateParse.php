@@ -51,10 +51,8 @@ class PizzaUpdateParse extends Command
             $toppingServiceContract->update($attribute[config('services.parser.product_topping')]);
             $productServiceContract->update($data);
 
-            $this->info('The command was successful!');
-        } catch (Throwable $e) {
-            report($e);
-            $this->error('Something went wrong! Check log file');
+        } catch (Throwable) {
+            report('Something went wrong! Check log file');
         }
     }
 }
