@@ -6,4 +6,4 @@
     PRODUCT_TOPPING=toppings
 
 
-    php artisan pizza:parse
+    php artisan pizza:update
