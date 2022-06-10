@@ -32,9 +32,9 @@ return [
     ],
 
     'parser' => [
-        'url' => env('PARSE_URL','https://dominos.ua/uk/chornomorsk/'),
-        'product_attribute' => env('PRODUCT_ATTRIBUTE','sizes'),
-        'product_relations_attribute' => env('PRODUCT_RELATION_ATTRIBUTE','flavors'),
-        'product_topping' => env('PRODUCT_TOPPING','toppings')
+        'url' => 'https://dominos.ua/uk/chornomorsk/',
+        'product_attribute' => 'sizes',
+        'product_relations_attribute' => 'flavors',
+        'product_topping' => 'toppings'
     ]
 ];
