@@ -16,7 +16,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
 
-    $products = Product::with('size')->first();
+    $products = Product::with(['sizes' => function($query){$query->with('flavors');}])->first();
 
-    dd($products);
+    dump($products);
 });
