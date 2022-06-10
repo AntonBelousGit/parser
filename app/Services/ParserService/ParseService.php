@@ -22,6 +22,7 @@ class ParseService implements ParseServiceContract, ParseServiceAttributeContrac
     }
 
     /**
+     *Parse get data - return prepare data
      * @return array
      */
     public function parseProduct(): array
@@ -43,12 +44,11 @@ class ParseService implements ParseServiceContract, ParseServiceAttributeContrac
 
         $new = json_decode($str, true, 100);
         $product_collection = collect($new['data']['groups'])->pluck('products')->toArray();
-        $products = call_user_func_array('array_merge', $product_collection);
-
-        return $products;
+        return call_user_func_array('array_merge', $product_collection);
     }
 
     /**
+     * Prepare parsed attribute data
      * @param array $array
      * @return array
      */
@@ -68,13 +68,16 @@ class ParseService implements ParseServiceContract, ParseServiceAttributeContrac
                 $data[config('services.parser.product_topping')] = $this->array_unique_key(call_user_func_array('array_merge', $temp_arr), 'id');
             }
         }
-
-
         return $data;
     }
 
-
-    protected function array_unique_key($array, $key)
+    /**
+     * Remove non-unique key from deep array
+     * @param $array
+     * @param $key
+     * @return array
+     */
+    protected function array_unique_key($array, $key): array
     {
         $tmp = $key_array = array();
         $i = 0;

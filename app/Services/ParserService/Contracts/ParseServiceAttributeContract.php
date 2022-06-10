@@ -7,7 +7,11 @@ namespace App\Services\ParserService\Contracts;
 
 interface ParseServiceAttributeContract
 {
-
-    public function parseAttribute( array $array = []);
+    /**
+     * Parse Product Attribute
+     * @param array $array
+     * @return mixed
+     */
+    public function parseAttribute( array $array = []) : array;
 
 }
