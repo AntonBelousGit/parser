@@ -14,10 +14,8 @@ class Size extends Model
 
     protected $fillable = ['id','name'];
 
-    public function flavor()
+    public function flavors()
     {
-        return $this->belongsToMany(
-            Flavor::class, 'product_size_flavor','size_id','flavor_id'
-        );
+        return $this->belongsToMany(Flavor::class, 'product_size_flavor')->withPivot('price');
     }
 }
