@@ -9,7 +9,7 @@ interface SizeServiceContract
 {
     /**
      * @param array $array
-     * @return mixed
+     * @return bool
      */
-    public function update(array $array = []): mixed;
+    public function update(array $array = []): bool;
 }
