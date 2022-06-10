@@ -29,46 +29,12 @@ class FlavorService implements FlavorServiceContract
 
     /**
      * @param array $array
-     * @return mixed
-     */
-    public function store(array $array = []): bool
-    {
-        try {
-
-            foreach ($array as $flavor) {
-
-                $flavor = $this->flavorValidatorContract->validate($flavor);
-                $data = [
-                    'id' => $flavor['id'],
-                    'name' => html_entity_decode($flavor['name']),
-                    'code' => $flavor['code']
-                ];
-
-                try {
-                    (new Flavor())->create($data);
-                } catch (Throwable $e) {
-
-                    report($e);
-                    abort(400);
-                }
-            }
-        } catch (Throwable $e) {
-            report($e);
-            return false;
-        }
-        return true;
-    }
-
-    /**
-     * @param array $array
      * @return bool
      */
     public function update(array $array = []): bool
     {
         try {
-
             foreach ($array as $flavor) {
-
                 $flavor = $this->flavorValidatorContract->validate($flavor);
 
                 $data = [
@@ -78,21 +44,19 @@ class FlavorService implements FlavorServiceContract
                 ];
 
                 try {
-                    $update_size = $this->flavorRepositories->getFlavorByID($data['id']);
-                    if ($update_size) {
-                        $update_size->update($data);
+                    $updateFlavor = $this->flavorRepositories->getFlavorByID($data['id']);
+                    if ($updateFlavor) {
+                        $updateFlavor->update($data);
                     } else {
-                        (new Flavor())->create($data);
+                        Flavor::create($data);
                     }
-
-                } catch (Throwable $e) {
-
-                    report($e);
+                } catch (Throwable $exception) {
+                    report('FlavorService error create/update' . $exception);
                     continue;
                 }
             }
-        } catch (Throwable $e) {
-            report($e);
+        } catch (Throwable) {
+            report('FlavorService update error');
             return false;
         }
         return true;
