@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace App\Services\ParserService;
 
-
 use App\Services\ParserService\Contracts\DominoParseServiceAttributeContract;
 use App\Services\ParserService\Contracts\DominoParseServiceContract;
 use DiDom\Document;
@@ -12,13 +11,17 @@ use Throwable;
 
 class DominoParseService implements DominoParseServiceContract, DominoParseServiceAttributeContract
 {
+    private const URL = 'https://dominos.ua/uk/chornomorsk/';
+    private const PRODUCT_ATTRIBUTE = 'sizes';
+    private const PRODUCT_RELATION_ATTRIBUTE = 'flavors';
+    private const PRODUCT_TOPPING = 'toppings';
 
     /**
      * @return Document
      */
     public function callConnectToParse(): Document
     {
-        return new Document(config('services.parser.url'), true);
+        return new Document(self::URL, true);
     }
 
     /**
@@ -50,25 +53,27 @@ class DominoParseService implements DominoParseServiceContract, DominoParseServi
     /**
      * Prepare parsed attribute data
      * @param array $array
-     * @return array
+     * @return Attribute
      */
-    public function parseAttribute(array $array = []): array
+    public function parseAttribute(array $array = []): Attribute
     {
-        $data = [];
-        if (!empty($array)) {
-            $data[config('services.parser.product_attribute')] = $array[0][config('services.parser.product_attribute')] ?? '';
-            $data[config('services.parser.product_relations_attribute')] = $array[0][config('services.parser.product_relations_attribute')] ?? '';
-            $data[config('services.parser.product_topping')] = [];
-            $temp_arr = [];
+        $productAttribute = $array[0][self::PRODUCT_ATTRIBUTE] ?? [];
+        $productRelationAttribute = $array[0][self::PRODUCT_RELATION_ATTRIBUTE] ?? [];
+        $productTopping = [];
+        $temp_arr = [];
 
-            foreach ($array as $product) {
-                $temp_arr[] = $product[config('services.parser.product_topping')];
-            }
-            if (!empty($temp_arr)) {
-                $data[config('services.parser.product_topping')] = $this->array_unique_key(call_user_func_array('array_merge', $temp_arr), 'id');
-            }
+        foreach ($array as $product) {
+            $temp_arr[] = $product[self::PRODUCT_TOPPING] ?? [];
         }
-        return $data;
+        if (!empty(array_filter($temp_arr))) {
+            $productTopping = $this->array_unique_key(call_user_func_array('array_merge', $temp_arr), 'id');
+        }
+
+        return new Attribute(
+            size: $productAttribute,
+            productRelation: $productRelationAttribute,
+            topping: $productTopping
+        );
     }
 
     /**
@@ -92,6 +97,3 @@ class DominoParseService implements DominoParseServiceContract, DominoParseServi
         return $tmp;
     }
 }
-
-
-

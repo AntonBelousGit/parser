@@ -45,9 +45,9 @@ class PizzaUpdateParse extends Command
         try {
             $data = $contract->parseProduct();
             $attribute = $attributeContract->parseAttribute($data);
-            $sizeServiceContract->update($attribute[config('services.parser.product_attribute')]);
-            $flavorServiceContract->update($attribute[config('services.parser.product_relations_attribute')]);
-            $toppingServiceContract->update($attribute[config('services.parser.product_topping')]);
+            $sizeServiceContract->update($attribute->size);
+            $flavorServiceContract->update($attribute->productRelation);
+            $toppingServiceContract->update($attribute->topping);
             $productServiceContract->update($data);
         } catch (Throwable) {
             report('Something went wrong! Check log file');
