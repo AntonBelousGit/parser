@@ -30,11 +30,4 @@ return [
         'secret' => env('AWS_SECRET_ACCESS_KEY'),
         'region' => env('AWS_DEFAULT_REGION', 'us-east-1'),
     ],
-
-    'parser' => [
-        'url' => 'https://dominos.ua/uk/chornomorsk/',
-        'product_attribute' => 'sizes',
-        'product_relations_attribute' => 'flavors',
-        'product_topping' => 'toppings'
-    ]
 ];
