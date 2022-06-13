@@ -14,3 +14,7 @@ parameters:
         - ./*/*/FileToBeExcluded.php
 
     checkMissingIterableValueType: false
+
+    ignoreErrors:
+        - '#Call to an undefined method [a-zA-Z0-9\\_]+::getChangedColumns\(\)#'
+        - '#Call to an undefined method [a-zA-Z0-9\\_]+::saveChange\(\)#'
