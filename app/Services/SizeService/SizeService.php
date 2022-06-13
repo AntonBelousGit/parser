@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace App\Services\SizeService;
 
-
 use App\Models\Size;
 use App\Repositories\SizeRepositories;
 use App\Services\SizeService\Contracts\SizeServiceContract;
@@ -20,8 +19,7 @@ class SizeService implements SizeServiceContract
     public function __construct(
         protected SizeValidatorContract $sizeDataValidator,
         protected SizeRepositories $sizeRepositories,
-    )
-    {
+    ) {
     }
 
     /**

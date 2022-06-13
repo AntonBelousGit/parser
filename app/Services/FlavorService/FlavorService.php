@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace App\Services\FlavorService;
 
-
 use App\Models\Flavor;
 use App\Repositories\FlavorRepositories;
 use App\Services\FlavorService\Contracts\FlavorServiceContract;
@@ -13,7 +12,6 @@ use Throwable;
 
 class FlavorService implements FlavorServiceContract
 {
-
     protected array $sizes = [];
 
     /**
@@ -23,8 +21,7 @@ class FlavorService implements FlavorServiceContract
     public function __construct(
         protected FlavorValidatorContract $flavorValidatorContract,
         protected FlavorRepositories $flavorRepositories,
-    )
-    {
+    ) {
     }
 
     /**

@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace App\Services\ToppingService;
 
-
 use App\Models\Topping;
 use App\Repositories\ToppingRepositories;
 use App\Services\ToppingService\Contracts\ToppingServiceContract;
@@ -20,8 +19,7 @@ class ToppingService implements ToppingServiceContract
     public function __construct(
         protected ToppingValidatorContract $toppingValidatorContract,
         protected ToppingRepositories $toppingRepositories,
-    )
-    {
+    ) {
     }
 
     /**
