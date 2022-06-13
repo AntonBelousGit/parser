@@ -7,7 +7,7 @@ namespace App\Services\ParserService\Contracts;
 
 use DiDom\Document;
 
-interface ParseServiceContract
+interface DominoParseServiceContract
 {
 
     /**

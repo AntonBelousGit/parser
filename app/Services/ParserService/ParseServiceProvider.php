@@ -5,8 +5,8 @@ declare(strict_types=1);
 namespace App\Services\ParserService;
 
 
-use App\Services\ParserService\Contracts\ParseServiceAttributeContract;
-use App\Services\ParserService\Contracts\ParseServiceContract;
+use App\Services\ParserService\Contracts\DominoParseServiceAttributeContract;
+use App\Services\ParserService\Contracts\DominoParseServiceContract;
 use Illuminate\Support\ServiceProvider;
 
 class ParseServiceProvider extends ServiceProvider
@@ -18,7 +18,7 @@ class ParseServiceProvider extends ServiceProvider
      */
     public function register(): void
     {
-        $this->app->bind(ParseServiceContract::class, ParseService::class);
-        $this->app->bind(ParseServiceAttributeContract::class, ParseService::class);
+        $this->app->bind(DominoParseServiceContract::class, DominoParseService::class);
+        $this->app->bind(DominoParseServiceAttributeContract::class, DominoParseService::class);
     }
 }

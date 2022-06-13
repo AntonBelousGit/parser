@@ -5,12 +5,12 @@ declare(strict_types=1);
 namespace App\Services\ParserService;
 
 
-use App\Services\ParserService\Contracts\ParseServiceAttributeContract;
-use App\Services\ParserService\Contracts\ParseServiceContract;
+use App\Services\ParserService\Contracts\DominoParseServiceAttributeContract;
+use App\Services\ParserService\Contracts\DominoParseServiceContract;
 use DiDom\Document;
 use Throwable;
 
-class ParseService implements ParseServiceContract, ParseServiceAttributeContract
+class DominoParseService implements DominoParseServiceContract, DominoParseServiceAttributeContract
 {
 
     /**

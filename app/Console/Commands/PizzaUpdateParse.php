@@ -5,8 +5,8 @@ declare(strict_types=1);
 namespace App\Console\Commands;
 
 use App\Services\FlavorService\Contracts\FlavorServiceContract;
-use App\Services\ParserService\Contracts\ParseServiceAttributeContract;
-use App\Services\ParserService\Contracts\ParseServiceContract;
+use App\Services\ParserService\Contracts\DominoParseServiceAttributeContract;
+use App\Services\ParserService\Contracts\DominoParseServiceContract;
 use App\Services\ProductService\Contracts\ProductServiceContract;
 use App\Services\SizeService\Contracts\SizeServiceContract;
 use App\Services\ToppingService\Contracts\ToppingServiceContract;
@@ -35,14 +35,13 @@ class PizzaUpdateParse extends Command
      * @return void
      */
     public function handle(
-        ParseServiceContract $contract,
-        ParseServiceAttributeContract $attributeContract,
+        DominoParseServiceContract $contract,
+        DominoParseServiceAttributeContract $attributeContract,
         SizeServiceContract $sizeServiceContract,
         FlavorServiceContract $flavorServiceContract,
         ToppingServiceContract $toppingServiceContract,
         ProductServiceContract $productServiceContract,
-    )
-    {
+    ) {
         try {
             $data = $contract->parseProduct();
             $attribute = $attributeContract->parseAttribute($data);
@@ -50,7 +49,6 @@ class PizzaUpdateParse extends Command
             $flavorServiceContract->update($attribute[config('services.parser.product_relations_attribute')]);
             $toppingServiceContract->update($attribute[config('services.parser.product_topping')]);
             $productServiceContract->update($data);
-
         } catch (Throwable) {
             report('Something went wrong! Check log file');
         }
