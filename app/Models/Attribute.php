@@ -15,10 +15,10 @@ class Attribute extends Model
 
     public function size()
     {
-        return $this->hasMany(Size::class,'id','sizes_id');
+        return $this->hasMany(Size::class, 'id', 'sizes_id');
     }
 
-    public function ignoreHistoryColumns()
+    public function ignoreHistoryColumns(): array
     {
         return [
             'updated_at',

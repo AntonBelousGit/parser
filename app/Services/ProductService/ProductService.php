@@ -23,8 +23,7 @@ class ProductService implements ProductServiceContract
         protected ProductValidatorContract $validatorContract,
         protected ProductRepositories $productRepositories,
         protected AttributeRepositories $attributeRepositories,
-    )
-    {
+    ) {
     }
 
     /**
@@ -72,6 +71,7 @@ class ProductService implements ProductServiceContract
                     $this->attachAttribute($product, $size['id'], $flavor);
                 }
             }
+            return true;
         } catch (Throwable) {
             report('ProductService error in createProduct');
             return false;
@@ -92,7 +92,6 @@ class ProductService implements ProductServiceContract
 
             foreach ($data['sizes'] as $size) {
                 foreach ($size['flavors'] as $flavor) {
-
                     $data = [
                         'product_id' => $product->id,
                         'size_id' => $size['id'],

@@ -63,7 +63,7 @@ trait Historical
     }
 
 
-    public function ignoreHistoryColumns()
+    public function ignoreHistoryColumns(): array
     {
         return [
             'updated_at',
