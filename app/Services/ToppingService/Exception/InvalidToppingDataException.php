@@ -3,9 +3,6 @@
 
 namespace App\Services\ToppingService\Exception;
 
-use Exception;
-
-class InvalidToppingDataException extends Exception
+class InvalidToppingDataException extends ToppingServiceException
 {
-
 }

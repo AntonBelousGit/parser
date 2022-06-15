@@ -7,7 +7,6 @@ namespace App\Services\ToppingService;
 use App\Services\BaseValidator;
 use App\Services\ToppingService\Contracts\ToppingValidatorContract;
 use App\Services\ToppingService\Exception\InvalidToppingDataException;
-use Throwable;
 
 class ToppingValidator extends BaseValidator implements ToppingValidatorContract
 {
@@ -17,7 +16,7 @@ class ToppingValidator extends BaseValidator implements ToppingValidatorContract
      * @param array $data
      * @param array $rules
      * @return array
-     * @throws InvalidToppingDataException|Throwable
+     * @throws InvalidToppingDataException
      */
     public function validate(array $data, array $rules = []): array
     {
@@ -43,7 +42,7 @@ class ToppingValidator extends BaseValidator implements ToppingValidatorContract
 
     /**
      * Size data validation exception.
-     *
+     * @return InvalidToppingDataException
      */
     protected function getValidationException(): InvalidToppingDataException
     {
