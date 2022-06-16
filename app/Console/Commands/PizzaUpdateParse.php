@@ -4,12 +4,12 @@ declare(strict_types=1);
 
 namespace App\Console\Commands;
 
-use App\Services\FlavorService\Contracts\FlavorServiceContract;
-use App\Services\ParserService\Contracts\DominoParseServiceAttributeContract;
-use App\Services\ParserService\Contracts\DominoParseServiceContract;
-use App\Services\ProductService\Contracts\ProductServiceContract;
-use App\Services\SizeService\Contracts\SizeServiceContract;
-use App\Services\ToppingService\Contracts\ToppingServiceContract;
+use App\Services\ParseDomino\FlavorService\Contracts\FlavorServiceContract;
+use App\Services\ParseDomino\ParserService\Contracts\DominoParseServiceAttributeContract;
+use App\Services\ParseDomino\ParserService\Contracts\DominoParseServiceContract;
+use App\Services\ParseDomino\ProductService\Contracts\ProductServiceContract;
+use App\Services\ParseDomino\SizeService\Contracts\SizeServiceContract;
+use App\Services\ParseDomino\ToppingService\Contracts\ToppingServiceContract;
 use Illuminate\Console\Command;
 use Throwable;
 

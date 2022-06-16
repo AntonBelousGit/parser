@@ -199,11 +199,11 @@ return [
          *  Parse Service Providers...
          */
 
-        \App\Services\ParserService\ParseServiceProvider::class,
-        \App\Services\SizeService\SizeServiceProvider::class,
-        \App\Services\FlavorService\FlavorServiceProvider::class,
-        \App\Services\ToppingService\ToppingServiceProvider::class,
-        \App\Services\ProductService\ProductServiceProvider::class,
+        \App\Services\ParseDomino\ParserService\ParseServiceProvider::class,
+        \App\Services\ParseDomino\SizeService\SizeServiceProvider::class,
+        \App\Services\ParseDomino\FlavorService\FlavorServiceProvider::class,
+        \App\Services\ParseDomino\ToppingService\ToppingServiceProvider::class,
+        \App\Services\ParseDomino\ProductService\ProductServiceProvider::class,
     ],
 
     /*
