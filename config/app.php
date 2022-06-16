@@ -204,6 +204,8 @@ return [
         \App\Services\ParseDomino\FlavorService\FlavorServiceProvider::class,
         \App\Services\ParseDomino\ToppingService\ToppingServiceProvider::class,
         \App\Services\ParseDomino\ProductService\ProductServiceProvider::class,
+
+        App\Services\ParseZharPizza\ParserService\ParseServiceProvider::class,
     ],
 
     /*
