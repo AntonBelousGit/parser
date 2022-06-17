@@ -94,8 +94,8 @@ class ZharPizzaParseService implements ZharPizzaParseServiceContract, ZharPizzaP
                 $temp_arr_size[] = $item->attribute->attribute;
                 $temp_arr_topping[] = $item->topping->topping;
             }
-            $attr_size = call_user_func_array('array_merge', $temp_arr_size);
-            $attr_topping = call_user_func_array('array_merge', $temp_arr_topping);
+            $attr_size = $this->array_unique_key(call_user_func_array('array_merge', $temp_arr_size), 'id');
+            $attr_topping = $this->array_unique_key(call_user_func_array('array_merge', $temp_arr_topping), 'id');
         } catch (Throwable) {
             report('ZharPizzaParser - parseAttribute - size error');
         }
@@ -115,9 +115,9 @@ class ZharPizzaParseService implements ZharPizzaParseServiceContract, ZharPizzaP
         $temp_array = [];
         $array = array_map('trim', explode(',', $data));
         foreach ($array as $item) {
-            $temp_array[] = Str::slug($item);
+            $temp_array[] = [ 'id' =>Str::slug($item), 'name' =>$item ];
         }
-        return array_combine($temp_array, $array);
+        return $temp_array;
     }
 
     /**
@@ -130,8 +130,29 @@ class ZharPizzaParseService implements ZharPizzaParseServiceContract, ZharPizzaP
         $temp_array = [];
 
         foreach ($data[0]->values as $item) {
-            $temp_array[] = Str::slug($item);
+            $temp_array[] = [ 'id' =>Str::slug($item), 'name' =>$item ];
         }
-        return array_combine($temp_array, $data[0]->values);
+        return $temp_array;
+    }
+
+    /**
+     * Remove non-unique key from deep array
+     * @param $array
+     * @param $key
+     * @return array
+     */
+    protected function array_unique_key($array, $key): array
+    {
+        $tmp = $key_array = array();
+        $i = 0;
+
+        foreach ($array as $val) {
+            if (!in_array($val[$key], $key_array)) {
+                $key_array[$i] = $val[$key];
+                $tmp[$i] = $val;
+            }
+            $i++;
+        }
+        return $tmp;
     }
 }

@@ -198,14 +198,15 @@ return [
         /*
          *  Parse Service Providers...
          */
+        \App\Services\BaseServices\ToppingService\ToppingServiceProvider::class,
+        \App\Services\BaseServices\SizeService\SizeServiceProvider::class,
 
         \App\Services\ParseDomino\ParserService\ParseServiceProvider::class,
-        \App\Services\ParseDomino\SizeService\SizeServiceProvider::class,
         \App\Services\ParseDomino\FlavorService\FlavorServiceProvider::class,
-        \App\Services\ParseDomino\ToppingService\ToppingServiceProvider::class,
         \App\Services\ParseDomino\ProductService\ProductServiceProvider::class,
 
-        App\Services\ParseZharPizza\ParserService\ParseServiceProvider::class,
+        \App\Services\ParseZharPizza\ParserService\ParseServiceProvider::class,
+        \App\Services\ParseZharPizza\ProductService\ProductServiceProvider::class,
     ],
 
     /*

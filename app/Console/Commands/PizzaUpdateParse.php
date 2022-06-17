@@ -8,8 +8,10 @@ use App\Services\ParseDomino\FlavorService\Contracts\FlavorServiceContract;
 use App\Services\ParseDomino\ParserService\Contracts\DominoParseServiceAttributeContract;
 use App\Services\ParseDomino\ParserService\Contracts\DominoParseServiceContract;
 use App\Services\ParseDomino\ProductService\Contracts\ProductServiceContract;
-use App\Services\ParseDomino\SizeService\Contracts\SizeServiceContract;
-use App\Services\ParseDomino\ToppingService\Contracts\ToppingServiceContract;
+use App\Services\BaseServices\SizeService\Contracts\SizeServiceContract;
+use App\Services\BaseServices\ToppingService\Contracts\ToppingServiceContract;
+use App\Services\ParseZharPizza\ParserService\Contracts\ZharPizzaParseServiceAttributeContract;
+use App\Services\ParseZharPizza\ParserService\Contracts\ZharPizzaParseServiceContract;
 use Illuminate\Console\Command;
 use Throwable;
 
@@ -41,14 +43,26 @@ class PizzaUpdateParse extends Command
         FlavorServiceContract $flavorServiceContract,
         ToppingServiceContract $toppingServiceContract,
         ProductServiceContract $productServiceContract,
+        ZharPizzaParseServiceContract $contractZhar,
+        ZharPizzaParseServiceAttributeContract $attributeZharContract,
+        \App\Services\ParseZharPizza\ProductService\Contracts\ProductServiceContract $productZharService
+
     ) {
         try {
+            //Domino
             $data = $contract->parseProduct();
             $attribute = $attributeContract->parseAttribute($data);
             $sizeServiceContract->update($attribute->size);
             $flavorServiceContract->update($attribute->productRelation);
             $toppingServiceContract->update($attribute->topping);
             $productServiceContract->update($data);
+            //ZharPizza
+            $data = $contractZhar->parseProduct();
+            $attribute = $attributeZharContract->parseAttribute($data);
+            $sizeServiceContract->update($attribute->size);
+            $toppingServiceContract->update($attribute->topping);
+            $productZharService->update($data);
+
         } catch (Throwable) {
             report('Something went wrong! Check log file');
         }
