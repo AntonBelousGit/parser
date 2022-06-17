@@ -18,3 +18,5 @@ parameters:
     ignoreErrors:
         - '#Call to an undefined method [a-zA-Z0-9\\_]+::getChangedColumns\(\)#'
         - '#Call to an undefined method [a-zA-Z0-9\\_]+::saveChange\(\)#'
+        - '#Access to an undefined property [a-zA-Z0-9\\_]+::\$attribute#'
+        - '#Access to an undefined property [a-zA-Z0-9\\_]+::\$price#'
