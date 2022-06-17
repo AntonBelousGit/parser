@@ -32,6 +32,7 @@ class ProductService implements ProductServiceContract
      */
     public function update(array $array = []): bool
     {
+
         try {
             foreach ($array as $item) {
                 try {

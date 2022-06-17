@@ -132,5 +132,9 @@ class ToppingSeeder extends Seeder
             'id' => 'fce178eb-6e6c-44b7-9c00-cdbe6275bdb6',
             'name' => "Болгарський перець"
         ]);
+        Topping::create([
+            'id' => 'krasnyi-sous',
+            'name' => "Красный соус"
+        ]);
     }
 }
