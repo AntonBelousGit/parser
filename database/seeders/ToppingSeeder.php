@@ -2,9 +2,7 @@
 
 namespace Database\Seeders;
 
-use App\Models\Size;
 use App\Models\Topping;
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
 class ToppingSeeder extends Seeder
@@ -135,6 +133,10 @@ class ToppingSeeder extends Seeder
         Topping::create([
             'id' => 'krasnyi-sous',
             'name' => "Красный соус"
+        ]);
+        Topping::create([
+            "id" => "grusa",
+            "name" => "Груша"
         ]);
     }
 }
