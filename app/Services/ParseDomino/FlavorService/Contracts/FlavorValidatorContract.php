@@ -7,7 +7,7 @@ namespace App\Services\ParseDomino\FlavorService\Contracts;
 interface FlavorValidatorContract
 {
     /**
-     * Validate rate data.
+     * Validate data.
      *
      * @param array $data
      * @param array $rules

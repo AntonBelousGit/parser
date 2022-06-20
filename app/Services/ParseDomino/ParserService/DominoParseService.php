@@ -46,8 +46,8 @@ class DominoParseService implements DominoParseServiceContract, DominoParseServi
         }, $array[1]);
 
         $new = json_decode($str, true, 100);
-        $product_collection = collect($new['data']['groups'])->pluck('products')->toArray();
-        return call_user_func_array('array_merge', $product_collection);
+        $productCollection = collect($new['data']['groups'])->pluck('products')->toArray();
+        return call_user_func_array('array_merge', $productCollection);
     }
 
     /**
@@ -60,13 +60,13 @@ class DominoParseService implements DominoParseServiceContract, DominoParseServi
         $productAttribute = $array[0][self::PRODUCT_ATTRIBUTE] ?? [];
         $productRelationAttribute = $array[0][self::PRODUCT_RELATION_ATTRIBUTE] ?? [];
         $productTopping = [];
-        $temp_arr = [];
+        $tempArr = [];
 
         foreach ($array as $product) {
-            $temp_arr[] = $product[self::PRODUCT_TOPPING] ?? [];
+            $tempArr[] = $product[self::PRODUCT_TOPPING] ?? [];
         }
-        if (!empty(array_filter($temp_arr))) {
-            $productTopping = $this->array_unique_key(call_user_func_array('array_merge', $temp_arr), 'id');
+        if (!empty(array_filter($tempArr))) {
+            $productTopping = $this->array_unique_key(call_user_func_array('array_merge', $tempArr), 'id');
         }
 
         return new Attribute(
@@ -84,12 +84,12 @@ class DominoParseService implements DominoParseServiceContract, DominoParseServi
      */
     protected function array_unique_key($array, $key): array
     {
-        $tmp = $key_array = array();
+        $tmp = $keyArray = array();
         $i = 0;
 
         foreach ($array as $val) {
-            if (!in_array($val[$key], $key_array)) {
-                $key_array[$i] = $val[$key];
+            if (!in_array($val[$key], $keyArray)) {
+                $keyArray[$i] = $val[$key];
                 $tmp[$i] = $val;
             }
             $i++;

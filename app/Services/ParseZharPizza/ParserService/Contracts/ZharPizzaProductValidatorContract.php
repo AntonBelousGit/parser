@@ -7,7 +7,7 @@ namespace App\Services\ParseZharPizza\ParserService\Contracts;
 interface ZharPizzaProductValidatorContract
 {
     /**
-     * Validate rate data.
+     * Validate data.
      *
      * @param array $data
      * @param array $rules

@@ -7,7 +7,7 @@ namespace App\Services\BaseServices\SizeService\Contracts;
 interface SizeValidatorContract
 {
     /**
-     * Validate rate data.
+     * Validate data.
      *
      * @param array $data
      * @param array $rules

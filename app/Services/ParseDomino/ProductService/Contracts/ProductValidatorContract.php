@@ -7,7 +7,7 @@ namespace App\Services\ParseDomino\ProductService\Contracts;
 interface ProductValidatorContract
 {
     /**
-     * Validate rate data.
+     * Validate data.
      *
      * @param array $data
      * @param array $rules

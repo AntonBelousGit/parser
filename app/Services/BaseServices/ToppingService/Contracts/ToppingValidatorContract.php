@@ -7,7 +7,7 @@ namespace App\Services\BaseServices\ToppingService\Contracts;
 interface ToppingValidatorContract
 {
     /**
-     * Validate rate data.
+     * Validate data.
      *
      * @param array $data
      * @param array $rules

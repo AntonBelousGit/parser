@@ -84,25 +84,25 @@ class ZharPizzaParseService implements ZharPizzaParseServiceContract, ZharPizzaP
      */
     public function parseAttribute(array $array = []): Attribute
     {
-        $temp_arr_size = [];
-        $temp_arr_topping = [];
-        $attr_size = [];
-        $attr_topping = [];
+        $tempArrSize = [];
+        $tempArrTopping = [];
+        $attrSize = [];
+        $attrTopping = [];
 
         try {
             foreach ($array as $item) {
-                $temp_arr_size[] = $item->attribute->attribute;
-                $temp_arr_topping[] = $item->topping->topping;
+                $tempArrSize[] = $item->attribute->attribute;
+                $tempArrTopping[] = $item->topping->topping;
             }
-            $attr_size = $this->array_unique_key(call_user_func_array('array_merge', $temp_arr_size), 'id');
-            $attr_topping = $this->array_unique_key(call_user_func_array('array_merge', $temp_arr_topping), 'id');
+            $attrSize = $this->array_unique_key(call_user_func_array('array_merge', $tempArrSize), 'id');
+            $attrTopping = $this->array_unique_key(call_user_func_array('array_merge', $tempArrTopping), 'id');
         } catch (Throwable) {
             report('ZharPizzaParser - parseAttribute - size error');
         }
 
         return new Attribute(
-            size: $attr_size,
-            topping: $attr_topping
+            size: $attrSize,
+            topping: $attrTopping
         );
     }
 
@@ -112,12 +112,12 @@ class ZharPizzaParseService implements ZharPizzaParseServiceContract, ZharPizzaP
      */
     protected function parseJsonTopping($data): array
     {
-        $temp_array = [];
+        $tempArray = [];
         $array = array_map('trim', explode(',', $data));
         foreach ($array as $item) {
-            $temp_array[] = [ 'id' =>Str::slug($item), 'name' =>$item ];
+            $tempArray[] = ['id' => Str::slug($item), 'name' => $item];
         }
-        return $temp_array;
+        return $tempArray;
     }
 
     /**
@@ -127,12 +127,12 @@ class ZharPizzaParseService implements ZharPizzaParseServiceContract, ZharPizzaP
     protected function parseJsonOptionsSize($data): array
     {
         $data = json_decode($data);
-        $temp_array = [];
+        $tempArray = [];
 
         foreach ($data[0]->values as $item) {
-            $temp_array[] = [ 'id' =>Str::slug($item), 'name' =>$item ];
+            $tempArray[] = ['id' => Str::slug($item), 'name' => $item];
         }
-        return $temp_array;
+        return $tempArray;
     }
 
     /**
@@ -143,12 +143,12 @@ class ZharPizzaParseService implements ZharPizzaParseServiceContract, ZharPizzaP
      */
     protected function array_unique_key($array, $key): array
     {
-        $tmp = $key_array = array();
+        $tmp = $keyArray = array();
         $i = 0;
 
         foreach ($array as $val) {
-            if (!in_array($val[$key], $key_array)) {
-                $key_array[$i] = $val[$key];
+            if (!in_array($val[$key], $keyArray)) {
+                $keyArray[$i] = $val[$key];
                 $tmp[$i] = $val;
             }
             $i++;

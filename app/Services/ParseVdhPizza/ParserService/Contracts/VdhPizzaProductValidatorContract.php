@@ -7,7 +7,7 @@ namespace App\Services\ParseVdhPizza\ParserService\Contracts;
 interface VdhPizzaProductValidatorContract
 {
     /**
-     * Validate rate data.
+     * Validate data.
      *
      * @param array $data
      * @param array $rules
