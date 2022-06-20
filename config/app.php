@@ -207,6 +207,9 @@ return [
 
         \App\Services\ParseZharPizza\ParserService\ParseServiceProvider::class,
         \App\Services\ParseZharPizza\ProductService\ProductServiceProvider::class,
+
+        \App\Services\ParseVdhPizza\ParserService\ParseServiceProvider::class,
+        \App\Services\ParseVdhPizza\ProductService\ProductServiceProvider::class,
     ],
 
     /*

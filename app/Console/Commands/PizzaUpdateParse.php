@@ -10,6 +10,8 @@ use App\Services\ParseDomino\ParserService\Contracts\DominoParseServiceContract;
 use App\Services\ParseDomino\ProductService\Contracts\ProductServiceContract;
 use App\Services\BaseServices\SizeService\Contracts\SizeServiceContract;
 use App\Services\BaseServices\ToppingService\Contracts\ToppingServiceContract;
+use App\Services\ParseVdhPizza\ParserService\Contracts\VdhPizzaParseServiceAttributeContract;
+use App\Services\ParseVdhPizza\ParserService\Contracts\VdhPizzaParseServiceContract;
 use App\Services\ParseZharPizza\ParserService\Contracts\ZharPizzaParseServiceAttributeContract;
 use App\Services\ParseZharPizza\ParserService\Contracts\ZharPizzaParseServiceContract;
 use Illuminate\Console\Command;
@@ -45,24 +47,31 @@ class PizzaUpdateParse extends Command
         ProductServiceContract $productServiceContract,
         ZharPizzaParseServiceContract $contractZhar,
         ZharPizzaParseServiceAttributeContract $attributeZharContract,
-        \App\Services\ParseZharPizza\ProductService\Contracts\ProductServiceContract $productZharService
-
+        \App\Services\ParseZharPizza\ProductService\Contracts\ProductServiceContract $productZharService,
+        VdhPizzaParseServiceContract $vdhPizzaParseServiceContract,
+        VdhPizzaParseServiceAttributeContract $vdhPizzaParseServiceAttributeContract,
+        \App\Services\ParseVdhPizza\ProductService\Contracts\ProductServiceContract $productVdhServiceContract
     ) {
         try {
-            //Domino
-            $data = $contract->parseProduct();
-            $attribute = $attributeContract->parseAttribute($data);
-            $sizeServiceContract->update($attribute->size);
-            $flavorServiceContract->update($attribute->productRelation);
-            $toppingServiceContract->update($attribute->topping);
-            $productServiceContract->update($data);
-            //ZharPizza
-            $data = $contractZhar->parseProduct();
-            $attribute = $attributeZharContract->parseAttribute($data);
-            $sizeServiceContract->update($attribute->size);
-            $toppingServiceContract->update($attribute->topping);
-            $productZharService->update($data);
-
+//          Domino
+            $dataDomino = $contract->parseProduct();
+            $attributeDomino = $attributeContract->parseAttribute($dataDomino);
+            $sizeServiceContract->update($attributeDomino->size);
+            $flavorServiceContract->update($attributeDomino->productRelation);
+            $toppingServiceContract->update($attributeDomino->topping);
+            $productServiceContract->update($dataDomino);
+//          ZharPizza
+            $dataZhar = $contractZhar->parseProduct();
+            $attributeZhar = $attributeZharContract->parseAttribute($dataZhar);
+            $sizeServiceContract->update($attributeZhar->size);
+            $toppingServiceContract->update($attributeZhar->topping);
+            $productZharService->update($dataZhar);
+//          VdhBar
+            $dataVdh = $vdhPizzaParseServiceContract->parseProduct();
+            $attributeVdh = $vdhPizzaParseServiceAttributeContract->parseAttribute($dataVdh);
+            $sizeServiceContract->update($attributeVdh->size);
+            $toppingServiceContract->update($attributeVdh->topping);
+            $productVdhServiceContract->update($dataVdh);
         } catch (Throwable) {
             report('Something went wrong! Check log file');
         }
