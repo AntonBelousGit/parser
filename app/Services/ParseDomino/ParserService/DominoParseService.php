@@ -7,6 +7,7 @@ namespace App\Services\ParseDomino\ParserService;
 use App\Services\ParseDomino\ParserService\Contracts\DominoParseServiceAttributeContract;
 use App\Services\ParseDomino\ParserService\Contracts\DominoParseServiceContract;
 use DiDom\Document;
+use Illuminate\Support\Arr;
 use Throwable;
 
 class DominoParseService implements DominoParseServiceContract, DominoParseServiceAttributeContract
@@ -46,8 +47,9 @@ class DominoParseService implements DominoParseServiceContract, DominoParseServi
         }, $array[1]);
 
         $new = json_decode($str, true, 100);
-        $productCollection = collect($new['data']['groups'])->pluck('products')->toArray();
-        return call_user_func_array('array_merge', $productCollection);
+
+        $productArray = Arr::pluck($new['data']['groups'], 'products');
+        return call_user_func_array('array_merge', $productArray);
     }
 
     /**
@@ -68,7 +70,6 @@ class DominoParseService implements DominoParseServiceContract, DominoParseServi
         if (!empty(array_filter($tempArr))) {
             $productTopping = $this->arrayUniqueKey(call_user_func_array('array_merge', $tempArr), 'id');
         }
-
         return new Attribute(
             size: $productAttribute,
             productRelation: $productRelationAttribute,
