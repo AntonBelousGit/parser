@@ -210,6 +210,8 @@ return [
 
         \App\Services\ParseVdhPizza\ParserService\ParseServiceProvider::class,
         \App\Services\ParseVdhPizza\ProductService\ProductServiceProvider::class,
+
+        \App\Services\ProductHistory\ProductHistoryServiceProvider::class
     ],
 
     /*

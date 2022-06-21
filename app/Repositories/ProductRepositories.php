@@ -24,4 +24,8 @@ class ProductRepositories extends CoreRepository
         return $this->startCondition()->find($id);
     }
 
+    public function getProductHistory($id)
+    {
+        return $this->startCondition()->with('attributeProduct.history')->find($id);
+    }
 }
