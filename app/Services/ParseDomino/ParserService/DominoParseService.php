@@ -66,7 +66,7 @@ class DominoParseService implements DominoParseServiceContract, DominoParseServi
             $tempArr[] = $product[self::PRODUCT_TOPPING] ?? [];
         }
         if (!empty(array_filter($tempArr))) {
-            $productTopping = $this->array_unique_key(call_user_func_array('array_merge', $tempArr), 'id');
+            $productTopping = $this->arrayUniqueKey(call_user_func_array('array_merge', $tempArr), 'id');
         }
 
         return new Attribute(
@@ -82,7 +82,7 @@ class DominoParseService implements DominoParseServiceContract, DominoParseServi
      * @param $key
      * @return array
      */
-    protected function array_unique_key($array, $key): array
+    protected function arrayUniqueKey($array, $key): array
     {
         $tmp = $keyArray = array();
         $i = 0;

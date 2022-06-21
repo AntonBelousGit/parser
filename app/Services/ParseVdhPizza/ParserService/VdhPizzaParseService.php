@@ -87,7 +87,7 @@ class VdhPizzaParseService implements VdhPizzaParseServiceContract, VdhPizzaPars
             foreach ($array as $item) {
                 $tempArrTopping[] = $item->topping->topping;
             }
-            $attrTopping = $this->array_unique_key(call_user_func_array('array_merge', $tempArrTopping), 'id');
+            $attrTopping = $this->arrayUniqueKey(call_user_func_array('array_merge', $tempArrTopping), 'id');
         } catch (Throwable) {
             report('VdhPizzaParser - parseAttribute - size error');
         }
@@ -119,7 +119,7 @@ class VdhPizzaParseService implements VdhPizzaParseServiceContract, VdhPizzaPars
      * @param $key
      * @return array
      */
-    protected function array_unique_key($array, $key): array
+    protected function arrayUniqueKey($array, $key): array
     {
         $tmp = $keyArray = array();
         $i = 0;
