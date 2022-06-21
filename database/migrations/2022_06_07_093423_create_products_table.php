@@ -14,7 +14,7 @@ return new class extends Migration {
     {
         Schema::create('products', function (Blueprint $table) {
             $table->string('id', 50)->index()->unique();
-            $table->string('name');
+            $table->string('name', 100);
             $table->json('image');
             $table->json('image_mobile');
             $table->timestamps();
