@@ -36,7 +36,7 @@ class ToppingValidator extends BaseValidator implements ToppingValidatorContract
     {
         return [
             'id' => ['required','string','max:50'],
-            'name' => ['required', 'string'],
+            'name' => ['required', 'string','max:100'],
         ];
     }
 
