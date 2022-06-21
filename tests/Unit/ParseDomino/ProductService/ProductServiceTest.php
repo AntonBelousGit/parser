@@ -3,9 +3,9 @@ declare(strict_types=1);
 
 namespace Tests\Unit\ParseDomino\ProductService;
 
+use App\Models\Attribute;
 use App\Models\History;
 use App\Models\Product;
-use App\Services\ParseDomino\ParserService\Attribute;
 use App\Services\ParseDomino\ProductService\ProductService;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
@@ -19,7 +19,7 @@ class ProductServiceTest extends TestCase
         $this->seed();
         $productData = $this->getTestProductData();
         $service = $this->app->make(ProductService::class);
-        $service->update($productData);
+        $service->updateOrCreate($productData);
         $searchProduct = Product::find($productData[0]['id']);
         $this->assertEquals($productData[0]['name'], $searchProduct->name);
     }
@@ -29,7 +29,7 @@ class ProductServiceTest extends TestCase
         $this->seed();
         $productData = $this->getTestProductData();
         $service = $this->app->make(ProductService::class);
-        $service->update($productData);
+        $service->updateOrCreate($productData);
         $searchProduct = Product::with('topping')->find($productData[0]['id']);
         $this->assertEquals($productData[0]['name'], $searchProduct->name);
         $this->assertContains('Шинка', $searchProduct->topping->where('id', 'fa4b63ee-d0d0-4a6f-b2ff-4f39dbeb0342')->pluck('name'));
@@ -40,9 +40,9 @@ class ProductServiceTest extends TestCase
         $this->seed();
         $productData = $this->getTestProductData();
         $service = $this->app->make(ProductService::class);
-        $service->update($productData);
+        $service->updateOrCreate($productData);
         $searchProduct = Product::with('topping')->find($productData[0]['id']);
-        $findAttribute = \App\Models\Attribute::where(['product_id' => $searchProduct->id, 'size_id' => 'e1e74edf-1431-4a90-8234-5039265d7ae6', 'flavor_id' => '8cce4b72-3386-415c-b983-70711ea235e7'])->first();
+        $findAttribute = Attribute::where(['product_id' => $searchProduct->id, 'size_id' => 'e1e74edf-1431-4a90-8234-5039265d7ae6', 'flavor_id' => '8cce4b72-3386-415c-b983-70711ea235e7'])->first();
         $this->assertEquals(205.0, $findAttribute->price);
     }
 
@@ -51,14 +51,14 @@ class ProductServiceTest extends TestCase
         $this->seed();
         $productData = $this->getTestProductData();
         $service = $this->app->make(ProductService::class);
-        $service->update($productData);
+        $service->updateOrCreate($productData);
         $searchProduct = Product::with('topping')->find($productData[0]['id']);
-        $findAttribute = \App\Models\Attribute::where(['product_id' => $searchProduct->id, 'size_id' => 'e1e74edf-1431-4a90-8234-5039265d7ae6', 'flavor_id' => '8cce4b72-3386-415c-b983-70711ea235e7'])->first();
+        $findAttribute = Attribute::where(['product_id' => $searchProduct->id, 'size_id' => 'e1e74edf-1431-4a90-8234-5039265d7ae6', 'flavor_id' => '8cce4b72-3386-415c-b983-70711ea235e7'])->first();
         $this->assertEquals(205.0, $findAttribute->price);
 
         $updateProductData = $this->updateTestProductData();
-        $service->update($updateProductData);
-        $findNewAttribute = \App\Models\Attribute::where(['product_id' => $searchProduct->id, 'size_id' => 'e1e74edf-1431-4a90-8234-5039265d7ae6', 'flavor_id' => '8cce4b72-3386-415c-b983-70711ea235e7'])->first();
+        $service->updateOrCreate($updateProductData);
+        $findNewAttribute = Attribute::where(['product_id' => $searchProduct->id, 'size_id' => 'e1e74edf-1431-4a90-8234-5039265d7ae6', 'flavor_id' => '8cce4b72-3386-415c-b983-70711ea235e7'])->first();
         $this->assertEquals(255.0, $findNewAttribute->price);
         $this->assertNotEquals(255.0, $findAttribute->price);
     }
@@ -69,18 +69,18 @@ class ProductServiceTest extends TestCase
         $this->seed();
         $productData = $this->getTestProductData();
         $service = $this->app->make(ProductService::class);
-        $service->update($productData);
+        $service->updateOrCreate($productData);
         $searchProduct = Product::with('topping')->find($productData[0]['id']);
-        $findAttribute = \App\Models\Attribute::where(['product_id' => $searchProduct->id, 'size_id' => 'e1e74edf-1431-4a90-8234-5039265d7ae6', 'flavor_id' => '8cce4b72-3386-415c-b983-70711ea235e7'])->first();
+        $findAttribute = Attribute::where(['product_id' => $searchProduct->id, 'size_id' => 'e1e74edf-1431-4a90-8234-5039265d7ae6', 'flavor_id' => '8cce4b72-3386-415c-b983-70711ea235e7'])->first();
         $this->assertEquals(205.0, $findAttribute->price);
 
         $updateProductData = $this->updateTestProductData();
-        $service->update($updateProductData);
-        $findNewAttribute = \App\Models\Attribute::where(['product_id' => $searchProduct->id, 'size_id' => 'e1e74edf-1431-4a90-8234-5039265d7ae6', 'flavor_id' => '8cce4b72-3386-415c-b983-70711ea235e7'])->first();
+        $service->updateOrCreate($updateProductData);
+        $findNewAttribute = Attribute::where(['product_id' => $searchProduct->id, 'size_id' => 'e1e74edf-1431-4a90-8234-5039265d7ae6', 'flavor_id' => '8cce4b72-3386-415c-b983-70711ea235e7'])->first();
         $this->assertEquals(255.0, $findNewAttribute->price);
         $this->assertNotEquals(255.0, $findAttribute->price);
 
-        $history = History::where(['historical_type' => 'App\Models\Attribute', 'historical_id' => $findNewAttribute->id])->first();
+        $history = History::where(['historical_type' => 'App\Models\Attribute', 'historical_id' => $findNewAttribute->id])->orderBy('id', 'desc')->first();
 
         $this->assertEquals(205, $history->changed_value_from);
         $this->assertEquals(255, $history->changed_value_to);

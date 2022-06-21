@@ -3,6 +3,7 @@ declare(strict_types=1);
 
 namespace Tests\Unit\ParseVdhPizza\ProductService;
 
+use App\Models\Attribute;
 use App\Models\History;
 use App\Models\Product;
 use App\Services\ParseVdhPizza\ParserService\ProductSize;
@@ -21,7 +22,7 @@ class ProductServiceTest extends TestCase
         $this->seed();
         $productData = $this->getTestProductData();
         $service = $this->app->make(ProductService::class);
-        $service->update([$productData]);
+        $service->updateOrCreate([$productData]);
         $searchProduct = Product::find($productData->id);
         $this->assertEquals($productData->name, $searchProduct->name);
     }
@@ -31,7 +32,7 @@ class ProductServiceTest extends TestCase
         $this->seed();
         $productData = $this->getTestProductData();
         $service = $this->app->make(ProductService::class);
-        $service->update([$productData]);
+        $service->updateOrCreate([$productData]);
         $searchProduct = Product::with('topping')->find($productData->id);
         $this->assertEquals($productData->name, $searchProduct->name);
         $this->assertContains('Груша', $searchProduct->topping->where('id', 'grusa')->pluck('name'));
@@ -42,9 +43,9 @@ class ProductServiceTest extends TestCase
         $this->seed();
         $productData = $this->getTestProductData();
         $service = $this->app->make(ProductService::class);
-        $service->update([$productData]);
+        $service->updateOrCreate([$productData]);
         $searchProduct = Product::with('topping')->find($productData->id);
-        $findAttribute = \App\Models\Attribute::where(['product_id' => $searchProduct->id, 'size_id' => 'standard', 'flavor_id' => ''])->first();
+        $findAttribute = Attribute::where(['product_id' => $searchProduct->id, 'size_id' => 'standard', 'flavor_id' => ''])->first();
         $this->assertEquals(210, $findAttribute->price);
     }
 
@@ -53,14 +54,14 @@ class ProductServiceTest extends TestCase
         $this->seed();
         $productData = $this->getTestProductData();
         $service = $this->app->make(ProductService::class);
-        $service->update([$productData]);
+        $service->updateOrCreate([$productData]);
         $searchProduct = Product::with('topping')->find($productData->id);
-        $findAttribute = \App\Models\Attribute::where(['product_id' => $searchProduct->id, 'size_id' => 'standard', 'flavor_id' => ''])->first();
+        $findAttribute = Attribute::where(['product_id' => $searchProduct->id, 'size_id' => 'standard', 'flavor_id' => ''])->first();
         $this->assertEquals(210, $findAttribute->price);
 
         $updateProductData = $this->updateTestProductData();
-        $service->update([$updateProductData]);
-        $findNewAttribute = \App\Models\Attribute::where(['product_id' => $searchProduct->id, 'size_id' => 'standard', 'flavor_id' => ''])->first();
+        $service->updateOrCreate([$updateProductData]);
+        $findNewAttribute = Attribute::where(['product_id' => $searchProduct->id, 'size_id' => 'standard', 'flavor_id' => ''])->first();
         $this->assertEquals(215.0, $findNewAttribute->price);
         $this->assertNotEquals(215.0, $findAttribute->price);
     }
@@ -71,18 +72,18 @@ class ProductServiceTest extends TestCase
         $this->seed();
         $productData = $this->getTestProductData();
         $service = $this->app->make(ProductService::class);
-        $service->update([$productData]);
+        $service->updateOrCreate([$productData]);
         $searchProduct = Product::with('topping')->find($productData->id);
-        $findAttribute = \App\Models\Attribute::where(['product_id' => $searchProduct->id, 'size_id' => 'standard', 'flavor_id' => ''])->first();
+        $findAttribute = Attribute::where(['product_id' => $searchProduct->id, 'size_id' => 'standard', 'flavor_id' => ''])->first();
         $this->assertEquals(210, $findAttribute->price);
 
         $updateProductData = $this->updateTestProductData();
-        $service->update([$updateProductData]);
-        $findNewAttribute = \App\Models\Attribute::where(['product_id' => $searchProduct->id, 'size_id' => 'standard', 'flavor_id' => ''])->first();
+        $service->updateOrCreate([$updateProductData]);
+        $findNewAttribute = Attribute::where(['product_id' => $searchProduct->id, 'size_id' => 'standard', 'flavor_id' => ''])->first();
         $this->assertEquals(215.0, $findNewAttribute->price);
         $this->assertNotEquals(215.0, $findAttribute->price);
 
-        $history = History::where(['historical_type' => 'App\Models\Attribute', 'historical_id' => $findNewAttribute->id])->first();
+        $history = History::where(['historical_type' => 'App\Models\Attribute', 'historical_id' => $findNewAttribute->id])->orderBy('id', 'desc')->first();
 
         $this->assertEquals(210, $history->changed_value_from);
         $this->assertEquals(215, $history->changed_value_to);

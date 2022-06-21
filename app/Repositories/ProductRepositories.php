@@ -4,6 +4,7 @@
 namespace App\Repositories;
 
 use App\Models\Product as Model;
+use Illuminate\Database\Eloquent\Collection;
 
 /**
  * Class ProductRepositories
@@ -24,7 +25,7 @@ class ProductRepositories extends CoreRepository
         return $this->startCondition()->find($id);
     }
 
-    public function getProductHistory($id)
+    public function getProductHistory($id): \Illuminate\Database\Eloquent\Model|Collection|array|null
     {
         return $this->startCondition()->with('attributeProduct.history')->find($id);
     }

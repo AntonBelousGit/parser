@@ -17,7 +17,7 @@ class SizeServiceTest extends TestCase
     {
         $size = $this->getTestAttribute()->size;
         $service = $this->app->make(SizeService::class);
-        $service->update($size);
+        $service->updateOrCreate($size);
         $searchSize = Size::find($size[0]['id']);
         $this->assertEquals($size[0]['name'], $searchSize->name);
     }
@@ -26,12 +26,12 @@ class SizeServiceTest extends TestCase
     {
         $size = $this->getTestAttribute()->size;
         $service = $this->app->make(SizeService::class);
-        $service->update($size);
+        $service->updateOrCreate($size);
         $searchSize = Size::find($size[0]['id']);
         $this->assertEquals($size[0]['name'], $searchSize->name);
 
         $sizeUpdate = $this->updateTestAttribute()->size;
-        $service->update($sizeUpdate);
+        $service->updateOrCreate($sizeUpdate);
         $searchUpdateSize = Size::find($sizeUpdate[0]['id']);
         $this->assertEquals($sizeUpdate[0]['name'], $searchUpdateSize->name);
         $this->assertNotEquals($size[0]['name'], $searchUpdateSize->name);

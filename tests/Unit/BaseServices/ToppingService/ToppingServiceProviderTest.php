@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Tests\Unit\ParseDomino\ToppingService;
+namespace Tests\Unit\BaseServices\ToppingService;
 
 use App\Services\BaseServices\ToppingService\Contracts\ToppingServiceContract;
 use App\Services\BaseServices\ToppingService\Contracts\ToppingValidatorContract;

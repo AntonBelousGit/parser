@@ -17,7 +17,7 @@ use App\Services\ParseZharPizza\ParserService\Contracts\ZharPizzaParseServiceCon
 use Illuminate\Console\Command;
 use Throwable;
 
-class PizzaUpdateParse extends Command
+class PizzaUpdateOrCreateParse extends Command
 {
     /**
      * The name and signature of the console command.
@@ -56,22 +56,22 @@ class PizzaUpdateParse extends Command
 //          Domino
             $dataDomino = $contract->parseProduct();
             $attributeDomino = $attributeContract->parseAttribute($dataDomino);
-            $sizeServiceContract->update($attributeDomino->size);
-            $flavorServiceContract->update($attributeDomino->productRelation);
-            $toppingServiceContract->update($attributeDomino->topping);
-            $productServiceContract->update($dataDomino);
+            $sizeServiceContract->updateOrCreate($attributeDomino->size);
+            $flavorServiceContract->updateOrCreate($attributeDomino->productRelation);
+            $toppingServiceContract->updateOrCreate($attributeDomino->topping);
+            $productServiceContract->updateOrCreate($dataDomino);
 //          ZharPizza
             $dataZhar = $contractZhar->parseProduct();
             $attributeZhar = $attributeZharContract->parseAttribute($dataZhar);
-            $sizeServiceContract->update($attributeZhar->size);
-            $toppingServiceContract->update($attributeZhar->topping);
-            $productZharService->update($dataZhar);
+            $sizeServiceContract->updateOrCreate($attributeZhar->size);
+            $toppingServiceContract->updateOrCreate($attributeZhar->topping);
+            $productZharService->updateOrCreate($dataZhar);
 //          VdhBar
             $dataVdh = $vdhPizzaParseServiceContract->parseProduct();
             $attributeVdh = $vdhPizzaParseServiceAttributeContract->parseAttribute($dataVdh);
-            $sizeServiceContract->update($attributeVdh->size);
-            $toppingServiceContract->update($attributeVdh->topping);
-            $productVdhServiceContract->update($dataVdh);
+            $sizeServiceContract->updateOrCreate($attributeVdh->size);
+            $toppingServiceContract->updateOrCreate($attributeVdh->topping);
+            $productVdhServiceContract->updateOrCreate($dataVdh);
         } catch (Throwable) {
             report('Something went wrong! Check log file');
         }

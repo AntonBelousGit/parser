@@ -26,7 +26,7 @@ class SizeService implements SizeServiceContract
      * @param array $array
      * @return bool
      */
-    public function update(array $array = []): bool
+    public function updateOrCreate(array $array = []): bool
     {
         try {
             foreach ($array as $size) {

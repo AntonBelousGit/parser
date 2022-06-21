@@ -11,5 +11,5 @@ interface SizeServiceContract
      * @param array $array
      * @return bool
      */
-    public function update(array $array = []): bool;
+    public function updateOrCreate(array $array = []): bool;
 }

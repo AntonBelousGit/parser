@@ -1,7 +1,7 @@
 <?php
 declare(strict_types=1);
 
-namespace Tests\Unit\ParseDomino\ToppingService;
+namespace Tests\Unit\BaseServices\ToppingService;
 
 use App\Models\Topping;
 use App\Services\ParseDomino\ParserService\Attribute;
@@ -17,7 +17,7 @@ class ToppingServiceTest extends TestCase
     {
         $topping = $this->getTestAttribute()->topping;
         $service = $this->app->make(ToppingService::class);
-        $service->update($topping);
+        $service->updateOrCreate($topping);
         $searchTopping = Topping::find($topping[0]['id']);
         $this->assertEquals($topping[0]['name'], $searchTopping->name);
     }
@@ -26,12 +26,12 @@ class ToppingServiceTest extends TestCase
     {
         $topping = $this->getTestAttribute()->topping;
         $service = $this->app->make(ToppingService::class);
-        $service->update($topping);
+        $service->updateOrCreate($topping);
         $searchTopping = Topping::find($topping[0]['id']);
         $this->assertEquals($topping[0]['name'], $searchTopping->name);
 
         $toppingUpdate = $this->updateTestAttribute()->topping;
-        $service->update($toppingUpdate);
+        $service->updateOrCreate($toppingUpdate);
         $searchUpdateTopping = Topping::find($toppingUpdate[0]['id']);
         $this->assertEquals($toppingUpdate[0]['name'], $searchUpdateTopping->name);
         $this->assertNotEquals($topping[0]['name'], $searchUpdateTopping->name);

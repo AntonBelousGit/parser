@@ -17,7 +17,7 @@ class FlavorServiceTest extends TestCase
     {
         $flavor = $this->getTestAttribute()->productRelation;
         $service = $this->app->make(FlavorService::class);
-        $service->update($flavor);
+        $service->updateOrCreate($flavor);
 
         $searchFlavor = Flavor::find($flavor[0]['id']);
         $this->assertEquals($flavor[0]['name'], $searchFlavor->name);
@@ -27,12 +27,12 @@ class FlavorServiceTest extends TestCase
     {
         $flavor = $this->getTestAttribute()->productRelation;
         $service = $this->app->make(FlavorService::class);
-        $service->update($flavor);
+        $service->updateOrCreate($flavor);
         $searchFlavor = Flavor::find($flavor[0]['id']);
         $this->assertEquals($flavor[0]['name'], $searchFlavor->name);
 
         $flavor_update = $this->updateTestAttribute()->productRelation;
-        $service->update($flavor_update);
+        $service->updateOrCreate($flavor_update);
         $searchUpdateFlavor = Flavor::find($flavor_update[0]['id']);
         $this->assertEquals($flavor_update[0]['name'], $searchUpdateFlavor->name);
         $this->assertNotEquals($flavor[0]['name'], $searchUpdateFlavor->name);
