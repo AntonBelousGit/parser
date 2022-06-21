@@ -1,8 +1,6 @@
 <?php
 
-
 namespace App\History\Traits;
-
 
 use App\History\ColumnChange;
 use App\Models\History;
@@ -13,8 +11,6 @@ use Illuminate\Support\Collection;
 
 trait Historical
 {
-
-
     public static function bootHistorical()
     {
         static::updated(function (Model $model) {
@@ -23,7 +19,6 @@ trait Historical
             });
         });
     }
-
 
     protected function saveChange(ColumnChange $change)
     {
@@ -61,7 +56,6 @@ trait Historical
         return $this->morphMany(History::class, 'historical')
             ->latest();
     }
-
 
     public function ignoreHistoryColumns(): array
     {

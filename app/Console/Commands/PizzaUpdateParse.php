@@ -17,7 +17,7 @@ use App\Services\ParseZharPizza\ParserService\Contracts\ZharPizzaParseServiceCon
 use Illuminate\Console\Command;
 use Throwable;
 
-class PizzaUpdateOrCreateParse extends Command
+class PizzaUpdateParse extends Command
 {
     /**
      * The name and signature of the console command.
@@ -72,8 +72,8 @@ class PizzaUpdateOrCreateParse extends Command
             $sizeServiceContract->updateOrCreate($attributeVdh->size);
             $toppingServiceContract->updateOrCreate($attributeVdh->topping);
             $productVdhServiceContract->updateOrCreate($dataVdh);
-        } catch (Throwable) {
-            report('Something went wrong! Check log file');
+        } catch (Throwable $exception) {
+            report($exception);
         }
     }
 }
