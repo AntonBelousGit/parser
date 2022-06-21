@@ -32,7 +32,7 @@ class ProductHistoryService implements ProductHistoryContract
             'name' => $product->name,
             'image' => $product->image,
             'image_mobile' => $product->image_mobile,
-            'history' => ProductHistoryResources::collection($product->attributeProduct),
+            'variants' => ProductHistoryResources::collection($product->attributeProduct),
         ]);
     }
 }

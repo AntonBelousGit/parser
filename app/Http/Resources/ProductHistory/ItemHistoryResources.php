@@ -17,9 +17,7 @@ class ItemHistoryResources extends JsonResource
     public function toArray($request)
     {
         return [
-            'oldPrice'=> $this->changed_value_from,
-            'newPrice' => $this->changed_value_to,
-            'updated_at' => $this->updated_at->format('d-m-y H:i:s')
+            $this->updated_at->format('d-m-y H:i:s') => $this->changed_value_from,
         ];
     }
 }
