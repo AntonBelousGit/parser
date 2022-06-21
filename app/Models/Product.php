@@ -32,5 +32,8 @@ class Product extends Model
         return $this->belongsToMany(Topping::class, 'topping_product');
     }
 
-
+    public function attributeProduct()
+    {
+        return $this->hasMany(Attribute::class, 'product_id');
+    }
 }

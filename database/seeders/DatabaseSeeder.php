@@ -16,5 +16,6 @@ class DatabaseSeeder extends Seeder
         $this->call(SizeSeeder::class);
         $this->call(FlavorSeeder::class);
         $this->call(ToppingSeeder::class);
+        $this->call(HistorySeeder::class);
     }
 }

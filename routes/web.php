@@ -15,9 +15,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    $products = Product::with(['sizes' => function ($query) {
-        $query->with('flavors');
-    }])->first();
 
-    dump($products);
+    $products = Product::with('attributeProduct.history')->find('53aa39d4-500e-4b41-9d42-9e901707335f');
+    dump($products->attributeProduct);
 });
