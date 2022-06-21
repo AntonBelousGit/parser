@@ -1,6 +1,6 @@
 <?php
 
-use App\Models\Product;
+use App\Services\ProductHistory\Contracts\ProductHistoryContract;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -14,8 +14,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
+Route::get('/', function (ProductHistoryContract $historyContract) {
+    return $historyContract->getProductHistory('53aa39d4-500e-4b41-9d42-9e901707335f');
 
-    $products = Product::with('attributeProduct.history')->find('53aa39d4-500e-4b41-9d42-9e901707335f');
-    dump($products->attributeProduct);
 });
