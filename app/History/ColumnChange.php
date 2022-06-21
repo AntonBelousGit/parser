@@ -7,10 +7,6 @@ namespace App\History;
 class ColumnChange
 {
 
-    public $column;
-    public $from;
-    public $to;
-
     /**
      * ColumnChange constructor.
      * @param $column
@@ -18,11 +14,8 @@ class ColumnChange
      * @param $to
      */
 
-    public function __construct($column, $from, $to)
+    public function __construct(public $column, public $from, public $to)
     {
-        $this->column = $column;
-        $this->from = $from;
-        $this->to = $to;
     }
 
 
