@@ -12,8 +12,10 @@ use App\Services\BaseServices\SizeService\Contracts\SizeServiceContract;
 use App\Services\BaseServices\ToppingService\Contracts\ToppingServiceContract;
 use App\Services\ParseVdhPizza\ParserService\Contracts\VdhPizzaParseServiceAttributeContract;
 use App\Services\ParseVdhPizza\ParserService\Contracts\VdhPizzaParseServiceContract;
+use \App\Services\ParseZharPizza\ProductService\Contracts\ProductServiceContract as ParseZharPizzaServiceContract;
 use App\Services\ParseZharPizza\ParserService\Contracts\ZharPizzaParseServiceAttributeContract;
 use App\Services\ParseZharPizza\ParserService\Contracts\ZharPizzaParseServiceContract;
+use \App\Services\ParseVdhPizza\ProductService\Contracts\ProductServiceContract as ParseVdhPizzaServiceContract;
 use Illuminate\Console\Command;
 use Throwable;
 
@@ -47,10 +49,10 @@ class PizzaUpdateParse extends Command
         ProductServiceContract $productServiceContract,
         ZharPizzaParseServiceContract $contractZhar,
         ZharPizzaParseServiceAttributeContract $attributeZharContract,
-        \App\Services\ParseZharPizza\ProductService\Contracts\ProductServiceContract $productZharService,
+        ParseZharPizzaServiceContract $productZharService,
         VdhPizzaParseServiceContract $vdhPizzaParseServiceContract,
         VdhPizzaParseServiceAttributeContract $vdhPizzaParseServiceAttributeContract,
-        \App\Services\ParseVdhPizza\ProductService\Contracts\ProductServiceContract $productVdhServiceContract
+        ParseVdhPizzaServiceContract $productVdhServiceContract
     ) {
         try {
 //          Domino
