@@ -12,7 +12,6 @@ use Throwable;
 
 class DominoParseService implements DominoParseServiceContract, DominoParseServiceAttributeContract
 {
-    private const URL = 'https://dominos.ua/uk/chornomorsk/';
     private const PRODUCT_ATTRIBUTE = 'sizes';
     private const PRODUCT_RELATION_ATTRIBUTE = 'flavors';
     private const PRODUCT_TOPPING = 'toppings';
@@ -22,7 +21,7 @@ class DominoParseService implements DominoParseServiceContract, DominoParseServi
      */
     public function callConnectToParse(): Document
     {
-        return new Document(self::URL, true);
+        return new Document(config('services.parse.dominionParse'), true);
     }
 
     /**

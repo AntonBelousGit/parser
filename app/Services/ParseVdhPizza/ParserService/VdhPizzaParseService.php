@@ -14,8 +14,6 @@ use Throwable;
 
 class VdhPizzaParseService implements VdhPizzaParseServiceContract, VdhPizzaParseServiceAttributeContract
 {
-    private const URL = 'https://store.tildacdn.com/api/getproductslist/?storepartuid=608315548424&recid=155887892&c=1655719066017&getparts=true&getoptions=true&slice=1&&size=36';
-
     protected array $products = [];
 
     public function __construct(
@@ -30,7 +28,7 @@ class VdhPizzaParseService implements VdhPizzaParseServiceContract, VdhPizzaPars
     public function callConnectToParse(): mixed
     {
         $client = new Client();
-        $body = $client->get(self::URL)->getBody();
+        $body = $client->get(config('services.parse.vdhPizzaParse'))->getBody();
         return json_decode((string)$body);
     }
 

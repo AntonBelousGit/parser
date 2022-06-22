@@ -14,8 +14,6 @@ use Throwable;
 
 class ZharPizzaParseService implements ZharPizzaParseServiceContract, ZharPizzaParseServiceAttributeContract
 {
-    private const URL = 'https://store.tildacdn.com/api/getproductslist/?storepartuid=261323000731&recid=264435121&c=1655380264126&getparts=true&getoptions=true';
-
     protected array $products = [];
 
     public function __construct(
@@ -30,7 +28,7 @@ class ZharPizzaParseService implements ZharPizzaParseServiceContract, ZharPizzaP
     public function callConnectToParse(): mixed
     {
         $client = new Client();
-        $body = $client->get(self::URL)->getBody();
+        $body = $client->get(config('services.parse.zharPizzaParse'))->getBody();
         return json_decode((string)$body);
     }
 

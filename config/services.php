@@ -30,4 +30,10 @@ return [
         'secret' => env('AWS_SECRET_ACCESS_KEY'),
         'region' => env('AWS_DEFAULT_REGION', 'us-east-1'),
     ],
+
+    'parse' => [
+        'dominionParse' => 'https://dominos.ua/uk/chornomorsk/',
+        'vdhPizzaParse' => 'https://store.tildacdn.com/api/getproductslist/?storepartuid=608315548424&recid=155887892&c=1655719066017&getparts=true&getoptions=true&slice=1&&size=36',
+        'zharPizzaParse' =>'https://store.tildacdn.com/api/getproductslist/?storepartuid=261323000731&recid=264435121&c=1655380264126&getparts=true&getoptions=true',
+        ]
 ];
