@@ -21,6 +21,7 @@ trait Historical
     }
 
     /**
+     * Save history
      * @param ColumnChange $change
      */
 
@@ -34,6 +35,7 @@ trait Historical
     }
 
     /**
+     * Get changed data
      * @param Model $model
      * @return Collection
      */
@@ -60,6 +62,7 @@ trait Historical
     }
 
     /**
+     * Default ignore field
      * @return string[]
      */
     public function ignoreHistoryColumns(): array
