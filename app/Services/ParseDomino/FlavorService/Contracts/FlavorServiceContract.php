@@ -9,7 +9,7 @@ interface FlavorServiceContract
 {
     /**
      * @param array $array
-     * @return bool
+     * @return void
      */
-    public function updateOrCreate(array $array = []): bool;
+    public function updateOrCreate(array $array = []): void;
 }

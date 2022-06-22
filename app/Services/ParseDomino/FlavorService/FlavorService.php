@@ -26,9 +26,9 @@ class FlavorService implements FlavorServiceContract
 
     /**
      * @param array $array
-     * @return bool
+     * @return void
      */
-    public function updateOrCreate(array $array = []): bool
+    public function updateOrCreate(array $array = []): void
     {
         try {
             foreach ($array as $flavor) {
@@ -49,13 +49,10 @@ class FlavorService implements FlavorServiceContract
                     }
                 } catch (Throwable) {
                     report('FlavorService error create/update');
-                    continue;
                 }
             }
         } catch (Throwable) {
             report('FlavorService update error');
-            return false;
         }
-        return true;
     }
 }

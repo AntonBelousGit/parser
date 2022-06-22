@@ -24,9 +24,9 @@ class ToppingService implements ToppingServiceContract
 
     /**
      * @param array $array
-     * @return bool
+     * @return void
      */
-    public function updateOrCreate(array $array = []): bool
+    public function updateOrCreate(array $array = []): void
     {
         try {
             foreach ($array as $topping) {
@@ -46,13 +46,10 @@ class ToppingService implements ToppingServiceContract
                     }
                 } catch (Throwable $exception) {
                     report('ToppingService error create/update'. $exception);
-                    continue;
                 }
             }
         } catch (Throwable) {
             report('ToppingService update error');
-            return false;
         }
-        return true;
     }
 }

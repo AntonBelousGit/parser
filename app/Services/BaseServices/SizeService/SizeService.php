@@ -24,9 +24,9 @@ class SizeService implements SizeServiceContract
 
     /**
      * @param array $array
-     * @return bool
+     * @return void
      */
-    public function updateOrCreate(array $array = []): bool
+    public function updateOrCreate(array $array = []): void
     {
         try {
             foreach ($array as $size) {
@@ -36,7 +36,6 @@ class SizeService implements SizeServiceContract
                     'id' => $size['id'],
                     'name' => html_entity_decode($size['name']),
                 ];
-
                 try {
                     $updateSize = $this->sizeRepositories->getSizeByID($data['id']);
                     if ($updateSize) {
@@ -46,13 +45,10 @@ class SizeService implements SizeServiceContract
                     }
                 } catch (Throwable $exception) {
                     report('SizeService error create/update' . $exception);
-                    continue;
                 }
             }
         } catch (Throwable) {
             report('SizeService update error');
-            return false;
         }
-        return true;
     }
 }

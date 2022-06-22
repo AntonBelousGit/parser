@@ -28,9 +28,9 @@ class ProductService implements ProductServiceContract
 
     /**
      * @param array $array
-     * @return bool
+     * @return void
      */
-    public function updateOrCreate(array $array = []): bool
+    public function updateOrCreate(array $array = []): void
     {
         try {
             foreach ($array as $item) {
@@ -46,21 +46,18 @@ class ProductService implements ProductServiceContract
                     }
                 } catch (Throwable $exception) {
                     report('ProductService error create/update' . $exception);
-                    continue;
                 }
             }
         } catch (Throwable) {
             report('ProductService update error');
-            return false;
         }
-        return true;
     }
 
     /**
      * @param array $item
-     * @return bool
+     * @return void
      */
-    protected function createProduct(array $item): bool
+    protected function createProduct(array $item): void
     {
         try {
             $product = Product::create($item);
@@ -71,20 +68,18 @@ class ProductService implements ProductServiceContract
                     $this->attachAttribute($product, $size['id'], $flavor);
                 }
             }
-            return true;
         } catch (Throwable) {
             report('ProductService error in createProduct');
-            return false;
         }
     }
 
     /**
      * @param Product $product
      * @param array $data
-     * @return bool
+     * @return void
      */
 
-    protected function updateProduct(Product $product, array $data): bool
+    protected function updateProduct(Product $product, array $data): void
     {
         $product->update($data);
         try {
@@ -107,10 +102,8 @@ class ProductService implements ProductServiceContract
                     }
                 }
             }
-            return true;
         } catch (Throwable) {
             report('ProductService error in updateProduct');
-            return false;
         }
     }
 

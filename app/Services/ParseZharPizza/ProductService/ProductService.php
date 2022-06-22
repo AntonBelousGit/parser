@@ -28,9 +28,9 @@ class ProductService implements ProductServiceContract
 
     /**
      * @param array $array
-     * @return bool
+     * @return void
      */
-    public function updateOrCreate(array $array = []): bool
+    public function updateOrCreate(array $array = []): void
     {
 
         try {
@@ -44,40 +44,35 @@ class ProductService implements ProductServiceContract
                     }
                 } catch (Throwable) {
                     report('ProductService error create/update');
-                    continue;
                 }
             }
         } catch (Throwable) {
             report('ProductService update error');
-            return false;
         }
-        return true;
     }
 
     /**
      * @param \App\Services\ParseZharPizza\ParserService\Product $item
-     * @return bool
+     * @return void
      */
-    protected function createProduct(\App\Services\ParseZharPizza\ParserService\Product $item): bool
+    protected function createProduct(\App\Services\ParseZharPizza\ParserService\Product $item): void
     {
         try {
             $product = Product::create(['id' => $item->id, 'name' => $item->name, 'image' => $item->image, 'image_mobile' => $item->image]);
             $product->topping()->attach(Arr::pluck($item->topping->topping, 'id'));
             $product->sizes()->attach(Arr::pluck($item->attribute->attribute, 'id'), ['flavor_id' => '', 'price' => $item->attribute->price]);
-            return true;
         } catch (Throwable) {
             report('ProductService error in createProduct');
-            return false;
         }
     }
 
     /**
      * @param Product $product
      * @param \App\Services\ParseZharPizza\ParserService\Product $item
-     * @return bool
+     * @return void
      */
 
-    protected function updateProduct(Product $product, \App\Services\ParseZharPizza\ParserService\Product $item): bool
+    protected function updateProduct(Product $product, \App\Services\ParseZharPizza\ParserService\Product $item): void
     {
         $product->update(['id' => $item->id, 'name' => $item->name, 'image' => $item->image, 'image_mobile' => $item->image]);
         try {
@@ -97,10 +92,8 @@ class ProductService implements ProductServiceContract
                     $product->sizes()->attach(Arr::pluck($item->attribute->attribute, 'id'), ['flavor_id' => '', 'price' => $item->attribute->price]);
                 }
             }
-            return true;
         } catch (Throwable) {
             report('ProductService error in updateProduct');
-            return false;
         }
     }
 }

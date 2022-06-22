@@ -8,8 +8,9 @@ namespace App\Services\ParseDomino\ProductService\Contracts;
 interface ProductServiceContract
 {
     /**
+     * Save products into DB
      * @param array $array
-     * @return bool
+     * @return void
      */
-    public function updateOrCreate(array $array = []): bool;
+    public function updateOrCreate(array $array = []): void;
 }
