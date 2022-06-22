@@ -20,7 +20,11 @@ trait Historical
         });
     }
 
-    protected function saveChange(ColumnChange $change)
+    /**
+     * @param ColumnChange $change
+     */
+
+    protected function saveChange(ColumnChange $change): void
     {
         $this->history()->create([
             'changed_column' => $change->column,
@@ -36,11 +40,9 @@ trait Historical
 
     protected function getChangedColumns(Model $model): Collection
     {
+        $original = $model->getOriginal();
         return collect(
-            array_diff(
-                Arr::except($model->getChanges(), $this->ignoreHistoryColumns()),
-                $original = $model->getOriginal()
-            )
+            Arr::except($model->getChanges(), $this->ignoreHistoryColumns()),
         )
             ->map(function ($change, $column) use ($original) {
                 return new ColumnChange($column, Arr::get($original, $column), $change);
@@ -57,6 +59,9 @@ trait Historical
             ->latest();
     }
 
+    /**
+     * @return string[]
+     */
     public function ignoreHistoryColumns(): array
     {
         return [

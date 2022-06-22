@@ -43,7 +43,7 @@ class SizeValidatorTest extends TestCase
     {
         return [
             'id' => ['required','string','max:50'],
-            'name' => ['required', 'string','max:100'],
+            'name' => ['required', 'string','max:200'],
         ];
     }
 

@@ -37,7 +37,7 @@ class FlavorValidator extends BaseValidator implements FlavorValidatorContract
     {
         return [
             'id' => ['required','string','max:50'],
-            'name' => ['required', 'string','max:100'],
+            'name' => ['required', 'string','max:200'],
             'code' => ['required', 'string'],
         ];
     }

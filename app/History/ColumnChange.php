@@ -3,7 +3,6 @@
 
 namespace App\History;
 
-
 class ColumnChange
 {
 
@@ -17,6 +16,4 @@ class ColumnChange
     public function __construct(public $column, public $from, public $to)
     {
     }
-
-
 }

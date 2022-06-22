@@ -47,8 +47,8 @@ class FlavorService implements FlavorServiceContract
                     } else {
                         Flavor::create($data);
                     }
-                } catch (Throwable $exception) {
-                    report('FlavorService error create/update' . $exception);
+                } catch (Throwable) {
+                    report('FlavorService error create/update');
                     continue;
                 }
             }

@@ -37,7 +37,7 @@ class ProductValidator extends BaseValidator implements ProductValidatorContract
     {
         return [
             'id' => ['required','string','max:50'],
-            'name' => ['required', 'string','max:100'],
+            'name' => ['required', 'string','max:200'],
             'image' => ['required', 'array'],
             'image_mobile' => ['required', 'array'],
             'toppings.*.id' => ['required','string','max:50'],
