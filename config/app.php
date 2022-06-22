@@ -198,6 +198,8 @@ return [
         /*
          *  Parse Service Providers...
          */
+        \App\Services\CallParseServices\CallParseServiceProvider::class,
+
         \App\Services\BaseServices\ToppingService\ToppingServiceProvider::class,
         \App\Services\BaseServices\SizeService\SizeServiceProvider::class,
 
