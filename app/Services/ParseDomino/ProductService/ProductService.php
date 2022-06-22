@@ -36,7 +36,6 @@ class ProductService implements ProductServiceContract
             foreach ($array as $item) {
                 $item = $this->validatorContract->validate($item);
                 $item['name'] = html_entity_decode($item['name']);
-
                 try {
                     $updateProduct = $this->productRepositories->getProductByID($item['id']);
                     if ($updateProduct) {
