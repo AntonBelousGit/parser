@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace Tests\Unit\ParseDomino\ParserService;
 
 use App\Services\ParseDomino\ParserService\DominoParseService;
-use PHPUnit\Framework\TestCase;
+use Tests\TestCase;
 
 class ParseServiceTest extends TestCase
 {
@@ -38,6 +38,6 @@ class ParseServiceTest extends TestCase
      */
     protected function getDominiParse(): DominoParseService
     {
-        return new DominoParseService();
+        return $this->app->make(DominoParseService::class);
     }
 }
