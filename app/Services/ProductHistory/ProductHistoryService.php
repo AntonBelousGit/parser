@@ -28,11 +28,11 @@ class ProductHistoryService implements ProductHistoryContract
     {
         $product = $this->productRepositories->getProductHistory($id);
         return response()->json([
-            'id' => $product->id,
-            'name' => $product->name,
-            'image' => $product->image,
-            'image_mobile' => $product->image_mobile,
-            'variants' => ProductHistoryResources::collection($product->attributeProduct),
+            'id' => $product->id ?? '',
+            'name' => $product->name ?? '',
+            'image' => $product->image ?? '',
+            'image_mobile' => $product->image_mobile ?? '',
+            'variants' => ProductHistoryResources::collection($product->attributeProduct ?? ''),
         ]);
     }
 }

@@ -15,11 +15,11 @@ class ProductHistoryResources extends JsonResource
      */
     public function toArray($request)
     {
-        return [
-            'size_id' => $this->size_id,
-            'flavor_id' => $this->flavor_id,
-            'variantCurrentPrice'=> $this->price,
+        return array(
+            'size_id' => $this->size_id ?? '',
+            'flavor_id' => $this->flavor_id ?? '',
+            'variantCurrentPrice'=> $this->price ?? '',
             'variantPriceHistory' => (!$request->history)? ItemHistoryResources::collection($this->history) : null,
-        ];
+        );
     }
 }
