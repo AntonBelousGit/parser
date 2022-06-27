@@ -16,7 +16,7 @@ class ParseServiceTest extends TestCase
      */
     public function testConnectionToParsedPage()
     {
-        $this->getDominiParse()->callConnectToParse();
+        $this->getDominiParse()->callConnectToParse(config('parsers.vdhBar.config.address'));
         $this->assertTrue(true);
     }
 
@@ -25,7 +25,7 @@ class ParseServiceTest extends TestCase
      */
     public function testGetProductDataFromParsedPage()
     {
-        $response = $this->getDominiParse()->parseProduct();
+        $response = $this->getDominiParse()->parseProduct(config('parsers.vdhBar.config.address'));
         $this->assertNotEmpty($response);
         $this->assertNotEmpty($response[0]->id);
     }
@@ -35,7 +35,7 @@ class ParseServiceTest extends TestCase
      */
     public function testGetAttributeDataFromParsedPage()
     {
-        $response = $this->getDominiParse()->parseAttribute($this->getDominiParse()->parseProduct());
+        $response = $this->getDominiParse()->parseAttribute($this->getDominiParse()->parseProduct(config('parsers.vdhBar.config.address')));
         if (count($response->size) > 0 && count($response->topping) > 0) {
             $this->assertTrue(true);
             return;

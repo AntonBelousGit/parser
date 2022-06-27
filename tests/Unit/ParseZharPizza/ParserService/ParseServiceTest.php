@@ -16,23 +16,20 @@ class ParseServiceTest extends TestCase
      */
     public function testConnectionToParsedPage()
     {
-        $this->getDominiParse()->callConnectToParse();
+        $this->getDominiParse()->callConnectToParse(config('parsers.zharPizza.config.address'));
         $this->assertTrue(true);
     }
 
-    /**
-     * @throws GuzzleException
-     */
     public function testGetProductDataFromParsedPage()
     {
-        $response = $this->getDominiParse()->parseProduct();
+        $response = $this->getDominiParse()->parseProduct(config('parsers.zharPizza.config.address'));
         $this->assertNotEmpty($response);
         $this->assertNotEmpty($response[0]->id);
     }
 
     public function testGetAttributeDataFromParsedPage()
     {
-        $response = $this->getDominiParse()->parseAttribute($this->getDominiParse()->parseProduct());
+        $response = $this->getDominiParse()->parseAttribute($this->getDominiParse()->parseProduct(config('parsers.zharPizza.config.address')));
         if (count($response->size) > 0 && count($response->topping) > 0) {
             $this->assertTrue(true);
             return;

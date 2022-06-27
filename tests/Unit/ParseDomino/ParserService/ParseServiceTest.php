@@ -11,20 +11,20 @@ class ParseServiceTest extends TestCase
 {
     public function testConnectionToParsedPage()
     {
-        $this->getDominiParse()->callConnectToParse();
+        $this->getDominiParse()->callConnectToParse(config('parsers.dominoParse.config.address'));
         $this->assertTrue(true);
     }
 
     public function testGetProductDataFromParsedPage()
     {
-        $response = $this->getDominiParse()->parseProduct();
+        $response = $this->getDominiParse()->parseProduct(config('parsers.dominoParse.config.address'));
         $this->assertNotEmpty($response);
         $this->assertNotEmpty($response[0]['id']);
     }
 
     public function testGetAttributeDataFromParsedPage()
     {
-        $response = $this->getDominiParse()->parseAttribute($this->getDominiParse()->parseProduct());
+        $response = $this->getDominiParse()->parseAttribute($this->getDominiParse()->parseProduct(config('parsers.dominoParse.config.address')), config('parsers.dominoParse.config.attribute'));
         if (count($response->size) > 0 && count($response->topping) > 0 && count($response->productRelation)) {
             $this->assertTrue(true);
             return;
