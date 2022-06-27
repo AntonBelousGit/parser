@@ -31,16 +31,17 @@ class CallParseVdhPizza
     /**
      * Parser VdhPizza
      */
-    public function __invoke(): void
+    public function parser(array $config): void
     {
+        $address = $config['address'] ?? '';
         try {
-            $dataVdh = $this->contract->parseProduct();
+            $dataVdh = $this->contract->parseProduct($address);
             $attributeVdh = $this->attributeContract->parseAttribute($dataVdh);
             $this->sizeServiceContract->updateOrCreate($attributeVdh->size);
             $this->toppingServiceContract->updateOrCreate($attributeVdh->topping);
             $this->productServiceContract->updateOrCreate($dataVdh);
-        } catch (Throwable $exception) {
-            report('Error VdhPizza' . $exception);
+        } catch (Throwable) {
+            report('Error VdhPizza');
         }
     }
 }

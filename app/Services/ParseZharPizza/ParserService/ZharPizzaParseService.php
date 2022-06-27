@@ -22,25 +22,26 @@ class ZharPizzaParseService implements ZharPizzaParseServiceContract, ZharPizzaP
     }
 
     /**
+     * @param string $address
      * @return mixed
      * @throws GuzzleException
      */
-    public function callConnectToParse(): mixed
+    public function callConnectToParse(string $address): mixed
     {
         $client = new Client();
-        $body = $client->get(config('services.parse.zharPizzaParse'))->getBody();
+        $body = $client->get($address)->getBody();
         return json_decode((string)$body);
     }
 
     /**
      *Parse get data - return prepare data
+     * @param string $address
      * @return array
-     * @throws GuzzleException
      */
-    public function parseProduct(): array
+    public function parseProduct(string $address): array
     {
-        $productsParse = $this->callConnectToParse();
         try {
+            $productsParse = $this->callConnectToParse($address);
             foreach ($productsParse->products as $item) {
                 $item = $this->productValidator->validate(collect($item)->toArray());
                 $topping = [];

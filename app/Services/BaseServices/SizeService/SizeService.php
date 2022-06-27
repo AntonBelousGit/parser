@@ -43,8 +43,8 @@ class SizeService implements SizeServiceContract
                     } else {
                         Size::create($data);
                     }
-                } catch (Throwable $exception) {
-                    report('SizeService error create/update' . $exception);
+                } catch (Throwable) {
+                    report('SizeService error create/update');
                 }
             }
         } catch (Throwable) {

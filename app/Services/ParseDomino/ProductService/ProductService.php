@@ -43,8 +43,8 @@ class ProductService implements ProductServiceContract
                     } else {
                         $this->createProduct($item);
                     }
-                } catch (Throwable $exception) {
-                    report('ProductService error create/update' . $exception);
+                } catch (Throwable) {
+                    report('ProductService error create/update');
                 }
             }
         } catch (Throwable) {

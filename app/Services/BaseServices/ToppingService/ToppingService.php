@@ -44,8 +44,8 @@ class ToppingService implements ToppingServiceContract
                     } else {
                         Topping::create($data);
                     }
-                } catch (Throwable $exception) {
-                    report('ToppingService error create/update'. $exception);
+                } catch (Throwable) {
+                    report('ToppingService error create/update');
                 }
             }
         } catch (Throwable) {

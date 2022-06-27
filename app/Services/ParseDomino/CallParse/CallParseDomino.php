@@ -39,7 +39,6 @@ class CallParseDomino
     {
         $address = $config['address'] ?? '';
         $attribute = $config['attribute'] ?? [];
-
         try {
             $dataDomino = $this->contract->parseProduct($address);
             $attributeDomino = $this->attributeContract->parseAttribute($dataDomino, $attribute);
@@ -47,8 +46,8 @@ class CallParseDomino
             $this->flavorServiceContract->updateOrCreate($attributeDomino->productRelation);
             $this->toppingServiceContract->updateOrCreate($attributeDomino->topping);
             $this->productServiceContract->updateOrCreate($dataDomino);
-        } catch (Throwable $exception) {
-            report('Error dominoParse' . $exception);
+        } catch (Throwable) {
+            report('Error dominoParse');
         }
     }
 }
