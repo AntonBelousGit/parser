@@ -35,11 +35,14 @@ class CallParseDomino
     /**
      * Parser DominoPizza
      */
-    public function __invoke(): void
+    public function parser(array $config): void
     {
+        $address = $config['address'] ?? '';
+        $attribute = $config['attribute'] ?? [];
+
         try {
-            $dataDomino = $this->contract->parseProduct();
-            $attributeDomino = $this->attributeContract->parseAttribute($dataDomino);
+            $dataDomino = $this->contract->parseProduct($address);
+            $attributeDomino = $this->attributeContract->parseAttribute($dataDomino, $attribute);
             $this->sizeServiceContract->updateOrCreate($attributeDomino->size);
             $this->flavorServiceContract->updateOrCreate($attributeDomino->productRelation);
             $this->toppingServiceContract->updateOrCreate($attributeDomino->topping);

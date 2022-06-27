@@ -12,32 +12,29 @@ use Throwable;
 
 class DominoParseService implements DominoParseServiceContract, DominoParseServiceAttributeContract
 {
-    private const PRODUCT_ATTRIBUTE = 'sizes';
-    private const PRODUCT_RELATION_ATTRIBUTE = 'flavors';
-    private const PRODUCT_TOPPING = 'toppings';
-
     /**
+     * @param string $address
      * @return Document
      */
-    public function callConnectToParse(): Document
+    public function callConnectToParse(string $address): Document
     {
-        return new Document(config('services.parse.dominionParse'), true);
+        return new Document($address, true);
     }
 
     /**
      *Parse get data - return prepare data
+     * @param string $address
      * @return array
      */
-    public function parseProduct(): array
+    public function parseProduct(string $address): array
     {
         try {
-            $html = $this->callConnectToParse();
+            $html = $this->callConnectToParse($address);
             $stringRawHtml = $html->find('script');
         } catch (Throwable $exception) {
             report($exception);
             return [];
         }
-
         $stringHtml = $stringRawHtml[8]->text();
         $array = explode("'", ($stringHtml));
 
@@ -54,17 +51,18 @@ class DominoParseService implements DominoParseServiceContract, DominoParseServi
     /**
      * Prepare parsed attribute data
      * @param array $array
+     * @param array $attribute
      * @return Attribute
      */
-    public function parseAttribute(array $array = []): Attribute
+    public function parseAttribute(array $array = [], array $attribute = []): Attribute
     {
-        $productAttribute = $array[0][self::PRODUCT_ATTRIBUTE] ?? [];
-        $productRelationAttribute = $array[0][self::PRODUCT_RELATION_ATTRIBUTE] ?? [];
+        $productAttribute = $array[0][$attribute[0]] ?? [];
+        $productRelationAttribute = $array[0][$attribute[1]] ?? [];
         $productTopping = [];
         $tempArr = [];
 
         foreach ($array as $product) {
-            $tempArr[] = $product[self::PRODUCT_TOPPING] ?? [];
+            $tempArr[] = $product[$attribute[2]] ?? [];
         }
         if (!empty(array_filter($tempArr))) {
             $productTopping = $this->arrayUniqueKey(call_user_func_array('array_merge', $tempArr), 'id');

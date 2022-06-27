@@ -11,7 +11,8 @@ interface DominoParseServiceAttributeContract
     /**
      * Parse Product Attribute
      * @param array $array
+     * @param array $attribute
      * @return Attribute
      */
-    public function parseAttribute(array $array = []) : Attribute;
+    public function parseAttribute(array $array = [], array $attribute = []) : Attribute;
 }

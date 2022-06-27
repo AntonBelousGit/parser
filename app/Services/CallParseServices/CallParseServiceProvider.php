@@ -4,6 +4,7 @@
 namespace App\Services\CallParseServices;
 
 use App\Services\CallParseServices\Contracts\CallParseServiceContract;
+use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Support\ServiceProvider;
 
 class CallParseServiceProvider extends ServiceProvider
@@ -15,6 +16,10 @@ class CallParseServiceProvider extends ServiceProvider
      */
     public function register(): void
     {
-        $this->app->bind(CallParseServiceContract::class, CallParseService::class);
+        $this->app->bind(CallParseServiceContract::class, function (Application $app) {
+            return $app->make(CallParseService::class, [
+                'parsers' => $app->get('config')->get('parsers'),
+            ]);
+        });
     }
 }
