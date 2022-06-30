@@ -4,6 +4,12 @@ declare(strict_types=1);
 
 namespace App\Services\ParseZharPizza\ParserService;
 
+use App\Services\BaseServices\Attribute;
+use App\Services\BaseServices\Flavor;
+use App\Services\BaseServices\Product;
+use App\Services\BaseServices\ProductSize;
+use App\Services\BaseServices\Size;
+use App\Services\BaseServices\Topping;
 use App\Services\ParseZharPizza\ParserService\Contracts\ZharPizzaParseServiceAttributeContract;
 use App\Services\ParseZharPizza\ParserService\Contracts\ZharPizzaParseServiceContract;
 use App\Services\ParseZharPizza\ParserService\Contracts\ZharPizzaProductValidatorContract;
@@ -60,13 +66,17 @@ class ZharPizzaParseService implements ZharPizzaParseServiceContract, ZharPizzaP
                 $this->products[] = new Product(
                     id: $item['uid'],
                     name: $item['title'],
-                    image: $image[0]->img,
+                    image: $image,
+                    imageMobile: $image,
                     topping: new Topping(
                         topping: $topping
                     ),
+                    sizes: new Size($attribute),
+                    flavors: new Flavor(),
                     attribute: new ProductSize(
-                        attribute: $attribute,
-                        price: (float)$item['price']
+                        attribute: [
+                            ['size_id' => $attribute[0]['id'], 'flavor_id' => '', 'price' => (float)$item['price']]
+                        ],
                     )
                 );
             }
@@ -90,7 +100,7 @@ class ZharPizzaParseService implements ZharPizzaParseServiceContract, ZharPizzaP
 
         try {
             foreach ($array as $item) {
-                $tempArrSize[] = $item->attribute->attribute;
+                $tempArrSize[] = $item->sizes->size;
                 $tempArrTopping[] = $item->topping->topping;
             }
             $attrSize = $this->arrayUniqueKey(call_user_func_array('array_merge', $tempArrSize), 'id');
@@ -98,7 +108,6 @@ class ZharPizzaParseService implements ZharPizzaParseServiceContract, ZharPizzaP
         } catch (Throwable) {
             report('ZharPizzaParser - parseAttribute - size error');
         }
-
         return new Attribute(
             size: $attrSize,
             topping: $attrTopping

@@ -2,47 +2,41 @@
 
 namespace App\Services\ParseZharPizza\CallParse;
 
-use App\Services\BaseServices\SizeService\Contracts\SizeServiceContract;
-use App\Services\BaseServices\ToppingService\Contracts\ToppingServiceContract;
-
+use App\Services\BaseServices\ParserProductData;
 use App\Services\ParseZharPizza\ParserService\Contracts\ZharPizzaParseServiceAttributeContract;
 use App\Services\ParseZharPizza\ParserService\Contracts\ZharPizzaParseServiceContract;
-use App\Services\ParseZharPizza\ProductService\Contracts\ProductServiceContract;
 use Throwable;
 
 class CallParseZharPizza
 {
     /**
      * CallParseVdhPizza constructor.
-     * @param SizeServiceContract $sizeServiceContract
-     * @param ToppingServiceContract $toppingServiceContract
      * @param ZharPizzaParseServiceContract $contract
      * @param ZharPizzaParseServiceAttributeContract $attributeContract
-     * @param ProductServiceContract $productServiceContract
      */
     public function __construct(
-        public SizeServiceContract $sizeServiceContract,
-        public ToppingServiceContract $toppingServiceContract,
         public ZharPizzaParseServiceContract $contract,
         public ZharPizzaParseServiceAttributeContract $attributeContract,
-        public ProductServiceContract $productServiceContract,
     ) {
     }
 
     /**
-     * Parser VdhPizza
+     * Parser ZharPizza
+     * @param $config
+     * @return ParserProductData
      */
-    public function parser($config): void
+    public function parser($config): ParserProductData
     {
         $address = $config['address'] ?? '';
         try {
-            $dataVdh = $this->contract->parseProduct($address);
-            $attributeVdh = $this->attributeContract->parseAttribute($dataVdh);
-            $this->sizeServiceContract->updateOrCreate($attributeVdh->size);
-            $this->toppingServiceContract->updateOrCreate($attributeVdh->topping);
-            $this->productServiceContract->updateOrCreate($dataVdh);
+            $dataZhar = $this->contract->parseProduct($address);
+            $attributeZhar = $this->attributeContract->parseAttribute($dataZhar);
         } catch (Throwable) {
             report('Error VdhPizza');
         }
+        return new ParserProductData(
+            products: $dataZhar,
+            attributes: $attributeZhar
+        );
     }
 }
