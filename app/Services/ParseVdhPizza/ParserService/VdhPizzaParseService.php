@@ -4,6 +4,12 @@ declare(strict_types=1);
 
 namespace App\Services\ParseVdhPizza\ParserService;
 
+use App\Services\BaseServices\Attribute;
+use App\Services\BaseServices\Flavor;
+use App\Services\BaseServices\Product;
+use App\Services\BaseServices\ProductSize;
+use App\Services\BaseServices\Size;
+use App\Services\BaseServices\Topping;
 use App\Services\ParseVdhPizza\ParserService\Contracts\VdhPizzaParseServiceAttributeContract;
 use App\Services\ParseVdhPizza\ParserService\Contracts\VdhPizzaParseServiceContract;
 use App\Services\ParseVdhPizza\ParserService\Contracts\VdhPizzaProductValidatorContract;
@@ -55,20 +61,22 @@ class VdhPizzaParseService implements VdhPizzaParseServiceContract, VdhPizzaPars
                 $this->products[] = new Product(
                     id: $item['uid'],
                     name: $item['title'],
-                    image: $image[0]->img,
+                    image: [$image[0]->img],
+                    imageMobile: [$image[0]->img],
                     topping: new Topping(
                         topping: $topping
                     ),
+                    sizes: new Size(['id'=> 'standard',"name" => "Standard"]),
+                    flavors: new Flavor(),
                     attribute: new ProductSize(
                         attribute: [
-                            ['id'=> 'standard',"name" => "Standard"]
+                            ['size_id'=> 'standard', 'flavor_id' => '','price'=> (float)$item['price']]
                         ],
-                        price: (float)$item['price']
                     )
                 );
             }
-        } catch (Throwable) {
-            report('VdhPizzaParser - parseProduct error');
+        } catch (Throwable $exception) {
+            report('VdhPizzaParser - parseProduct error'. $exception);
         }
         return $this->products;
     }

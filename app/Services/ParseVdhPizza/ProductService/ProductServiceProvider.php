@@ -3,7 +3,6 @@
 
 namespace App\Services\ParseVdhPizza\ProductService;
 
-use App\Services\ParseVdhPizza\ProductService\Contracts\ProductServiceContract;
 use App\Services\ParseVdhPizza\ProductService\Contracts\ProductValidatorContract;
 use Illuminate\Support\ServiceProvider;
 
@@ -17,6 +16,5 @@ class ProductServiceProvider extends ServiceProvider
     public function register(): void
     {
         $this->app->bind(ProductValidatorContract::class, ProductValidator::class);
-        $this->app->bind(ProductServiceContract::class, ProductService::class);
     }
 }
