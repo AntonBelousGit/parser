@@ -9,6 +9,7 @@ use App\Repositories\AttributeRepositories;
 use App\Repositories\ProductRepositories;
 use App\Services\ParseZharPizza\ProductService\Contracts\ProductServiceContract;
 use App\Services\ParseZharPizza\ProductService\Contracts\ProductValidatorContract;
+use \App\Services\BaseServices\Product as ParseProduct;
 use Illuminate\Support\Arr;
 use Throwable;
 
@@ -52,10 +53,10 @@ class ProductService implements ProductServiceContract
     }
 
     /**
-     * @param \App\Services\ParseZharPizza\ParserService\Product $item
+     * @param ParseProduct $item
      * @return void
      */
-    protected function createProduct(\App\Services\ParseZharPizza\ParserService\Product $item): void
+    protected function createProduct(ParseProduct $item): void
     {
         try {
             $product = Product::create(['id' => $item->id, 'name' => $item->name, 'image' => $item->image, 'image_mobile' => $item->image]);
@@ -68,11 +69,11 @@ class ProductService implements ProductServiceContract
 
     /**
      * @param Product $product
-     * @param \App\Services\ParseZharPizza\ParserService\Product $item
+     * @param ParseProduct $item
      * @return void
      */
 
-    protected function updateProduct(Product $product, \App\Services\ParseZharPizza\ParserService\Product $item): void
+    protected function updateProduct(Product $product, ParseProduct $item): void
     {
         $product->update(['id' => $item->id, 'name' => $item->name, 'image' => $item->image, 'image_mobile' => $item->image]);
         try {

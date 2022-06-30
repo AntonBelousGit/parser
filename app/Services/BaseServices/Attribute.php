@@ -1,7 +1,7 @@
 <?php
 declare(strict_types=1);
 
-namespace App\Services\ParseDomino\ParserService;
+namespace App\Services\BaseServices;
 
 class Attribute
 {

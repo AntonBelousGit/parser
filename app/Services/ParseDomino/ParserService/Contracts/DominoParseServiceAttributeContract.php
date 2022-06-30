@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\Services\ParseDomino\ParserService\Contracts;
 
-use App\Services\ParseDomino\ParserService\Attribute;
+use App\Services\BaseServices\Attribute;
 
 interface DominoParseServiceAttributeContract
 {

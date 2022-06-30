@@ -1,7 +1,7 @@
 <?php
 
 
-namespace App\Services\ParseDomino\FlavorService\Exception;
+namespace App\Services\BaseServices\FlavorService\Exception;
 
 use Exception;
 

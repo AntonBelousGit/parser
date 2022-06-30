@@ -1,7 +1,7 @@
 <?php
 
 
-namespace App\Services\ParseDomino\FlavorService\Contracts;
+namespace App\Services\BaseServices\FlavorService\Contracts;
 
 
 interface FlavorValidatorContract

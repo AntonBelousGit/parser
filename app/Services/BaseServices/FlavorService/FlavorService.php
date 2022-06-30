@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace App\Services\ParseDomino\FlavorService;
+namespace App\Services\BaseServices\FlavorService;
 
 use App\Models\Flavor;
 use App\Repositories\FlavorRepositories;
-use App\Services\ParseDomino\FlavorService\Contracts\FlavorServiceContract;
-use App\Services\ParseDomino\FlavorService\Contracts\FlavorValidatorContract;
+use App\Services\BaseServices\FlavorService\Contracts\FlavorServiceContract;
+use App\Services\BaseServices\FlavorService\Contracts\FlavorValidatorContract;
 use Throwable;
 
 class FlavorService implements FlavorServiceContract

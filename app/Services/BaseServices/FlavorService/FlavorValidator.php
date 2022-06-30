@@ -2,11 +2,12 @@
 
 declare(strict_types=1);
 
-namespace App\Services\ParseDomino\FlavorService;
+namespace App\Services\BaseServices\FlavorService;
 
+use App\Services\BaseServices\FlavorService\Contracts\FlavorValidatorContract;
+use App\Services\BaseServices\FlavorService\Exception\InvalidFlavorDataException;
 use App\Services\BaseValidator;
-use App\Services\ParseDomino\FlavorService\Contracts\FlavorValidatorContract;
-use App\Services\ParseDomino\FlavorService\Exception\InvalidFlavorDataException;
+
 use Throwable;
 
 class FlavorValidator extends BaseValidator implements FlavorValidatorContract

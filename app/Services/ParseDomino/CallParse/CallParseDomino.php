@@ -3,9 +3,10 @@
 
 namespace App\Services\ParseDomino\CallParse;
 
+use App\Services\BaseServices\FlavorService\Contracts\FlavorServiceContract;
+use App\Services\BaseServices\ParserProductData;
 use App\Services\BaseServices\SizeService\Contracts\SizeServiceContract;
 use App\Services\BaseServices\ToppingService\Contracts\ToppingServiceContract;
-use App\Services\ParseDomino\FlavorService\Contracts\FlavorServiceContract;
 use App\Services\ParseDomino\ParserService\Contracts\DominoParseServiceAttributeContract;
 use App\Services\ParseDomino\ParserService\Contracts\DominoParseServiceContract;
 use App\Services\ParseDomino\ProductService\Contracts\ProductServiceContract;
@@ -35,19 +36,24 @@ class CallParseDomino
     /**
      * Parser DominoPizza
      */
-    public function parser(array $config): void
+    public function parser(array $config): ParserProductData
     {
         $address = $config['address'] ?? '';
         $attribute = $config['attribute'] ?? [];
         try {
             $dataDomino = $this->contract->parseProduct($address);
             $attributeDomino = $this->attributeContract->parseAttribute($dataDomino, $attribute);
-            $this->sizeServiceContract->updateOrCreate($attributeDomino->size);
-            $this->flavorServiceContract->updateOrCreate($attributeDomino->productRelation);
-            $this->toppingServiceContract->updateOrCreate($attributeDomino->topping);
-            $this->productServiceContract->updateOrCreate($dataDomino);
+//            $this->sizeServiceContract->updateOrCreate($attributeDomino->size);
+//            $this->flavorServiceContract->updateOrCreate($attributeDomino->productRelation);
+//            $this->toppingServiceContract->updateOrCreate($attributeDomino->topping);
+//            $this->productServiceContract->updateOrCreate($dataDomino);
         } catch (Throwable) {
             report('Error dominoParse');
         }
+
+        return new ParserProductData(
+            products: $dataDomino,
+            attributes: $attributeDomino
+        );
     }
 }

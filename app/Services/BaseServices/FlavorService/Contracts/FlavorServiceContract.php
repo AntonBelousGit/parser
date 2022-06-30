@@ -2,8 +2,7 @@
 declare(strict_types=1);
 
 
-namespace App\Services\ParseDomino\FlavorService\Contracts;
-
+namespace App\Services\BaseServices\FlavorService\Contracts;
 
 interface FlavorServiceContract
 {

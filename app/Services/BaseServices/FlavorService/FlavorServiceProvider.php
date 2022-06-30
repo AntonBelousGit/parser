@@ -1,10 +1,11 @@
 <?php
 
 
-namespace App\Services\ParseDomino\FlavorService;
+namespace App\Services\BaseServices\FlavorService;
 
-use App\Services\ParseDomino\FlavorService\Contracts\FlavorServiceContract;
-use App\Services\ParseDomino\FlavorService\Contracts\FlavorValidatorContract;
+
+use App\Services\BaseServices\FlavorService\Contracts\FlavorServiceContract;
+use App\Services\BaseServices\FlavorService\Contracts\FlavorValidatorContract;
 use Illuminate\Support\ServiceProvider;
 
 class FlavorServiceProvider extends ServiceProvider
