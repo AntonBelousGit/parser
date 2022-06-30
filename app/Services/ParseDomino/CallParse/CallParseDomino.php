@@ -23,6 +23,8 @@ class CallParseDomino
 
     /**
      * Parser DominoPizza
+     * @param array $config
+     * @return ParserProductData
      */
     public function parser(array $config): ParserProductData
     {
