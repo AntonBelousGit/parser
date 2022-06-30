@@ -13,6 +13,14 @@ use Throwable;
 
 class ParseService implements ParseServiceContract
 {
+    /**
+     * ParseService constructor.
+     * @param array $parsers
+     * @param SizeServiceContract $sizeServiceContract
+     * @param FlavorServiceContract $flavorServiceContract
+     * @param ToppingServiceContract $toppingServiceContract
+     * @param DataBaseServiceContract $contract
+     */
     public function __construct(
         protected array $parsers,
         public SizeServiceContract $sizeServiceContract,

@@ -19,8 +19,15 @@ use Throwable;
 
 class DominoParseService implements DominoParseServiceContract, DominoParseServiceAttributeContract
 {
+    /**
+     * @var array
+     */
     protected array $products = [];
 
+    /**
+     * DominoParseService constructor.
+     * @param ProductValidatorContract $productValidator
+     */
     public function __construct(
         protected ProductValidatorContract $productValidator,
     ) {

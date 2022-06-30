@@ -12,6 +12,9 @@ use Throwable;
 
 class FlavorService implements FlavorServiceContract
 {
+    /**
+     * @var array
+     */
     protected array $sizes = [];
 
     /**

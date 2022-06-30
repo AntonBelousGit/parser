@@ -20,8 +20,15 @@ use Throwable;
 
 class ZharPizzaParseService implements ZharPizzaParseServiceContract, ZharPizzaParseServiceAttributeContract
 {
+    /**
+     * @var array
+     */
     protected array $products = [];
 
+    /**
+     * ZharPizzaParseService constructor.
+     * @param ZharPizzaProductValidatorContract $productValidator
+     */
     public function __construct(
         protected ZharPizzaProductValidatorContract $productValidator,
     ) {
@@ -80,8 +87,8 @@ class ZharPizzaParseService implements ZharPizzaParseServiceContract, ZharPizzaP
                     )
                 );
             }
-        } catch (Throwable $exception) {
-            report('ZharPizzaParser - parseProduct error' . $exception);
+        } catch (Throwable) {
+            report('ZharPizzaParser - parseProduct error');
         }
         return $this->products;
     }

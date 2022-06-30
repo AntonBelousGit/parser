@@ -5,6 +5,10 @@ namespace App\Services\BaseServices;
 
 class Flavor
 {
+    /**
+     * Flavor constructor.
+     * @param array $flavor
+     */
     public function __construct(
         public array $flavor= [],
     ) {
