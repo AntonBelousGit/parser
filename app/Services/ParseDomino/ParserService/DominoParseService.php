@@ -15,7 +15,6 @@ use App\Services\ParseDomino\ParserService\Contracts\DominoParseServiceContract;
 use App\Services\ParseDomino\ProductService\Contracts\ProductValidatorContract;
 use DiDom\Document;
 use Illuminate\Support\Arr;
-use Illuminate\Support\Str;
 use Throwable;
 
 class DominoParseService implements DominoParseServiceContract, DominoParseServiceAttributeContract
@@ -129,7 +128,7 @@ class DominoParseService implements DominoParseServiceContract, DominoParseServi
         }
         return new Attribute(
             size: $attrSize,
-            productRelation: $attrFlavor,
+            flavor: $attrFlavor,
             topping: $attrTopping
         );
     }

@@ -7,7 +7,7 @@ class Attribute
 {
     public function __construct(
         public array $size = [],
-        public array $productRelation = [],
+        public array $flavor = [],
         public array $topping = []
     ) {
     }

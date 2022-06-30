@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\Console\Commands;
 
-use App\Services\CallParseServices\Contracts\CallParseServiceContract;
+use App\Services\ParseServices\Contracts\ParseServiceContract;
 use Illuminate\Console\Command;
 use Throwable;
 
@@ -30,10 +30,10 @@ class PizzaUpdateParse extends Command
      * @return void
      */
     public function handle(
-        CallParseServiceContract $contract
+        ParseServiceContract $contract
     ) {
         try {
-            $contract->callParse();
+            $contract->storeOrUpdateParse();
         } catch (Throwable $exception) {
             report($exception);
         }

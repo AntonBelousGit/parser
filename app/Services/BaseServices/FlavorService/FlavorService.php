@@ -37,7 +37,6 @@ class FlavorService implements FlavorServiceContract
                 $data = [
                     'id' => $flavor['id'],
                     'name' => html_entity_decode($flavor['name']),
-                    'code' => $flavor['code']
                 ];
 
                 try {
