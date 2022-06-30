@@ -8,20 +8,17 @@ use App\Models\Product;
 use App\Repositories\AttributeRepositories;
 use App\Repositories\ProductRepositories;
 use App\Services\BaseServices\DataBaseService\Contracts\DataBaseServiceContract;
-use App\Services\ParseDomino\ProductService\Contracts\ProductServiceContract;
-use App\Services\ParseDomino\ProductService\Contracts\ProductValidatorContract;
+use App\Services\BaseServices\Product as ParsedProduct;
 use Illuminate\Support\Arr;
 use Throwable;
 
 class DataBaseService implements DataBaseServiceContract
 {
     /**
-     * @param ProductValidatorContract $validatorContract
      * @param ProductRepositories $productRepositories
      * @param AttributeRepositories $attributeRepositories
      */
     public function __construct(
-        protected ProductValidatorContract $validatorContract,
         protected ProductRepositories $productRepositories,
         protected AttributeRepositories $attributeRepositories,
     ) {
@@ -35,90 +32,73 @@ class DataBaseService implements DataBaseServiceContract
     {
         try {
             foreach ($array as $item) {
-                $item = $this->validatorContract->validate($item);
-                $item['name'] = html_entity_decode($item['name']);
                 try {
-                    $updateProduct = $this->productRepositories->getProductByID($item['id']);
+                    $updateProduct = $this->productRepositories->getProductByID($item->id);
                     if ($updateProduct) {
                         $this->updateProduct($updateProduct, $item);
                     } else {
                         $this->createProduct($item);
                     }
-                } catch (Throwable) {
-                    report('ProductService error create/update');
+                } catch (Throwable $exception) {
+                    report('DataBaseService error create/update' . $exception);
                 }
             }
         } catch (Throwable) {
-            report('ProductService update error');
+            report('DataBaseService update error');
         }
     }
 
     /**
-     * @param array $item
+     * @param ParsedProduct $item
      * @return void
      */
-    protected function createProduct(array $item): void
+    protected function createProduct(ParsedProduct $item): void
     {
         try {
-            $product = Product::create($item);
-            $product->topping()->attach(Arr::pluck($item['toppings'], 'id'));
-
-            foreach ($item['sizes'] as $size) {
-                foreach ($size['flavors'] as $flavor) {
-                    $this->attachAttribute($product, $size['id'], $flavor);
-                }
+            $product = Product::create(['id' => $item->id, 'name' => $item->name, 'image' => $item->image, 'image_mobile' => $item->imageMobile]);
+            try {
+                $product->topping()->attach(Arr::pluck($item->topping->topping, 'id'));
+            } catch (Throwable $exception) {
+                report('ProductService error in createProduct - topping attach' . $exception);
             }
-        } catch (Throwable) {
-            report('ProductService error in createProduct');
+            try {
+                $product->attributeProduct()->createMany($item->attribute->attribute);
+            } catch (Throwable $exception) {
+                report($exception);
+            }
+        } catch (Throwable $exception) {
+            report('ProductService error in createProduct' . $exception);
         }
     }
 
     /**
      * @param Product $product
-     * @param array $data
+     * @param ParsedProduct $data
      * @return void
      */
 
-    protected function updateProduct(Product $product, array $data): void
+    protected function updateProduct(Product $product, ParsedProduct $data): void
     {
-        $product->update($data);
+        $product->update(['id' => $data->id, 'name' => $data->name, 'image' => $data->image, 'image_mobile' => $data->imageMobile]);
         try {
-            $product->topping()->sync(Arr::pluck($data['toppings'], 'id'));
+            $product->topping()->attach(Arr::pluck($data->topping->topping, 'id'));
 
-            foreach ($data['sizes'] as $size) {
-                foreach ($size['flavors'] as $flavor) {
-                    $data = [
-                        'product_id' => $product->id,
-                        'size_id' => $size['id'],
-                        'flavor_id' => $flavor['id']
-                    ];
+            foreach ($data->attribute->attribute as $item) {
+                $data = [
+                    'product_id' => $product->id,
+                    'size_id' => $item['size_id'],
+                    'flavor_id' => $item['flavor_id']
+                ];
+                $attribute = $this->attributeRepositories->getAttributeFromArray($data);
 
-                    $attribute = $this->attributeRepositories->getAttributeFromArray($data);
-
-                    if ($attribute) {
-                        $attribute->update($data + ['price' => $flavor['product']['price']]);
-                    } else {
-                        $this->attachAttribute($product, $size['id'], $flavor);
-                    }
+                if ($attribute) {
+                    $attribute->update(['price' => $item['price']]);
+                } else {
+                    $product->attributeProduct()->create($item);
                 }
             }
         } catch (Throwable) {
             report('ProductService error in updateProduct');
-        }
-    }
-
-    /**
-     * @param $product
-     * @param string $size
-     * @param array $flavor
-     */
-
-    protected function attachAttribute($product, string $size, array $flavor)
-    {
-        try {
-            $product->sizes()->attach($size, ['flavor_id' => $flavor['id'], 'price' => $flavor['product']['price']]);
-        } catch (Throwable) {
-            report('Attach failed');
         }
     }
 }

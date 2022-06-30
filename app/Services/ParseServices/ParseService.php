@@ -45,7 +45,7 @@ class ParseService implements ParseServiceContract
                 $this->sizeServiceContract->updateOrCreate($item->attributes->size);
                 $this->flavorServiceContract->updateOrCreate($item->attributes->flavor);
                 $this->toppingServiceContract->updateOrCreate($item->attributes->topping);
-//                $this->contract->updateOrCreate($item->products);
+                $this->contract->updateOrCreate($item->products);
             }
         } catch (Throwable $exception) {
             report($exception);
