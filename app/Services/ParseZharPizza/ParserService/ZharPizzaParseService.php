@@ -75,13 +75,13 @@ class ZharPizzaParseService implements ZharPizzaParseServiceContract, ZharPizzaP
                     flavors: new Flavor(),
                     attribute: new ProductSize(
                         attribute: [
-                            ['size_id' => $attribute[0]['id'], 'flavor_id' => '', 'price' => (float)$item['price']]
+                            ['size_id' => $attribute[0]['id'] ?? '35-sm', 'flavor_id' => '', 'price' => (float)$item['price']]
                         ],
                     )
                 );
             }
-        } catch (Throwable) {
-            report('ZharPizzaParser - parseProduct error');
+        } catch (Throwable $exception) {
+            report('ZharPizzaParser - parseProduct error' . $exception);
         }
         return $this->products;
     }
