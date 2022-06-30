@@ -106,7 +106,7 @@ class DominoParseService implements DominoParseServiceContract, DominoParseServi
      * @param array $attribute
      * @return Attribute
      */
-    public function parseAttribute(array $array = [], array $attribute = []): Attribute
+    public function parseAttribute(array $array = []): Attribute
     {
         $tempArrSize = [];
         $tempArrTopping = [];

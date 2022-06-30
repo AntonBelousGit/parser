@@ -11,7 +11,6 @@ return [
         'parser' => CallParseDomino::class . '@parser',
         'config' => [
             'address' => 'https://dominos.ua/uk/chornomorsk/',
-            'attribute' => ['sizes', 'flavors', 'toppings']
         ],
     ],
 //    'zharPizza' => [

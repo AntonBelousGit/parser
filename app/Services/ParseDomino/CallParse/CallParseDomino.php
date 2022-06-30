@@ -39,10 +39,9 @@ class CallParseDomino
     public function parser(array $config): ParserProductData
     {
         $address = $config['address'] ?? '';
-        $attribute = $config['attribute'] ?? [];
         try {
             $dataDomino = $this->contract->parseProduct($address);
-            $attributeDomino = $this->attributeContract->parseAttribute($dataDomino, $attribute);
+            $attributeDomino = $this->attributeContract->parseAttribute($dataDomino);
 //            $this->sizeServiceContract->updateOrCreate($attributeDomino->size);
 //            $this->flavorServiceContract->updateOrCreate($attributeDomino->productRelation);
 //            $this->toppingServiceContract->updateOrCreate($attributeDomino->topping);
