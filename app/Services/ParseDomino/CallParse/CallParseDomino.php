@@ -42,10 +42,6 @@ class CallParseDomino
         try {
             $dataDomino = $this->contract->parseProduct($address);
             $attributeDomino = $this->attributeContract->parseAttribute($dataDomino);
-//            $this->sizeServiceContract->updateOrCreate($attributeDomino->size);
-//            $this->flavorServiceContract->updateOrCreate($attributeDomino->productRelation);
-//            $this->toppingServiceContract->updateOrCreate($attributeDomino->topping);
-//            $this->productServiceContract->updateOrCreate($dataDomino);
         } catch (Throwable) {
             report('Error dominoParse');
         }
