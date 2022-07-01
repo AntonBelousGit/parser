@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace Tests\Unit\ParseDomino\FlavorService;
+namespace Tests\Unit\BaseServices\FlavorService;
 
-use App\Services\ParseDomino\FlavorService\FlavorValidator;
+use App\Services\BaseServices\FlavorService\FlavorValidator;
 use Tests\TestCase;
 use Throwable;
 

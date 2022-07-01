@@ -4,7 +4,7 @@ declare(strict_types=1);
 namespace Tests\Unit\BaseServices\ToppingService;
 
 use App\Models\Topping;
-use App\Services\ParseDomino\ParserService\Attribute;
+use App\Services\BaseServices\Attribute;
 use App\Services\BaseServices\ToppingService\ToppingService;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;

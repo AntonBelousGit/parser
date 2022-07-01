@@ -4,7 +4,7 @@ declare(strict_types=1);
 namespace Tests\Unit\BaseServices\SizeService;
 
 use App\Models\Size;
-use App\Services\ParseDomino\ParserService\Attribute;
+use App\Services\BaseServices\Attribute;
 use App\Services\BaseServices\SizeService\SizeService;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;

@@ -18,14 +18,15 @@ class ParseServiceTest extends TestCase
     public function testGetProductDataFromParsedPage()
     {
         $response = $this->getDominiParse()->parseProduct(config('parsers.dominoParse.config.address'));
+
         $this->assertNotEmpty($response);
-        $this->assertNotEmpty($response[0]['id']);
+        $this->assertNotEmpty($response[0]->id);
     }
 
     public function testGetAttributeDataFromParsedPage()
     {
-        $response = $this->getDominiParse()->parseAttribute($this->getDominiParse()->parseProduct(config('parsers.dominoParse.config.address')), config('parsers.dominoParse.config.attribute'));
-        if (count($response->size) > 0 && count($response->topping) > 0 && count($response->productRelation)) {
+        $response = $this->getDominiParse()->parseAttribute($this->getDominiParse()->parseProduct(config('parsers.dominoParse.config.address')));
+        if (count($response->size) > 0 && count($response->topping) > 0 && count($response->flavor)) {
             $this->assertTrue(true);
             return;
         }
