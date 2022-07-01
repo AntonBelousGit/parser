@@ -29,14 +29,14 @@ class CallParseZharPizza
     {
         $address = $config['address'] ?? '';
         try {
-            $dataZhar = $this->contract->parseProduct($address);
-            $attributeZhar = $this->attributeContract->parseAttribute($dataZhar);
+            $data = $this->contract->parseProduct($address);
+            $attribute = $this->attributeContract->parseAttribute($data);
         } catch (Throwable) {
             report('Error VdhPizza');
         }
         return new ParserProductData(
-            products: $dataZhar,
-            attributes: $attributeZhar
+            products: $data,
+            attributes: $attribute
         );
     }
 }

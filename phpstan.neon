@@ -19,6 +19,7 @@ parameters:
         - '#Call to an undefined method [a-zA-Z0-9\\_]+::getChangedColumns\(\)#'
         - '#Call to an undefined method [a-zA-Z0-9\\_]+::saveChange\(\)#'
         - '#Access to an undefined property [a-zA-Z0-9\\_]+::\$attribute#'
-        - '#Access to an undefined property [a-zA-Z0-9\\_]+::\$price#'
         - '#Access to an undefined property [a-zA-Z0-9\\_]+::\$updated_at#'
         - '#Access to an undefined property [a-zA-Z0-9\\_]+::\$history#'
+        - '#Variable \$data might not be defined.#'
+        - '#Variable \$attribute might not be defined.#'

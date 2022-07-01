@@ -27,15 +27,15 @@ class CallParseVdhPizza
     {
         $address = $config['address'] ?? '';
         try {
-            $dataVdh = $this->contract->parseProduct($address);
-            $attributeVdh = $this->attributeContract->parseAttribute($dataVdh);
+            $data = $this->contract->parseProduct($address);
+            $attribute= $this->attributeContract->parseAttribute($data);
         } catch (Throwable) {
             report('Error VdhPizza');
         }
 
         return new ParserProductData(
-            products: $dataVdh,
-            attributes: $attributeVdh
+            products: $data,
+            attributes: $attribute
         );
     }
 }

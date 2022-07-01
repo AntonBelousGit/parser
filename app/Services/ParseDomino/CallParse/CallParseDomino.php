@@ -30,15 +30,14 @@ class CallParseDomino
     {
         $address = $config['address'] ?? '';
         try {
-            $dataDomino = $this->contract->parseProduct($address);
-            $attributeDomino = $this->attributeContract->parseAttribute($dataDomino);
+            $data = $this->contract->parseProduct($address);
+            $attribute = $this->attributeContract->parseAttribute($data);
         } catch (Throwable) {
             report('Error dominoParse');
         }
-
         return new ParserProductData(
-            products: $dataDomino,
-            attributes: $attributeDomino
+            products: $data,
+            attributes: $attribute
         );
     }
 }
