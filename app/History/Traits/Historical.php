@@ -14,7 +14,7 @@ trait Historical
     public static function bootHistorical()
     {
         static::updated(function (Model $model) {
-            collect($model->getChangedColumns($model))->each(function ($change) use ($model) {
+            $model->getChangedColumns($model)->each(function ($change) use ($model) {
                 $model->saveChange($change);
             });
         });
