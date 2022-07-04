@@ -37,7 +37,7 @@ class ParseService implements ParseServiceContract
     {
         $parsedData = [];
         foreach ($this->parsers as $parser) {
-            $parsedData[] = app()->call($parser['parser'], ['config' => $parser['config']]);
+            $parsedData[] = app()->call($parser['parser']. '@parser', ['config' => $parser['config']]);
         }
         return $parsedData;
     }
