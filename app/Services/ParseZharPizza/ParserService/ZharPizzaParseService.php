@@ -110,8 +110,8 @@ class ZharPizzaParseService implements ZharPizzaParseServiceContract, ZharPizzaP
                 $tempArrSize[] = $item->sizes->size;
                 $tempArrTopping[] = $item->topping->topping;
             }
-            $attrSize = $this->arrayUniqueKey(call_user_func_array('array_merge', $tempArrSize), 'id');
-            $attrTopping = $this->arrayUniqueKey(call_user_func_array('array_merge', $tempArrTopping), 'id');
+            $attrSize = arrayUniqueKey(call_user_func_array('array_merge', $tempArrSize), 'id');
+            $attrTopping = arrayUniqueKey(call_user_func_array('array_merge', $tempArrTopping), 'id');
         } catch (Throwable) {
             report('ZharPizzaParser - parseAttribute - size error');
         }
@@ -148,26 +148,5 @@ class ZharPizzaParseService implements ZharPizzaParseServiceContract, ZharPizzaP
             $tempArray[] = ['id' => Str::slug($item), 'name' => $item];
         }
         return $tempArray;
-    }
-
-    /**
-     * Remove non-unique key from deep array
-     * @param $array
-     * @param $key
-     * @return array
-     */
-    protected function arrayUniqueKey($array, $key): array
-    {
-        $tmp = $keyArray = array();
-        $i = 0;
-
-        foreach ($array as $val) {
-            if (!in_array($val[$key], $keyArray)) {
-                $keyArray[$i] = $val[$key];
-                $tmp[$i] = $val;
-            }
-            $i++;
-        }
-        return $tmp;
     }
 }

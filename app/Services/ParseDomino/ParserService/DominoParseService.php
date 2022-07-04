@@ -126,11 +126,11 @@ class DominoParseService implements DominoParseServiceContract, DominoParseServi
                 $tempArrFlavor[] = $item->flavors->flavor;
             }
 
-            $attrSize = $this->arrayUniqueKey(call_user_func_array('array_merge', $tempArrSize), 'id');
-            $attrTopping = $this->arrayUniqueKey(call_user_func_array('array_merge', $tempArrTopping), 'id');
-            $attrFlavor = $this->arrayUniqueKey(call_user_func_array('array_merge', $tempArrFlavor), 'id');
-        } catch (Throwable) {
-            report('DominoParser - parseAttribute - size error');
+            $attrSize = arrayUniqueKey(call_user_func_array('array_merge', $tempArrSize), 'id');
+            $attrTopping = arrayUniqueKey(call_user_func_array('array_merge', $tempArrTopping), 'id');
+            $attrFlavor = arrayUniqueKey(call_user_func_array('array_merge', $tempArrFlavor), 'id');
+        } catch (Throwable $exception) {
+            report('DominoParser - parseAttribute - size error' . $exception);
         }
         return new Attribute(
             size: $attrSize,
@@ -171,26 +171,5 @@ class DominoParseService implements DominoParseServiceContract, DominoParseServi
             $tempArray[] = ['id' => $item['id'], 'name' => html_entity_decode($item['name'])];
         }
         return $tempArray;
-    }
-
-    /**
-     * Remove non-unique key from deep array
-     * @param $array
-     * @param $key
-     * @return array
-     */
-    protected function arrayUniqueKey($array, $key): array
-    {
-        $tmp = $keyArray = array();
-        $i = 0;
-
-        foreach ($array as $val) {
-            if (!in_array($val[$key], $keyArray)) {
-                $keyArray[$i] = $val[$key];
-                $tmp[$i] = $val;
-            }
-            $i++;
-        }
-        return $tmp;
     }
 }

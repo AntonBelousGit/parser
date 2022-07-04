@@ -95,7 +95,7 @@ class VdhPizzaParseService implements VdhPizzaParseServiceContract, VdhPizzaPars
             foreach ($array as $item) {
                 $tempArrTopping[] = $item->topping->topping;
             }
-            $attrTopping = $this->arrayUniqueKey(call_user_func_array('array_merge', $tempArrTopping), 'id');
+            $attrTopping = arrayUniqueKey(call_user_func_array('array_merge', $tempArrTopping), 'id');
         } catch (Throwable) {
             report('VdhPizzaParser - parseAttribute - size error');
         }
@@ -119,26 +119,5 @@ class VdhPizzaParseService implements VdhPizzaParseServiceContract, VdhPizzaPars
             $tempArray[] = [ 'id' =>Str::slug($cleanValueHtml), 'name' =>$cleanValueHtml ];
         }
         return $tempArray;
-    }
-
-    /**
-     * Remove non-unique key from deep array
-     * @param $array
-     * @param $key
-     * @return array
-     */
-    protected function arrayUniqueKey($array, $key): array
-    {
-        $tmp = $keyArray = array();
-        $i = 0;
-
-        foreach ($array as $val) {
-            if (!in_array($val[$key], $keyArray)) {
-                $keyArray[$i] = $val[$key];
-                $tmp[$i] = $val;
-            }
-            $i++;
-        }
-        return $tmp;
     }
 }
