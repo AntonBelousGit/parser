@@ -15,7 +15,7 @@ class PizzaUpdateParse extends Command
      *
      * @var string
      */
-    protected $signature = 'pizza:update';
+    protected $signature = 'parse';
 
     /**
      * The console command description.
