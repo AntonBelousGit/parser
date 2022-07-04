@@ -30,10 +30,10 @@ class PizzaUpdateParse extends Command
      * @return void
      */
     public function handle(
-        ParseServiceContract $contract
+        ParseServiceContract $parseServiceContract
     ) {
         try {
-            $contract->storeOrUpdateParse();
+            $parseServiceContract->parse();
         } catch (Throwable $exception) {
             report($exception);
         }

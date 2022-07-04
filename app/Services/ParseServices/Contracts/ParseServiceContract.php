@@ -16,5 +16,5 @@ interface ParseServiceContract
      *  Store in DB new parsed data or update
      *  @return void
      */
-    public function storeOrUpdateParse(): void;
+    public function parse(): void;
 }

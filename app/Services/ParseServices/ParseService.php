@@ -45,7 +45,7 @@ class ParseService implements ParseServiceContract
     /**
      * Store or update parsed data
      */
-    public function storeOrUpdateParse(): void
+    public function parse(): void
     {
         $data = $this->callParse();
         try {
