@@ -4,7 +4,7 @@ declare(strict_types=1);
 namespace Tests\Unit\BaseServices\SizeService;
 
 use App\Models\Size;
-use App\Services\BaseServices\Attribute;
+use App\Services\BaseServices\AttributeDTO;
 use App\Services\BaseServices\SizeService\SizeService;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
@@ -38,11 +38,11 @@ class SizeServiceTest extends TestCase
     }
 
     /**
-     * @return Attribute
+     * @return AttributeDTO
      */
-    protected function getTestAttribute(): Attribute
+    protected function getTestAttribute(): AttributeDTO
     {
-        return new Attribute(
+        return new AttributeDTO(
             size: [
             [
                 "id" => "e1e74edf-1431-4a90-8234-5039265d7ae6",
@@ -58,9 +58,9 @@ class SizeServiceTest extends TestCase
         );
     }
 
-    protected function updateTestAttribute(): Attribute
+    protected function updateTestAttribute(): AttributeDTO
     {
-        return new Attribute(
+        return new AttributeDTO(
             size: [
             [
                 "id" => "e1e74edf-1431-4a90-8234-5039265d7ae6",

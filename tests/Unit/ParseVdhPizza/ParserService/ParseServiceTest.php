@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Tests\Unit\ParseVdhPizza\ParserService;
 
-use App\Services\ParseVdhPizza\ParserService\VdhPizzaParseService;
+use App\Services\ParseVdhPizza\ParserService\VdhPizzaParseDriver;
 use GuzzleHttp\Exception\GuzzleException;
 use Tests\TestCase;
 
@@ -44,10 +44,10 @@ class ParseServiceTest extends TestCase
     }
 
     /**
-     * @return VdhPizzaParseService
+     * @return VdhPizzaParseDriver
      */
-    protected function getDominiParse(): VdhPizzaParseService
+    protected function getDominiParse(): VdhPizzaParseDriver
     {
-        return $this->app->make(VdhPizzaParseService::class);
+        return $this->app->make(VdhPizzaParseDriver::class);
     }
 }

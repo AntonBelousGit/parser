@@ -7,10 +7,10 @@ use App\Models\Attribute;
 use App\Models\History;
 use App\Models\Product;
 use App\Services\BaseServices\DataBaseService\DataBaseService;
-use App\Services\BaseServices\Flavor;
-use App\Services\BaseServices\ProductSize;
-use App\Services\BaseServices\Size;
-use App\Services\BaseServices\Topping;
+use App\Services\BaseServices\FlavorDTO;
+use App\Services\BaseServices\ProductSizeDTO;
+use App\Services\BaseServices\SizeDTO;
+use App\Services\BaseServices\ToppingDTO;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
@@ -96,7 +96,7 @@ class DataBaseServiceTest extends TestCase
     protected function getTestProductData(): array
     {
         return [
-            new \App\Services\BaseServices\Product(
+            new \App\Services\BaseServices\ProductDTO(
                 id: "4d06072b-81b0-4108-9e3a-0cab1fdaf8a4",
                 name: "ПІца Мангеттен",
                 image: [
@@ -113,7 +113,7 @@ class DataBaseServiceTest extends TestCase
                 480 => "https://media.dominos.ua/__sized__/menu/product_osg_image_mobile/2021/07/27/Manhatten_slice_collageweb-min-thumbnail-480x480-70.jpg",
                 960 => "https://media.dominos.ua/__sized__/menu/product_osg_image_mobile/2021/07/27/Manhatten_slice_collageweb-min-thumbnail-960x960-70.jpg",
             ],
-                topping: new Topping(
+                topping: new ToppingDTO(
                     topping: [
                     [
                         "id" => "841ed46e-fae5-4df5-aabc-6a98155afe2f",
@@ -132,7 +132,7 @@ class DataBaseServiceTest extends TestCase
                         "name" => "Пепероні",
                     ]]
                 ),
-                sizes: new Size(
+                sizes: new SizeDTO(
                     size: [
                 [
                     "id" => "e1e74edf-1431-4a90-8234-5039265d7ae6",
@@ -141,7 +141,7 @@ class DataBaseServiceTest extends TestCase
                     "name" => "Велика"]
             ]
                 ),
-                flavors: new Flavor(
+                flavors: new FlavorDTO(
                     flavor: [
                     [
                         "id" => "8cce4b72-3386-415c-b983-70711ea235e7",
@@ -177,7 +177,7 @@ class DataBaseServiceTest extends TestCase
                     ]
                 ]
                 ),
-                attribute: new ProductSize(
+                attribute: new ProductSizeDTO(
                     attribute: [
                     [
                         "size_id" => "e1e74edf-1431-4a90-8234-5039265d7ae6",
@@ -231,7 +231,7 @@ class DataBaseServiceTest extends TestCase
     protected function updateTestProductData(): array
     {
         return [
-            new \App\Services\BaseServices\Product(
+            new \App\Services\BaseServices\ProductDTO(
                 id: "4d06072b-81b0-4108-9e3a-0cab1fdaf8a4",
                 name: "ПІца Мангеттен",
                 image: [
@@ -248,7 +248,7 @@ class DataBaseServiceTest extends TestCase
                 480 => "https://media.dominos.ua/__sized__/menu/product_osg_image_mobile/2021/07/27/Manhatten_slice_collageweb-min-thumbnail-480x480-70.jpg",
                 960 => "https://media.dominos.ua/__sized__/menu/product_osg_image_mobile/2021/07/27/Manhatten_slice_collageweb-min-thumbnail-960x960-70.jpg",
             ],
-                topping: new Topping(
+                topping: new ToppingDTO(
                     topping: [
                     [
                         "id" => "841ed46e-fae5-4df5-aabc-6a98155afe2f",
@@ -267,7 +267,7 @@ class DataBaseServiceTest extends TestCase
                         "name" => "Пепероні",
                     ]]
                 ),
-                sizes: new Size(
+                sizes: new SizeDTO(
                     size: [
                     [
                         "id" => "e1e74edf-1431-4a90-8234-5039265d7ae6",
@@ -276,7 +276,7 @@ class DataBaseServiceTest extends TestCase
                         "name" => "Велика"]
                 ]
                 ),
-                flavors: new Flavor(
+                flavors: new FlavorDTO(
                     flavor: [
                     [
                         "id" => "8cce4b72-3386-415c-b983-70711ea235e7",
@@ -312,7 +312,7 @@ class DataBaseServiceTest extends TestCase
                     ]
                 ]
                 ),
-                attribute: new ProductSize(
+                attribute: new ProductSizeDTO(
                     attribute: [
                         [
                             "size_id" => "e1e74edf-1431-4a90-8234-5039265d7ae6",

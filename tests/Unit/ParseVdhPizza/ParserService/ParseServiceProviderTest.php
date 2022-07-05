@@ -6,13 +6,13 @@ namespace Tests\Unit\ParseVdhPizza\ParserService;
 
 use App\Services\ParseVdhPizza\ParserService\Contracts\VdhPizzaParseServiceAttributeContract;
 use App\Services\ParseVdhPizza\ParserService\Contracts\VdhPizzaParseServiceContract;
-use App\Services\ParseVdhPizza\ParserService\VdhPizzaParseService;
+use App\Services\ParseVdhPizza\ParserService\VdhPizzaParseDriver;
 use Tests\Unit\BaseServiceProviderTest;
 
 class ParseServiceProviderTest extends BaseServiceProviderTest
 {
     protected array $services = [
-        VdhPizzaParseServiceContract::class => VdhPizzaParseService::class,
-        VdhPizzaParseServiceAttributeContract::class =>  VdhPizzaParseService::class
+        VdhPizzaParseServiceContract::class => VdhPizzaParseDriver::class,
+        VdhPizzaParseServiceAttributeContract::class =>  VdhPizzaParseDriver::class
     ];
 }

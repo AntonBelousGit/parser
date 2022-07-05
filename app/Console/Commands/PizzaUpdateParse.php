@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\Console\Commands;
 
-use App\Services\ParseServices\Contracts\ParseServiceContract;
+use App\Services\ParserManager\Contracts\ParseServiceContract;
 use Illuminate\Console\Command;
 use Throwable;
 

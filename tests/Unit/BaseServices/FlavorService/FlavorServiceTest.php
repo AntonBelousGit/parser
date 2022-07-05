@@ -4,7 +4,7 @@ declare(strict_types=1);
 namespace Tests\Unit\BaseServices\FlavorService;
 
 use App\Models\Flavor;
-use App\Services\BaseServices\Attribute;
+use App\Services\BaseServices\AttributeDTO;
 use App\Services\BaseServices\FlavorService\FlavorService;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
@@ -39,11 +39,11 @@ class FlavorServiceTest extends TestCase
     }
 
     /**
-     * @return Attribute
+     * @return AttributeDTO
      */
-    protected function getTestAttribute(): Attribute
+    protected function getTestAttribute(): AttributeDTO
     {
-        return new Attribute(
+        return new AttributeDTO(
             flavor: [
             [
                 "id" => "8cce4b72-3386-415c-b983-70711ea235e7",
@@ -59,9 +59,9 @@ class FlavorServiceTest extends TestCase
         );
     }
 
-    protected function updateTestAttribute(): Attribute
+    protected function updateTestAttribute(): AttributeDTO
     {
-        return new Attribute(
+        return new AttributeDTO(
             flavor: [
             [
                 "id" => "8cce4b72-3386-415c-b983-70711ea235e7",

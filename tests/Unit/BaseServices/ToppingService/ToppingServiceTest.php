@@ -4,7 +4,7 @@ declare(strict_types=1);
 namespace Tests\Unit\BaseServices\ToppingService;
 
 use App\Models\Topping;
-use App\Services\BaseServices\Attribute;
+use App\Services\BaseServices\AttributeDTO;
 use App\Services\BaseServices\ToppingService\ToppingService;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
@@ -38,11 +38,11 @@ class ToppingServiceTest extends TestCase
     }
 
     /**
-     * @return Attribute
+     * @return AttributeDTO
      */
-    protected function getTestAttribute(): Attribute
+    protected function getTestAttribute(): AttributeDTO
     {
-        return new Attribute(
+        return new AttributeDTO(
             topping: [
             [
                 "id" => "57b9883e-7652-4590-9316-f45f2da2cad4",
@@ -58,9 +58,9 @@ class ToppingServiceTest extends TestCase
         );
     }
 
-    protected function updateTestAttribute(): Attribute
+    protected function updateTestAttribute(): AttributeDTO
     {
-        return new Attribute(
+        return new AttributeDTO(
             topping: [
             [
                 "id" => "57b9883e-7652-4590-9316-f45f2da2cad4",

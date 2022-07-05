@@ -5,20 +5,18 @@ declare(strict_types=1);
 namespace App\Services\BaseServices\ToppingService;
 
 use App\Models\Topping;
-use App\Repositories\ToppingRepositories;
 use App\Services\BaseServices\ToppingService\Contracts\ToppingServiceContract;
 use App\Services\BaseServices\ToppingService\Contracts\ToppingValidatorContract;
+use Illuminate\Support\Facades\Log;
 use Throwable;
 
 class ToppingService implements ToppingServiceContract
 {
     /**
      * @param ToppingValidatorContract $toppingValidatorContract
-     * @param ToppingRepositories $toppingRepositories
      */
     public function __construct(
         protected ToppingValidatorContract $toppingValidatorContract,
-        protected ToppingRepositories $toppingRepositories,
     ) {
     }
 
@@ -31,25 +29,23 @@ class ToppingService implements ToppingServiceContract
         try {
             foreach ($array as $topping) {
                 $topping = $this->toppingValidatorContract->validate($topping);
-
                 $data = [
                     'id' => $topping['id'],
                     'name' => html_entity_decode($topping['name']),
                 ];
-
                 try {
-                    $updateTopping = $this->toppingRepositories->getToppingByID($data['id']);
+                    $updateTopping = Topping::find($data['id']);
                     if ($updateTopping) {
                         $updateTopping->update($data);
                     } else {
                         Topping::create($data);
                     }
                 } catch (Throwable) {
-                    report('ToppingService error create/update');
+                    Log::info('ToppingService error create/update');
                 }
             }
         } catch (Throwable) {
-            report('ToppingService update error');
+            Log::info('ToppingService update error');
         }
     }
 }

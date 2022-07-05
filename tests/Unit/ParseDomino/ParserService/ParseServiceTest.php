@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Tests\Unit\ParseDomino\ParserService;
 
-use App\Services\ParseDomino\ParserService\DominoParseService;
+use App\Services\ParseDomino\ParserService\DominoParseDriver;
 use Tests\TestCase;
 
 class ParseServiceTest extends TestCase
@@ -35,10 +35,10 @@ class ParseServiceTest extends TestCase
 
 
     /**
-     * @return DominoParseService
+     * @return DominoParseDriver
      */
-    protected function getDominiParse(): DominoParseService
+    protected function getDominiParse(): DominoParseDriver
     {
-        return $this->app->make(DominoParseService::class);
+        return $this->app->make(DominoParseDriver::class);
     }
 }

@@ -6,7 +6,7 @@ namespace App\Services\ParseDomino\ProductService;
 
 use App\Services\BaseValidator;
 use App\Services\ParseDomino\ProductService\Contracts\ProductValidatorContract;
-use App\Services\ParseDomino\ProductService\Exception\InvalidProductDataException;
+use App\Services\ParserManager\Exception\InvalidConfigDataException;
 use Throwable;
 
 class ProductValidator extends BaseValidator implements ProductValidatorContract
@@ -17,7 +17,7 @@ class ProductValidator extends BaseValidator implements ProductValidatorContract
      * @param array $data
      * @param array $rules
      * @return array
-     * @throws InvalidProductDataException|Throwable
+     * @throws InvalidConfigDataException|Throwable
      */
     public function validate(array $data, array $rules = []): array
     {
@@ -56,8 +56,8 @@ class ProductValidator extends BaseValidator implements ProductValidatorContract
      * Size data validation exception.
      *
      */
-    protected function getValidationException(): InvalidProductDataException
+    protected function getValidationException(): InvalidConfigDataException
     {
-        return new InvalidProductDataException('Size data is invalid. Check ports source.');
+        return new InvalidConfigDataException('Size data is invalid. Check ports source.');
     }
 }

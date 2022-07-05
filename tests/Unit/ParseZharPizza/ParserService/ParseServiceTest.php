@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Tests\Unit\ParseZharPizza\ParserService;
 
-use App\Services\ParseZharPizza\ParserService\ZharPizzaParseService;
+use App\Services\ParseZharPizza\ParserService\ZharPizzaParseDriver;
 use GuzzleHttp\Exception\GuzzleException;
 use Tests\TestCase;
 
@@ -38,10 +38,10 @@ class ParseServiceTest extends TestCase
     }
 
     /**
-     * @return ZharPizzaParseService
+     * @return ZharPizzaParseDriver
      */
-    protected function getDominiParse(): ZharPizzaParseService
+    protected function getDominiParse(): ZharPizzaParseDriver
     {
-        return $this->app->make(ZharPizzaParseService::class);
+        return $this->app->make(ZharPizzaParseDriver::class);
     }
 }

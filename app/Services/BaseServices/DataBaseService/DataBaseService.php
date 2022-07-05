@@ -4,23 +4,22 @@ declare(strict_types=1);
 
 namespace App\Services\BaseServices\DataBaseService;
 
+use App\Models\Attribute;
 use App\Models\Product;
-use App\Repositories\AttributeRepositories;
 use App\Repositories\ProductRepositories;
 use App\Services\BaseServices\DataBaseService\Contracts\DataBaseServiceContract;
-use App\Services\BaseServices\Product as ParsedProduct;
+use App\Services\ParserManager\DTOs\ProductDTO as ParsedProduct;
 use Illuminate\Support\Arr;
+use Illuminate\Support\Facades\Log;
 use Throwable;
 
 class DataBaseService implements DataBaseServiceContract
 {
     /**
      * @param ProductRepositories $productRepositories
-     * @param AttributeRepositories $attributeRepositories
      */
     public function __construct(
         protected ProductRepositories $productRepositories,
-        protected AttributeRepositories $attributeRepositories,
     ) {
     }
 
@@ -39,12 +38,12 @@ class DataBaseService implements DataBaseServiceContract
                     } else {
                         $this->createProduct($item);
                     }
-                } catch (Throwable $exception) {
-                    report('DataBaseService error create/update' . $exception);
+                } catch (Throwable) {
+                    Log::info('DataBaseService error create/update');
                 }
             }
         } catch (Throwable) {
-            report('DataBaseService update error');
+            Log::info('DataBaseService update error', ['data' => $array]);
         }
     }
 
@@ -58,16 +57,16 @@ class DataBaseService implements DataBaseServiceContract
             $product = Product::create(['id' => $item->id, 'name' => $item->name, 'image' => $item->image, 'image_mobile' => $item->imageMobile]);
             try {
                 $product->topping()->attach(Arr::pluck($item->topping->topping, 'id'));
-            } catch (Throwable $exception) {
-                report('ProductService error in createProduct - topping attach' . $exception);
+            } catch (Throwable) {
+                Log::info('ProductService error in createProduct - topping attach', ['item' => $item]);
             }
             try {
                 $product->attributeProduct()->createMany($item->attribute->attribute);
-            } catch (Throwable $exception) {
-                report($exception);
+            } catch (Throwable) {
+                Log::info('ProductService error in createProduct - attributeProduct', ['item' => $item]);
             }
-        } catch (Throwable $exception) {
-            report('ProductService error in createProduct' . $exception);
+        } catch (Throwable) {
+            Log::info('ProductService error in createProduct', ['item' => $item]);
         }
     }
 
@@ -76,21 +75,18 @@ class DataBaseService implements DataBaseServiceContract
      * @param ParsedProduct $data
      * @return void
      */
-
     protected function updateProduct(Product $product, ParsedProduct $data): void
     {
         $product->update(['id' => $data->id, 'name' => $data->name, 'image' => $data->image, 'image_mobile' => $data->imageMobile]);
         try {
             $product->topping()->attach(Arr::pluck($data->topping->topping, 'id'));
-
             foreach ($data->attribute->attribute as $item) {
                 $data = [
                     'product_id' => $product->id,
                     'size_id' => $item['size_id'],
                     'flavor_id' => $item['flavor_id']
                 ];
-                $attribute = $this->attributeRepositories->getAttributeFromArray($data);
-
+                $attribute = Attribute::where($data)->first();
                 if ($attribute) {
                     $attribute->update(['price' => $item['price']]);
                 } else {
@@ -98,7 +94,7 @@ class DataBaseService implements DataBaseServiceContract
                 }
             }
         } catch (Throwable) {
-            report('ProductService error in updateProduct');
+            Log::info('ProductService error in updateProduct', ['data' => $data]);
         }
     }
 }
