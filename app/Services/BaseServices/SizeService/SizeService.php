@@ -26,26 +26,23 @@ class SizeService implements SizeServiceContract
      */
     public function updateOrCreate(array $array = []): void
     {
-        try {
-            foreach ($array as $size) {
+        foreach ($array as $size) {
+            try {
                 $size = $this->sizeDataValidator->validate($size);
                 $data = [
                     'id' => $size['id'],
                     'name' => html_entity_decode($size['name']),
                 ];
-                try {
-                    $updateSize = Size::find($data['id']);
-                    if ($updateSize) {
-                        $updateSize->update($data);
-                    } else {
-                        Size::create($data);
-                    }
-                } catch (Throwable) {
-                    Log::info('SizeService error create/update');
+
+                $updateSize = Size::find($data['id']);
+                if ($updateSize) {
+                    $updateSize->update($data);
+                } else {
+                    Size::create($data);
                 }
+            } catch (Throwable) {
+                Log::info('SizeService error create/update');
             }
-        } catch (Throwable) {
-            Log::info('SizeService update error');
         }
     }
 }

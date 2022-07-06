@@ -31,26 +31,23 @@ class FlavorService implements FlavorServiceContract
      */
     public function updateOrCreate(array $array = []): void
     {
-        try {
-            foreach ($array as $flavor) {
+        foreach ($array as $flavor) {
+            try {
                 $flavor = $this->flavorValidatorContract->validate($flavor);
                 $data = [
                     'id' => $flavor['id'],
                     'name' => html_entity_decode($flavor['name']),
                 ];
-                try {
-                    $updateFlavor = Flavor::find($data['id']);
-                    if ($updateFlavor) {
-                        $updateFlavor->update($data);
-                    } else {
-                        Flavor::create($data);
-                    }
-                } catch (Throwable) {
-                    Log::info('FlavorService error create/update');
+
+                $updateFlavor = Flavor::find($data['id']);
+                if ($updateFlavor) {
+                    $updateFlavor->update($data);
+                } else {
+                    Flavor::create($data);
                 }
+            } catch (Throwable) {
+                Log::info('FlavorService error create/update');
             }
-        } catch (Throwable) {
-            Log::info('FlavorService update error');
         }
     }
 }

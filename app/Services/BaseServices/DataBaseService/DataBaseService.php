@@ -29,21 +29,17 @@ class DataBaseService implements DataBaseServiceContract
      */
     public function updateOrCreate(array $array = []): void
     {
-        try {
-            foreach ($array as $item) {
-                try {
-                    $updateProduct = $this->productRepositories->getProductByID($item->id);
-                    if ($updateProduct) {
-                        $this->updateProduct($updateProduct, $item);
-                    } else {
-                        $this->createProduct($item);
-                    }
-                } catch (Throwable) {
-                    Log::info('DataBaseService error create/update');
+        foreach ($array as $item) {
+            try {
+                $updateProduct = $this->productRepositories->getProductByID($item->id);
+                if ($updateProduct) {
+                    $this->updateProduct($updateProduct, $item);
+                } else {
+                    $this->createProduct($item);
                 }
+            } catch (Throwable) {
+                Log::info('DataBaseService error create/update');
             }
-        } catch (Throwable) {
-            Log::info('DataBaseService update error', ['data' => $array]);
         }
     }
 
@@ -77,8 +73,8 @@ class DataBaseService implements DataBaseServiceContract
      */
     protected function updateProduct(Product $product, ParsedProduct $data): void
     {
-        $product->update(['id' => $data->id, 'name' => $data->name, 'image' => $data->image, 'image_mobile' => $data->imageMobile]);
         try {
+            $product->update(['id' => $data->id, 'name' => $data->name, 'image' => $data->image, 'image_mobile' => $data->imageMobile]);
             $product->topping()->attach(Arr::pluck($data->topping->topping, 'id'));
             foreach ($data->attribute->attribute as $item) {
                 $data = [
