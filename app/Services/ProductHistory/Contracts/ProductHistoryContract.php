@@ -4,8 +4,7 @@ declare(strict_types=1);
 
 namespace App\Services\ProductHistory\Contracts;
 
-
-use Illuminate\Http\JsonResponse;
+use App\Http\Resources\Product\ProductResource;
 
 interface ProductHistoryContract
 {
@@ -13,6 +12,7 @@ interface ProductHistoryContract
      * Get product history price change.
      *
      * @param string $id
+     * @return ProductResource
      */
-    public function getProductHistory(string $id): JsonResponse;
+    public function getProductHistory(string $id): ProductResource;
 }

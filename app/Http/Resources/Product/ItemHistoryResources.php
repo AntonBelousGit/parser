@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Resources\ProductHistory;
+namespace App\Http\Resources\Product;
 
 use Illuminate\Contracts\Support\Arrayable;
 use Illuminate\Http\Request;
