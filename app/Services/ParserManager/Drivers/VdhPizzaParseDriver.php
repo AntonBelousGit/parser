@@ -67,12 +67,12 @@ class VdhPizzaParseDriver implements ParseDriverContract, ParseServiceAttributeD
                     topping: new ToppingDTO(
                         topping: $topping
                     ),
-                    sizes: new SizeDTO(['id'=> 'standard',"name" => "Standard"]),
+                    sizes: new SizeDTO(['id' => 'standard', "name" => "Standard"]),
                     flavors: new FlavorDTO(),
                     attribute: new ProductSizeDTO(
                         attribute: [
-                            ['size_id'=> 'standard', 'flavor_id' => '','price'=> (float)$item['price']]
-                        ],
+                        ['size_id' => 'standard', 'flavor_id' => '', 'price' => (float)$item['price']]
+                    ],
                     )
                 );
             }
@@ -101,7 +101,7 @@ class VdhPizzaParseDriver implements ParseDriverContract, ParseServiceAttributeD
         }
 
         return new AttributeDTO(
-            size: [['id'=> 'standard',"name" => "Standard"]],
+            size: [['id' => 'standard', "name" => "Standard"]],
             topping: $attrTopping
         );
     }
@@ -116,7 +116,7 @@ class VdhPizzaParseDriver implements ParseDriverContract, ParseServiceAttributeD
         $array = array_map('trim', explode(',', $data));
         foreach ($array as $item) {
             $cleanValueHtml = trim(strip_tags($item));
-            $tempArray[] = [ 'id' =>Str::slug($cleanValueHtml), 'name' =>$cleanValueHtml ];
+            $tempArray[] = ['id' => Str::slug($cleanValueHtml), 'name' => $cleanValueHtml];
         }
         return $tempArray;
     }

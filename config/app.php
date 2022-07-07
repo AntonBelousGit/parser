@@ -200,9 +200,7 @@ return [
          */
         App\Services\ParserManager\ParseServiceProvider::class,
 
-        \App\Services\BaseServices\ToppingService\ToppingServiceProvider::class,
-        \App\Services\BaseServices\SizeService\SizeServiceProvider::class,
-        \App\Services\BaseServices\FlavorService\FlavorServiceProvider::class,
+        \App\Services\BaseServices\AttributeService\AttributeServiceProvider::class,
         \App\Services\BaseServices\DataBaseService\DataBaseServiceProvider::class,
 
         \App\Services\ParseDomino\ProductService\ProductServiceProvider::class,

@@ -27,7 +27,8 @@ abstract class BaseParserServiceDriver
         }
         return new ParserProductDataDTO(
             products: $data,
-            attributes: $attribute
+            attributes: $attribute,
+            config: $config
         );
     }
 }

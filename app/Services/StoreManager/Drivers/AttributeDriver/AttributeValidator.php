@@ -2,14 +2,14 @@
 
 declare(strict_types=1);
 
-namespace App\Services\BaseServices\SizeService;
+namespace App\Services\StoreManager\Drivers\AttributeDriver;
 
 use App\Services\BaseValidator;
-use App\Services\BaseServices\SizeService\Contracts\SizeValidatorContract;
-use App\Services\BaseServices\SizeService\Exception\InvalidSizeDataException;
+use App\Services\StoreManager\Contracts\AttributeValidatorContract;
+use App\Services\StoreManager\Exception\InvalidStoreManagerDataException;
 use Throwable;
 
-class SizeValidator extends BaseValidator implements SizeValidatorContract
+class AttributeValidator extends BaseValidator implements AttributeValidatorContract
 {
     /**
      * Validate port data.
@@ -17,7 +17,7 @@ class SizeValidator extends BaseValidator implements SizeValidatorContract
      * @param array $data
      * @param array $rules
      * @return array
-     * @throws InvalidSizeDataException|Throwable
+     * @throws InvalidStoreManagerDataException|Throwable
      */
     public function validate(array $data, array $rules = []): array
     {
@@ -45,8 +45,8 @@ class SizeValidator extends BaseValidator implements SizeValidatorContract
      * Size data validation exception.
      *
      */
-    protected function getValidationException(): InvalidSizeDataException
+    protected function getValidationException(): InvalidStoreManagerDataException
     {
-        return new InvalidSizeDataException('Size data is invalid. Check ports source.');
+        return new InvalidStoreManagerDataException('Attribute data is invalid.');
     }
 }

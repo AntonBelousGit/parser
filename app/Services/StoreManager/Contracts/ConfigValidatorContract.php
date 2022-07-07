@@ -1,13 +1,13 @@
 <?php
+declare(strict_types=1);
+
+namespace App\Services\StoreManager\Contracts;
 
 
-namespace App\Services\BaseServices\FlavorService\Contracts;
-
-
-interface FlavorValidatorContract
+interface ConfigValidatorContract
 {
     /**
-     * Validate data.
+     * Validate product data.
      *
      * @param array $data
      * @param array $rules

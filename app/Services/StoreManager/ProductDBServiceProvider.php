@@ -1,14 +1,14 @@
 <?php
 
 
-namespace App\Services\ParserManager;
+namespace App\Services\StoreManager;
 
-use App\Services\ParserManager\Contracts\ConfigValidatorContract;
-use App\Services\ParserManager\Contracts\ParseServiceContract;
+use App\Services\StoreManager\Contracts\ConfigValidatorContract;
+use App\Services\StoreManager\Contracts\ProductServiceContract;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Support\ServiceProvider;
 
-class ParseServiceProvider extends ServiceProvider
+class ProductDBServiceProvider extends ServiceProvider
 {
     /**
      * Register port services.
@@ -18,8 +18,8 @@ class ParseServiceProvider extends ServiceProvider
     public function register(): void
     {
         $this->app->bind(ConfigValidatorContract::class, ConfigValidator::class);
-        $this->app->bind(ParseServiceContract::class, function (Application $app) {
-            return $app->make(ParseService::class, [
+        $this->app->bind(ProductServiceContract::class, function (Application $app) {
+            return $app->make(StoreService::class, [
                 'config' => $app->get('config')->get('parsers'),
             ]);
         });

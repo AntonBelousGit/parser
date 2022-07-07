@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace App\Services\ParserManager;
+namespace App\Services\StoreManager;
 
 use App\Services\BaseValidator;
 
-use App\Services\ParserManager\Contracts\ConfigValidatorContract;
 use App\Services\ParserManager\Exception\InvalidConfigDataException;
+use App\Services\StoreManager\Contracts\ConfigValidatorContract;
 use Throwable;
 
 class ConfigValidator extends BaseValidator implements ConfigValidatorContract

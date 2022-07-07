@@ -2,18 +2,18 @@
 
 declare(strict_types=1);
 
-namespace App\Services\BaseServices\DataBaseService;
+namespace App\Services\StoreManager\Drivers\ProductDriver;
 
 use App\Models\Attribute;
 use App\Models\Product;
 use App\Repositories\ProductRepositories;
-use App\Services\BaseServices\DataBaseService\Contracts\DataBaseServiceContract;
 use App\Services\ParserManager\DTOs\ProductDTO as ParsedProduct;
+use App\Services\StoreManager\Contracts\ProductDriverContract;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Log;
 use Throwable;
 
-class DataBaseService implements DataBaseServiceContract
+class ProductDriver implements ProductDriverContract
 {
     /**
      * @param ProductRepositories $productRepositories

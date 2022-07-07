@@ -2,9 +2,9 @@
 declare(strict_types=1);
 
 
-namespace App\Services\BaseServices\DataBaseService\Contracts;
+namespace App\Services\StoreManager\Contracts;
 
-interface DataBaseServiceContract
+interface ProductDriverContract
 {
     /**
      * Save products into DB
