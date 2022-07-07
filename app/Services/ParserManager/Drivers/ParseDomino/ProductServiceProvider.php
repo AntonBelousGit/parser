@@ -1,9 +1,9 @@
 <?php
 
 
-namespace App\Services\ParseZharPizza\ProductService;
+namespace App\Services\ParserManager\Drivers\ParseDomino;
 
-use App\Services\ParseZharPizza\ProductService\Contracts\ProductValidatorContract;
+use App\Services\ParserManager\Drivers\ParseDomino\Contracts\ProductValidatorContract;
 use Illuminate\Support\ServiceProvider;
 
 class ProductServiceProvider extends ServiceProvider

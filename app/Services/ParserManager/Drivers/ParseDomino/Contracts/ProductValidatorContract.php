@@ -1,7 +1,7 @@
 <?php
 declare(strict_types=1);
 
-namespace App\Services\ParseDomino\ProductService\Contracts;
+namespace App\Services\ParserManager\Drivers\ParseDomino\Contracts;
 
 
 interface ProductValidatorContract

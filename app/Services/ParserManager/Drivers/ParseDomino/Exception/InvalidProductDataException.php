@@ -1,7 +1,7 @@
 <?php
 
 
-namespace App\Services\ParseVdhPizza\ProductService\Exception;
+namespace App\Services\ParserManager\Drivers\ParseDomino\Exception;
 
 use Exception;
 

@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace App\Services\ParseDomino\ProductService;
+namespace App\Services\ParserManager\Drivers\ParseDomino;
 
 use App\Services\BaseValidator;
-use App\Services\ParseDomino\ProductService\Contracts\ProductValidatorContract;
+use App\Services\ParserManager\Drivers\ParseDomino\Contracts\ProductValidatorContract;
 use App\Services\ParserManager\Exception\InvalidConfigDataException;
 use Throwable;
 
@@ -17,7 +17,7 @@ class ProductValidator extends BaseValidator implements ProductValidatorContract
      * @param array $data
      * @param array $rules
      * @return array
-     * @throws InvalidConfigDataException|Throwable
+     * @throws Throwable
      */
     public function validate(array $data, array $rules = []): array
     {

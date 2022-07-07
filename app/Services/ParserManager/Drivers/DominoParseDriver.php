@@ -12,7 +12,7 @@ use App\Services\ParserManager\DTOs\ProductDTO;
 use App\Services\ParserManager\DTOs\ProductSizeDTO;
 use App\Services\ParserManager\DTOs\SizeDTO;
 use App\Services\ParserManager\DTOs\ToppingDTO;
-use App\Services\ParseDomino\ProductService\Contracts\ProductValidatorContract;
+use App\Services\ParserManager\Drivers\ParseDomino\Contracts\ProductValidatorContract;
 use DiDom\Document;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Log;
