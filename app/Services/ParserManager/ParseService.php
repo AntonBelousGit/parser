@@ -14,11 +14,9 @@ class ParseService extends BaseParserServiceDriver implements ParseServiceContra
 {
     /**
      * ParseService constructor.
-     * @param array $config
      * @param ConfigValidatorContract $configValidatorContract
      */
     public function __construct(
-        protected array $config,
         private ConfigValidatorContract $configValidatorContract,
     ) {
     }

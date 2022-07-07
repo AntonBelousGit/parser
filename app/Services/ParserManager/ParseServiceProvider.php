@@ -5,7 +5,6 @@ namespace App\Services\ParserManager;
 
 use App\Services\ParserManager\Contracts\ConfigValidatorContract;
 use App\Services\ParserManager\Contracts\ParseServiceContract;
-use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Support\ServiceProvider;
 
 class ParseServiceProvider extends ServiceProvider
@@ -18,10 +17,6 @@ class ParseServiceProvider extends ServiceProvider
     public function register(): void
     {
         $this->app->bind(ConfigValidatorContract::class, ConfigValidator::class);
-        $this->app->bind(ParseServiceContract::class, function (Application $app) {
-            return $app->make(ParseService::class, [
-                'config' => $app->get('config')->get('parsers'),
-            ]);
-        });
+        $this->app->bind(ParseServiceContract::class, ParseService::class);
     }
 }

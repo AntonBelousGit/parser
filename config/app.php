@@ -198,18 +198,25 @@ return [
         /*
          *  Parse Service Providers...
          */
+        /*
+         * Parse
+         */
         App\Services\ParserManager\ParseServiceProvider::class,
-
-        \App\Services\BaseServices\AttributeService\AttributeServiceProvider::class,
-        \App\Services\BaseServices\DataBaseService\DataBaseServiceProvider::class,
-
-        \App\Services\ParseDomino\ProductService\ProductServiceProvider::class,
-
         App\Services\ParserManager\Drivers\ParseZharPizza\ParserService\ParseServiceProvider::class,
-        \App\Services\ParseZharPizza\ProductService\ProductServiceProvider::class,
-
         App\Services\ParserManager\Drivers\ParseVdhPizza\ParserService\ParseServiceProvider::class,
+        /*
+         * Store
+         */
+        App\Services\StoreManager\ProductDBServiceProvider::class,
+        App\Services\StoreManager\Drivers\ProductDriver\ProductServiceProvider::class,
+        \App\Services\StoreManager\Drivers\AttributeDriver\AttributeServiceProvider::class,
 
+        App\Services\ParseDomino\ProductService\ProductServiceProvider::class,
+        App\Services\ParseZharPizza\ProductService\ProductServiceProvider::class,
+
+        /*
+         *History
+         */
         \App\Services\ProductHistory\ProductHistoryServiceProvider::class
     ],
 

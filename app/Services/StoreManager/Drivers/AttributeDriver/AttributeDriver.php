@@ -1,15 +1,14 @@
 <?php
-
 declare(strict_types=1);
 
 namespace App\Services\StoreManager\Drivers\AttributeDriver;
 
 use App\Services\ParserManager\DTOs\AttributeDTO;
-use App\Services\StoreManager\Contracts\AttributeServiceContract;
+use App\Services\StoreManager\Contracts\AttributeDriverContract;
 use Illuminate\Support\Facades\Log;
 use Throwable;
 
-class AttributeDriver implements AttributeServiceContract
+class AttributeDriver implements AttributeDriverContract
 {
     /**
      * @param AttributeValidator $attributeValidator

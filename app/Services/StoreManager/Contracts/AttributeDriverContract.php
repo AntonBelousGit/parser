@@ -5,7 +5,7 @@ namespace App\Services\StoreManager\Contracts;
 
 use App\Services\ParserManager\DTOs\AttributeDTO;
 
-interface AttributeServiceContract
+interface AttributeDriverContract
 {
     /** Store or Update pizza attribute (size, flavor, topping)
      * @param AttributeDTO $attribute

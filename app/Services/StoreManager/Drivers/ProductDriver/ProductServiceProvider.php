@@ -1,9 +1,8 @@
 <?php
-
+declare(strict_types=1);
 
 namespace App\Services\StoreManager\Drivers\ProductDriver;
 
-use App\Services\BaseServices\DataBaseService\ProductDriver;
 use App\Services\StoreManager\Contracts\ProductDriverContract;
 use Illuminate\Support\ServiceProvider;
 
