@@ -17,7 +17,6 @@ class ProductDBServiceProvider extends ServiceProvider
      */
     public function register(): void
     {
-        $this->app->bind(ConfigValidatorContract::class, ConfigValidator::class);
         $this->app->bind(ProductServiceContract::class, function (Application $app) {
             return $app->make(StoreService::class, [
                 'config' => $app->get('config')->get('parsers'),

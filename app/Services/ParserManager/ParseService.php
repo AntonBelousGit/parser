@@ -33,8 +33,8 @@ class ParseService extends BaseParserServiceDriver implements ParseServiceContra
             try {
                 $parser = $this->configValidatorContract->validate($parser);
                 $parsedData[] = $this->parser(app()->make($parser['parser']), $parser['config']);
-            } catch (Throwable) {
-                Log::info('ParseService - validate problem');
+            } catch (Throwable $exception) {
+                Log::info('ParseService - validate problem'. $exception);
             }
         }
         return $parsedData;
