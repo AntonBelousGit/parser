@@ -15,6 +15,6 @@ class CommandPizzaUpdateTest extends TestCase
      */
     public function test_console_command_pizza_update_successful()
     {
-        $this->artisan('pizza:update')->assertSuccessful();
+        $this->artisan('parse')->assertSuccessful();
     }
 }
