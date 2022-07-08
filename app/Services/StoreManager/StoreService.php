@@ -36,7 +36,7 @@ class StoreService implements ProductServiceContract
         try {
             $data = $this->parseServiceContract->callParse($this->config);
             foreach ($data as $item) {
-                $this->attributeDriverContract->updateOrCreate($item->attributes, $item->config['attribute']);
+                $this->attributeDriverContract->updateOrCreate($item->attributes);
                 $this->productDriverContract->updateOrCreate($item->products);
             }
         } catch (Throwable $exception) {

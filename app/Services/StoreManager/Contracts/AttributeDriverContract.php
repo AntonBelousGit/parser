@@ -9,8 +9,7 @@ interface AttributeDriverContract
 {
     /** Store or Update pizza attribute (size, flavor, topping)
      * @param AttributeDTO $attribute
-     * @param array $config
      * @return void
      */
-    public function updateOrCreate(AttributeDTO $attribute, array $config): void;
+    public function updateOrCreate(AttributeDTO $attribute): void;
 }

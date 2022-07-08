@@ -3,6 +3,9 @@ declare(strict_types=1);
 
 namespace App\Services\StoreManager\Drivers\AttributeDriver;
 
+use App\Models\Flavor;
+use App\Models\Size;
+use App\Models\Topping;
 use App\Services\ParserManager\DTOs\AttributeDTO;
 use App\Services\StoreManager\Contracts\AttributeDriverContract;
 use Illuminate\Support\Facades\Log;
@@ -10,6 +13,14 @@ use Throwable;
 
 class AttributeDriver implements AttributeDriverContract
 {
+    /**
+     * Attribute model
+     */
+    const ATTRIBUTEMODEL = [
+        'size' => Size::class,
+        'flavor' => Flavor::class,
+        'topping' => Topping::class
+    ];
     /**
      * @param AttributeValidator $attributeValidator
      */
@@ -20,14 +31,13 @@ class AttributeDriver implements AttributeDriverContract
 
     /**
      * @param AttributeDTO $attribute
-     * @param array $config
      * @return void
      */
-    public function updateOrCreate(AttributeDTO $attribute, array $config): void
+    public function updateOrCreate(AttributeDTO $attribute): void
     {
         try {
-            foreach ($config as $attributeKey => $attributeModel) {
-                $this->attribute($attribute, $attributeKey, $attributeModel);
+            foreach ($attribute as $attributeKey => $attributeData) {
+                $this->attribute($attributeKey, $attributeData);
             }
         } catch (Throwable $exception) {
             Log::info('Store or update AttributeService - problem', ['data' => $exception]);
@@ -36,27 +46,26 @@ class AttributeDriver implements AttributeDriverContract
 
     /**
      * Save or Update attribute to DB
-     * @param AttributeDTO $attribute
      * @param string $attributeKey
-     * @param string $attributeModel
+     * @param array $attributeData
      */
-    protected function attribute(AttributeDTO $attribute, string $attributeKey, string $attributeModel):void
+    protected function attribute(string $attributeKey, array $attributeData):void
     {
-        foreach ($attribute->$attributeKey as $item) {
+        foreach ($attributeData as $item) {
             try {
                 $item = $this->attributeValidator->validate($item);
                 $data = [
                     'id' => $item['id'],
                     'name' => html_entity_decode($item['name']),
                 ];
-                $updateModel = ($attributeModel)::find($data['id']);
+                $updateModel = (self::ATTRIBUTEMODEL[$attributeKey])::find($data['id']);
                 if ($updateModel) {
                     $updateModel->update($data);
                 } else {
-                    ($attributeModel)::create($data);
+                    (self::ATTRIBUTEMODEL[$attributeKey])::create($data);
                 }
             } catch (Throwable) {
-                Log::info('FlavorService error create/update');
+                Log::info($attributeKey.' error create/update');
             }
         }
     }
