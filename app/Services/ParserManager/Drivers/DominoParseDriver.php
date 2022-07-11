@@ -6,13 +6,13 @@ namespace App\Services\ParserManager\Drivers;
 
 use App\Services\ParserManager\Contracts\ParseDriverContract;
 use App\Services\ParserManager\Contracts\ParseServiceAttributeDriver;
+use App\Services\ParserManager\Contracts\ParseValidatorContract;
 use App\Services\ParserManager\DTOs\AttributeDTO;
 use App\Services\ParserManager\DTOs\FlavorDTO;
 use App\Services\ParserManager\DTOs\ProductDTO;
 use App\Services\ParserManager\DTOs\ProductSizeDTO;
 use App\Services\ParserManager\DTOs\SizeDTO;
 use App\Services\ParserManager\DTOs\ToppingDTO;
-use App\Services\ParserManager\Drivers\ParseDomino\Contracts\ProductValidatorContract;
 use DiDom\Document;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Log;
@@ -27,31 +27,31 @@ class DominoParseDriver implements ParseDriverContract, ParseServiceAttributeDri
 
     /**
      * DominoParseService constructor.
-     * @param ProductValidatorContract $productValidator
+     * @param ParseValidatorContract $parseValidatorContract
      */
     public function __construct(
-        protected ProductValidatorContract $productValidator,
+        protected ParseValidatorContract $parseValidatorContract,
     ) {
     }
 
     /**
-     * @param string $address
+     * @param string $url
      * @return Document
      */
-    public function callConnectToParse(string $address): Document
+    public function callConnectToParse(string $url): Document
     {
-        return new Document($address, true);
+        return new Document($url, true);
     }
 
     /**
      *Parse get data - return prepare data
-     * @param string $address
+     * @param string $url
      * @return array
      */
-    public function parseProduct(string $address): array
+    public function parseProduct(string $url): array
     {
         try {
-            $html = $this->callConnectToParse($address);
+            $html = $this->callConnectToParse($url);
             $stringRawHtml = $html->find('script');
         } catch (Throwable) {
             Log::info('DominoParser - connect error');
@@ -67,7 +67,7 @@ class DominoParseDriver implements ParseDriverContract, ParseServiceAttributeDri
         $products = call_user_func_array('array_merge', $productArray);
 
         foreach ($products as $item) {
-            $item = $this->productValidator->validate($item);
+            $item = $this->parseValidatorContract->validate($item, $this->validationRules());
             $attribute = [];
             $topping = [];
 
@@ -172,5 +172,24 @@ class DominoParseDriver implements ParseDriverContract, ParseServiceAttributeDri
             $tempArray[] = ['id' => $item['id'], 'name' => html_entity_decode($item['name'])];
         }
         return $tempArray;
+    }
+
+    protected function validationRules(): array
+    {
+        return [
+            'id' => ['required','string','max:50'],
+            'name' => ['required', 'string','max:200'],
+            'image' => ['required', 'array','min:1'],
+            'image.*' => ['required'],
+            'image_mobile' => ['required', 'array','min:1'],
+            'image_mobile.*' => ['required'],
+            'toppings.*.id' => ['required','string','max:50'],
+            'toppings.*.name' => ['required','string','max:200'],
+            'sizes.*.id' => ['required','string','max:50'],
+            'sizes.*.name' => ['required','string','max:200'],
+            'sizes.*.flavors.*.id' => ['required','string','max:50'],
+            'sizes.*.flavors.*.name' => ['required','string','max:200'],
+            'sizes.*.flavors.*.product.price' => ['required','integer'],
+        ];
     }
 }

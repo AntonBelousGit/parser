@@ -202,17 +202,12 @@ return [
          * Parse
          */
         App\Services\ParserManager\ParseServiceProvider::class,
-        App\Services\ParserManager\Drivers\ParseZharPizza\ParserService\ParseServiceProvider::class,
-        App\Services\ParserManager\Drivers\ParseVdhPizza\ParserService\ParseServiceProvider::class,
-        App\Services\ParserManager\Drivers\ParseDomino\ProductServiceProvider::class,
         /*
          * Store
          */
         App\Services\StoreManager\StoreServiceProvider::class,
         App\Services\StoreManager\Drivers\ProductDriver\ProductServiceProvider::class,
         App\Services\StoreManager\Drivers\AttributeDriver\AttributeServiceProvider::class,
-//        App\Services\ParseDomino\ProductService\ProductServiceProvider::class,
-//        App\Services\ParseZharPizza\ProductService\ProductServiceProvider::class,
         /*
          *History
          */

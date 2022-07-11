@@ -43,8 +43,7 @@ class ConfigValidator extends BaseValidator implements ConfigValidatorContract
                         $fail('The ' . $attribute . ' is invalid.');
                     }
                 }],
-            'config' => ['required', 'array'],
-            'config.address' => ['required', 'string'],
+            'url' => ['required', 'string'],
         ];
     }
 

@@ -13,14 +13,13 @@ abstract class BaseParserServiceDriver
     /**
      * Parser Pizza
      * @param $app
-     * @param array $config
+     * @param string $url
      * @return ParserProductDataDTO
      */
-    public function parser($app, array $config): ParserProductDataDTO
+    public function parser($app, string $url): ParserProductDataDTO
     {
-        $address = $config['address'];
         try {
-            $data = $app->parseProduct($address);
+            $data = $app->parseProduct($url);
             $attribute = $app->parseAttribute($data);
         } catch (Throwable) {
             Log::info('Error Parse');
@@ -28,7 +27,7 @@ abstract class BaseParserServiceDriver
         return new ParserProductDataDTO(
             products: $data,
             attributes: $attribute,
-            config: $config
+//            config: $config
         );
     }
 }

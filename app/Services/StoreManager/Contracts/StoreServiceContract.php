@@ -3,11 +3,12 @@ declare(strict_types=1);
 
 namespace App\Services\StoreManager\Contracts;
 
-interface ProductServiceContract
+interface StoreServiceContract
 {
     /**
      *  Store in DB new parsed data or update
-     *  @return void
+     * @param array $data
+     * @return void
      */
-    public function parse(): void;
+    public function store(array $data): void;
 }

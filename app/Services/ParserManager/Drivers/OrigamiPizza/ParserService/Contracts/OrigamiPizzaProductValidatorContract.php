@@ -1,10 +1,10 @@
 <?php
 declare(strict_types=1);
 
-namespace App\Services\ParserManager\Drivers\ParseZharPizza\ParserService\Contracts;
+namespace App\Services\ParserManager\Drivers\OrigamiPizza\ParserService\Contracts;
 
 
-interface ZharPizzaProductValidatorContract
+interface OrigamiPizzaProductValidatorContract
 {
     /**
      * Validate data.

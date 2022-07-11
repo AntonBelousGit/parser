@@ -6,13 +6,13 @@ namespace App\Services\ParserManager\Drivers;
 
 use App\Services\ParserManager\Contracts\ParseDriverContract;
 use App\Services\ParserManager\Contracts\ParseServiceAttributeDriver;
+use App\Services\ParserManager\Contracts\ParseValidatorContract;
 use App\Services\ParserManager\DTOs\AttributeDTO;
 use App\Services\ParserManager\DTOs\FlavorDTO;
 use App\Services\ParserManager\DTOs\ProductDTO;
 use App\Services\ParserManager\DTOs\ProductSizeDTO;
 use App\Services\ParserManager\DTOs\SizeDTO;
 use App\Services\ParserManager\DTOs\ToppingDTO;
-use App\Services\ParserManager\Drivers\ParseZharPizza\ParserService\Contracts\ZharPizzaProductValidatorContract;
 use GuzzleHttp\Client;
 use GuzzleHttp\Exception\GuzzleException;
 use Illuminate\Support\Facades\Log;
@@ -28,36 +28,36 @@ class ZharPizzaParseDriver implements ParseDriverContract, ParseServiceAttribute
 
     /**
      * ZharPizzaParseService constructor.
-     * @param ZharPizzaProductValidatorContract $productValidator
+     * @param ParseValidatorContract $parseValidatorContract
      */
     public function __construct(
-        protected ZharPizzaProductValidatorContract $productValidator,
+        protected ParseValidatorContract $parseValidatorContract,
     ) {
     }
 
     /**
-     * @param string $address
+     * @param string $url
      * @return mixed
      * @throws GuzzleException
      */
-    public function callConnectToParse(string $address): mixed
+    public function callConnectToParse(string $url): mixed
     {
         $client = new Client();
-        $body = $client->get($address)->getBody();
+        $body = $client->get($url)->getBody();
         return json_decode((string)$body);
     }
 
     /**
      *Parse get data - return prepare data
-     * @param string $address
+     * @param string $url
      * @return array
      */
-    public function parseProduct(string $address): array
+    public function parseProduct(string $url): array
     {
         try {
-            $productsParse = $this->callConnectToParse($address);
+            $productsParse = $this->callConnectToParse($url);
             foreach ($productsParse->products as $item) {
-                $item = $this->productValidator->validate(collect($item)->toArray());
+                $item = $this->parseValidatorContract->validate(collect($item)->toArray(), $this->validationRules());
                 $topping = [];
                 $attribute = [];
                 $image = (json_decode($item['gallery']));
@@ -149,5 +149,17 @@ class ZharPizzaParseDriver implements ParseDriverContract, ParseServiceAttribute
             $tempArray[] = ['id' => Str::slug($item), 'name' => $item];
         }
         return $tempArray;
+    }
+
+    protected function validationRules(): array
+    {
+        return [
+            'uid' => ['required','string','max:50'],
+            'title' => ['required', 'string'],
+            'price' => ['required', 'string'],
+            'descr' => ['required', 'string'],
+            'gallery' => ['required', 'string'],
+            'json_options' => ['nullable', 'string'],
+        ];
     }
 }

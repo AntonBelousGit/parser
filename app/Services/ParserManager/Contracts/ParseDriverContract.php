@@ -8,15 +8,15 @@ interface ParseDriverContract
 {
     /**
      * Connect to parsed target - connection url
-     * @param string $address
+     * @param string $url
      * @return mixed
      */
-    public function callConnectToParse(string $address): mixed;
+    public function callConnectToParse(string $url): mixed;
 
     /**
      * Return completed parsed file
-     * @param string $address
+     * @param string $url
      * @return array
      */
-    public function parseProduct(string $address): array;
+    public function parseProduct(string $url): array;
 }

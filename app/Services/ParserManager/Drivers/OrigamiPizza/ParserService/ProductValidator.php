@@ -2,14 +2,16 @@
 
 declare(strict_types=1);
 
-namespace App\Services\ParserManager\Drivers\ParseVdhPizza\ParserService;
+namespace App\Services\ParserManager\Drivers\OrigamiPizza\ParserService;
 
 use App\Services\BaseValidator;
-use App\Services\ParserManager\Drivers\ParseVdhPizza\ParserService\Contracts\VdhPizzaProductValidatorContract;
-use App\Services\ParserManager\Drivers\ParseVdhPizza\ParserService\Exception\InvalidProductDataException;
+
+use App\Services\ParserManager\Drivers\OrigamiPizza\ParserService\Contracts\OrigamiPizzaProductValidatorContract;
+use App\Services\ParserManager\Drivers\ParseZharPizza\ParserService\Contracts\ZharPizzaProductValidatorContract;
+use App\Services\ParserManager\Drivers\ParseZharPizza\ParserService\Exception\InvalidProductDataException;
 use Throwable;
 
-class ProductValidator extends BaseValidator implements VdhPizzaProductValidatorContract
+class ProductValidator extends BaseValidator implements OrigamiPizzaProductValidatorContract
 {
     /**
      * Validate port data.
@@ -41,6 +43,7 @@ class ProductValidator extends BaseValidator implements VdhPizzaProductValidator
             'price' => ['required', 'string'],
             'descr' => ['required', 'string'],
             'gallery' => ['required', 'string'],
+            'json_options' => ['nullable', 'string'],
         ];
     }
 
@@ -50,6 +53,6 @@ class ProductValidator extends BaseValidator implements VdhPizzaProductValidator
      */
     protected function getValidationException(): InvalidProductDataException
     {
-        return new InvalidProductDataException('Product VdhPizza data is invalid. Check ports source.');
+        return new InvalidProductDataException('Product ZharPizza    data is invalid. Check ports source.');
     }
 }
