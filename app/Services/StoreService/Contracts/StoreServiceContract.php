@@ -7,6 +7,7 @@ interface StoreServiceContract
 {
     /**
      *  Store in DB new parsed data or update
+     *
      * @param array $data
      * @return void
      */

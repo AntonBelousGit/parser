@@ -7,6 +7,7 @@ class ToppingDTO
 {
     /**
      * Topping constructor.
+     *
      * @param array $topping
      */
     public function __construct(

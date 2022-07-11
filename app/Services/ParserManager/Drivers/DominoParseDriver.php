@@ -21,6 +21,8 @@ use Throwable;
 class DominoParseDriver implements ParseDriverContract, ParseServiceAttributeDriver
 {
     /**
+     * All products
+     *
      * @var array
      */
     protected array $products = [];
@@ -35,6 +37,8 @@ class DominoParseDriver implements ParseDriverContract, ParseServiceAttributeDri
     }
 
     /**
+     * Connect to parsed url
+     *
      * @param string $url
      * @return Document
      */
@@ -44,7 +48,8 @@ class DominoParseDriver implements ParseDriverContract, ParseServiceAttributeDri
     }
 
     /**
-     *Parse get data - return prepare data
+     * Parse get data - return prepare data
+     *
      * @param string $url
      * @return array
      */
@@ -72,7 +77,7 @@ class DominoParseDriver implements ParseDriverContract, ParseServiceAttributeDri
             $topping = [];
 
             try {
-                $attribute = $this->parseOptionsSize($item['sizes']);
+                $attribute = $this->parseSize($item['sizes']);
             } catch (Throwable) {
                 Log::info('DominoParser - parseProduct - parseJsonOptionsSize error');
             }
@@ -109,6 +114,7 @@ class DominoParseDriver implements ParseDriverContract, ParseServiceAttributeDri
 
     /**
      * Prepare parsed attribute data
+     *
      * @param array $array
      * @return AttributeDTO
      */
@@ -141,10 +147,12 @@ class DominoParseDriver implements ParseDriverContract, ParseServiceAttributeDri
     }
 
     /**
+     * Parse attribute size
+     *
      * @param $data
      * @return array
      */
-    protected function parseOptionsSize($data): array
+    protected function parseSize($data): array
     {
         $tempArray = ['size' => [], 'flavor' => [], 'attribute' => []];
         foreach ($data as $size) {
@@ -162,6 +170,8 @@ class DominoParseDriver implements ParseDriverContract, ParseServiceAttributeDri
     }
 
     /**
+     * Parse attribute topping
+     *
      * @param $data
      * @return array
      */
@@ -176,6 +186,7 @@ class DominoParseDriver implements ParseDriverContract, ParseServiceAttributeDri
 
     /**
      * Validation rulers
+     *
      * @return string[][]
      */
     protected function validationRules(): array

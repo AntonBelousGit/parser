@@ -30,6 +30,7 @@ class StoreService implements StoreServiceContract
 
     /**
      * StoreService constructor.
+     *
      * @param ProductRepositories $productRepositories
      * @param AttributeValidator $attributeValidator
      */
@@ -41,6 +42,7 @@ class StoreService implements StoreServiceContract
 
     /**
      * Store or update parsed data
+     *
      * @param $data
      * @return void
      */
@@ -58,6 +60,7 @@ class StoreService implements StoreServiceContract
 
     /**
      * Update or Create Product method
+     *
      * @param array $array
      * @return void
      */
@@ -79,6 +82,7 @@ class StoreService implements StoreServiceContract
 
     /**
      * Create Product
+     *
      * @param ParsedProduct $item
      * @return void
      */
@@ -103,6 +107,7 @@ class StoreService implements StoreServiceContract
 
     /**
      * Update Product
+     *
      * @param Product $product
      * @param ParsedProduct $data
      * @return void
@@ -132,6 +137,7 @@ class StoreService implements StoreServiceContract
 
     /**
      * Update or Create product attribute (size, flavor, topping, etc.)
+     *
      * @param AttributeDTO $attribute
      * @return void
      */
@@ -148,6 +154,7 @@ class StoreService implements StoreServiceContract
 
     /**
      * Save or Update attribute to DB
+     *
      * @param string $attributeKey
      * @param array $attributeData
      */

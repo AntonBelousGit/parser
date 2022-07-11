@@ -7,6 +7,7 @@ class FlavorDTO
 {
     /**
      * Flavor constructor.
+     *
      * @param array $flavor
      */
     public function __construct(

@@ -22,12 +22,15 @@ use Throwable;
 class VdhPizzaParseDriver implements ParseDriverContract, ParseServiceAttributeDriver
 {
     /**
+     * All products
+     *
      * @var array
      */
     protected array $products = [];
 
     /**
      * VdhPizzaParseDriver constructor.
+     *
      * @param ParseValidatorContract $parseValidatorContract
      */
     public function __construct(
@@ -36,6 +39,8 @@ class VdhPizzaParseDriver implements ParseDriverContract, ParseServiceAttributeD
     }
 
     /**
+     * Connect to parsed url
+     *
      * @param string $url
      * @return mixed
      * @throws GuzzleException
@@ -49,6 +54,7 @@ class VdhPizzaParseDriver implements ParseDriverContract, ParseServiceAttributeD
 
     /**
      *Parse get data - return prepare data
+     *
      * @param string $url
      * @return array
      * @throws GuzzleException
@@ -91,6 +97,7 @@ class VdhPizzaParseDriver implements ParseDriverContract, ParseServiceAttributeD
 
     /**
      * Prepare parsed attribute data
+     *
      * @param array $array
      * @return AttributeDTO
      */
@@ -114,6 +121,8 @@ class VdhPizzaParseDriver implements ParseDriverContract, ParseServiceAttributeD
     }
 
     /**
+     * Parse attribute topping from json
+     *
      * @param $data
      * @return array
      */

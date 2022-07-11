@@ -6,6 +6,10 @@ use App\Services\ParserManager\Drivers\OrigamiPizzaParseDriver;
 use App\Services\ParserManager\Drivers\VdhPizzaParseDriver;
 use App\Services\ParserManager\Drivers\ZharPizzaParseDriver;
 
+/**
+ * Config with parsed information
+ */
+
 return [
     [
         'parser' => DominoParseDriver::class,

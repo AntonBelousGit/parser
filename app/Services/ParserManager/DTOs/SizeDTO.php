@@ -7,6 +7,7 @@ class SizeDTO
 {
     /**
      * Size constructor.
+     *
      * @param array $size
      */
     public function __construct(

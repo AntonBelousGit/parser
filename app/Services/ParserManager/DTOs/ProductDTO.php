@@ -7,6 +7,7 @@ class ProductDTO
 {
     /**
      * Product constructor.
+     *
      * @param string $id
      * @param string $name
      * @param array $image

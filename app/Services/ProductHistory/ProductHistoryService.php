@@ -14,6 +14,7 @@ class ProductHistoryService implements ProductHistoryContract
 {
     /**
      * ProductHistoryService constructor.
+     *
      * @param ProductRepositories $productRepositories
      */
     public function __construct(
@@ -23,6 +24,7 @@ class ProductHistoryService implements ProductHistoryContract
 
     /**
      * Get history of product
+     *
      * @param string $id
      * @return ProductResource
      */

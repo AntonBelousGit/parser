@@ -8,6 +8,7 @@ interface ParseDriverContract
 {
     /**
      * Connect to parsed target - connection url
+     *
      * @param string $url
      * @return mixed
      */
@@ -15,6 +16,7 @@ interface ParseDriverContract
 
     /**
      * Return completed parsed file
+     *
      * @param string $url
      * @return array
      */

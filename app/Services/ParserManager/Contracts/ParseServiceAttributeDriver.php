@@ -10,6 +10,7 @@ interface ParseServiceAttributeDriver
 {
     /**
      * Parse Product Attribute
+     *
      * @param array $array
      * @return AttributeDTO
      */

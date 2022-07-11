@@ -7,6 +7,7 @@ class ProductSizeDTO extends AttributeDTO
 {
     /**
      * ProductSize constructor.
+     *
      * @param array $attribute
      */
     public function __construct(

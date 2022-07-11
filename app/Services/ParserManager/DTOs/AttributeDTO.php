@@ -7,6 +7,7 @@ class AttributeDTO
 {
     /**
      * Attribute constructor.
+     *
      * @param array $size
      * @param array $flavor
      * @param array $topping

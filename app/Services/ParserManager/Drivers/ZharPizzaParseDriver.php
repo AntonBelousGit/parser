@@ -22,12 +22,15 @@ use Throwable;
 class ZharPizzaParseDriver implements ParseDriverContract, ParseServiceAttributeDriver
 {
     /**
+     * All products
+     *
      * @var array
      */
     protected array $products = [];
 
     /**
      * ZharPizzaParseService constructor.
+     *
      * @param ParseValidatorContract $parseValidatorContract
      */
     public function __construct(
@@ -36,6 +39,8 @@ class ZharPizzaParseDriver implements ParseDriverContract, ParseServiceAttribute
     }
 
     /**
+     * Connect to parsed url
+     *
      * @param string $url
      * @return mixed
      * @throws GuzzleException
@@ -49,6 +54,7 @@ class ZharPizzaParseDriver implements ParseDriverContract, ParseServiceAttribute
 
     /**
      *Parse get data - return prepare data
+     *
      * @param string $url
      * @return array
      */
@@ -67,7 +73,7 @@ class ZharPizzaParseDriver implements ParseDriverContract, ParseServiceAttribute
                     Log::info('ZharPizzaParser - parseProduct - parseTopping error');
                 }
                 try {
-                    $attribute = $this->parseJsonOptionsSize($item['json_options']);
+                    $attribute = $this->parseJsonSize($item['json_options']);
                 } catch (Throwable) {
                     Log::info('ZharPizzaParser - parseProduct - parseJsonOptionsSize error');
                 }
@@ -96,6 +102,7 @@ class ZharPizzaParseDriver implements ParseDriverContract, ParseServiceAttribute
 
     /**
      * Prepare parsed attribute data
+     *
      * @param array $array
      * @return AttributeDTO
      */
@@ -123,6 +130,8 @@ class ZharPizzaParseDriver implements ParseDriverContract, ParseServiceAttribute
     }
 
     /**
+     * Parse attribute topping from json
+     *
      * @param $data
      * @return array
      */
@@ -137,10 +146,12 @@ class ZharPizzaParseDriver implements ParseDriverContract, ParseServiceAttribute
     }
 
     /**
+     *Parse attribute size from json
+     *
      * @param $data
      * @return array
      */
-    protected function parseJsonOptionsSize($data): array
+    protected function parseJsonSize($data): array
     {
         $data = json_decode($data);
         $tempArray = [];
@@ -153,6 +164,7 @@ class ZharPizzaParseDriver implements ParseDriverContract, ParseServiceAttribute
 
     /**
      * Validation rulers
+     *
      * @return string[][]
      */
     protected function validationRules(): array

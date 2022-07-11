@@ -7,6 +7,7 @@ class ParserProductDataDTO
 {
     /**
      * ParserProductData constructor.
+     *
      * @param array $products
      * @param AttributeDTO $attributes
      */

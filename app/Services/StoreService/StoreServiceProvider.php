@@ -19,6 +19,5 @@ class StoreServiceProvider extends ServiceProvider
     {
         $this->app->bind(StoreServiceContract::class, StoreService::class);
         $this->app->bind(AttributeValidatorContract::class, AttributeValidator::class);
-
     }
 }

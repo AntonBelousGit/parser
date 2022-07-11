@@ -14,7 +14,6 @@ use App\Services\ParserManager\DTOs\ProductSizeDTO;
 use App\Services\ParserManager\DTOs\SizeDTO;
 use App\Services\ParserManager\DTOs\ToppingDTO;
 use DiDom\Document;
-use DiDom\Exceptions\InvalidSelectorException;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Str;
 use Throwable;
@@ -22,12 +21,15 @@ use Throwable;
 class OrigamiPizzaParseDriver implements ParseDriverContract, ParseServiceAttributeDriver
 {
     /**
+     * All products
+     *
      * @var array
      */
     protected array $products = [];
 
     /**
-     * VdhPizzaParseDriver constructor.
+     * OrigamiPizzaParseDriver constructor.
+     *
      * @param ParseValidatorContract $parseValidatorContract
      */
     public function __construct(
@@ -36,6 +38,8 @@ class OrigamiPizzaParseDriver implements ParseDriverContract, ParseServiceAttrib
     }
 
     /**
+     * Connect to parsed url
+     *
      * @param string $url
      * @return Document
      */
@@ -46,6 +50,7 @@ class OrigamiPizzaParseDriver implements ParseDriverContract, ParseServiceAttrib
 
     /**
      *Parse get data - return prepare data
+     *
      * @param string $url
      * @return array
      */
@@ -102,6 +107,7 @@ class OrigamiPizzaParseDriver implements ParseDriverContract, ParseServiceAttrib
 
     /**
      * Prepare parsed attribute data
+     *
      * @param array $array
      * @return AttributeDTO
      */
@@ -125,6 +131,8 @@ class OrigamiPizzaParseDriver implements ParseDriverContract, ParseServiceAttrib
     }
 
     /**
+     * Parse attribute topping
+     *
      * @param $data
      * @return array
      */
@@ -141,6 +149,7 @@ class OrigamiPizzaParseDriver implements ParseDriverContract, ParseServiceAttrib
 
     /**
      * Validation rulers
+     *
      * @return string[][]
      */
     protected function validationRules(): array
