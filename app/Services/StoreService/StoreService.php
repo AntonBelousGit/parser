@@ -1,32 +1,67 @@
 <?php
 declare(strict_types=1);
 
-namespace App\Services\StoreManager\Drivers\ProductDriver;
+namespace App\Services\StoreService;
 
 use App\Models\Attribute;
+use App\Models\Flavor;
 use App\Models\Product;
+use App\Models\Size;
+use App\Models\Topping;
 use App\Repositories\ProductRepositories;
+use App\Services\ParserManager\DTOs\AttributeDTO;
 use App\Services\ParserManager\DTOs\ProductDTO as ParsedProduct;
-use App\Services\StoreManager\Contracts\ProductDriverContract;
+use App\Services\StoreService\Contracts\StoreServiceContract;
+use App\Services\StoreService\Validator\AttributeValidator;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Log;
 use Throwable;
 
-class ProductDriver implements ProductDriverContract
+class StoreService implements StoreServiceContract
 {
     /**
+     * Attribute model
+     */
+    const ATTRIBUTEMODEL = [
+        'size' => Size::class,
+        'flavor' => Flavor::class,
+        'topping' => Topping::class
+    ];
+
+    /**
+     * StoreService constructor.
      * @param ProductRepositories $productRepositories
+     * @param AttributeValidator $attributeValidator
      */
     public function __construct(
         protected ProductRepositories $productRepositories,
+        protected AttributeValidator $attributeValidator,
     ) {
     }
 
     /**
+     * Store or update parsed data
+     * @param $data
+     * @return void
+     */
+    public function store($data): void
+    {
+        try {
+            foreach ($data as $item) {
+                $this->updateOrCreateAttribute($item->attributes);
+                $this->updateOrCreateProduct($item->products);
+            }
+        } catch (Throwable $exception) {
+            Log::info('Store or update parsed data - problem', ['data' => $exception]);
+        }
+    }
+
+    /**
+     * Update or Create Product method
      * @param array $array
      * @return void
      */
-    public function updateOrCreate(array $array = []): void
+    protected function updateOrCreateProduct(array $array): void
     {
         foreach ($array as $item) {
             try {
@@ -43,6 +78,7 @@ class ProductDriver implements ProductDriverContract
     }
 
     /**
+     * Create Product
      * @param ParsedProduct $item
      * @return void
      */
@@ -66,6 +102,7 @@ class ProductDriver implements ProductDriverContract
     }
 
     /**
+     * Update Product
      * @param Product $product
      * @param ParsedProduct $data
      * @return void
@@ -90,6 +127,48 @@ class ProductDriver implements ProductDriverContract
             }
         } catch (Throwable) {
             Log::info('ProductService error in updateProduct', ['data' => $data]);
+        }
+    }
+
+    /**
+     * Update or Create product attribute (size, flavor, topping, etc.)
+     * @param AttributeDTO $attribute
+     * @return void
+     */
+    protected function updateOrCreateAttribute(AttributeDTO $attribute): void
+    {
+        try {
+            foreach ($attribute as $attributeKey => $attributeData) {
+                $this->attribute($attributeKey, $attributeData);
+            }
+        } catch (Throwable $exception) {
+            Log::info('Store or update AttributeService - problem', ['data' => $exception]);
+        }
+    }
+
+    /**
+     * Save or Update attribute to DB
+     * @param string $attributeKey
+     * @param array $attributeData
+     */
+    protected function attribute(string $attributeKey, array $attributeData): void
+    {
+        foreach ($attributeData as $item) {
+            try {
+                $item = $this->attributeValidator->validate($item);
+                $data = [
+                    'id' => $item['id'],
+                    'name' => html_entity_decode($item['name']),
+                ];
+                $updateModel = (self::ATTRIBUTEMODEL[$attributeKey])::find($data['id']);
+                if ($updateModel) {
+                    $updateModel->update($data);
+                } else {
+                    (self::ATTRIBUTEMODEL[$attributeKey])::create($data);
+                }
+            } catch (Throwable) {
+                Log::info($attributeKey . ' error create/update');
+            }
         }
     }
 }

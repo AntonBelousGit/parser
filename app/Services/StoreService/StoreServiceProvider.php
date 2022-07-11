@@ -1,9 +1,11 @@
 <?php
 declare(strict_types=1);
 
-namespace App\Services\StoreManager;
+namespace App\Services\StoreService;
 
-use App\Services\StoreManager\Contracts\StoreServiceContract;
+use App\Services\StoreService\Contracts\AttributeValidatorContract;
+use App\Services\StoreService\Contracts\StoreServiceContract;
+use App\Services\StoreService\Validator\AttributeValidator;
 use Illuminate\Support\ServiceProvider;
 
 class StoreServiceProvider extends ServiceProvider
@@ -16,5 +18,7 @@ class StoreServiceProvider extends ServiceProvider
     public function register(): void
     {
         $this->app->bind(StoreServiceContract::class, StoreService::class);
+        $this->app->bind(AttributeValidatorContract::class, AttributeValidator::class);
+
     }
 }

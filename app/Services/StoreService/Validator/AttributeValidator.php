@@ -1,11 +1,11 @@
 <?php
 declare(strict_types=1);
 
-namespace App\Services\StoreManager\Drivers\AttributeDriver;
+namespace App\Services\StoreService\Validator;
 
 use App\Services\BaseValidator;
-use App\Services\StoreManager\Contracts\AttributeValidatorContract;
-use App\Services\StoreManager\Exception\InvalidStoreManagerDataException;
+use App\Services\StoreService\Contracts\AttributeValidatorContract;
+use App\Services\StoreService\Exception\InvalidStoreServiceDataException;
 use Throwable;
 
 class AttributeValidator extends BaseValidator implements AttributeValidatorContract
@@ -16,7 +16,7 @@ class AttributeValidator extends BaseValidator implements AttributeValidatorCont
      * @param array $data
      * @param array $rules
      * @return array
-     * @throws InvalidStoreManagerDataException|Throwable
+     * @throws InvalidStoreServiceDataException|Throwable
      */
     public function validate(array $data, array $rules = []): array
     {
@@ -44,8 +44,8 @@ class AttributeValidator extends BaseValidator implements AttributeValidatorCont
      * Size data validation exception.
      *
      */
-    protected function getValidationException(): InvalidStoreManagerDataException
+    protected function getValidationException(): InvalidStoreServiceDataException
     {
-        return new InvalidStoreManagerDataException('Attribute data is invalid.');
+        return new InvalidStoreServiceDataException('Attribute data is invalid.');
     }
 }

@@ -205,9 +205,7 @@ return [
         /*
          * Store
          */
-        App\Services\StoreManager\StoreServiceProvider::class,
-        App\Services\StoreManager\Drivers\ProductDriver\ProductServiceProvider::class,
-        App\Services\StoreManager\Drivers\AttributeDriver\AttributeServiceProvider::class,
+        App\Services\StoreService\StoreServiceProvider::class,
         /*
          *History
          */

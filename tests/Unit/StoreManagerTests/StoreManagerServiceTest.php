@@ -15,8 +15,8 @@ use App\Services\ParserManager\DTOs\ProductDTO;
 use App\Services\ParserManager\DTOs\ProductSizeDTO;
 use App\Services\ParserManager\DTOs\SizeDTO;
 use App\Services\ParserManager\DTOs\ToppingDTO;
-use App\Services\StoreManager\Drivers\AttributeDriver\AttributeDriver;
-use App\Services\StoreManager\Drivers\ProductDriver\ProductDriver;
+use App\Services\StoreService\Drivers\AttributeDriver\AttributeDriver;
+use App\Services\StoreService\Drivers\ProductDriver\ProductDriver;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
