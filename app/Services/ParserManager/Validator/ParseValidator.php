@@ -6,7 +6,7 @@ namespace App\Services\ParserManager\Validator;
 
 use App\Services\BaseValidator;
 use App\Services\ParserManager\Contracts\ParseValidatorContract;
-use App\Services\ParserManager\Validator\Exception\InvalidParseDataException;
+use App\Services\ParserManager\Exception\InvalidParseDataException;
 use Throwable;
 
 class ParseValidator extends BaseValidator implements ParseValidatorContract

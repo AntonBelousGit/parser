@@ -6,6 +6,7 @@ namespace App\Services\ParserManager;
 use App\Services\ParserManager\Contracts\ConfigValidatorContract;
 use App\Services\ParserManager\Contracts\ParseServiceContract;
 use App\Services\ParserManager\Contracts\ParseValidatorContract;
+use App\Services\ParserManager\Validator\ConfigValidator;
 use App\Services\ParserManager\Validator\ParseValidator;
 use Illuminate\Support\ServiceProvider;
 

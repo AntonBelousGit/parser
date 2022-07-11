@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Services\ParserManager\Validator\Exception;
+namespace App\Services\ParserManager\Exception;
 
 use Exception;
 

@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\Services\ParserManager;
+namespace App\Services\ParserManager\Validator;
 
 use App\Services\BaseValidator;
 
