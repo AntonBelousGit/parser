@@ -208,7 +208,7 @@ return [
         /*
          * Store
          */
-        App\Services\StoreManager\ProductDBServiceProvider::class,
+        App\Services\StoreManager\StoreServiceProvider::class,
         App\Services\StoreManager\Drivers\ProductDriver\ProductServiceProvider::class,
         App\Services\StoreManager\Drivers\AttributeDriver\AttributeServiceProvider::class,
 //        App\Services\ParseDomino\ProductService\ProductServiceProvider::class,
