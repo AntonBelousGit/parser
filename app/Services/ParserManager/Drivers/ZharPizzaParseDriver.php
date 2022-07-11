@@ -114,7 +114,7 @@ class ZharPizzaParseDriver implements ParseDriverContract, ParseServiceAttribute
             $attrSize = arrayUniqueKey(call_user_func_array('array_merge', $tempArrSize), 'id');
             $attrTopping = arrayUniqueKey(call_user_func_array('array_merge', $tempArrTopping), 'id');
         } catch (Throwable) {
-            Log::info('ZharPizzaParser - parseAttribute - size error');
+            Log::info('ZharPizzaParser - parseAttribute - error');
         }
         return new AttributeDTO(
             size: $attrSize,
@@ -151,6 +151,10 @@ class ZharPizzaParseDriver implements ParseDriverContract, ParseServiceAttribute
         return $tempArray;
     }
 
+    /**
+     * Validation rulers
+     * @return string[][]
+     */
     protected function validationRules(): array
     {
         return [

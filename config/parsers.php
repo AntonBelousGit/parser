@@ -19,8 +19,8 @@ return [
         'parser' => VdhPizzaParseDriver::class,
         'url' => 'https://store.tildacdn.com/api/getproductslist/?storepartuid=261323000731&recid=264435121&c=1655380264126&getparts=true&getoptions=true',
     ],
-//    [
-//        'parser' => OrigamiPizzaParseDriver::class,
-//        'url' => 'https://origami.od.ua/index.php?route=product/category&path=68',
-//    ],
+    [
+        'parser' => OrigamiPizzaParseDriver::class,
+        'url' => 'https://origami.od.ua/index.php?route=product/category&path=68',
+    ],
 ];

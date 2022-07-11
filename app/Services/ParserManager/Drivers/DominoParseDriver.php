@@ -130,8 +130,8 @@ class DominoParseDriver implements ParseDriverContract, ParseServiceAttributeDri
             $attrSize = arrayUniqueKey(call_user_func_array('array_merge', $tempArrSize), 'id');
             $attrTopping = arrayUniqueKey(call_user_func_array('array_merge', $tempArrTopping), 'id');
             $attrFlavor = arrayUniqueKey(call_user_func_array('array_merge', $tempArrFlavor), 'id');
-        } catch (Throwable $exception) {
-            report('DominoParser - parseAttribute - size error' . $exception);
+        } catch (Throwable) {
+            Log::info('DominoParser - parseAttribute - error');
         }
         return new AttributeDTO(
             size: $attrSize,
@@ -174,6 +174,10 @@ class DominoParseDriver implements ParseDriverContract, ParseServiceAttributeDri
         return $tempArray;
     }
 
+    /**
+     * Validation rulers
+     * @return string[][]
+     */
     protected function validationRules(): array
     {
         return [

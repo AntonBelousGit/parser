@@ -1,7 +1,6 @@
 <?php
 
-use App\Models\Product;
-use App\Services\ProductHistory\Contracts\ProductHistoryContract;
+
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -16,6 +15,5 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    $product = Product::first();
-    $product->update(['name'=> rand(0, 10000)]);
+    return view('welcome');
 });

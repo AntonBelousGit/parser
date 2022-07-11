@@ -13,13 +13,13 @@ use App\Services\ParserManager\DTOs\ProductDTO;
 use App\Services\ParserManager\DTOs\ProductSizeDTO;
 use App\Services\ParserManager\DTOs\SizeDTO;
 use App\Services\ParserManager\DTOs\ToppingDTO;
-use GuzzleHttp\Client;
-use GuzzleHttp\Exception\GuzzleException;
+use DiDom\Document;
+use DiDom\Exceptions\InvalidSelectorException;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Str;
 use Throwable;
 
-class VdhPizzaParseDriver implements ParseDriverContract, ParseServiceAttributeDriver
+class OrigamiPizzaParseDriver implements ParseDriverContract, ParseServiceAttributeDriver
 {
     /**
      * @var array
@@ -37,40 +37,50 @@ class VdhPizzaParseDriver implements ParseDriverContract, ParseServiceAttributeD
 
     /**
      * @param string $url
-     * @return mixed
-     * @throws GuzzleException
+     * @return Document
      */
-    public function callConnectToParse(string $url): mixed
+    public function callConnectToParse(string $url): Document
     {
-        $client = new Client();
-        $body = $client->get($url)->getBody();
-        return json_decode((string)$body);
+        return new Document($url, true);
     }
 
     /**
      *Parse get data - return prepare data
      * @param string $url
      * @return array
-     * @throws GuzzleException
      */
     public function parseProduct(string $url): array
     {
-        $productsParse = $this->callConnectToParse($url);
         try {
-            foreach ($productsParse->products as $item) {
-                $item = $this->parseValidatorContract->validate(collect($item)->toArray(), $this->validationRules());
+            $productsParse = $this->callConnectToParse($url);
+            $products = $productsParse->find('.productblock');
+            foreach ($products as $item) {
+                $name = $item->find('.product-info > h3')[0]->text();
+                $id = Str::slug($name);
+                $topping = $item->find('.product-info > .product-text > p')[0]->text();
+                $price = $item->find('.product-info > p')[0]->text();
+                $image = "https://origami.od.ua/" . $item->find('.productitem > img')[0]->attr('src');
+                $data =  [
+                    'id'  => $id,
+                    'name' => $name,
+                    'image' => $image,
+                    'image_mobile' => $image,
+                    'topping' => $topping,
+                    'price' => $price
+                ];
+
+                $item = $this->parseValidatorContract->validate($data, $this->validationRules());
                 $topping = [];
-                $image = (json_decode($item['gallery']));
                 try {
-                    $topping = $this->parseJsonTopping($item['descr']);
+                    $topping = $this->parseTopping($item['topping']);
                 } catch (Throwable) {
-                    Log::info('VdhPizzaParser - parseProduct - parseTopping error');
+                    Log::info('Origami Pizza  - parseProduct - parseTopping error');
                 }
                 $this->products[] = new ProductDTO(
-                    id: $item['uid'],
-                    name: $item['title'],
-                    image: [$image[0]->img],
-                    imageMobile: [$image[0]->img],
+                    id: $item['id'],
+                    name: $item['name'],
+                    image: [$item['image']],
+                    imageMobile: [$item['image']],
                     topping: new ToppingDTO(
                         topping: $topping
                     ),
@@ -78,13 +88,14 @@ class VdhPizzaParseDriver implements ParseDriverContract, ParseServiceAttributeD
                     flavors: new FlavorDTO(),
                     attribute: new ProductSizeDTO(
                         attribute: [
-                        ['size_id' => 'standard', 'flavor_id' => '', 'price' => (float)$item['price']]
+                        ['size_id' => 'standard', 'flavor_id' => '', 'price' => (float)str_replace('грн', '', $item['price'])]
                     ],
                     )
                 );
             }
-        } catch (Throwable) {
-            Log::info('VdhPizzaParser - parseProduct error');
+        } catch (Throwable $exception) {
+            report($exception);
+            Log::info('Origami Pizza - parseProduct error');
         }
         return $this->products;
     }
@@ -104,7 +115,7 @@ class VdhPizzaParseDriver implements ParseDriverContract, ParseServiceAttributeD
             }
             $attrTopping = arrayUniqueKey(call_user_func_array('array_merge', $tempArrTopping), 'id');
         } catch (Throwable) {
-            Log::info('VdhPizzaParser - parseAttribute - error');
+            Log::info('Origami Pizza - parseAttribute - error');
         }
 
         return new AttributeDTO(
@@ -117,7 +128,7 @@ class VdhPizzaParseDriver implements ParseDriverContract, ParseServiceAttributeD
      * @param $data
      * @return array
      */
-    protected function parseJsonTopping($data): array
+    protected function parseTopping($data): array
     {
         $tempArray = [];
         $array = array_map('trim', explode(',', $data));
@@ -135,11 +146,12 @@ class VdhPizzaParseDriver implements ParseDriverContract, ParseServiceAttributeD
     protected function validationRules(): array
     {
         return [
-            'uid' => ['required','string','max:50'],
-            'title' => ['required', 'string'],
-            'price' => ['required', 'string'],
-            'descr' => ['required', 'string'],
-            'gallery' => ['required', 'string'],
+            'id' => ['required', 'string', 'max:50'],
+            'name' => ['required', 'string', 'max:200'],
+            'image' => ['required', 'string'],
+            'image_mobile' => ['required', 'string'],
+            'topping' => ['required', 'string'],
+            'price' => ['required', 'string']
         ];
     }
 }
