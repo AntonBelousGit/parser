@@ -3,7 +3,7 @@ declare(strict_types=1);
 
 namespace App\Services\ParserManager\Contracts;
 
-interface ParseServiceContract
+interface ParseManagerContract
 {
     /** Call all isset parser and get data
      *

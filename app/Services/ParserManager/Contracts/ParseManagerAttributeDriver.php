@@ -6,7 +6,7 @@ namespace App\Services\ParserManager\Contracts;
 
 use App\Services\ParserManager\DTOs\AttributeDTO;
 
-interface ParseServiceAttributeDriver
+interface ParseManagerAttributeDriver
 {
     /**
      * Parse Product Attribute

@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\Console\Commands;
 
-use App\Services\ParserManager\Contracts\ParseServiceContract;
+use App\Services\ParserManager\Contracts\ParseManagerContract;
 use App\Services\StoreService\Contracts\StoreServiceContract;
 use Illuminate\Console\Command;
 use Throwable;
@@ -32,7 +32,7 @@ class PizzaUpdateParse extends Command
      */
     public function handle(
         StoreServiceContract $storeServiceContract,
-        ParseServiceContract $parseServiceContract,
+        ParseManagerContract $parseServiceContract,
     ) {
         try {
             $config = config('parsers');

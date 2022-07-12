@@ -22,5 +22,3 @@ parameters:
         - '#Access to an undefined property [a-zA-Z0-9\\_]+::\$updated_at#'
         - '#Access to an undefined property [a-zA-Z0-9\\_]+::\$history#'
         - '#Access to an undefined property [a-zA-Z0-9\\_]+::\$id#'
-        - '#Variable \$data might not be defined.#'
-        - '#Variable \$attribute might not be defined.#'

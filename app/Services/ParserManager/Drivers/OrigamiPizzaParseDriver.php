@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace App\Services\ParserManager\Drivers;
 
 use App\Services\ParserManager\Contracts\ParseDriverContract;
-use App\Services\ParserManager\Contracts\ParseServiceAttributeDriver;
+use App\Services\ParserManager\Contracts\ParseManagerAttributeDriver;
 use App\Services\ParserManager\Contracts\ParseValidatorContract;
 use App\Services\ParserManager\DTOs\AttributeDTO;
 use App\Services\ParserManager\DTOs\FlavorDTO;
@@ -18,7 +18,7 @@ use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Str;
 use Throwable;
 
-class OrigamiPizzaParseDriver implements ParseDriverContract, ParseServiceAttributeDriver
+class OrigamiPizzaParseDriver implements ParseDriverContract, ParseManagerAttributeDriver
 {
     /**
      * All products
