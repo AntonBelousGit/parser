@@ -32,11 +32,11 @@ class PizzaUpdateParse extends Command
      */
     public function handle(
         StoreServiceContract $storeServiceContract,
-        ParseManagerContract $parseServiceContract,
+        ParseManagerContract $parseManagerContract,
     ) {
         try {
             $config = config('parsers');
-            $data = $parseServiceContract->callParse($config);
+            $data = $parseManagerContract->callParse($config);
             $storeServiceContract->store($data);
         } catch (Throwable $exception) {
             report($exception);
