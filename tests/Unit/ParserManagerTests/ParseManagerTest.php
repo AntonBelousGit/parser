@@ -4,9 +4,7 @@ declare(strict_types=1);
 
 namespace ParserManagerTests;
 
-use App\Services\ParserManager\DTOs\ParserProductDataDTO;
 use App\Services\ParserManager\ParseManager;
-use Mockery;
 use Tests\TestCase;
 
 class ParseManagerTest extends TestCase
@@ -19,7 +17,7 @@ class ParseManagerTest extends TestCase
 
     public function testGetProductDataFromParsedPage()
     {
-        $response = $this->getParse();
+        $response = $this->getParse()->callParse(config('parsers'));
         $this->assertNotEmpty($response);
         $this->assertNotEmpty($response[0]->products);
     }
@@ -39,34 +37,6 @@ class ParseManagerTest extends TestCase
      */
     protected function getParse(): ParseManager
     {
-        $parseManagerMock = Mockery::mock('ParseManager');
-        $parseManagerMock->shouldReceive('callParse')->with(config('parsers'));
-        dd($parseManagerMock);
-        return $parseManagerMock;
-    }
-
-    /**
-     * @param array $carriers
-     * @return ParserProductDataDTO
-     */
-    protected function getTestRates(array $carriers): ParserProductDataDTO
-    {
-        $rates = [];
-        foreach ($carriers as $carrier) {
-            $rates[] = new Rate(
-                carrier: $carrier,
-                originPortIsoCode: 'ESBCN',
-                destinationPortIsoCode: 'USMIA',
-                pricePerContainer: '100',
-                pricePerShipment: '0',
-                currency: 'USD',
-                expiresAt: Carbon::now()->addHour()
-            );
-        }
-
-        return new ParserProductDataDTO(
-            products: $data,
-            attributes: $attribute,
-        );
+        return $this->app->make(ParseManager::class);
     }
 }

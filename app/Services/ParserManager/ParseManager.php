@@ -44,6 +44,7 @@ class ParseManager implements ParseManagerContract
 
     /**
      * Parser Pizza
+     *
      * @param $app
      * @param string $url
      * @return ParserProductDataDTO|null
