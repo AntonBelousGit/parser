@@ -22,3 +22,4 @@ parameters:
         - '#Access to an undefined property [a-zA-Z0-9\\_]+::\$updated_at#'
         - '#Access to an undefined property [a-zA-Z0-9\\_]+::\$history#'
         - '#Access to an undefined property [a-zA-Z0-9\\_]+::\$id#'
+        - '#Argument of an invalid type App\\Services\\ParserManager\\DTOs\\AttributeDTO supplied for foreach, only iterables are supported#'
