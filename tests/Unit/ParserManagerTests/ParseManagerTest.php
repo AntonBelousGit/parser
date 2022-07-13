@@ -4,7 +4,9 @@ declare(strict_types=1);
 
 namespace ParserManagerTests;
 
-use App\Services\ParserManager\ParseService;
+use App\Services\ParserManager\DTOs\ParserProductDataDTO;
+use App\Services\ParserManager\ParseManager;
+use Mockery;
 use Tests\TestCase;
 
 class ParseManagerTest extends TestCase
@@ -17,7 +19,7 @@ class ParseManagerTest extends TestCase
 
     public function testGetProductDataFromParsedPage()
     {
-        $response = $this->getParse()->callParse(config('parsers'));
+        $response = $this->getParse();
         $this->assertNotEmpty($response);
         $this->assertNotEmpty($response[0]->products);
     }
@@ -33,10 +35,38 @@ class ParseManagerTest extends TestCase
     }
 
     /**
-     * @return ParseService
+     * @return ParseManager
      */
-    protected function getParse(): ParseService
+    protected function getParse(): ParseManager
     {
-        return $this->app->make(ParseService::class);
+        $parseManagerMock = Mockery::mock('ParseManager');
+        $parseManagerMock->shouldReceive('callParse')->with(config('parsers'));
+        dd($parseManagerMock);
+        return $parseManagerMock;
+    }
+
+    /**
+     * @param array $carriers
+     * @return ParserProductDataDTO
+     */
+    protected function getTestRates(array $carriers): ParserProductDataDTO
+    {
+        $rates = [];
+        foreach ($carriers as $carrier) {
+            $rates[] = new Rate(
+                carrier: $carrier,
+                originPortIsoCode: 'ESBCN',
+                destinationPortIsoCode: 'USMIA',
+                pricePerContainer: '100',
+                pricePerShipment: '0',
+                currency: 'USD',
+                expiresAt: Carbon::now()->addHour()
+            );
+        }
+
+        return new ParserProductDataDTO(
+            products: $data,
+            attributes: $attribute,
+        );
     }
 }
