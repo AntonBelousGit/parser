@@ -26,6 +26,7 @@ class StoreManagerServiceTest extends TestCase
     public function setUp(): void
     {
         parent::setUp();
+        //seed Topping,Flavor,Size
         $this->seed();
         $this->topping = Topping::first();
         $this->flavor = Flavor::first();
