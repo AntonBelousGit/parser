@@ -13,6 +13,7 @@ use App\Services\ParserManager\DTOs\ProductSizeDTO;
 use App\Services\ParserManager\DTOs\SizeDTO;
 use App\Services\ParserManager\DTOs\ToppingDTO;
 use Illuminate\Foundation\Testing\TestCase as BaseTestCase;
+use Illuminate\Support\Arr;
 
 abstract class TestCase extends BaseTestCase
 {
@@ -80,25 +81,45 @@ abstract class TestCase extends BaseTestCase
             ],
                 attributes: new AttributeDTO(
                     size: [
-                        [
-                            "id" => $size->id,
-                            "name" => "BIG BOY"
-                        ],
-                     ],
+                [
+                    "id" => $size->id,
+                    "name" => "BIG BOY"
+                ],
+            ],
                     flavor: [
-                        [
-                            "id" => $flavor->id,
-                            "name" => "Holly",
-                        ],
-                    ],
+                [
+                    "id" => $flavor->id,
+                    "name" => "Holly",
+                ],
+            ],
                     topping: [
-                        [
-                            "id" => $topping->id,
-                            "name" => "Соус HELL",
-                        ],
-                    ]
+                    [
+                        "id" => $topping->id,
+                        "name" => "Соус HELL",
+                    ],
+                ]
                 ),
             )
         ];
+    }
+
+    /**
+     * Check equals Model before update dnd after update
+     *
+     * @param $model
+     * @param $checkArray
+     * @param string[] $ignore
+     */
+    public function checkTwoModelAssertNotEquals($model, $checkArray, array $ignore = ['created_at','updated_at'])
+    {
+        $modelToArray = $model->toArray();
+        $model = Arr::except($modelToArray, $ignore);
+        foreach ($model as $key => $item) {
+            if ($key === 'id') {
+                $this->assertEquals($model['id'], $checkArray['id']);
+                continue;
+            }
+            $this->assertNotEquals($item, $checkArray[$key]);
+        }
     }
 }

@@ -26,8 +26,7 @@ class StoreManagerServiceTest extends TestCase
     public function setUp(): void
     {
         parent::setUp();
-        //seed Topping,Flavor,Size
-        $this->seed();
+        $this->seed(); //seed Topping,Flavor,Size
         $this->topping = Topping::first();
         $this->flavor = Flavor::first();
         $this->size = Size::first();
@@ -56,10 +55,7 @@ class StoreManagerServiceTest extends TestCase
         $service = $this->app->make(StoreService::class);
         $service->store($productData);
         $afterUpdateProduct = Product::find($this->id);
-        $this->assertEquals($beforeUpdateProduct->id, $afterUpdateProduct->id);
-        $this->assertNotEquals($beforeUpdateProduct->name, $afterUpdateProduct->name);
-        $this->assertNotEquals($beforeUpdateProduct->image, $afterUpdateProduct->image);
-        $this->assertNotEquals($beforeUpdateProduct->image_mobile, $afterUpdateProduct->image_mobile);
+        $this->checkTwoModelAssertNotEquals($beforeUpdateProduct, $afterUpdateProduct);
     }
 
     public function testUpdateSizeFlavorPrice()
@@ -67,7 +63,6 @@ class StoreManagerServiceTest extends TestCase
         $beforeUpdateProduct = Product::find($this->id);
         $findAttribute = Attribute::where(['product_id' => $beforeUpdateProduct->id, 'size_id' => $this->size['id'], 'flavor_id' => $this->flavor['id']])->first();
         $this->assertEquals(180, $findAttribute->price);
-
         $productData = $this->getTestProductData($this->id, $this->size, $this->flavor, $this->topping, 250);
         $service = $this->app->make(StoreService::class);
         $service->store($productData);
@@ -80,15 +75,12 @@ class StoreManagerServiceTest extends TestCase
         $beforeUpdateProduct = Product::find($this->id);
         $findAttribute = Attribute::where(['product_id' => $beforeUpdateProduct->id, 'size_id' => $this->size['id'], 'flavor_id' => $this->flavor['id']])->first();
         $this->assertEquals(180, $findAttribute->price);
-
         $productData = $this->getTestProductData($this->id, $this->size, $this->flavor, $this->topping, 250);
         $service = $this->app->make(StoreService::class);
         $service->store($productData);
         $findNewAttribute = Attribute::where(['product_id' => $beforeUpdateProduct->id, 'size_id' => $this->size['id'], 'flavor_id' => $this->flavor['id']])->first();
         $this->assertEquals(250, $findNewAttribute->price);
-
         $history = History::where(['historical_type' => 'App\Models\Attribute', 'historical_id' => $findNewAttribute->id])->orderBy('id', 'desc')->first();
-
         $this->assertEquals(180, $history->changed_value_from);
         $this->assertEquals(250, $history->changed_value_to);
     }
@@ -98,15 +90,12 @@ class StoreManagerServiceTest extends TestCase
         $searchFlavor = Flavor::find($this->flavor->id);
         $searchSize = Size::find($this->size->id);
         $searchTopping = Topping::find($this->topping->id);
-
         $productData = $this->getTestProductData($this->id, $this->size, $this->flavor, $this->topping, 250);
         $service = $this->app->make(StoreService::class);
         $service->store($productData);
-
         $afterUpdateFlavor = Flavor::find($this->flavor->id);
         $afterUpdateSize = Size::find($this->size->id);
         $afterUpdateTopping = Topping::find($this->topping->id);
-
         $this->assertNotEquals($searchFlavor->name, $afterUpdateFlavor->name);
         $this->assertNotEquals($searchSize->name, $afterUpdateSize->name);
         $this->assertNotEquals($searchTopping->name, $afterUpdateTopping->name);
