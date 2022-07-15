@@ -74,8 +74,8 @@ class DominoParseDriver implements ParseDriverContract, ParseManagerAttributeDri
 
         foreach ($products as $item) {
             $item = $this->parseValidatorContract->validate($item, $this->validationRules());
-            $attribute = [];
-            $topping = [];
+            $attribute = collect();
+            $topping = collect();
 
             try {
                 $attribute = $this->parseSize($item['sizes']);
