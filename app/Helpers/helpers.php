@@ -24,3 +24,27 @@ if (!function_exists('arrayUniqueKey')) {
         return $tmp;
     }
 }
+if (!function_exists('collectionUniqueKey')) {
+
+    /**
+     * Remove non-unique key from deep collection
+     *
+     * @param $collection
+     * @param $key
+     * @return array
+     */
+    function collectionUniqueKey($collection, $key): array
+    {
+        $tmp = $keyCollection = array();
+        $i = 0;
+
+        foreach ($collection as $val) {
+            if (!in_array($val->$key, $keyCollection)) {
+                $keyCollection[$i] = $val->$key;
+                $tmp[$i] = $val;
+            }
+            $i++;
+        }
+        return $tmp;
+    }
+}

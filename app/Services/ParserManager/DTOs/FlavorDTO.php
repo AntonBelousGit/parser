@@ -8,10 +8,12 @@ class FlavorDTO
     /**
      * Flavor constructor.
      *
-     * @param array $flavor
+     * @param string $id
+     * @param string $name
      */
     public function __construct(
-        public array $flavor= [],
+        public string $id,
+        public string $name,
     ) {
     }
 }

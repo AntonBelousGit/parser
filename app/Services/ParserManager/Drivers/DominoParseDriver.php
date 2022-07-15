@@ -15,6 +15,7 @@ use App\Services\ParserManager\DTOs\SizeDTO;
 use App\Services\ParserManager\DTOs\ToppingDTO;
 use DiDom\Document;
 use Illuminate\Support\Arr;
+use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Log;
 use Throwable;
 
@@ -92,21 +93,15 @@ class DominoParseDriver implements ParseDriverContract, ParseManagerAttributeDri
                     name: html_entity_decode($item['name']),
                     image: $item['image'],
                     imageMobile: $item['image_mobile'],
-                    topping: new ToppingDTO(
-                        topping: $topping
-                    ),
-                    sizes: new SizeDTO(
-                        size: $attribute['size']
-                    ),
-                    flavors: new FlavorDTO(
-                        flavor: $attribute['flavor']
-                    ),
+                    topping: $topping,
+                    sizes: $attribute['size'],
+                    flavors: $attribute['flavor'],
                     attribute: new ProductSizeDTO(
                         attribute: $attribute['attribute'],
                     )
                 );
-            } catch (Throwable) {
-                Log::info('DominoParser - parseProduct - new Product error');
+            } catch (Throwable $exception) {
+                Log::info('DominoParser - parseProduct - new Product error'. $exception);
             }
         }
         return $this->products;
@@ -120,24 +115,25 @@ class DominoParseDriver implements ParseDriverContract, ParseManagerAttributeDri
      */
     public function parseAttribute(array $array = []): AttributeDTO
     {
-        $tempArrSize = [];
-        $tempArrTopping = [];
-        $tempArrFlavor = [];
-        $attrSize = [];
-        $attrTopping = [];
-        $attrFlavor = [];
+        $tempArrSize = collect();
+        $tempArrTopping = collect();
+        $tempArrFlavor = collect();
+        $attrSize = collect();
+        $attrTopping = collect();
+        $attrFlavor = collect();
+
         try {
             foreach ($array as $item) {
-                $tempArrSize[] = $item->sizes->size;
-                $tempArrTopping[] = $item->topping->topping;
-                $tempArrFlavor[] = $item->flavors->flavor;
+                $tempArrSize->push($item->sizes);
+                $tempArrTopping->push($item->topping);
+                $tempArrFlavor->push($item->flavors);
             }
+            $attrSize->push(collectionUniqueKey($tempArrSize->flatten(1), 'id'));
+            $attrTopping->push(collectionUniqueKey($tempArrTopping->flatten(1), 'id'));
+            $attrFlavor->push(collectionUniqueKey($tempArrFlavor->flatten(1), 'id'));
 
-            $attrSize = arrayUniqueKey(call_user_func_array('array_merge', $tempArrSize), 'id');
-            $attrTopping = arrayUniqueKey(call_user_func_array('array_merge', $tempArrTopping), 'id');
-            $attrFlavor = arrayUniqueKey(call_user_func_array('array_merge', $tempArrFlavor), 'id');
-        } catch (Throwable) {
-            Log::info('DominoParser - parseAttribute - error');
+        } catch (Throwable $exception) {
+            Log::info('DominoParser - parseAttribute - error'. $exception);
         }
         return new AttributeDTO(
             size: $attrSize,
@@ -150,38 +146,41 @@ class DominoParseDriver implements ParseDriverContract, ParseManagerAttributeDri
      * Parse attribute size
      *
      * @param $data
-     * @return array
+     * @return Collection
      */
-    protected function parseSize($data): array
+    protected function parseSize($data): Collection
     {
-        $tempArray = ['size' => [], 'flavor' => [], 'attribute' => []];
+        $tempCollection = collect(['size' => collect([]), 'flavor' => collect([]), 'attribute' => collect([])]);
         foreach ($data as $size) {
-            $tempArray['size'][] = ['id' => $size['id'], 'name' => html_entity_decode($size['name'])];
+            $tempCollection['size'][] = new SizeDTO(id: $size['id'], name:html_entity_decode($size['name']));
             foreach ($size['flavors'] as $flavor) {
-                $tempArray['flavor'][] = ['id' => $flavor['id'], 'name' => html_entity_decode($flavor['name'])];
-                $tempArray['attribute'][] = [
+                $tempCollection['flavor'][] = new FlavorDTO(id: $flavor['id'], name: html_entity_decode($flavor['name']));
+                $tempCollection['attribute'][] = [
                     'size_id' => $size['id'],
                     'flavor_id' => $flavor['id'],
                     'price' => $flavor['product']['price']
                 ];
             }
         }
-        return $tempArray;
+        return $tempCollection;
     }
 
     /**
      * Parse attribute topping
      *
      * @param $data
-     * @return array
+     * @return Collection
      */
-    protected function parseTopping($data): array
+    protected function parseTopping($data): Collection
     {
         $tempArray = [];
         foreach ($data as $item) {
-            $tempArray[] = ['id' => $item['id'], 'name' => html_entity_decode($item['name'])];
+            $tempArray[] = new ToppingDTO(
+                id: $item['id'],
+                name: html_entity_decode($item['name'])
+            );
         }
-        return $tempArray;
+        return collect($tempArray);
     }
 
     /**

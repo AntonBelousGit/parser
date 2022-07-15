@@ -8,10 +8,12 @@ class SizeDTO
     /**
      * Size constructor.
      *
-     * @param array $size
+     * @param string $id
+     * @param string $name
      */
     public function __construct(
-        public array $size = [],
+        public string $id,
+        public string $name,
     ) {
     }
 }

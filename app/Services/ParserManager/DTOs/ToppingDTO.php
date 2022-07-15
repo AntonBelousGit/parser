@@ -8,10 +8,12 @@ class ToppingDTO
     /**
      * Topping constructor.
      *
-     * @param array $topping
+     * @param string $id
+     * @param string $name
      */
     public function __construct(
-        public array $topping = []
+        public string $id,
+        public string $name,
     ) {
     }
 }

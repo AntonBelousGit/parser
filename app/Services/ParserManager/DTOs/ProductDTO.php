@@ -3,6 +3,8 @@ declare(strict_types=1);
 
 namespace App\Services\ParserManager\DTOs;
 
+use Illuminate\Support\Collection;
+
 class ProductDTO
 {
     /**
@@ -12,9 +14,9 @@ class ProductDTO
      * @param string $name
      * @param array $image
      * @param array $imageMobile
-     * @param ToppingDTO $topping
-     * @param SizeDTO $sizes
-     * @param FlavorDTO $flavors
+     * @param Collection $topping
+     * @param Collection $sizes
+     * @param Collection $flavors
      * @param AttributeDTO $attribute
      */
     public function __construct(
@@ -22,9 +24,9 @@ class ProductDTO
         public string $name,
         public array $image,
         public array $imageMobile,
-        public ToppingDTO $topping,
-        public SizeDTO $sizes,
-        public FlavorDTO $flavors,
+        public Collection $topping,
+        public Collection $sizes,
+        public Collection $flavors,
         public AttributeDTO $attribute
     ) {
     }
