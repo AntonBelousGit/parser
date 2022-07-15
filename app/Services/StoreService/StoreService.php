@@ -14,6 +14,7 @@ use App\Services\ParserManager\DTOs\ProductDTO as ParsedProduct;
 use App\Services\StoreService\Contracts\StoreServiceContract;
 use App\Services\StoreService\Validator\AttributeValidator;
 use Illuminate\Support\Arr;
+use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Log;
 use Throwable;
 
@@ -91,7 +92,7 @@ class StoreService implements StoreServiceContract
         try {
             $product = Product::create(['id' => $item->id, 'name' => $item->name, 'image' => $item->image, 'image_mobile' => $item->imageMobile]);
             try {
-                $product->topping()->attach(Arr::pluck($item->topping->topping, 'id'));
+                $product->topping()->attach(Arr::pluck($item->topping, 'id'));
             } catch (Throwable) {
                 Log::info('ProductService error in createProduct - topping attach', ['item' => $item]);
             }
@@ -116,7 +117,7 @@ class StoreService implements StoreServiceContract
     {
         try {
             $product->update(['id' => $data->id, 'name' => $data->name, 'image' => $data->image, 'image_mobile' => $data->imageMobile]);
-            $product->topping()->attach(Arr::pluck($data->topping->topping, 'id'));
+            $product->topping()->attach(Arr::pluck($data->topping, 'id'));
             foreach ($data->attribute->attribute as $item) {
                 $data = [
                     'product_id' => $product->id,
@@ -130,7 +131,8 @@ class StoreService implements StoreServiceContract
                     $product->attributeProduct()->create($item);
                 }
             }
-        } catch (Throwable) {
+        } catch (Throwable $exception) {
+            report($exception);
             Log::info('ProductService error in updateProduct', ['data' => $data]);
         }
     }
@@ -156,23 +158,14 @@ class StoreService implements StoreServiceContract
      * Save or Update attribute to DB
      *
      * @param string $attributeKey
-     * @param array $attributeData
+     * @param Collection $attributeData
      */
-    protected function attribute(string $attributeKey, array $attributeData): void
+    protected function attribute(string $attributeKey, Collection $attributeData): void
     {
-        foreach ($attributeData as $item) {
+        foreach ($attributeData->flatten() as $item) {
             try {
-                $item = $this->attributeValidator->validate($item);
-                $data = [
-                    'id' => $item['id'],
-                    'name' => html_entity_decode($item['name']),
-                ];
-                $updateModel = (self::ATTRIBUTEMODEL[$attributeKey])::find($data['id']);
-                if ($updateModel) {
-                    $updateModel->update($data);
-                } else {
-                    (self::ATTRIBUTEMODEL[$attributeKey])::create($data);
-                }
+                $item = $this->attributeValidator->validate(['id'=> $item->id, 'name' => $item->name]);
+                (self::ATTRIBUTEMODEL[$attributeKey])::query()->updateOrCreate(['id' => $item['id']], $item);
             } catch (Throwable) {
                 Log::info($attributeKey . ' error create/update');
             }

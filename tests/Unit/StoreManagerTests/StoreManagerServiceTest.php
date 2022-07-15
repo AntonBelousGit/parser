@@ -10,7 +10,9 @@ use App\Models\Product;
 use App\Models\Size;
 use App\Models\Topping;
 use App\Services\StoreService\StoreService;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Support\Arr;
 use Tests\TestCase;
 
 class StoreManagerServiceTest extends TestCase
@@ -26,12 +28,10 @@ class StoreManagerServiceTest extends TestCase
     public function setUp(): void
     {
         parent::setUp();
-        $this->seed(); //seed Topping,Flavor,Size
-        $this->topping = Topping::first();
-        $this->flavor = Flavor::first();
-        $this->size = Size::first();
+        $this->topping = Topping::factory()->create();
+        $this->flavor = Flavor::factory()->create();
+        $this->size = Size::factory()->create();
         $this->id = uniqid();
-
         Product::factory()->create(['id' => $this->id])->each(function ($product) {
             $product->topping()->attach($this->topping->id);
             $product->attributeProduct()
@@ -99,5 +99,26 @@ class StoreManagerServiceTest extends TestCase
         $this->assertNotEquals($searchFlavor->name, $afterUpdateFlavor->name);
         $this->assertNotEquals($searchSize->name, $afterUpdateSize->name);
         $this->assertNotEquals($searchTopping->name, $afterUpdateTopping->name);
+    }
+
+
+    /**
+     * Check equals Model before update dnd after update
+     *
+     * @param Model $model
+     * @param Model $checkArray
+     * @param string[] $ignore
+     */
+    private function checkTwoModelAssertNotEquals(Model $model, Model $checkArray, array $ignore = ['created_at','updated_at'])
+    {
+        $modelToArray = $model->toArray();
+        $model = Arr::except($modelToArray, $ignore);
+        foreach ($model as $key => $item) {
+            if ($key === 'id') {
+                $this->assertEquals($model['id'], $checkArray->id);
+                continue;
+            }
+            $this->assertNotEquals($item, $checkArray[$key]);
+        }
     }
 }
