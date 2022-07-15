@@ -92,6 +92,7 @@ class StoreService implements StoreServiceContract
         try {
             $product = Product::create(['id' => $item->id, 'name' => $item->name, 'image' => $item->image, 'image_mobile' => $item->imageMobile]);
             try {
+                dump('create', $item->topping, $item->name);
                 $product->topping()->attach(Arr::pluck($item->topping, 'id'));
             } catch (Throwable) {
                 Log::info('ProductService error in createProduct - topping attach', ['item' => $item]);
@@ -117,7 +118,8 @@ class StoreService implements StoreServiceContract
     {
         try {
             $product->update(['id' => $data->id, 'name' => $data->name, 'image' => $data->image, 'image_mobile' => $data->imageMobile]);
-            $product->topping()->attach(Arr::pluck($data->topping, 'id'));
+            dump('update', $data->topping, $data->name);
+            $product->topping()->sync(Arr::pluck($data->topping, 'id'));
             foreach ($data->attribute->attribute as $item) {
                 $data = [
                     'product_id' => $product->id,
