@@ -8,12 +8,12 @@ use App\Services\ParserManager\Contracts\ParseDriverContract;
 use App\Services\ParserManager\Contracts\ParseManagerAttributeDriver;
 use App\Services\ParserManager\Contracts\ParseValidatorContract;
 use App\Services\ParserManager\DTOs\AttributeDTO;
-use App\Services\ParserManager\DTOs\FlavorDTO;
 use App\Services\ParserManager\DTOs\ProductDTO;
 use App\Services\ParserManager\DTOs\ProductSizeDTO;
 use App\Services\ParserManager\DTOs\SizeDTO;
 use App\Services\ParserManager\DTOs\ToppingDTO;
 use DiDom\Document;
+use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Str;
 use Throwable;
@@ -86,20 +86,15 @@ class OrigamiPizzaParseDriver implements ParseDriverContract, ParseManagerAttrib
                     name: $item['name'],
                     image: [$item['image']],
                     imageMobile: [$item['image']],
-                    topping: new ToppingDTO(
-                        topping: $topping
-                    ),
-                    sizes: new SizeDTO(['id' => 'standard', "name" => "Standard"]),
-                    flavors: new FlavorDTO(),
+                    topping:$topping,
+                    sizes: collect(),
+                    flavors: collect(),
                     attribute: new ProductSizeDTO(
-                        attribute: [
-                        ['size_id' => 'standard', 'flavor_id' => '', 'price' => (float)str_replace('грн', '', $item['price'])]
-                    ],
+                        attribute: collect([['size_id' => 'standard', 'flavor_id' => '', 'price' => (float)str_replace('грн', '', $item['price'])]]),
                     )
                 );
             }
-        } catch (Throwable $exception) {
-            report($exception);
+        } catch (Throwable) {
             Log::info('Origami Pizza - parseProduct error');
         }
         return $this->products;
@@ -113,19 +108,20 @@ class OrigamiPizzaParseDriver implements ParseDriverContract, ParseManagerAttrib
      */
     public function parseAttribute(array $array = []): AttributeDTO
     {
-        $tempArrTopping = [];
-        $attrTopping = [];
+        $tempCollectTopping = collect();
+        $attrTopping = collect();
         try {
             foreach ($array as $item) {
-                $tempArrTopping[] = $item->topping->topping;
+                $tempCollectTopping->push($item->topping);
             }
-            $attrTopping = arrayUniqueKey(call_user_func_array('array_merge', $tempArrTopping), 'id');
+            $attrTopping->push(collectionUniqueKey($tempCollectTopping->flatten(1), 'id'));
         } catch (Throwable) {
             Log::info('Origami Pizza - parseAttribute - error');
         }
 
         return new AttributeDTO(
-            size: [['id' => 'standard', "name" => "Standard"]],
+            size: collect([new SizeDTO(id:'standard', name: 'Standard')]),
+            flavor: collect(),
             topping: $attrTopping
         );
     }
@@ -134,17 +130,17 @@ class OrigamiPizzaParseDriver implements ParseDriverContract, ParseManagerAttrib
      * Parse attribute topping
      *
      * @param $data
-     * @return array
+     * @return Collection
      */
-    protected function parseTopping($data): array
+    protected function parseTopping($data): Collection
     {
-        $tempArray = [];
+        $tempCollect = collect();
         $array = array_map('trim', explode(',', $data));
         foreach ($array as $item) {
             $cleanValueHtml = trim(strip_tags($item));
-            $tempArray[] = ['id' => Str::slug($cleanValueHtml), 'name' => $cleanValueHtml];
+            $tempCollect->push(new ToppingDTO(id:Str::slug($cleanValueHtml), name:$cleanValueHtml));
         }
-        return $tempArray;
+        return $tempCollect;
     }
 
     /**

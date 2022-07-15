@@ -90,8 +90,8 @@ class ZharPizzaParseDriver implements ParseDriverContract, ParseManagerAttribute
                     )
                 );
             }
-        } catch (Throwable $exception) {
-            Log::info('ZharPizzaParser - parseProduct error' . $exception);
+        } catch (Throwable) {
+            Log::info('ZharPizzaParser - parseProduct error');
         }
         return $this->products;
     }

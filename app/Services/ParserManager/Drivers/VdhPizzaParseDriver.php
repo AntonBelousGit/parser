@@ -10,6 +10,7 @@ use App\Services\ParserManager\Contracts\ParseValidatorContract;
 use App\Services\ParserManager\DTOs\AttributeDTO;
 use App\Services\ParserManager\DTOs\ProductDTO;
 use App\Services\ParserManager\DTOs\ProductSizeDTO;
+use App\Services\ParserManager\DTOs\SizeDTO;
 use App\Services\ParserManager\DTOs\ToppingDTO;
 use GuzzleHttp\Client;
 use GuzzleHttp\Exception\GuzzleException;
@@ -71,6 +72,7 @@ class VdhPizzaParseDriver implements ParseDriverContract, ParseManagerAttributeD
                 } catch (Throwable) {
                     Log::info('VdhPizzaParser - parseProduct - parseTopping error');
                 }
+
                 $this->products[] = new ProductDTO(
                     id: $item['uid'],
                     name: $item['title'],
@@ -110,7 +112,7 @@ class VdhPizzaParseDriver implements ParseDriverContract, ParseManagerAttributeD
         }
 
         return new AttributeDTO(
-            size: collect(),
+            size: collect([new SizeDTO(id:'standard', name: 'Standard')]),
             flavor: collect(),
             topping: $attrTopping
         );
