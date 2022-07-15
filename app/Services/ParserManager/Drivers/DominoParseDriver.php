@@ -100,10 +100,11 @@ class DominoParseDriver implements ParseDriverContract, ParseManagerAttributeDri
                         attribute: $attribute['attribute'],
                     )
                 );
-            } catch (Throwable $exception) {
-                Log::info('DominoParser - parseProduct - new Product error'. $exception);
+            } catch (Throwable) {
+                Log::info('DominoParser - parseProduct - new Product error');
             }
         }
+
         return $this->products;
     }
 
@@ -131,9 +132,8 @@ class DominoParseDriver implements ParseDriverContract, ParseManagerAttributeDri
             $attrSize->push(collectionUniqueKey($tempArrSize->flatten(1), 'id'));
             $attrTopping->push(collectionUniqueKey($tempArrTopping->flatten(1), 'id'));
             $attrFlavor->push(collectionUniqueKey($tempArrFlavor->flatten(1), 'id'));
-
-        } catch (Throwable $exception) {
-            Log::info('DominoParser - parseAttribute - error'. $exception);
+        } catch (Throwable) {
+            Log::info('DominoParser - parseAttribute - error');
         }
         return new AttributeDTO(
             size: $attrSize,
@@ -150,16 +150,16 @@ class DominoParseDriver implements ParseDriverContract, ParseManagerAttributeDri
      */
     protected function parseSize($data): Collection
     {
-        $tempCollection = collect(['size' => collect([]), 'flavor' => collect([]), 'attribute' => collect([])]);
+        $tempCollection = collect(['size' => collect(), 'flavor' => collect(), 'attribute' => collect()]);
         foreach ($data as $size) {
-            $tempCollection['size'][] = new SizeDTO(id: $size['id'], name:html_entity_decode($size['name']));
+            $tempCollection['size']->push(new SizeDTO(id: $size['id'], name: html_entity_decode($size['name'])));
             foreach ($size['flavors'] as $flavor) {
-                $tempCollection['flavor'][] = new FlavorDTO(id: $flavor['id'], name: html_entity_decode($flavor['name']));
-                $tempCollection['attribute'][] = [
+                $tempCollection['flavor']->push(new FlavorDTO(id: $flavor['id'], name: html_entity_decode($flavor['name'])));
+                $tempCollection['attribute']->push([
                     'size_id' => $size['id'],
                     'flavor_id' => $flavor['id'],
                     'price' => $flavor['product']['price']
-                ];
+                ]);
             }
         }
         return $tempCollection;
@@ -173,14 +173,11 @@ class DominoParseDriver implements ParseDriverContract, ParseManagerAttributeDri
      */
     protected function parseTopping($data): Collection
     {
-        $tempArray = [];
+        $tempArray = collect();
         foreach ($data as $item) {
-            $tempArray[] = new ToppingDTO(
-                id: $item['id'],
-                name: html_entity_decode($item['name'])
-            );
+            $tempArray->push(new ToppingDTO(id: $item['id'], name: html_entity_decode($item['name'])));
         }
-        return collect($tempArray);
+        return $tempArray;
     }
 
     /**
@@ -191,19 +188,19 @@ class DominoParseDriver implements ParseDriverContract, ParseManagerAttributeDri
     protected function validationRules(): array
     {
         return [
-            'id' => ['required','string','max:50'],
-            'name' => ['required', 'string','max:200'],
-            'image' => ['required', 'array','min:1'],
+            'id' => ['required', 'string', 'max:50'],
+            'name' => ['required', 'string', 'max:200'],
+            'image' => ['required', 'array', 'min:1'],
             'image.*' => ['required'],
-            'image_mobile' => ['required', 'array','min:1'],
+            'image_mobile' => ['required', 'array', 'min:1'],
             'image_mobile.*' => ['required'],
-            'toppings.*.id' => ['required','string','max:50'],
-            'toppings.*.name' => ['required','string','max:200'],
-            'sizes.*.id' => ['required','string','max:50'],
-            'sizes.*.name' => ['required','string','max:200'],
-            'sizes.*.flavors.*.id' => ['required','string','max:50'],
-            'sizes.*.flavors.*.name' => ['required','string','max:200'],
-            'sizes.*.flavors.*.product.price' => ['required','integer'],
+            'toppings.*.id' => ['required', 'string', 'max:50'],
+            'toppings.*.name' => ['required', 'string', 'max:200'],
+            'sizes.*.id' => ['required', 'string', 'max:50'],
+            'sizes.*.name' => ['required', 'string', 'max:200'],
+            'sizes.*.flavors.*.id' => ['required', 'string', 'max:50'],
+            'sizes.*.flavors.*.name' => ['required', 'string', 'max:200'],
+            'sizes.*.flavors.*.product.price' => ['required', 'integer'],
         ];
     }
 }
