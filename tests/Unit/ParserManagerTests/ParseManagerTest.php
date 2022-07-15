@@ -9,12 +9,6 @@ use Tests\TestCase;
 
 class ParseManagerTest extends TestCase
 {
-    public function testConnectionToParsedPage()
-    {
-        $this->getParse();
-        $this->assertTrue(true);
-    }
-
     public function testGetProductDataFromParsedPage()
     {
         $response = $this->getParse()->callParse(config('parsers'));
