@@ -8,13 +8,12 @@ use App\Services\ParserManager\Contracts\ParseDriverContract;
 use App\Services\ParserManager\Contracts\ParseManagerAttributeDriver;
 use App\Services\ParserManager\Contracts\ParseValidatorContract;
 use App\Services\ParserManager\DTOs\AttributeDTO;
-use App\Services\ParserManager\DTOs\FlavorDTO;
 use App\Services\ParserManager\DTOs\ProductDTO;
 use App\Services\ParserManager\DTOs\ProductSizeDTO;
-use App\Services\ParserManager\DTOs\SizeDTO;
 use App\Services\ParserManager\DTOs\ToppingDTO;
 use GuzzleHttp\Client;
 use GuzzleHttp\Exception\GuzzleException;
+use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Str;
 use Throwable;
@@ -65,7 +64,7 @@ class VdhPizzaParseDriver implements ParseDriverContract, ParseManagerAttributeD
         try {
             foreach ($productsParse->products as $item) {
                 $item = $this->parseValidatorContract->validate(collect($item)->toArray(), $this->validationRules());
-                $topping = [];
+                $topping = collect();
                 $image = (json_decode($item['gallery']));
                 try {
                     $topping = $this->parseJsonTopping($item['descr']);
@@ -77,15 +76,11 @@ class VdhPizzaParseDriver implements ParseDriverContract, ParseManagerAttributeD
                     name: $item['title'],
                     image: [$image[0]->img],
                     imageMobile: [$image[0]->img],
-                    topping: new ToppingDTO(
-                        topping: $topping
-                    ),
-                    sizes: new SizeDTO(['id' => 'standard', "name" => "Standard"]),
-                    flavors: new FlavorDTO(),
+                    topping: $topping,
+                    sizes: collect(),
+                    flavors: collect(),
                     attribute: new ProductSizeDTO(
-                        attribute: [
-                        ['size_id' => 'standard', 'flavor_id' => '', 'price' => (float)$item['price']]
-                    ],
+                        attribute: collect([['size_id' => 'standard', 'flavor_id' => '', 'price' => (float)$item['price']]]),
                     )
                 );
             }
@@ -103,19 +98,20 @@ class VdhPizzaParseDriver implements ParseDriverContract, ParseManagerAttributeD
      */
     public function parseAttribute(array $array = []): AttributeDTO
     {
-        $tempArrTopping = [];
-        $attrTopping = [];
+        $tempCollectTopping = collect();
+        $attrTopping = collect();
         try {
             foreach ($array as $item) {
-                $tempArrTopping[] = $item->topping->topping;
+                $tempCollectTopping->push($item->topping);
             }
-            $attrTopping = arrayUniqueKey(call_user_func_array('array_merge', $tempArrTopping), 'id');
+            $attrTopping->push(collectionUniqueKey($tempCollectTopping->flatten(1), 'id'));
         } catch (Throwable) {
             Log::info('VdhPizzaParser - parseAttribute - error');
         }
 
         return new AttributeDTO(
-            size: [['id' => 'standard', "name" => "Standard"]],
+            size: collect(),
+            flavor: collect(),
             topping: $attrTopping
         );
     }
@@ -124,17 +120,17 @@ class VdhPizzaParseDriver implements ParseDriverContract, ParseManagerAttributeD
      * Parse attribute topping from json
      *
      * @param $data
-     * @return array
+     * @return Collection
      */
-    protected function parseJsonTopping($data): array
+    protected function parseJsonTopping($data): Collection
     {
-        $tempArray = [];
+        $tempCollect = collect();
         $array = array_map('trim', explode(',', $data));
         foreach ($array as $item) {
             $cleanValueHtml = trim(strip_tags($item));
-            $tempArray[] = ['id' => Str::slug($cleanValueHtml), 'name' => $cleanValueHtml];
+            $tempCollect->push(new ToppingDTO(id:Str::slug($cleanValueHtml), name:$cleanValueHtml));
         }
-        return $tempArray;
+        return $tempCollect;
     }
 
     /**
