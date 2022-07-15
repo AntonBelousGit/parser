@@ -8,13 +8,13 @@ use App\Services\ParserManager\Contracts\ParseDriverContract;
 use App\Services\ParserManager\Contracts\ParseManagerAttributeDriver;
 use App\Services\ParserManager\Contracts\ParseValidatorContract;
 use App\Services\ParserManager\DTOs\AttributeDTO;
-use App\Services\ParserManager\DTOs\FlavorDTO;
 use App\Services\ParserManager\DTOs\ProductDTO;
 use App\Services\ParserManager\DTOs\ProductSizeDTO;
 use App\Services\ParserManager\DTOs\SizeDTO;
 use App\Services\ParserManager\DTOs\ToppingDTO;
 use GuzzleHttp\Client;
 use GuzzleHttp\Exception\GuzzleException;
+use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Str;
 use Throwable;
@@ -64,8 +64,8 @@ class ZharPizzaParseDriver implements ParseDriverContract, ParseManagerAttribute
             $productsParse = $this->callConnectToParse($url);
             foreach ($productsParse->products as $item) {
                 $item = $this->parseValidatorContract->validate(collect($item)->toArray(), $this->validationRules());
-                $topping = [];
-                $attribute = [];
+                $topping = collect();
+                $attribute = collect();
                 $image = (json_decode($item['gallery']));
                 try {
                     $topping = $this->parseJsonTopping($item['descr']);
@@ -82,20 +82,16 @@ class ZharPizzaParseDriver implements ParseDriverContract, ParseManagerAttribute
                     name: $item['title'],
                     image: $image,
                     imageMobile: $image,
-                    topping: new ToppingDTO(
-                        topping: $topping
-                    ),
-                    sizes: new SizeDTO($attribute),
-                    flavors: new FlavorDTO(),
+                    topping: $topping,
+                    sizes: $attribute,
+                    flavors: collect(),
                     attribute: new ProductSizeDTO(
-                        attribute: [
-                            ['size_id' => $attribute[0]['id'] ?? '35-sm', 'flavor_id' => '', 'price' => (float)$item['price']]
-                        ],
+                        attribute: collect([['size_id' => $attribute[0]->id ?? '35-sm', 'flavor_id' => '', 'price' => (float)$item['price']]]),
                     )
                 );
             }
-        } catch (Throwable) {
-            Log::info('ZharPizzaParser - parseProduct error');
+        } catch (Throwable $exception) {
+            Log::info('ZharPizzaParser - parseProduct error' . $exception);
         }
         return $this->products;
     }
@@ -108,23 +104,24 @@ class ZharPizzaParseDriver implements ParseDriverContract, ParseManagerAttribute
      */
     public function parseAttribute(array $array = []): AttributeDTO
     {
-        $tempArrSize = [];
-        $tempArrTopping = [];
-        $attrSize = [];
-        $attrTopping = [];
+        $tempCollectSize = collect();
+        $tempCollectTopping = collect();
+        $attrSize = collect();
+        $attrTopping = collect();
 
         try {
             foreach ($array as $item) {
-                $tempArrSize[] = $item->sizes->size;
-                $tempArrTopping[] = $item->topping->topping;
+                $tempCollectSize->push($item->sizes);
+                $tempCollectTopping->push($item->topping);
             }
-            $attrSize = arrayUniqueKey(call_user_func_array('array_merge', $tempArrSize), 'id');
-            $attrTopping = arrayUniqueKey(call_user_func_array('array_merge', $tempArrTopping), 'id');
+            $attrSize->push(collectionUniqueKey($tempCollectSize->flatten(1), 'id'));
+            $attrTopping->push(collectionUniqueKey($tempCollectTopping->flatten(1), 'id'));
         } catch (Throwable) {
             Log::info('ZharPizzaParser - parseAttribute - error');
         }
         return new AttributeDTO(
             size: $attrSize,
+            flavor: collect(),
             topping: $attrTopping
         );
     }
@@ -133,33 +130,32 @@ class ZharPizzaParseDriver implements ParseDriverContract, ParseManagerAttribute
      * Parse attribute topping from json
      *
      * @param $data
-     * @return array
+     * @return Collection
      */
-    protected function parseJsonTopping($data): array
+    protected function parseJsonTopping($data): Collection
     {
-        $tempArray = [];
+        $tempCollect = collect();
         $array = array_map('trim', explode(',', $data));
         foreach ($array as $item) {
-            $tempArray[] = ['id' => Str::slug($item), 'name' => $item];
+            $tempCollect->push(new ToppingDTO(id:Str::slug($item), name:$item));
         }
-        return $tempArray;
+        return $tempCollect;
     }
 
     /**
      *Parse attribute size from json
      *
      * @param $data
-     * @return array
+     * @return Collection
      */
-    protected function parseJsonSize($data): array
+    protected function parseJsonSize($data): Collection
     {
         $data = json_decode($data);
-        $tempArray = [];
-
+        $tempCollect = collect();
         foreach ($data[0]->values as $item) {
-            $tempArray[] = ['id' => Str::slug($item), 'name' => $item];
+            $tempCollect->push(new SizeDTO(id:Str::slug($item), name:$item));
         }
-        return $tempArray;
+        return $tempCollect;
     }
 
     /**
