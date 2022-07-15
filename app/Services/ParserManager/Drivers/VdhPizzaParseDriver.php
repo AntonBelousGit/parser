@@ -72,12 +72,11 @@ class VdhPizzaParseDriver implements ParseDriverContract, ParseManagerAttributeD
                 } catch (Throwable) {
                     Log::info('VdhPizzaParser - parseProduct - parseTopping error');
                 }
-
                 $this->products[] = new ProductDTO(
                     id: $item['uid'],
                     name: $item['title'],
-                    image: [$image[0]->img],
-                    imageMobile: [$image[0]->img],
+                    image: $image,
+                    imageMobile: $image,
                     topping: $topping,
                     sizes: collect(),
                     flavors: collect(),

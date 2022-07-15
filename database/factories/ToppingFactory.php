@@ -13,7 +13,7 @@ class ToppingFactory extends Factory
     public function definition(): array
     {
         return [
-            'id' => uniqid(),
+            'id' => 1,
             'name' => $this->faker->name,
             'created_at' => Carbon::now(),
             'updated_at' => Carbon::now(),
