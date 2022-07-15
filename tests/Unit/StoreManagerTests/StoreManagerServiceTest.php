@@ -10,7 +10,6 @@ use App\Models\Product;
 use App\Models\Size;
 use App\Models\Topping;
 use App\Services\StoreService\StoreService;
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Arr;
 use Tests\TestCase;
@@ -50,12 +49,13 @@ class StoreManagerServiceTest extends TestCase
 
     public function testUpdateProduct()
     {
-        $beforeUpdateProduct = Product::find($this->id);
+        $beforeUpdateProduct = Product::with('topping', 'attributeProduct')->find($this->id);
         $productData = $this->getTestProductData($this->id, $this->size, $this->flavor, $this->topping, 250);
         $service = $this->app->make(StoreService::class);
         $service->store($productData);
-        $afterUpdateProduct = Product::find($this->id);
+        $afterUpdateProduct = Product::with('topping', 'attributeProduct')->find($this->id);
         $this->checkTwoModelAssertNotEquals($beforeUpdateProduct, $afterUpdateProduct);
+        $this->checkEqualsUpdatedDataUpdatedProduct($productData, $afterUpdateProduct);
     }
 
     public function testUpdateSizeFlavorPrice()
@@ -103,22 +103,43 @@ class StoreManagerServiceTest extends TestCase
 
 
     /**
-     * Check equals Model before update dnd after update
+     * Check equals update data dnd updated Product
      *
-     * @param Model $model
-     * @param Model $checkArray
+     * @param $productData
+     * @param Product $testedModel
      * @param string[] $ignore
      */
-    private function checkTwoModelAssertNotEquals(Model $model, Model $checkArray, array $ignore = ['created_at','updated_at'])
+    private function checkEqualsUpdatedDataUpdatedProduct($productData, Product $testedModel, array $ignore = ['created_at','updated_at'])
     {
-        $modelToArray = $model->toArray();
-        $model = Arr::except($modelToArray, $ignore);
+        $productData = $productData[0]->products[0];
+        $this->assertEquals($testedModel['id'], $productData->id);
+        $this->assertEquals($testedModel['name'], $productData->name);
+        $this->assertEquals($testedModel['image'], $productData->image);
+        $this->assertEquals($testedModel['image'], $productData->image);
+        $this->assertEquals($testedModel['image_mobile'], $productData->imageMobile);
+        $this->assertEquals($testedModel['topping'][0]['id'], $productData->topping[0]->id);
+        $this->assertEquals($testedModel['topping'][0]['name'], $productData->topping[0]->name);
+        $this->assertEquals($testedModel['attributeProduct'][0]['size_id'], $productData->attribute->attribute[0]['size_id']);
+        $this->assertEquals($testedModel['attributeProduct'][0]['flavor_id'], $productData->attribute->attribute[0]['flavor_id']);
+        $this->assertEquals($testedModel['attributeProduct'][0]['price'], $productData->attribute->attribute[0]['price']);
+    }
+
+    /**
+     * Check equals Model before update dnd after update
+     *
+     * @param Product $model
+     * @param Product $checkProduct
+     * @param string[] $ignore
+     */
+    private function checkTwoModelAssertNotEquals(Product $model, Product $checkProduct, array $ignore = ['created_at','updated_at'])
+    {
+        $model = Arr::except($model->toArray(), $ignore);
         foreach ($model as $key => $item) {
             if ($key === 'id') {
-                $this->assertEquals($model['id'], $checkArray->id);
+                $this->assertEquals($model['id'], $checkProduct->id);
                 continue;
             }
-            $this->assertNotEquals($item, $checkArray[$key]);
+            $this->assertNotEquals($item, $checkProduct->$key);
         }
     }
 }
