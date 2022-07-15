@@ -87,7 +87,6 @@ class DominoParseDriver implements ParseDriverContract, ParseManagerAttributeDri
             } catch (Throwable) {
                 Log::info('DominoParser - parseProduct - parseTopping error');
             }
-            dd($attribute['attribute']);
             try {
                 $this->products[] = new ProductDTO(
                     id: $item['id'],
