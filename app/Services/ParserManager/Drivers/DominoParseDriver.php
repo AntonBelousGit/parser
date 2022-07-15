@@ -87,6 +87,7 @@ class DominoParseDriver implements ParseDriverContract, ParseManagerAttributeDri
             } catch (Throwable) {
                 Log::info('DominoParser - parseProduct - parseTopping error');
             }
+            dd($attribute['attribute']);
             try {
                 $this->products[] = new ProductDTO(
                     id: $item['id'],
@@ -116,22 +117,22 @@ class DominoParseDriver implements ParseDriverContract, ParseManagerAttributeDri
      */
     public function parseAttribute(array $array = []): AttributeDTO
     {
-        $tempArrSize = collect();
-        $tempArrTopping = collect();
-        $tempArrFlavor = collect();
+        $tempCollectSize = collect();
+        $tempCollectTopping = collect();
+        $tempCollectFlavor = collect();
         $attrSize = collect();
         $attrTopping = collect();
         $attrFlavor = collect();
 
         try {
             foreach ($array as $item) {
-                $tempArrSize->push($item->sizes);
-                $tempArrTopping->push($item->topping);
-                $tempArrFlavor->push($item->flavors);
+                $tempCollectSize->push($item->sizes);
+                $tempCollectTopping->push($item->topping);
+                $tempCollectFlavor->push($item->flavors);
             }
-            $attrSize->push(collectionUniqueKey($tempArrSize->flatten(1), 'id'));
-            $attrTopping->push(collectionUniqueKey($tempArrTopping->flatten(1), 'id'));
-            $attrFlavor->push(collectionUniqueKey($tempArrFlavor->flatten(1), 'id'));
+            $attrSize->push(collectionUniqueKey($tempCollectSize->flatten(1), 'id'));
+            $attrTopping->push(collectionUniqueKey($tempCollectTopping->flatten(1), 'id'));
+            $attrFlavor->push(collectionUniqueKey($tempCollectFlavor->flatten(1), 'id'));
         } catch (Throwable) {
             Log::info('DominoParser - parseAttribute - error');
         }
@@ -173,11 +174,11 @@ class DominoParseDriver implements ParseDriverContract, ParseManagerAttributeDri
      */
     protected function parseTopping($data): Collection
     {
-        $tempArray = collect();
+        $tempCollect = collect();
         foreach ($data as $item) {
-            $tempArray->push(new ToppingDTO(id: $item['id'], name: html_entity_decode($item['name'])));
+            $tempCollect->push(new ToppingDTO(id: $item['id'], name: html_entity_decode($item['name'])));
         }
-        return $tempArray;
+        return $tempCollect;
     }
 
     /**
