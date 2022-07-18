@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Services\ParserManager\Drivers;
 
+use App\Services\ConnectToParseService\Contracts\ConnectToParseServiceContract;
 use App\Services\ParserManager\Contracts\ParseDriverContract;
 use App\Services\ParserManager\Contracts\ParseManagerAttributeDriver;
 use App\Services\ParserManager\Contracts\ParseValidatorContract;
@@ -13,7 +14,6 @@ use App\Services\ParserManager\DTOs\ProductDTO;
 use App\Services\ParserManager\DTOs\ProductSizeDTO;
 use App\Services\ParserManager\DTOs\SizeDTO;
 use App\Services\ParserManager\DTOs\ToppingDTO;
-use DiDom\Document;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Log;
@@ -31,33 +31,25 @@ class DominoParseDriver implements ParseDriverContract, ParseManagerAttributeDri
     /**
      * DominoParseService constructor.
      * @param ParseValidatorContract $parseValidatorContract
+     * @param ConnectToParseServiceContract $parseServiceContract
      */
     public function __construct(
         protected ParseValidatorContract $parseValidatorContract,
+        protected ConnectToParseServiceContract $parseServiceContract,
     ) {
-    }
-
-    /**
-     * Connect to parsed url
-     *
-     * @param string $url
-     * @return Document
-     */
-    public function callConnectToParse(string $url): Document
-    {
-        return new Document($url, true);
     }
 
     /**
      * Parse get data - return prepare data
      *
      * @param string $url
+     * @param string $method
      * @return array
      */
-    public function parseProduct(string $url): array
+    public function parseProduct(string $url, string $method): array
     {
         try {
-            $html = $this->callConnectToParse($url);
+            $html = $this->parseServiceContract->$method($url);
             $stringRawHtml = $html->find('script');
         } catch (Throwable) {
             Log::info('DominoParser - connect error');

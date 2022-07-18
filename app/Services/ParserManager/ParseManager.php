@@ -34,9 +34,9 @@ class ParseManager implements ParseManagerContract
         foreach ($config as $parser) {
             try {
                 $parser = $this->configValidatorContract->validate($parser);
-                $parsedData[] = $this->parser(app()->make($parser['parser']), $parser['url']);
+                $parsedData[] = $this->parser(app()->make($parser['parser']), $parser['url'], $parser['method']);
             } catch (Throwable $exception) {
-                Log::info('ParseManager - validate problem'. $exception);
+                Log::info('ParseManager - validate problem '. $exception);
             }
         }
         return $parsedData;
@@ -47,12 +47,13 @@ class ParseManager implements ParseManagerContract
      *
      * @param $app
      * @param string $url
+     * @param string $method
      * @return ParserProductDataDTO|null
      */
-    public function parser($app, string $url): ParserProductDataDTO|null
+    public function parser($app, string $url, string $method): ParserProductDataDTO|null
     {
         try {
-            $data = $app->parseProduct($url);
+            $data = $app->parseProduct($url, $method);
             $attribute = $app->parseAttribute($data);
         } catch (Throwable) {
             Log::info('Error Parse');

@@ -6,12 +6,21 @@ namespace App\Services\ParserManager\Validator;
 
 use App\Services\BaseValidator;
 
+use App\Services\ConnectToParseService\ConnectToParseService;
 use App\Services\ParserManager\Contracts\ConfigValidatorContract;
 use App\Services\ParserManager\Exception\InvalidConfigDataException;
+use Illuminate\Validation\Factory as ValidationFactory;
 use Throwable;
 
 class ConfigValidator extends BaseValidator implements ConfigValidatorContract
 {
+    protected ConnectToParseService $directory;
+    public function __construct(ValidationFactory $validationFactory)
+    {
+        parent::__construct($validationFactory);
+        $this->directory = new ConnectToParseService();
+    }
+
     /**
      * Validate port data.
      *
@@ -43,6 +52,13 @@ class ConfigValidator extends BaseValidator implements ConfigValidatorContract
                         $fail('The ' . $attribute . ' is invalid.');
                     }
                 }],
+            'method' => [
+                function ($attribute, $value, $fail) {
+                    if (!method_exists($this->directory, $value)) {
+                        $fail('The ' . $attribute . ' is invalid.');
+                    }
+                }
+                ],
             'url' => ['required', 'string'],
         ];
     }
@@ -53,6 +69,6 @@ class ConfigValidator extends BaseValidator implements ConfigValidatorContract
      */
     protected function getValidationException(): InvalidConfigDataException
     {
-        return new InvalidConfigDataException('Config "parsers.php" is invalid. Check ports source.');
+        return new InvalidConfigDataException('Config "parsers.php" is invalid.');
     }
 }

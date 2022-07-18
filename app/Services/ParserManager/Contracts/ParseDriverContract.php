@@ -7,18 +7,11 @@ namespace App\Services\ParserManager\Contracts;
 interface ParseDriverContract
 {
     /**
-     * Connect to parsed target - connection url
-     *
-     * @param string $url
-     * @return mixed
-     */
-    public function callConnectToParse(string $url): mixed;
-
-    /**
      * Return completed parsed file
      *
      * @param string $url
+     * @param string $method
      * @return array
      */
-    public function parseProduct(string $url): array;
+    public function parseProduct(string $url, string $method): array;
 }
