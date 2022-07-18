@@ -7,7 +7,6 @@ namespace App\Services\ParseToFileService;
 use App\Services\ConnectToParseService\Contracts\ConnectToParseServiceContract;
 use App\Services\ParserManager\Contracts\ConfigValidatorContract;
 use App\Services\ParseToFileService\Contracts\ParseToFileServiceContract;
-use Config;
 use File;
 use Illuminate\Support\Facades\Log;
 use Throwable;
@@ -30,12 +29,10 @@ class ParseToFileService implements ParseToFileServiceContract
             try {
                 $method = $parser['method'];
                 $html = $this->parseServiceContract->$method($parser['url']);
-                $file = '/file/' . $key . '.html';
-
+                $file = '/file/' . $key . '.txt';
                 if (File::exists(public_path($file))) {
-                    $tempFile = '/file/temp/' . $key . '.html';
+                    $tempFile = '/file/temp/' . $key . '.txt';
                     File::put(public_path() . $tempFile, $html);
-
                     if (filesize(public_path() . $tempFile) !== filesize(public_path() . $file)) {
                         File::move(public_path($tempFile), public_path($file));
                         //Not set in runtime
@@ -46,7 +43,7 @@ class ParseToFileService implements ParseToFileServiceContract
                         File::delete(public_path($tempFile));
                     }
                 } else {
-                    File::put(public_path() . '/file/' . $key . '.html', $html);
+                    File::put(public_path() . '/file/' . $key . '.txt', $html);
                 }
             } catch (Throwable $exception) {
                 Log::info('parseToFile - problem ' . $exception);

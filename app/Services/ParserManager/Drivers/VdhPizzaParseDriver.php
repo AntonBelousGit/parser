@@ -49,7 +49,8 @@ class VdhPizzaParseDriver implements ParseDriverContract, ParseManagerAttributeD
     public function parseProduct(string $url, string $method): array
     {
         try {
-            $productsParse = $this->parseServiceContract->$method($url);
+            $productsParse = json_decode($this->parseServiceContract->$method($url));
+            dd($productsParse);
             foreach ($productsParse->products as $item) {
                 $item = $this->parseValidatorContract->validate(collect($item)->toArray(), $this->validationRules());
                 $topping = collect();

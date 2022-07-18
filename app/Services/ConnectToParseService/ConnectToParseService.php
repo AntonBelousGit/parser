@@ -33,6 +33,6 @@ class ConnectToParseService implements ConnectToParseServiceContract
     {
         $client = new Client();
         $body = $client->get($url)->getBody();
-        return json_decode((string)$body);
+        return (string)$body;
     }
 }
