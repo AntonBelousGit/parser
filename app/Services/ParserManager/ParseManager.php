@@ -31,12 +31,12 @@ class ParseManager implements ParseManagerContract
     public function callParse(array $config): array
     {
         $parsedData = [];
-        foreach ($config as $parser) {
+        foreach ($config as $key => $parser) {
             try {
                 $parser = $this->configValidatorContract->validate($parser);
                 $parsedData[] = $this->parser(app()->make($parser['parser']), $parser['url'], $parser['method']);
-            } catch (Throwable $exception) {
-                Log::info('ParseManager - validate problem '. $exception);
+            } catch (Throwable) {
+                Log::info('ParseManager - validate problem '. $key);
             }
         }
         return $parsedData;
