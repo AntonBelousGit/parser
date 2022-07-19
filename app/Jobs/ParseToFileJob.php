@@ -37,9 +37,9 @@ class ParseToFileJob implements ShouldQueue
             try {
                 $method = $parser['method'];
                 $html = $parseServiceContract->$method($parser['url']);
-                $file = '/file/' . $key . '.txt';
+                $file = '/file/' . $key . '.xml';
                 if (File::exists(public_path($file))) {
-                    $tempFile = '/file/temp/' . $key . '.txt';
+                    $tempFile = '/file/temp/' . $key . '.xml';
                     File::put(public_path() . $tempFile, $html);
                     if (filesize(public_path() . $tempFile) !== filesize(public_path() . $file)) {
                         File::move(public_path($tempFile), public_path($file));
@@ -49,7 +49,7 @@ class ParseToFileJob implements ShouldQueue
                         File::delete(public_path($tempFile));
                     }
                 } else {
-                    File::put(public_path() . '/file/' . $key . '.txt', $html);
+                    File::put(public_path() . '/file/' . $key . '.xml', $html);
                 }
             } catch (Throwable $exception) {
                 Log::info('parseToFile - problem ' . $exception);
