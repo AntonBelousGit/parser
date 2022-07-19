@@ -44,7 +44,7 @@ class ParseToFileJob implements ShouldQueue
                     if (filesize(public_path() . $tempFile) !== filesize(public_path() . $file)) {
                         File::move(public_path($tempFile), public_path($file));
                         $config[$key]['status'] = false;
-                        Log::info($key . ' maybe change structure!!!');
+                        Log::info($key . ' change structure!!!');
                     } else {
                         File::delete(public_path($tempFile));
                     }
