@@ -181,7 +181,6 @@ return [
         Illuminate\Translation\TranslationServiceProvider::class,
         Illuminate\Validation\ValidationServiceProvider::class,
         Illuminate\View\ViewServiceProvider::class,
-
         /*
          * Package Service Providers...
          */
@@ -203,10 +202,6 @@ return [
          */
         App\Services\ParserManager\ParseServiceProvider::class,
         App\Services\ConnectToParseService\ConnectToParseServiceProvider::class,
-        /*
-         * Parse to file
-         */
-        App\Services\ParseToFileService\ParseToFileServiceProvider::class,
         /*
          * Store
          */
