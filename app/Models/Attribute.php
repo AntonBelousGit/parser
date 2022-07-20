@@ -2,7 +2,7 @@
 
 namespace App\Models;
 
-use App\History\Traits\Historical;
+use App\Traits\Historical\Historical;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 

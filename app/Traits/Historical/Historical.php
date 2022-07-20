@@ -1,8 +1,8 @@
 <?php
 
-namespace App\History\Traits;
+namespace App\Traits\Historical;
 
-use App\History\ColumnChange;
+use App\Traits\Historical\DTOs\ColumnChange;
 use App\Models\History;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\MorphMany;
