@@ -21,13 +21,13 @@ return [
     'zharPizza' => [
         'enable'=> true,
         'parser' => ZharPizzaParseDriver::class,
-        'method' => ConnectToParseService::CONNECTION_TYPES['GUZZLE'],
+        'connection' => ConnectToParseService::CONNECTION_TYPES['GUZZLE'],
         'url' => 'https://store.tildacdn.com/api/getproductslist/?storepartuid=261323000731&recid=264435121&c=1656336574041&getparts=true&getoptions=true&slice=1&&size=36',
     ],
     'vdhBar' => [
         'enable'=> true,
         'parser' => VdhPizzaParseDriver::class,
-        'method' => ConnectToParseService::CONNECTION_TYPES['GUZZLE'],
+        'connection' => ConnectToParseService::CONNECTION_TYPES['GUZZLE'],
         'url' => 'https://store.tildacdn.com/api/getproductslist/?storepartuid=261323000731&recid=264435121&c=1655380264126&getparts=true&getoptions=true',
     ],
     'origami' => [

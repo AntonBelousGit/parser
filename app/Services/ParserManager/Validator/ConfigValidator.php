@@ -53,15 +53,9 @@ class ConfigValidator extends BaseValidator implements ConfigValidatorContract
                         $fail('The ' . $attribute . ' is invalid.');
                     }
                 }],
-            'method' => [
-                function ($attribute, $value, $fail) {
-                    if (!method_exists($this->directory, $value)) {
-                        $fail('The ' . $attribute . ' is invalid.');
-                    }
-                }
-                ],
+            'connection' => ['required', 'in:Guzzle,DiDom'],
             'url' => ['required', 'string'],
-            'status' => ['required', Rule::in([true])],
+            'enable' => ['required', Rule::in([true])],
         ];
     }
 

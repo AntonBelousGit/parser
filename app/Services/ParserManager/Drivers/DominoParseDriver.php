@@ -43,13 +43,13 @@ class DominoParseDriver implements ParseDriverContract, ParseManagerAttributeDri
      * Parse get data - return prepare data
      *
      * @param string $url
-     * @param string $method
+     * @param string $type
      * @return array
      */
-    public function parseProduct(string $url, string $method): array
+    public function parseProduct(string $url, string $type): array
     {
         try {
-            $html = $this->parseServiceContract->$method($url);
+            $html = $this->parseServiceContract->connect($type, $url);
             $stringRawHtml = $html->find('script');
         } catch (Throwable) {
             Log::info('DominoParser - connect error');
