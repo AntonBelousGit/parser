@@ -203,6 +203,10 @@ return [
         App\Services\ParserManager\ParseServiceProvider::class,
         App\Services\ConnectToParseService\ConnectToParseServiceProvider::class,
         /*
+         * Test parse data
+         */
+        App\Services\TestDataService\TestDataServiceProvider::class,
+        /*
          * Store
          */
         App\Services\StoreService\StoreServiceProvider::class,

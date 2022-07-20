@@ -4,28 +4,28 @@ declare(strict_types=1);
 
 namespace App\Console\Commands;
 
-use App\Models\ParseConfig;
 use App\Services\ParserManager\Contracts\ParseManagerContract;
 use App\Services\StoreService\Contracts\StoreServiceContract;
+use App\Services\TestDataService\Contracts\TestDataServiceContract;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\Log;
 use Throwable;
 
-class PizzaUpdateParse extends Command
+class TestDataParse extends Command
 {
     /**
      * The name and signature of the console command.
      *
      * @var string
      */
-    protected $signature = 'parse';
+    protected $signature = 'parse-test';
 
     /**
      * The console command description.
      *
      * @var string
      */
-    protected $description = 'Command to start parsing product';
+    protected $description = 'Command to start testing parsing data';
 
     /**
      * Execute the console command.
@@ -33,15 +33,12 @@ class PizzaUpdateParse extends Command
      * @return void
      */
     public function handle(
-        StoreServiceContract $storeServiceContract,
-        ParseManagerContract $parseManagerContract,
+        TestDataServiceContract $testDataServiceContract
     ) {
         try {
-            $config = ParseConfig::where('enable', 1)->get(['id','enable','parser','connection','url']);
-            $data = $parseManagerContract->callParse($config);
-            $storeServiceContract->store($data);
+            $testDataServiceContract->test();
         } catch (Throwable) {
-            Log::info('command "parse" - PizzaUpdateParse.php - fatal error');
+            Log::info('TestDataParse error');
         }
     }
 }

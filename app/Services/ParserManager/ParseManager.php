@@ -4,9 +4,11 @@ declare(strict_types=1);
 
 namespace App\Services\ParserManager;
 
+use App\Events\DisableCorruptedParserEvent;
 use App\Services\ParserManager\Contracts\ConfigValidatorContract;
 use App\Services\ParserManager\Contracts\ParseManagerContract;
 use App\Services\ParserManager\DTOs\ParserProductDataDTO;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Support\Facades\Log;
 use Throwable;
 
@@ -25,18 +27,19 @@ class ParseManager implements ParseManagerContract
     /**
      * Call all method parse
      *
-     * @param array $config
+     * @param Collection $config
      * @return array
      */
-    public function callParse(array $config): array
+    public function callParse(Collection $config): array
     {
         $parsedData = [];
-        foreach ($config as $key => $parser) {
+        foreach ($config as $parser) {
             try {
-                $parser = $this->configValidatorContract->validate($parser);
+                $parser = $this->configValidatorContract->validate($parser->toArray());
                 $parsedData[] = $this->parser(app()->make($parser['parser']), $parser['url'], $parser['connection']);
-            } catch (Throwable $exception) {
-                Log::info('ParseManager - validate problem '. $key . $exception);
+            } catch (Throwable) {
+                Log::info('ParseManager - validate problem '. $parser['name']);
+                event(new DisableCorruptedParserEvent($parser));
             }
         }
         return $parsedData;

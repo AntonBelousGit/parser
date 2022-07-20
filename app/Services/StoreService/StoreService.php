@@ -132,8 +132,7 @@ class StoreService implements StoreServiceContract
                 }
             }
         } catch (Throwable $exception) {
-            report($exception);
-            Log::info('ProductService error in updateProduct', ['data' => $data]);
+            Log::info('ProductService error in updateProduct', ['data' => $exception]);
         }
     }
 
@@ -149,8 +148,8 @@ class StoreService implements StoreServiceContract
             foreach ($attribute as $attributeKey => $attributeData) {
                 $this->attribute($attributeKey, $attributeData);
             }
-        } catch (Throwable $exception) {
-            Log::info('Store or update AttributeService - problem', ['data' => $exception]);
+        } catch (Throwable) {
+            Log::info('Store or update AttributeService - problem');
         }
     }
 

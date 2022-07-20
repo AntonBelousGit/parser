@@ -13,8 +13,9 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        $this->call(SizeSeeder::class);
-        $this->call(FlavorSeeder::class);
-        $this->call(ToppingSeeder::class);
+//        $this->call(SizeSeeder::class);
+//        $this->call(FlavorSeeder::class);
+//        $this->call(ToppingSeeder::class);
+        $this->call(ParseConfigSeeder::class);
     }
 }

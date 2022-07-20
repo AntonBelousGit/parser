@@ -5,45 +5,49 @@ declare(strict_types=1);
 namespace ParserManagerTests;
 
 use App\Services\ConnectToParseService\ConnectToParseService;
+use App\Services\ParserManager\Drivers\DominoParseDriver;
 use App\Services\ParserManager\ParseManager;
 use DiDom\Document;
-use Illuminate\Support\Facades\File;
-use Mockery\MockInterface;
+use Mockery;
 use Tests\TestCase;
 
 class ParseManagerTest extends TestCase
 {
-    public function testParserDriver()
-    {
-        $file = public_path('file/dominoParse.xml');
-        $mock = $this->app->make(ConnectToParseService::class);
-        $finallyParsedFile = $mock->callConnectToParseDiDom($file);
-
-        dd($finallyParsedFile);
-    }
-
     public function testGetProductDataFromParsedPage()
     {
-        $response = $this->getParse()->callParse(config('parsers'));
+        $response = $this->parse();
         $this->assertNotEmpty($response);
         $this->assertNotEmpty($response[0]->products);
     }
 
     public function testGetAttributeDataFromParsedPage()
     {
-        $response = $this->getParse()->callParse(config('parsers'));
-        if (count($response[0]->attributes->size) > 0 && count($response[0]->attributes->topping) > 0 && count($response[0]->attributes->flavor)) {
-            $this->assertTrue(true);
-            return;
-        }
-        $this->assertTrue(false);
+        $response = $this->parse();
+        $this->assertNotNull($response[0]->attributes->size);
+        $this->assertNotNull($response[0]->attributes->topping);
+        $this->assertNotNull($response[0]->attributes->flavor);
     }
 
     /**
-     * @return ParseManager
+     * @return array
      */
-    protected function getParse(): ParseManager
+    protected function parse(): array
     {
-        return $this->app->make(ParseManager::class);
+        $document = new Document(storage_path('app/public/file/dominoParse.xml'), true);
+        $mock = Mockery::mock(ConnectToParseService::class)->makePartial();
+        $mock->shouldReceive('connect')->andReturns($document);
+        app()->instance(ConnectToParseService::class, $mock);
+
+        $parsingManager = app(ParseManager::class);
+        return $parsingManager->callParse(
+            [
+                'dominoParse' => [
+                    'enable' => true,
+                    'parser' => DominoParseDriver::class,
+                    'connection' => ConnectToParseService::CONNECTION_TYPES['DIDOM'],
+                    'url' => 'https://dominos.ua/uk/chornomorsk/',
+                ],
+            ]
+        );
     }
 }

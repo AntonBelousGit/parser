@@ -3,12 +3,14 @@ declare(strict_types=1);
 
 namespace App\Services\ParserManager\Contracts;
 
+use Illuminate\Database\Eloquent\Collection;
+
 interface ParseManagerContract
 {
     /** Call all isset parser and get data
      *
-     * @param array $config
+     * @param Collection $config
      * @return array
      */
-    public function callParse(array $config): array;
+    public function callParse(Collection $config): array;
 }
