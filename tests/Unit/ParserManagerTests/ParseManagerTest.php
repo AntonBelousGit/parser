@@ -4,15 +4,26 @@ declare(strict_types=1);
 
 namespace ParserManagerTests;
 
+use App\Models\ParseConfig;
 use App\Services\ConnectToParseService\ConnectToParseService;
-use App\Services\ParserManager\Drivers\DominoParseDriver;
 use App\Services\ParserManager\ParseManager;
 use DiDom\Document;
+use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Foundation\Testing\RefreshDatabase;
 use Mockery;
 use Tests\TestCase;
 
 class ParseManagerTest extends TestCase
 {
+    use RefreshDatabase;
+
+    public function setUp(): void
+    {
+        parent::setUp();
+        //Seed config
+        $this->seed();
+    }
+
     public function testGetProductDataFromParsedPage()
     {
         $response = $this->parse();
@@ -33,21 +44,13 @@ class ParseManagerTest extends TestCase
      */
     protected function parse(): array
     {
+        $parse = ParseConfig::factory()->create();
         $document = new Document(storage_path('app/public/file/dominoParse.xml'), true);
         $mock = Mockery::mock(ConnectToParseService::class)->makePartial();
         $mock->shouldReceive('connect')->andReturns($document);
         app()->instance(ConnectToParseService::class, $mock);
 
         $parsingManager = app(ParseManager::class);
-        return $parsingManager->callParse(
-            [
-                'dominoParse' => [
-                    'enable' => true,
-                    'parser' => DominoParseDriver::class,
-                    'connection' => ConnectToParseService::CONNECTION_TYPES['DIDOM'],
-                    'url' => 'https://dominos.ua/uk/chornomorsk/',
-                ],
-            ]
-        );
+        return $parsingManager->callParse(Collection::make([$parse]));
     }
 }
