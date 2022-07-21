@@ -11,7 +11,6 @@ class Flavor extends Model
 
     public $incrementing = false;
     public $keyType = 'string';
-
     protected $fillable = ['id','name'];
 
 }

@@ -5,6 +5,7 @@ namespace App\Models;
 use App\Traits\Historical\Historical;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Attribute extends Model
 {
@@ -13,11 +14,17 @@ class Attribute extends Model
     protected $guarded = [];
     protected $table = 'product_size_flavor';
 
-    public function size()
+    /**
+     * @return HasMany
+     */
+    public function size(): HasMany
     {
         return $this->hasMany(Size::class, 'id', 'sizes_id');
     }
 
+    /**
+     * @return string[]
+     */
     public function ignoreHistoryColumns(): array
     {
         return [

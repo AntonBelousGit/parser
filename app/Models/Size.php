@@ -12,9 +12,11 @@ class Size extends Model
 
     public $incrementing = false;
     public $keyType = 'string';
-
     protected $fillable = ['id','name'];
 
+    /**
+     * @return BelongsToMany
+     */
     public function flavors(): BelongsToMany
     {
         return $this->belongsToMany(Flavor::class, 'product_size_flavor')->withPivot('price');
