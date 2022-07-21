@@ -9,10 +9,12 @@ use App\Models\History;
 use App\Models\Product;
 use App\Models\Size;
 use App\Models\Topping;
+use App\Services\StoreService\Exception\InvalidStoreServiceDataException;
 use App\Services\StoreService\StoreService;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Arr;
 use Tests\TestCase;
+use Throwable;
 
 class StoreManagerServiceTest extends TestCase
 {
@@ -38,15 +40,23 @@ class StoreManagerServiceTest extends TestCase
         });
     }
 
+    /**
+     * @throws InvalidStoreServiceDataException
+     * @throws Throwable
+     */
     public function testCreateProduct()
     {
         $productData = $this->getTestProductData(uniqid(), $this->size, $this->flavor, $this->topping, 250);
         $service = $this->app->make(StoreService::class);
         $service->store($productData);
-        $searchProduct = Product::find($productData[0]->products[0]->id);
-        $this->assertEquals($productData[0]->products[0]->name, $searchProduct->name);
+        $searchProduct = Product::find($productData->products[0]->id);
+        $this->assertEquals($productData->products[0]->name, $searchProduct->name);
     }
 
+    /**
+     * @throws Throwable
+     * @throws InvalidStoreServiceDataException
+     */
     public function testUpdateProduct()
     {
         $beforeUpdateProduct = Product::with('topping', 'attributeProduct')->find($this->id);
@@ -58,6 +68,10 @@ class StoreManagerServiceTest extends TestCase
         $this->checkEqualsUpdatedDataUpdatedProduct($productData, $afterUpdateProduct);
     }
 
+    /**
+     * @throws InvalidStoreServiceDataException
+     * @throws Throwable
+     */
     public function testUpdateSizeFlavorPrice()
     {
         $beforeUpdateProduct = Product::find($this->id);
@@ -70,6 +84,10 @@ class StoreManagerServiceTest extends TestCase
         $this->assertEquals(250, $findNewAttribute->price);
     }
 
+    /**
+     * @throws InvalidStoreServiceDataException
+     * @throws Throwable
+     */
     public function testCheckHistoryUpdateSizeFlavorPrice()
     {
         $beforeUpdateProduct = Product::find($this->id);
@@ -85,6 +103,10 @@ class StoreManagerServiceTest extends TestCase
         $this->assertEquals(250, $history->changed_value_to);
     }
 
+    /**
+     * @throws InvalidStoreServiceDataException
+     * @throws Throwable
+     */
     public function testUpdateAttribute()
     {
         $searchFlavor = Flavor::find($this->flavor->id);
@@ -111,7 +133,7 @@ class StoreManagerServiceTest extends TestCase
      */
     private function checkEqualsUpdatedDataUpdatedProduct($productData, Product $testedModel, array $ignore = ['created_at','updated_at'])
     {
-        $productData = $productData[0]->products[0];
+        $productData = $productData->products[0];
         $this->assertEquals($testedModel['id'], $productData->id);
         $this->assertEquals($testedModel['name'], $productData->name);
         $this->assertEquals($testedModel['image'], $productData->image);

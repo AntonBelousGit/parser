@@ -26,11 +26,11 @@ abstract class TestCase extends BaseTestCase
      * @param Flavor $flavor
      * @param Topping $topping
      * @param int $price
-     * @return ParserProductDataDTO[]
+     * @return ParserProductDataDTO
      */
-    public function getTestProductData(string $id, Size $size, Flavor $flavor, Topping $topping, int $price): array
+    public function getTestProductData(string $id, Size $size, Flavor $flavor, Topping $topping, int $price): ParserProductDataDTO
     {
-        return [
+        return
             new ParserProductDataDTO(
                 products: [
                     new ProductDTO(
@@ -56,6 +56,6 @@ abstract class TestCase extends BaseTestCase
                     topping: collect([new ToppingDTO(id: $topping->id, name: 'Соус HELL')]),
                 ),
             )
-        ];
+        ;
     }
 }
