@@ -23,13 +23,7 @@ class ParseManagerTest extends TestCase
     public function setUp(): void
     {
         parent::setUp();
-        $this->config =  ParseConfig::create([
-            'name' => 'dominoParse',
-            'parser' => DominoParseDriver::class,
-            'connection' => ConnectToParseService::CONNECTION_TYPES['DIDOM'],
-            'url' => 'https://dominos.ua/uk/chornomorsk/',
-            'enable' => 1
-        ]);
+        $this->config =  ParseConfig::factory()->create();
     }
 
     public function testGetProductDataFromParsedPage()
