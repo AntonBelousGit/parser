@@ -18,8 +18,11 @@ parameters:
     ignoreErrors:
         - '#Call to an undefined method [a-zA-Z0-9\\_]+::getChangedColumns\(\)#'
         - '#Call to an undefined method [a-zA-Z0-9\\_]+::saveChange\(\)#'
+        - '#Call to an undefined method [a-zA-Z0-9\\_]+::topping\(\)#'
+        - '#Call to an undefined method [a-zA-Z0-9\\_]+::attributeProduct\(\)#'
         - '#Access to an undefined property [a-zA-Z0-9\\_]+::\$attribute#'
         - '#Access to an undefined property [a-zA-Z0-9\\_]+::\$updated_at#'
         - '#Access to an undefined property [a-zA-Z0-9\\_]+::\$history#'
         - '#Access to an undefined property [a-zA-Z0-9\\_]+::\$id#'
         - '#Argument of an invalid type App\\Services\\ParserManager\\DTOs\\AttributeDTO supplied for foreach, only iterables are supported#'
+        - '#Method Mockery\\ExpectationInterface+::andReturns\(\) invoked with 1 parameter, 0 required.#'

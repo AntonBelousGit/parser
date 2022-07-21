@@ -15,6 +15,7 @@ class TestDataService implements TestDataServiceContract
 {
     /**
      * Test valid config and parsed data
+     * @return void
      */
     public function test(): void
     {
