@@ -10,7 +10,7 @@ use Illuminate\Console\Command;
 use Illuminate\Support\Facades\Log;
 use Throwable;
 
-class PizzaUpdateParse extends Command
+class ProductParse extends Command
 {
     /**
      * The name and signature of the console command.
@@ -39,7 +39,7 @@ class PizzaUpdateParse extends Command
                 $config = $configValidatorContract->validate($config);
                 dispatch(new ParseAndStoreProductJob($config));
             } catch (Throwable) {
-                Log::info('command "parse" - PizzaUpdateParse.php - error ' . $key);
+                Log::info('command "parse" - ProductParse - validate error ' . $key);
             }
         }
     }
