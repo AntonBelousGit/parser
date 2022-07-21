@@ -2,7 +2,9 @@
 
 namespace App\Providers;
 
+use App\Events\DisableCorruptedParserDriverEvent;
 use App\Events\DisableCorruptedParserEvent;
+use App\Listeners\DisableCorruptedParserDriverListener;
 use App\Listeners\DisabledCorruptedParserListener;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Auth\Listeners\SendEmailVerificationNotification;
@@ -22,6 +24,9 @@ class EventServiceProvider extends ServiceProvider
         ],
         DisableCorruptedParserEvent::class => [
             DisabledCorruptedParserListener::class,
+        ],
+        DisableCorruptedParserDriverEvent::class => [
+            DisableCorruptedParserDriverListener::class,
         ],
     ];
 

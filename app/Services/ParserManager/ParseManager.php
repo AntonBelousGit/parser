@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Services\ParserManager;
 
+use App\Events\DisableCorruptedParserDriverEvent;
 use App\Events\DisableCorruptedParserEvent;
 use App\Services\ParserManager\Contracts\ConfigValidatorContract;
 use App\Services\ParserManager\Contracts\ParseManagerContract;
@@ -60,6 +61,7 @@ class ParseManager implements ParseManagerContract
             $attribute = $app->parseAttribute($data);
         } catch (Throwable) {
             Log::info('Error Parse');
+            event(new DisableCorruptedParserDriverEvent($url));
             return null;
         }
         return new ParserProductDataDTO(

@@ -14,7 +14,7 @@ class DisabledCorruptedParserListener
     public function handle(DisableCorruptedParserEvent $event)
     {
         try {
-            $event->parseModel->update(['enable'=> false]);
+            $event->parseModel->update(['enable'=> false,'error' => 'ParseManager - validate problem']);
         } catch (Throwable) {
             Log::info('DisabledCorruptedParserEvent - problem');
         }

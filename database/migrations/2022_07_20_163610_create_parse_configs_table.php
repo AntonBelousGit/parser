@@ -19,6 +19,7 @@ return new class extends Migration {
             $table->string('parser', 150);
             $table->string('connection', 20);
             $table->text('url');
+            $table->string('error')->nullable();
             $table->timestamps();
         });
     }
