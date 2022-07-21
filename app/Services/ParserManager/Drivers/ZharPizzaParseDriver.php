@@ -14,9 +14,7 @@ use App\Services\ParserManager\DTOs\ProductSizeDTO;
 use App\Services\ParserManager\DTOs\SizeDTO;
 use App\Services\ParserManager\DTOs\ToppingDTO;
 use Illuminate\Support\Collection;
-use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Str;
-use Throwable;
 
 class ZharPizzaParseDriver implements ParseDriverContract, ParseManagerAttributeDriver
 {
@@ -48,38 +46,24 @@ class ZharPizzaParseDriver implements ParseDriverContract, ParseManagerAttribute
      */
     public function parseProduct(string $url, string $type): array
     {
-        try {
-            $productsParse = json_decode($this->parseServiceContract->connect($type, $url));
-            foreach ($productsParse->products as $item) {
-                $item = $this->parseValidatorContract->validate(collect($item)->toArray(), $this->validationRules());
-                $topping = collect();
-                $attribute = collect();
-                $image = (json_decode($item['gallery']));
-                try {
-                    $topping = $this->parseJsonTopping($item['descr']);
-                } catch (Throwable) {
-                    Log::info('ZharPizzaParser - parseProduct - parseTopping error');
-                }
-                try {
-                    $attribute = $this->parseJsonSize($item['json_options']);
-                } catch (Throwable) {
-                    Log::info('ZharPizzaParser - parseProduct - parseJsonOptionsSize error');
-                }
-                $this->products[] = new ProductDTO(
-                    id: $item['uid'],
-                    name: $item['title'],
-                    image: $image,
-                    imageMobile: $image,
-                    topping: $topping,
-                    sizes: $attribute,
-                    flavors: collect(),
-                    attribute: new ProductSizeDTO(
-                        attribute: collect([['size_id' => $attribute[0]->id ?? '35-sm', 'flavor_id' => '', 'price' => (float)$item['price']]]),
-                    )
-                );
-            }
-        } catch (Throwable) {
-            Log::info('ZharPizzaParser - parseProduct error');
+        $productsParse = json_decode($this->parseServiceContract->connect($type, $url));
+        foreach ($productsParse->products as $item) {
+            $item = $this->parseValidatorContract->validate(collect($item)->toArray(), $this->validationRules());
+            $image = (json_decode($item['gallery']));
+            $topping = $this->parseJsonTopping($item['descr']);
+            $attribute = $this->parseJsonSize($item['json_options']);
+            $this->products[] = new ProductDTO(
+                id: $item['uid'],
+                name: $item['title'],
+                image: $image,
+                imageMobile: $image,
+                topping: $topping,
+                sizes: $attribute,
+                flavors: collect(),
+                attribute: new ProductSizeDTO(
+                    attribute: collect([['size_id' => $attribute[0]->id ?? '35-sm', 'flavor_id' => '', 'price' => (float)$item['price']]]),
+                )
+            );
         }
         return $this->products;
     }
@@ -97,16 +81,13 @@ class ZharPizzaParseDriver implements ParseDriverContract, ParseManagerAttribute
         $attrSize = collect();
         $attrTopping = collect();
 
-        try {
-            foreach ($array as $item) {
-                $tempCollectSize->push($item->sizes);
-                $tempCollectTopping->push($item->topping);
-            }
-            $attrSize->push(collectionUniqueKey($tempCollectSize->flatten(1), 'id'));
-            $attrTopping->push(collectionUniqueKey($tempCollectTopping->flatten(1), 'id'));
-        } catch (Throwable) {
-            Log::info('ZharPizzaParser - parseAttribute - error');
+        foreach ($array as $item) {
+            $tempCollectSize->push($item->sizes);
+            $tempCollectTopping->push($item->topping);
         }
+        $attrSize->push(collectionUniqueKey($tempCollectSize->flatten(1), 'id'));
+        $attrTopping->push(collectionUniqueKey($tempCollectTopping->flatten(1), 'id'));
+
         return new AttributeDTO(
             size: $attrSize,
             flavor: collect(),
@@ -138,12 +119,15 @@ class ZharPizzaParseDriver implements ParseDriverContract, ParseManagerAttribute
      */
     protected function parseJsonSize($data): Collection
     {
-        $data = json_decode($data);
-        $tempCollect = collect();
-        foreach ($data[0]->values as $item) {
-            $tempCollect->push(new SizeDTO(id:Str::slug($item), name:$item));
+        if ($data) {
+            $data = json_decode($data);
+            $tempCollect = collect();
+            foreach ($data[0]->values as $item) {
+                $tempCollect->push(new SizeDTO(id:Str::slug($item), name:$item));
+            }
+            return $tempCollect;
         }
-        return $tempCollect;
+        return collect([new SizeDTO(id:'standard', name:'Standard')]);
     }
 
     /**

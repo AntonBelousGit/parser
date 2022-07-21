@@ -55,7 +55,6 @@ class ConfigValidator extends BaseValidator implements ConfigValidatorContract
                 }],
             'connection' => ['required', 'in:Guzzle,DiDom'],
             'url' => ['required', 'string'],
-            'enable' => ['required', 'boolean','in:1'],
         ];
     }
 

@@ -16,8 +16,6 @@ use App\Services\ParserManager\DTOs\SizeDTO;
 use App\Services\ParserManager\DTOs\ToppingDTO;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Collection;
-use Illuminate\Support\Facades\Log;
-use Throwable;
 
 class DominoParseDriver implements ParseDriverContract, ParseManagerAttributeDriver
 {
@@ -48,13 +46,8 @@ class DominoParseDriver implements ParseDriverContract, ParseManagerAttributeDri
      */
     public function parseProduct(string $url, string $type): array
     {
-        try {
-            $html = $this->parseServiceContract->connect($type, $url);
-            $stringRawHtml = $html->find('script');
-        } catch (Throwable) {
-            Log::info('DominoParser - connect error');
-            return [];
-        }
+        $html = $this->parseServiceContract->connect($type, $url);
+        $stringRawHtml = $html->find('script');
         $stringHtml = $stringRawHtml[8]->text();
         $array = explode("'", ($stringHtml));
         $str = preg_replace_callback('/\\\\u([0-9a-fA-F]{4})/', function ($match) {
@@ -66,37 +59,21 @@ class DominoParseDriver implements ParseDriverContract, ParseManagerAttributeDri
 
         foreach ($products as $item) {
             $item = $this->parseValidatorContract->validate($item, $this->validationRules());
-            $attribute = collect();
-            $topping = collect();
-
-            try {
-                $attribute = $this->parseSize($item['sizes']);
-            } catch (Throwable) {
-                Log::info('DominoParser - parseProduct - parseJsonOptionsSize error');
-            }
-            try {
-                $topping = $this->parseTopping($item['toppings']);
-            } catch (Throwable) {
-                Log::info('DominoParser - parseProduct - parseTopping error');
-            }
-            try {
-                $this->products[] = new ProductDTO(
-                    id: $item['id'],
-                    name: html_entity_decode($item['name']),
-                    image: $item['image'],
-                    imageMobile: $item['image_mobile'],
-                    topping: $topping,
-                    sizes: $attribute['size'],
-                    flavors: $attribute['flavor'],
-                    attribute: new ProductSizeDTO(
-                        attribute: $attribute['attribute'],
-                    )
-                );
-            } catch (Throwable) {
-                Log::info('DominoParser - parseProduct - new Product error');
-            }
+            $attribute = $this->parseSize($item['sizes']);
+            $topping = $this->parseTopping($item['toppings']);
+            $this->products[] = new ProductDTO(
+                id: $item['id'],
+                name: html_entity_decode($item['name']),
+                image: $item['image'],
+                imageMobile: $item['image_mobile'],
+                topping: $topping,
+                sizes: $attribute['size'],
+                flavors: $attribute['flavor'],
+                attribute: new ProductSizeDTO(
+                    attribute: $attribute['attribute'],
+                )
+            );
         }
-
         return $this->products;
     }
 
@@ -115,18 +92,15 @@ class DominoParseDriver implements ParseDriverContract, ParseManagerAttributeDri
         $attrTopping = collect();
         $attrFlavor = collect();
 
-        try {
-            foreach ($array as $item) {
-                $tempCollectSize->push($item->sizes);
-                $tempCollectTopping->push($item->topping);
-                $tempCollectFlavor->push($item->flavors);
-            }
-            $attrSize->push(collectionUniqueKey($tempCollectSize->flatten(1), 'id'));
-            $attrTopping->push(collectionUniqueKey($tempCollectTopping->flatten(1), 'id'));
-            $attrFlavor->push(collectionUniqueKey($tempCollectFlavor->flatten(1), 'id'));
-        } catch (Throwable) {
-            Log::info('DominoParser - parseAttribute - error');
+        foreach ($array as $item) {
+            $tempCollectSize->push($item->sizes);
+            $tempCollectTopping->push($item->topping);
+            $tempCollectFlavor->push($item->flavors);
         }
+        $attrSize->push(collectionUniqueKey($tempCollectSize->flatten(1), 'id'));
+        $attrTopping->push(collectionUniqueKey($tempCollectTopping->flatten(1), 'id'));
+        $attrFlavor->push(collectionUniqueKey($tempCollectFlavor->flatten(1), 'id'));
+
         return new AttributeDTO(
             size: $attrSize,
             flavor: $attrFlavor,

@@ -4,46 +4,22 @@ declare(strict_types=1);
 
 namespace App\Services\ParserManager;
 
-use App\Events\DisableCorruptedParserDriverEvent;
-use App\Events\DisableCorruptedParserEvent;
-use App\Services\ParserManager\Contracts\ConfigValidatorContract;
 use App\Services\ParserManager\Contracts\ParseManagerContract;
 use App\Services\ParserManager\DTOs\ParserProductDataDTO;
-use Illuminate\Database\Eloquent\Collection;
-use Illuminate\Support\Facades\Log;
-use Throwable;
+use Illuminate\Contracts\Container\BindingResolutionException;
 
 class ParseManager implements ParseManagerContract
 {
     /**
-     * ParseService constructor.
-     *
-     * @param ConfigValidatorContract $configValidatorContract
-     */
-    public function __construct(
-        private ConfigValidatorContract $configValidatorContract,
-    ) {
-    }
-
-    /**
      * Call all method parse
      *
-     * @param Collection $config
-     * @return array
+     * @param array $config
+     * @return ParserProductDataDTO
+     * @throws BindingResolutionException
      */
-    public function callParse(Collection $config): array
+    public function callParse(array $config): ParserProductDataDTO
     {
-        $parsedData = [];
-        foreach ($config as $parser) {
-            try {
-                $parser = $this->configValidatorContract->validate($parser->toArray());
-                $parsedData[] = $this->parser(app()->make($parser['parser']), $parser['url'], $parser['connection']);
-            } catch (Throwable) {
-                Log::info('ParseManager - validate problem '. $parser['name']);
-                event(new DisableCorruptedParserEvent($parser));
-            }
-        }
-        return $parsedData;
+        return $this->parser(app()->make($config['parser']), $config['url'], $config['connection']);
     }
 
     /**
@@ -52,18 +28,12 @@ class ParseManager implements ParseManagerContract
      * @param $app
      * @param string $url
      * @param string $method
-     * @return ParserProductDataDTO|null
+     * @return ParserProductDataDTO
      */
-    public function parser($app, string $url, string $method): ParserProductDataDTO|null
+    public function parser($app, string $url, string $method): ParserProductDataDTO
     {
-        try {
-            $data = $app->parseProduct($url, $method);
-            $attribute = $app->parseAttribute($data);
-        } catch (Throwable) {
-            Log::info('Error Parse');
-            event(new DisableCorruptedParserDriverEvent($url));
-            return null;
-        }
+        $data = $app->parseProduct($url, $method);
+        $attribute = $app->parseAttribute($data);
         return new ParserProductDataDTO(
             products: $data,
             attributes: $attribute,
