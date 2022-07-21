@@ -19,7 +19,7 @@ class ParseManager implements ParseManagerContract
      */
     public function callParse(array $config): ParserProductDataDTO
     {
-        return $this->parser(app()->make($config['parser']), $config['url'], $config['connection']);
+        return $this->parser(app()->make($config['parser']), $config['url']);
     }
 
     /**
@@ -27,12 +27,11 @@ class ParseManager implements ParseManagerContract
      *
      * @param $app
      * @param string $url
-     * @param string $method
      * @return ParserProductDataDTO
      */
-    public function parser($app, string $url, string $method): ParserProductDataDTO
+    public function parser($app, string $url): ParserProductDataDTO
     {
-        $data = $app->parseProduct($url, $method);
+        $data = $app->parseProduct($url);
         $attribute = $app->parseAttribute($data);
         return new ParserProductDataDTO(
             products: $data,

@@ -41,12 +41,11 @@ class DominoParseDriver implements ParseDriverContract, ParseManagerAttributeDri
      * Parse get data - return prepare data
      *
      * @param string $url
-     * @param string $type
      * @return array
      */
-    public function parseProduct(string $url, string $type): array
+    public function parseProduct(string $url): array
     {
-        $html = $this->parseServiceContract->connect($type, $url);
+        $html = $this->parseServiceContract->connect($url);
         $stringRawHtml = $html->find('script');
         $stringHtml = $stringRawHtml[8]->text();
         $array = explode("'", ($stringHtml));

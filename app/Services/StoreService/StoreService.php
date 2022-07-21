@@ -15,6 +15,7 @@ use App\Services\StoreService\Contracts\StoreServiceContract;
 use App\Services\StoreService\Validator\AttributeValidator;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Collection;
+use Throwable;
 
 class StoreService implements StoreServiceContract
 {
@@ -44,6 +45,8 @@ class StoreService implements StoreServiceContract
      *
      * @param $data
      * @return void
+     * @throws Exception\InvalidStoreServiceDataException
+     * @throws Throwable
      */
     public function store($data): void
     {
@@ -113,6 +116,8 @@ class StoreService implements StoreServiceContract
      *
      * @param AttributeDTO $attribute
      * @return void
+     * @throws Exception\InvalidStoreServiceDataException
+     * @throws Throwable
      */
     protected function updateOrCreateAttribute(AttributeDTO $attribute): void
     {
@@ -126,6 +131,7 @@ class StoreService implements StoreServiceContract
      *
      * @param string $attributeKey
      * @param Collection $attributeData
+     * @throws Exception\InvalidStoreServiceDataException|Throwable
      */
     protected function attribute(string $attributeKey, Collection $attributeData): void
     {

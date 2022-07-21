@@ -10,8 +10,7 @@ interface ParseDriverContract
      * Return completed parsed file
      *
      * @param string $url
-     * @param string $type
      * @return array
      */
-    public function parseProduct(string $url, string $type): array;
+    public function parseProduct(string $url): array;
 }

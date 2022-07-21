@@ -8,10 +8,8 @@ interface ConnectToParseServiceContract
     /**
      * Connect to parsed target - connection url use (DiDom,Guzzle)
      *
-     * @param string $type
      * @param string $url
      * @return mixed
      */
-    public function connect(string $type, string $url): mixed;
-
+    public function connect(string $url): mixed;
 }

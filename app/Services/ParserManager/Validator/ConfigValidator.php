@@ -53,7 +53,6 @@ class ConfigValidator extends BaseValidator implements ConfigValidatorContract
                         $fail('The ' . $attribute . ' is invalid.');
                     }
                 }],
-            'connection' => ['required', 'in:Guzzle,DiDom'],
             'url' => ['required', 'string'],
         ];
     }

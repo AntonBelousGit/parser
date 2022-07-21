@@ -41,12 +41,11 @@ class OrigamiPizzaParseDriver implements ParseDriverContract, ParseManagerAttrib
      *Parse get data - return prepare data
      *
      * @param string $url
-     * @param string $type
      * @return array
      */
-    public function parseProduct(string $url, string $type): array
+    public function parseProduct(string $url): array
     {
-        $productsParse = $this->parseServiceContract->connect($type, $url);
+        $productsParse = $this->parseServiceContract->connect($url);
         $products = $productsParse->find('.productblock');
         foreach ($products as $item) {
             $name = $item->find('.product-info > h3')[0]->text();

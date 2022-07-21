@@ -41,12 +41,12 @@ class ZharPizzaParseDriver implements ParseDriverContract, ParseManagerAttribute
      *Parse get data - return prepare data
      *
      * @param string $url
-     * @param string $type
      * @return array
      */
-    public function parseProduct(string $url, string $type): array
+    public function parseProduct(string $url): array
     {
-        $productsParse = json_decode($this->parseServiceContract->connect($type, $url));
+        $parse = $this->parseServiceContract->connect($url);
+        $productsParse = json_decode($parse->find('body > p')[0]->text());
         foreach ($productsParse->products as $item) {
             $item = $this->parseValidatorContract->validate(collect($item)->toArray(), $this->validationRules());
             $image = (json_decode($item['gallery']));

@@ -4,10 +4,10 @@ declare(strict_types=1);
 
 namespace ParserManagerTests;
 
-use App\Models\ParseConfig;
 use App\Services\ConnectToParseService\ConnectToParseService;
 use App\Services\ParserManager\ParseManager;
 use DiDom\Document;
+use Illuminate\Contracts\Container\BindingResolutionException;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Mockery;
@@ -16,14 +16,6 @@ use Tests\TestCase;
 class ParseManagerTest extends TestCase
 {
     use RefreshDatabase;
-
-    protected $config;
-
-    public function setUp(): void
-    {
-        parent::setUp();
-        $this->config =  ParseConfig::factory()->create();
-    }
 
     public function testGetProductDataFromParsedPage()
     {
@@ -42,6 +34,7 @@ class ParseManagerTest extends TestCase
 
     /**
      * @return array
+     * @throws BindingResolutionException
      */
     protected function parse(): array
     {
