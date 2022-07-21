@@ -6,7 +6,6 @@ namespace ParserManagerTests;
 
 use App\Models\ParseConfig;
 use App\Services\ConnectToParseService\ConnectToParseService;
-use App\Services\ParserManager\Drivers\DominoParseDriver;
 use App\Services\ParserManager\ParseManager;
 use DiDom\Document;
 use Illuminate\Database\Eloquent\Collection;
