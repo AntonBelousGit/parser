@@ -48,7 +48,7 @@ class OrigamiPizzaParseDriver implements ParseDriverContract
      */
     public function parseProduct(string $url): ParserProductDataDTO
     {
-        $productsParse =new Document($this->parseServiceContract->connect($url));
+        $productsParse = new Document($this->parseServiceContract->connect($url));
         $products = $productsParse->find('.productblock');
         $collectTopping = collect();
         foreach ($products as $item) {
@@ -57,14 +57,14 @@ class OrigamiPizzaParseDriver implements ParseDriverContract
             $topping = $item->find('.product-info > .product-text > p')[0]->text();
             $price = $item->find('.product-info > p')[0]->text();
             $image = "https://origami.od.ua/" . $item->find('.productitem > img')[0]->attr('src');
-            $data =  [
-                    'id'  => $id,
-                    'name' => $name,
-                    'image' => $image,
-                    'image_mobile' => $image,
-                    'topping' => $topping,
-                    'price' => $price
-                ];
+            $data = [
+                'id' => $id,
+                'name' => $name,
+                'image' => $image,
+                'image_mobile' => $image,
+                'topping' => $topping,
+                'price' => $price
+            ];
 
             $item = $this->parseValidatorContract->validate($data, $this->validationRules());
             $topping = $this->parseTopping($item['topping']);
@@ -73,7 +73,7 @@ class OrigamiPizzaParseDriver implements ParseDriverContract
                 name: $item['name'],
                 image: [$item['image']],
                 imageMobile: [$item['image']],
-                topping:$topping,
+                topping: $topping,
                 sizes: collect(),
                 flavors: collect(),
                 attribute: new ProductSizeDTO(
@@ -100,7 +100,7 @@ class OrigamiPizzaParseDriver implements ParseDriverContract
         $attrTopping = collect();
         $attrTopping->push(collectionUniqueKey($topping->flatten(1), 'id'));
         return new AttributeDTO(
-            size: collect([new SizeDTO(id:'standard', name: 'Standard')]),
+            size: collect([new SizeDTO(id: 'standard', name: 'Standard')]),
             flavor: collect(),
             topping: $attrTopping
         );
@@ -118,7 +118,7 @@ class OrigamiPizzaParseDriver implements ParseDriverContract
         $array = array_map('trim', explode(',', $data));
         foreach ($array as $item) {
             $cleanValueHtml = trim(strip_tags($item));
-            $tempCollect->push(new ToppingDTO(id:Str::slug($cleanValueHtml), name:$cleanValueHtml));
+            $tempCollect->push(new ToppingDTO(id: Str::slug($cleanValueHtml), name: $cleanValueHtml));
         }
         return $tempCollect;
     }
