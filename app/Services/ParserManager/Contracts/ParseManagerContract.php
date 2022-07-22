@@ -9,8 +9,9 @@ interface ParseManagerContract
 {
     /** Call all isset parser and get data
      *
-     * @param array $config
+     * @param string $driverName
+     * @param string $url
      * @return ParserProductDataDTO
      */
-    public function callParse(array $config): ParserProductDataDTO;
+    public function callParse(string $driverName, string $url): ParserProductDataDTO;
 }

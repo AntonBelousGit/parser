@@ -1,7 +1,6 @@
 <?php
 declare(strict_types=1);
 
-use App\Services\ConnectToParseService\ConnectToParseService;
 use App\Services\ParserManager\Drivers\DominoParseDriver;
 use App\Services\ParserManager\Drivers\OrigamiPizzaParseDriver;
 use App\Services\ParserManager\Drivers\VdhPizzaParseDriver;

@@ -6,17 +6,19 @@ namespace App\Services\ParserManager\Drivers;
 
 use App\Services\ConnectToParseService\Contracts\ConnectToParseServiceContract;
 use App\Services\ParserManager\Contracts\ParseDriverContract;
-use App\Services\ParserManager\Contracts\ParseManagerAttributeDriver;
 use App\Services\ParserManager\Contracts\ParseValidatorContract;
 use App\Services\ParserManager\DTOs\AttributeDTO;
+use App\Services\ParserManager\DTOs\ParserProductDataDTO;
 use App\Services\ParserManager\DTOs\ProductDTO;
 use App\Services\ParserManager\DTOs\ProductSizeDTO;
 use App\Services\ParserManager\DTOs\SizeDTO;
 use App\Services\ParserManager\DTOs\ToppingDTO;
+use DiDom\Document;
+use DiDom\Exceptions\InvalidSelectorException;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Str;
 
-class OrigamiPizzaParseDriver implements ParseDriverContract, ParseManagerAttributeDriver
+class OrigamiPizzaParseDriver implements ParseDriverContract
 {
     /**
      * All products
@@ -41,12 +43,14 @@ class OrigamiPizzaParseDriver implements ParseDriverContract, ParseManagerAttrib
      *Parse get data - return prepare data
      *
      * @param string $url
-     * @return array
+     * @return ParserProductDataDTO
+     * @throws InvalidSelectorException
      */
-    public function parseProduct(string $url): array
+    public function parseProduct(string $url): ParserProductDataDTO
     {
-        $productsParse = $this->parseServiceContract->connect($url);
+        $productsParse =new Document($this->parseServiceContract->connect($url));
         $products = $productsParse->find('.productblock');
+        $collectTopping = collect();
         foreach ($products as $item) {
             $name = $item->find('.product-info > h3')[0]->text();
             $id = Str::slug($name);
@@ -61,6 +65,7 @@ class OrigamiPizzaParseDriver implements ParseDriverContract, ParseManagerAttrib
                     'topping' => $topping,
                     'price' => $price
                 ];
+
             $item = $this->parseValidatorContract->validate($data, $this->validationRules());
             $topping = $this->parseTopping($item['topping']);
             $this->products[] = new ProductDTO(
@@ -75,24 +80,25 @@ class OrigamiPizzaParseDriver implements ParseDriverContract, ParseManagerAttrib
                     attribute: collect([['size_id' => 'standard', 'flavor_id' => '', 'price' => (float)str_replace('грн', '', $item['price'])]]),
                 )
             );
+            $collectTopping->push($topping);
         }
-        return $this->products;
+        $parseAttribute = $this->parseAttribute($collectTopping);
+        return new ParserProductDataDTO(
+            products: $this->products,
+            attributes: $parseAttribute,
+        );
     }
 
     /**
      * Prepare parsed attribute data
      *
-     * @param array $array
+     * @param Collection $topping
      * @return AttributeDTO
      */
-    public function parseAttribute(array $array = []): AttributeDTO
+    protected function parseAttribute(Collection $topping): AttributeDTO
     {
-        $tempCollectTopping = collect();
         $attrTopping = collect();
-        foreach ($array as $item) {
-            $tempCollectTopping->push($item->topping);
-        }
-        $attrTopping->push(collectionUniqueKey($tempCollectTopping->flatten(1), 'id'));
+        $attrTopping->push(collectionUniqueKey($topping->flatten(1), 'id'));
         return new AttributeDTO(
             size: collect([new SizeDTO(id:'standard', name: 'Standard')]),
             flavor: collect(),

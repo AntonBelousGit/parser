@@ -2,6 +2,7 @@
 
 namespace App\Jobs;
 
+use App\Services\ParserManager\Contracts\ConfigValidatorContract;
 use App\Services\ParserManager\Contracts\ParseManagerContract;
 use App\Services\StoreService\Contracts\StoreServiceContract;
 use Illuminate\Bus\Queueable;
@@ -35,8 +36,10 @@ class ParseAndStoreProductJob implements ShouldQueue
     public function handle(
         StoreServiceContract $storeServiceContract,
         ParseManagerContract $parseManagerContract,
+        ConfigValidatorContract $configValidatorContract
     ) {
-        $data = $parseManagerContract->callParse($this->config);
+        $configValid = $configValidatorContract->validate($this->config);
+        $data = $parseManagerContract->callParse($configValid['parser'], $configValid['url']);
         $storeServiceContract->store($data);
     }
 }

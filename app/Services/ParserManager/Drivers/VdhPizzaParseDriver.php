@@ -6,19 +6,17 @@ namespace App\Services\ParserManager\Drivers;
 
 use App\Services\ConnectToParseService\Contracts\ConnectToParseServiceContract;
 use App\Services\ParserManager\Contracts\ParseDriverContract;
-use App\Services\ParserManager\Contracts\ParseManagerAttributeDriver;
 use App\Services\ParserManager\Contracts\ParseValidatorContract;
 use App\Services\ParserManager\DTOs\AttributeDTO;
+use App\Services\ParserManager\DTOs\ParserProductDataDTO;
 use App\Services\ParserManager\DTOs\ProductDTO;
 use App\Services\ParserManager\DTOs\ProductSizeDTO;
 use App\Services\ParserManager\DTOs\SizeDTO;
 use App\Services\ParserManager\DTOs\ToppingDTO;
 use Illuminate\Support\Collection;
-use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Str;
-use Throwable;
 
-class VdhPizzaParseDriver implements ParseDriverContract, ParseManagerAttributeDriver
+class VdhPizzaParseDriver implements ParseDriverContract
 {
     /**
      * All products
@@ -43,12 +41,12 @@ class VdhPizzaParseDriver implements ParseDriverContract, ParseManagerAttributeD
      *Parse get data - return prepare data
      *
      * @param string $url
-     * @return array
+     * @return ParserProductDataDTO
      */
-    public function parseProduct(string $url): array
+    public function parseProduct(string $url): ParserProductDataDTO
     {
-        $parse = $this->parseServiceContract->connect($url);
-        $productsParse = json_decode($parse->find('body > p')[0]->text());
+        $productsParse = json_decode($this->parseServiceContract->connect($url));
+        $collectTopping = collect();
         foreach ($productsParse->products as $item) {
             $item = $this->parseValidatorContract->validate(collect($item)->toArray(), $this->validationRules());
             $image = (json_decode($item['gallery']));
@@ -65,8 +63,13 @@ class VdhPizzaParseDriver implements ParseDriverContract, ParseManagerAttributeD
                     attribute: collect([['size_id' => 'standard', 'flavor_id' => '', 'price' => (float)$item['price']]]),
                 )
             );
+            $collectTopping->push($topping);
         }
-        return $this->products;
+        $parseAttribute = $this->parseAttribute($collectTopping);
+        return new ParserProductDataDTO(
+            products: $this->products,
+            attributes: $parseAttribute,
+        );
     }
 
     /**
@@ -75,14 +78,10 @@ class VdhPizzaParseDriver implements ParseDriverContract, ParseManagerAttributeD
      * @param array $array
      * @return AttributeDTO
      */
-    public function parseAttribute(array $array = []): AttributeDTO
+    public function parseAttribute(Collection $topping): AttributeDTO
     {
-        $tempCollectTopping = collect();
         $attrTopping = collect();
-        foreach ($array as $item) {
-            $tempCollectTopping->push($item->topping);
-        }
-        $attrTopping->push(collectionUniqueKey($tempCollectTopping->flatten(1), 'id'));
+        $attrTopping->push(collectionUniqueKey($topping->flatten(1), 'id'));
         return new AttributeDTO(
             size: collect([new SizeDTO(id:'standard', name: 'Standard')]),
             flavor: collect(),

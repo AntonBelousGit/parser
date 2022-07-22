@@ -4,21 +4,23 @@
 namespace App\Services\ConnectToParseService;
 
 use App\Services\ConnectToParseService\Contracts\ConnectToParseServiceContract;
-use DiDom\Document;
 use GuzzleHttp\Client;
 use GuzzleHttp\Exception\GuzzleException;
 
 class ConnectToParseService implements ConnectToParseServiceContract
 {
     /**
-     * Connect to parsed url use DiDom
+     * Connect to parsed url use Guzzle
      *
      * @param string $url
      *
-     * @return Document
+     * @return string
+     * @throws GuzzleException
      */
-    public function connect(string $url): Document
+    public function connect(string $url): string
     {
-        return new Document($url, true);
+        $client = new Client();
+        $body = $client->get($url)->getBody();
+        return (string)$body;
     }
 }

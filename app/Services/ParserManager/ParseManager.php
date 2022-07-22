@@ -13,29 +13,14 @@ class ParseManager implements ParseManagerContract
     /**
      * Call all method parse
      *
-     * @param array $config
+     * @param string $driverName
+     * @param string $url
      * @return ParserProductDataDTO
      * @throws BindingResolutionException
      */
-    public function callParse(array $config): ParserProductDataDTO
+    public function callParse(string $driverName, string $url): ParserProductDataDTO
     {
-        return $this->parser(app()->make($config['parser']), $config['url']);
-    }
-
-    /**
-     * Parser Pizza
-     *
-     * @param $app
-     * @param string $url
-     * @return ParserProductDataDTO
-     */
-    public function parser($app, string $url): ParserProductDataDTO
-    {
-        $data = $app->parseProduct($url);
-        $attribute = $app->parseAttribute($data);
-        return new ParserProductDataDTO(
-            products: $data,
-            attributes: $attribute,
-        );
+        $driver = app()->make($driverName);
+        return $driver->parseProduct($url);
     }
 }

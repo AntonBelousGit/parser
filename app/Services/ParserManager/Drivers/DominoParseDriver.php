@@ -6,18 +6,20 @@ namespace App\Services\ParserManager\Drivers;
 
 use App\Services\ConnectToParseService\Contracts\ConnectToParseServiceContract;
 use App\Services\ParserManager\Contracts\ParseDriverContract;
-use App\Services\ParserManager\Contracts\ParseManagerAttributeDriver;
 use App\Services\ParserManager\Contracts\ParseValidatorContract;
 use App\Services\ParserManager\DTOs\AttributeDTO;
 use App\Services\ParserManager\DTOs\FlavorDTO;
+use App\Services\ParserManager\DTOs\ParserProductDataDTO;
 use App\Services\ParserManager\DTOs\ProductDTO;
 use App\Services\ParserManager\DTOs\ProductSizeDTO;
 use App\Services\ParserManager\DTOs\SizeDTO;
 use App\Services\ParserManager\DTOs\ToppingDTO;
+use DiDom\Document;
+use DiDom\Exceptions\InvalidSelectorException;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Collection;
 
-class DominoParseDriver implements ParseDriverContract, ParseManagerAttributeDriver
+class DominoParseDriver implements ParseDriverContract
 {
     /**
      * All products
@@ -41,11 +43,12 @@ class DominoParseDriver implements ParseDriverContract, ParseManagerAttributeDri
      * Parse get data - return prepare data
      *
      * @param string $url
-     * @return array
+     * @return ParserProductDataDTO
+     * @throws InvalidSelectorException
      */
-    public function parseProduct(string $url): array
+    public function parseProduct(string $url): ParserProductDataDTO
     {
-        $html = $this->parseServiceContract->connect($url);
+        $html = new Document($this->parseServiceContract->connect($url));
         $stringRawHtml = $html->find('script');
         $stringHtml = $stringRawHtml[8]->text();
         $array = explode("'", ($stringHtml));
@@ -56,6 +59,9 @@ class DominoParseDriver implements ParseDriverContract, ParseManagerAttributeDri
         $productArray = Arr::pluck($new['data']['groups'], 'products');
         $products = call_user_func_array('array_merge', $productArray);
 
+        $collectSize = collect();
+        $collectTopping = collect();
+        $collectFlavor = collect();
         foreach ($products as $item) {
             $item = $this->parseValidatorContract->validate($item, $this->validationRules());
             $attribute = $this->parseSize($item['sizes']);
@@ -72,34 +78,33 @@ class DominoParseDriver implements ParseDriverContract, ParseManagerAttributeDri
                     attribute: $attribute['attribute'],
                 )
             );
+            $collectSize->push($attribute['size']);
+            $collectTopping->push($topping);
+            $collectFlavor->push($attribute['flavor']);
         }
-        return $this->products;
+        $parseAttribute = $this->parseAttribute($collectSize, $collectTopping, $collectFlavor);
+        return new ParserProductDataDTO(
+            products: $this->products,
+            attributes: $parseAttribute,
+        );
     }
 
     /**
      * Prepare parsed attribute data
      *
-     * @param array $array
+     * @param Collection $size
+     * @param Collection $topping
+     * @param Collection $flavor
      * @return AttributeDTO
      */
-    public function parseAttribute(array $array = []): AttributeDTO
+    protected function parseAttribute(Collection $size, Collection $topping, Collection $flavor): AttributeDTO
     {
-        $tempCollectSize = collect();
-        $tempCollectTopping = collect();
-        $tempCollectFlavor = collect();
         $attrSize = collect();
         $attrTopping = collect();
         $attrFlavor = collect();
-
-        foreach ($array as $item) {
-            $tempCollectSize->push($item->sizes);
-            $tempCollectTopping->push($item->topping);
-            $tempCollectFlavor->push($item->flavors);
-        }
-        $attrSize->push(collectionUniqueKey($tempCollectSize->flatten(1), 'id'));
-        $attrTopping->push(collectionUniqueKey($tempCollectTopping->flatten(1), 'id'));
-        $attrFlavor->push(collectionUniqueKey($tempCollectFlavor->flatten(1), 'id'));
-
+        $attrSize->push(collectionUniqueKey($size->flatten(1), 'id'));
+        $attrTopping->push(collectionUniqueKey($topping->flatten(1), 'id'));
+        $attrFlavor->push(collectionUniqueKey($flavor->flatten(1), 'id'));
         return new AttributeDTO(
             size: $attrSize,
             flavor: $attrFlavor,

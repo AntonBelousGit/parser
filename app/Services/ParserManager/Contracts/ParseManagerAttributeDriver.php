@@ -8,11 +8,5 @@ use App\Services\ParserManager\DTOs\AttributeDTO;
 
 interface ParseManagerAttributeDriver
 {
-    /**
-     * Parse Product Attribute
-     *
-     * @param array $array
-     * @return AttributeDTO
-     */
-    public function parseAttribute(array $array = []) : AttributeDTO;
+
 }

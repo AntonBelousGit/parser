@@ -6,9 +6,9 @@ namespace App\Services\ParserManager\Drivers;
 
 use App\Services\ConnectToParseService\Contracts\ConnectToParseServiceContract;
 use App\Services\ParserManager\Contracts\ParseDriverContract;
-use App\Services\ParserManager\Contracts\ParseManagerAttributeDriver;
 use App\Services\ParserManager\Contracts\ParseValidatorContract;
 use App\Services\ParserManager\DTOs\AttributeDTO;
+use App\Services\ParserManager\DTOs\ParserProductDataDTO;
 use App\Services\ParserManager\DTOs\ProductDTO;
 use App\Services\ParserManager\DTOs\ProductSizeDTO;
 use App\Services\ParserManager\DTOs\SizeDTO;
@@ -16,7 +16,7 @@ use App\Services\ParserManager\DTOs\ToppingDTO;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Str;
 
-class ZharPizzaParseDriver implements ParseDriverContract, ParseManagerAttributeDriver
+class ZharPizzaParseDriver implements ParseDriverContract
 {
     /**
      * All products
@@ -41,12 +41,13 @@ class ZharPizzaParseDriver implements ParseDriverContract, ParseManagerAttribute
      *Parse get data - return prepare data
      *
      * @param string $url
-     * @return array
+     * @return ParserProductDataDTO
      */
-    public function parseProduct(string $url): array
+    public function parseProduct(string $url): ParserProductDataDTO
     {
-        $parse = $this->parseServiceContract->connect($url);
-        $productsParse = json_decode($parse->find('body > p')[0]->text());
+        $productsParse = json_decode($this->parseServiceContract->connect($url));
+        $collectSize = collect();
+        $collectTopping = collect();
         foreach ($productsParse->products as $item) {
             $item = $this->parseValidatorContract->validate(collect($item)->toArray(), $this->validationRules());
             $image = (json_decode($item['gallery']));
@@ -64,30 +65,29 @@ class ZharPizzaParseDriver implements ParseDriverContract, ParseManagerAttribute
                     attribute: collect([['size_id' => $attribute[0]->id ?? '35-sm', 'flavor_id' => '', 'price' => (float)$item['price']]]),
                 )
             );
+            $collectSize->push($attribute);
+            $collectTopping->push($topping);
         }
-        return $this->products;
+        $parseAttribute = $this->parseAttribute($collectSize, $collectTopping);
+        return new ParserProductDataDTO(
+            products: $this->products,
+            attributes: $parseAttribute,
+        );
     }
 
     /**
      * Prepare parsed attribute data
      *
-     * @param array $array
+     * @param Collection $size
+     * @param Collection $topping
      * @return AttributeDTO
      */
-    public function parseAttribute(array $array = []): AttributeDTO
+    public function parseAttribute(Collection $size, Collection $topping): AttributeDTO
     {
-        $tempCollectSize = collect();
-        $tempCollectTopping = collect();
         $attrSize = collect();
         $attrTopping = collect();
-
-        foreach ($array as $item) {
-            $tempCollectSize->push($item->sizes);
-            $tempCollectTopping->push($item->topping);
-        }
-        $attrSize->push(collectionUniqueKey($tempCollectSize->flatten(1), 'id'));
-        $attrTopping->push(collectionUniqueKey($tempCollectTopping->flatten(1), 'id'));
-
+        $attrSize->push(collectionUniqueKey($size->flatten(1), 'id'));
+        $attrTopping->push(collectionUniqueKey($topping->flatten(1), 'id'));
         return new AttributeDTO(
             size: $attrSize,
             flavor: collect(),
