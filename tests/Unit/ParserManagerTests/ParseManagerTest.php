@@ -84,7 +84,6 @@ class ParseManagerTest extends TestCase
         $mock = Mockery::mock(ConnectToParseService::class)->makePartial();
         $mock->shouldReceive('connect')->andReturns($document);
         app()->instance(ConnectToParseService::class, $mock);
-
         $parsingManager = app(ParseManager::class);
         return $parsingManager->callParse($config['parser'], $config['url']);
     }
