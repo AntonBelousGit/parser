@@ -21,6 +21,7 @@ class ConnectToParseService implements ConnectToParseServiceContract
     {
         $client = new Client();
         $body = $client->get($url)->getBody();
+
         return (string)$body;
     }
 }
