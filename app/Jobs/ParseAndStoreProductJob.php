@@ -15,22 +15,22 @@ class ParseAndStoreProductJob implements ShouldQueue
 {
     use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
 
-    private array $config;
-
     /**
      * Create a new job instance.
      *
      * @param array $config
      * @return void
      */
-    public function __construct(array $config)
+    public function __construct(private array $config)
     {
-        $this->config = $config;
     }
 
     /**
      * Execute the job.
      *
+     * @param StoreServiceContract $storeServiceContract
+     * @param ParseManagerContract $parseManagerContract
+     * @param ConfigValidatorContract $configValidatorContract
      * @return void
      */
     public function handle(
