@@ -76,11 +76,8 @@ class ParseManagerTest extends TestCase
     protected function parse(string $parseName, string $type = ''): ParserProductDataDTO
     {
         $config = config("parsers.{$parseName}");
-        if ($type === 'DiDom') {
-            $document = new Document(storage_path("app/public/file/{$parseName}.xml"), true);
-        } else {
-            $document = File::get(storage_path("app/public/file/{$parseName}.xml"));
-        }
+        $filePath = storage_path("app/public/file/{$parseName}.xml");
+        $document = $type === 'DiDom' ? new Document($filePath, true) : File::get($filePath);
         $mock = Mockery::mock(ConnectToParseService::class)->makePartial();
         $mock->shouldReceive('connect')->andReturns($document);
         app()->instance(ConnectToParseService::class, $mock);
