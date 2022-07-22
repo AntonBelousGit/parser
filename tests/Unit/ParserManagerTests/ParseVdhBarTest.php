@@ -55,7 +55,7 @@ class ParseVdhBarTest extends ParseTestCase
     {
         $config = config('parsers.vdhBar');
         try {
-            $this->parse($config, 'corruptFile/vdhBarCorrupted', 'DiDom');
+            $this->parse($config, 'corruptFile/vdhBarCorrupted');
         } catch (Exception $exception) {
             $message = $exception->getMessage();
             $this->assertStringContainsString('Attempt to read property "products" on null', $message);
