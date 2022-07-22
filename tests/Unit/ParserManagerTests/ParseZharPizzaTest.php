@@ -37,7 +37,6 @@ class ParseZharPizzaTest extends ParseTestCase
         }
     }
 
-
     public function testZharPizzaValidationProblemParse()
     {
         $config = config('parsers.zharPizza');
