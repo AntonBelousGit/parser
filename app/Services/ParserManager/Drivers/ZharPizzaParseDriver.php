@@ -69,6 +69,7 @@ class ZharPizzaParseDriver implements ParseDriverContract
             $collectTopping->push($topping);
         }
         $parseAttribute = $this->parseAttribute($collectSize, $collectTopping);
+
         return new ParserProductDataDTO(
             products: $this->products,
             attributes: $parseAttribute,
@@ -88,6 +89,7 @@ class ZharPizzaParseDriver implements ParseDriverContract
         $attrTopping = collect();
         $attrSize->push(collectionUniqueKey($size->flatten(1), 'id'));
         $attrTopping->push(collectionUniqueKey($topping->flatten(1), 'id'));
+
         return new AttributeDTO(
             size: $attrSize,
             flavor: collect(),
@@ -108,6 +110,7 @@ class ZharPizzaParseDriver implements ParseDriverContract
         foreach ($array as $item) {
             $tempCollect->push(new ToppingDTO(id:Str::slug($item), name:$item));
         }
+
         return $tempCollect;
     }
 
@@ -125,8 +128,10 @@ class ZharPizzaParseDriver implements ParseDriverContract
             foreach ($data[0]->values as $item) {
                 $tempCollect->push(new SizeDTO(id:Str::slug($item), name:$item));
             }
+
             return $tempCollect;
         }
+
         return collect([new SizeDTO(id:'standard', name:'Standard')]);
     }
 

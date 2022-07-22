@@ -66,6 +66,7 @@ class VdhPizzaParseDriver implements ParseDriverContract
             $collectTopping->push($topping);
         }
         $parseAttribute = $this->parseAttribute($collectTopping);
+
         return new ParserProductDataDTO(
             products: $this->products,
             attributes: $parseAttribute,
@@ -82,6 +83,7 @@ class VdhPizzaParseDriver implements ParseDriverContract
     {
         $attrTopping = collect();
         $attrTopping->push(collectionUniqueKey($topping->flatten(1), 'id'));
+
         return new AttributeDTO(
             size: collect([new SizeDTO(id:'standard', name: 'Standard')]),
             flavor: collect(),
@@ -103,6 +105,7 @@ class VdhPizzaParseDriver implements ParseDriverContract
             $cleanValueHtml = trim(strip_tags($item));
             $tempCollect->push(new ToppingDTO(id:Str::slug($cleanValueHtml), name:$cleanValueHtml));
         }
+
         return $tempCollect;
     }
 

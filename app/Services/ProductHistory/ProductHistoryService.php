@@ -31,6 +31,7 @@ class ProductHistoryService implements ProductHistoryContract
     public function getProductHistory(string $id): ProductResource
     {
         $product = $this->productRepositories->getProductHistory($id);
+
         return new ProductResource($product);
     }
 }

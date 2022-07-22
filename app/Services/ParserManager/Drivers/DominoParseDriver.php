@@ -83,6 +83,7 @@ class DominoParseDriver implements ParseDriverContract
             $collectFlavor->push($attribute['flavor']);
         }
         $parseAttribute = $this->parseAttribute($collectSize, $collectTopping, $collectFlavor);
+
         return new ParserProductDataDTO(
             products: $this->products,
             attributes: $parseAttribute,
@@ -105,6 +106,7 @@ class DominoParseDriver implements ParseDriverContract
         $attrSize->push(collectionUniqueKey($size->flatten(1), 'id'));
         $attrTopping->push(collectionUniqueKey($topping->flatten(1), 'id'));
         $attrFlavor->push(collectionUniqueKey($flavor->flatten(1), 'id'));
+
         return new AttributeDTO(
             size: $attrSize,
             flavor: $attrFlavor,
@@ -132,6 +134,7 @@ class DominoParseDriver implements ParseDriverContract
                 ]);
             }
         }
+
         return $tempCollection;
     }
 
@@ -147,6 +150,7 @@ class DominoParseDriver implements ParseDriverContract
         foreach ($data as $item) {
             $tempCollect->push(new ToppingDTO(id: $item['id'], name: html_entity_decode($item['name'])));
         }
+
         return $tempCollect;
     }
 

@@ -21,6 +21,7 @@ class ParseManager implements ParseManagerContract
     public function callParse(string $driverName, string $url): ParserProductDataDTO
     {
         $driver = app()->make($driverName);
+
         return $driver->parseProduct($url);
     }
 }
