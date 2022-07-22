@@ -75,7 +75,7 @@ class VdhPizzaParseDriver implements ParseDriverContract
     /**
      * Prepare parsed attribute data
      *
-     * @param array $array
+     * @param Collection $topping
      * @return AttributeDTO
      */
     public function parseAttribute(Collection $topping): AttributeDTO
