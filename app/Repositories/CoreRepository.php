@@ -18,7 +18,7 @@ abstract class CoreRepository
     /**
      * @var Model
      */
-    protected $model;
+    protected mixed $model;
 
     public function __construct()
     {
@@ -29,12 +29,12 @@ abstract class CoreRepository
      * @return mixed
      */
 
-    abstract protected function getModelClass();
+    abstract protected function getModelClass(): mixed;
 
     /**
-     * @return Model|mixed|Application
+     * @return mixed
      */
-    protected function startCondition()
+    protected function startCondition(): mixed
     {
         return clone $this->model;
     }

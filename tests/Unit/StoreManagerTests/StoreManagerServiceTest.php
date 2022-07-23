@@ -129,9 +129,8 @@ class StoreManagerServiceTest extends TestCase
      *
      * @param $productData
      * @param Product $testedModel
-     * @param string[] $ignore
      */
-    private function checkEqualsUpdatedDataUpdatedProduct($productData, Product $testedModel, array $ignore = ['created_at','updated_at'])
+    private function checkEqualsUpdatedDataUpdatedProduct($productData, Product $testedModel)
     {
         $productData = $productData->products[0];
         $this->assertEquals($testedModel['id'], $productData->id);

@@ -10,7 +10,6 @@ use App\Services\ConnectToParseService\ConnectToParseService;
 use App\Services\ParserManager\Contracts\ConfigValidatorContract;
 use App\Services\ParserManager\Exception\InvalidConfigDataException;
 use Illuminate\Validation\Factory as ValidationFactory;
-use Illuminate\Validation\Rule;
 use Throwable;
 
 class ConfigValidator extends BaseValidator implements ConfigValidatorContract
