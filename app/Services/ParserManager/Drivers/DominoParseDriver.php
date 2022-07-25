@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\Services\ParserManager\Drivers;
 
-use App\Services\ConnectToParseService\Contracts\ConnectToParseServiceContract;
+use App\Services\ConnectService\Contracts\ConnectServiceContract;
 use App\Services\ParserManager\Contracts\ParseDriverContract;
 use App\Services\ParserManager\Contracts\ParseValidatorContract;
 use App\Services\ParserManager\DTOs\AttributeDTO;
@@ -31,11 +31,11 @@ class DominoParseDriver implements ParseDriverContract
     /**
      * DominoParseService constructor.
      * @param ParseValidatorContract $parseValidatorContract
-     * @param ConnectToParseServiceContract $parseServiceContract
+     * @param ConnectServiceContract $parseServiceContract
      */
     public function __construct(
         protected ParseValidatorContract $parseValidatorContract,
-        protected ConnectToParseServiceContract $parseServiceContract,
+        protected ConnectServiceContract $parseServiceContract,
     ) {
     }
 

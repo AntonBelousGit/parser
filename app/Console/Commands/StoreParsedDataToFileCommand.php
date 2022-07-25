@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\Console\Commands;
 
-use App\Jobs\ParseStoreInFileJob;
+use App\Jobs\StoreParsedDataInFileJob;
 use Illuminate\Console\Command;
 
 class StoreParsedDataToFileCommand extends Command
@@ -32,7 +32,7 @@ class StoreParsedDataToFileCommand extends Command
     {
         $configs = config('parsers');
         foreach ($configs as $key => $config) {
-            dispatch(new ParseStoreInFileJob($key, $config));
+            dispatch(new StoreParsedDataInFileJob($key, $config));
         }
     }
 }

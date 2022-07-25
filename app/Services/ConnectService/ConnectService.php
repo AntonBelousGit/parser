@@ -2,13 +2,13 @@
 
 declare(strict_types=1);
 
-namespace App\Services\ConnectToParseService;
+namespace App\Services\ConnectService;
 
-use App\Services\ConnectToParseService\Contracts\ConnectToParseServiceContract;
+use App\Services\ConnectService\Contracts\ConnectServiceContract;
 use GuzzleHttp\Client;
 use GuzzleHttp\Exception\GuzzleException;
 
-class ConnectToParseService implements ConnectToParseServiceContract
+class ConnectService implements ConnectServiceContract
 {
     /**
      * Connect to parsed url use Guzzle

@@ -1,11 +1,10 @@
 <?php
 
+declare(strict_types=1);
 
 namespace App\Repositories;
 
-
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Foundation\Application;
 
 /**
  * Class CoreRepository
@@ -25,11 +24,7 @@ abstract class CoreRepository
         $this->model = app($this->getModelClass());
     }
 
-    /**
-     * @return mixed
-     */
-
-    abstract protected function getModelClass(): mixed;
+    abstract protected function getModelClass();
 
     /**
      * @return mixed

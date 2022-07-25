@@ -201,7 +201,7 @@ return [
          * Parse
          */
         App\Services\ParserManager\ParseServiceProvider::class,
-        App\Services\ConnectToParseService\ConnectToParseServiceProvider::class,
+        App\Services\ConnectService\ConnectServiceProvider::class,
         /*
          * Store
          */

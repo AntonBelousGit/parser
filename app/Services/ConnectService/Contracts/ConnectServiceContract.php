@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace App\Services\ConnectToParseService\Contracts;
+namespace App\Services\ConnectService\Contracts;
 
-interface ConnectToParseServiceContract
+interface ConnectServiceContract
 {
     /**
      * Connect to parsed target - connection url use Guzzle

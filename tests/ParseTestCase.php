@@ -2,8 +2,7 @@
 
 namespace Tests;
 
-use App\Jobs\ParseAndStoreProductJob;
-use App\Services\ConnectToParseService\ConnectToParseService;
+use App\Services\ConnectService\ConnectService;
 use App\Services\ParserManager\DTOs\ParserProductDataDTO;
 use App\Services\ParserManager\ParseManager;
 use DiDom\Document;
@@ -29,9 +28,9 @@ abstract class ParseTestCase extends BaseTestCase
     {
         $filePath = storage_path("app/public/file/{$parseName}.xml");
         $document = $type === 'DiDom' ? new Document($filePath, true) : File::get($filePath);
-        $mock = Mockery::mock(ConnectToParseService::class)->makePartial();
+        $mock = Mockery::mock(ConnectService::class)->makePartial();
         $mock->shouldReceive('connect')->andReturns($document);
-        app()->instance(ConnectToParseService::class, $mock);
+        app()->instance(ConnectService::class, $mock);
         $parsingManager = app(ParseManager::class);
 
         return $parsingManager->callParse($config['parser'], $config['url']);

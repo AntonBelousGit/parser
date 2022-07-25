@@ -6,7 +6,7 @@ namespace App\Services\ParserManager\Validator;
 
 use App\Services\BaseValidator;
 
-use App\Services\ConnectToParseService\ConnectToParseService;
+use App\Services\ConnectService\ConnectService;
 use App\Services\ParserManager\Contracts\ConfigValidatorContract;
 use App\Services\ParserManager\Exception\InvalidConfigDataException;
 use Illuminate\Validation\Factory as ValidationFactory;
@@ -14,11 +14,11 @@ use Throwable;
 
 class ConfigValidator extends BaseValidator implements ConfigValidatorContract
 {
-    protected ConnectToParseService $directory;
+    protected ConnectService $directory;
     public function __construct(ValidationFactory $validationFactory)
     {
         parent::__construct($validationFactory);
-        $this->directory = new ConnectToParseService();
+        $this->directory = new ConnectService();
     }
 
     /**
