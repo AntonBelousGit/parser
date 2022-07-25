@@ -15,6 +15,7 @@ use Throwable;
 class ConfigValidator extends BaseValidator implements ConfigValidatorContract
 {
     protected ConnectService $directory;
+
     public function __construct(ValidationFactory $validationFactory)
     {
         parent::__construct($validationFactory);
