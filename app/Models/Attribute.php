@@ -12,6 +12,7 @@ class Attribute extends Model
     use HasFactory,Historical;
 
     protected $guarded = [];
+
     protected $table = 'product_size_flavor';
 
     /**

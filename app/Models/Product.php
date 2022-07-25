@@ -13,8 +13,11 @@ class Product extends Model
     use HasFactory;
 
     public $incrementing = false;
+
     public $keyType = 'string';
+
     protected $fillable = ['id', 'name', 'image', 'image_mobile'];
+
     protected $casts =
         [
             'image' => 'array',
