@@ -7,12 +7,13 @@ namespace App\Services\StoreService\Validator;
 use App\Services\BaseValidator;
 use App\Services\StoreService\Contracts\AttributeValidatorContract;
 use App\Services\StoreService\Exception\InvalidStoreServiceDataException;
+use Doctrine\Common\Annotations\Annotation\Attribute;
 use Throwable;
 
 class AttributeValidator extends BaseValidator implements AttributeValidatorContract
 {
     /**
-     * Validate port data.
+     * Validate attribute data.
      *
      * @param array $data
      * @param array $rules
@@ -29,7 +30,7 @@ class AttributeValidator extends BaseValidator implements AttributeValidatorCont
     }
 
     /**
-     * Port data validation rules.
+     * Attribute data validation rules.
      *
      * @return string[][]
      */
@@ -42,7 +43,7 @@ class AttributeValidator extends BaseValidator implements AttributeValidatorCont
     }
 
     /**
-     * Size data validation exception.
+     * Attribute data validation exception.
      *
      */
     protected function getValidationException(): InvalidStoreServiceDataException

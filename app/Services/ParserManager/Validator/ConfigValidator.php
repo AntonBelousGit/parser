@@ -23,7 +23,7 @@ class ConfigValidator extends BaseValidator implements ConfigValidatorContract
     }
 
     /**
-     * Validate port data.
+     * Validate config data.
      *
      * @param array $data
      * @param array $rules
@@ -58,7 +58,7 @@ class ConfigValidator extends BaseValidator implements ConfigValidatorContract
     }
 
     /**
-     * Size data validation exception.
+     * Config data validation exception.
      *
      */
     protected function getValidationException(): InvalidConfigDataException

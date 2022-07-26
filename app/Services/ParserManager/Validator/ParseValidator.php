@@ -12,7 +12,7 @@ use Throwable;
 class ParseValidator extends BaseValidator implements ParseValidatorContract
 {
     /**
-     * Validate port data.
+     * Validate parse data.
      *
      * @param array $data
      * @param array $rules
