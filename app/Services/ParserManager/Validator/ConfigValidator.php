@@ -40,7 +40,7 @@ class ConfigValidator extends BaseValidator implements ConfigValidatorContract
     }
 
     /**
-     * Port data validation rules.
+     * Config data validation rules.
      *
      * @return array
      */
