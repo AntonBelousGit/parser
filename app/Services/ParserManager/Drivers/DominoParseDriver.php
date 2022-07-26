@@ -4,8 +4,6 @@ declare(strict_types=1);
 
 namespace App\Services\ParserManager\Drivers;
 
-use App\Services\ConnectService\Contracts\ConnectServiceContract;
-use App\Services\ParserManager\Contracts\ParseDriverContract;
 use App\Services\ParserManager\Contracts\ParseValidatorContract;
 use App\Services\ParserManager\DTOs\AttributeDTO;
 use App\Services\ParserManager\DTOs\FlavorDTO;
@@ -19,23 +17,14 @@ use DiDom\Exceptions\InvalidSelectorException;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Collection;
 
-class DominoParseDriver implements ParseDriverContract
+class DominoParseDriver extends BaseDriver
 {
-    /**
-     * All products
-     *
-     * @var array
-     */
-    protected array $products = [];
-
     /**
      * DominoParseService constructor.
      * @param ParseValidatorContract $parseValidatorContract
-     * @param ConnectServiceContract $parseServiceContract
      */
     public function __construct(
         protected ParseValidatorContract $parseValidatorContract,
-        protected ConnectServiceContract $parseServiceContract,
     ) {
     }
 
@@ -48,46 +37,59 @@ class DominoParseDriver implements ParseDriverContract
      */
     public function parseProduct(string $url): ParserProductDataDTO
     {
-        $html = new Document($this->parseServiceContract->connect($url));
-        $stringRawHtml = $html->find('script');
+        $xml = new Document($this->getHtml($url));
+        $parsedData = $this->prepareParsedProducts($xml);
+        $products = collect();
+        $collectSize = collect();
+        $collectTopping = collect();
+        $collectFlavor = collect();
+        foreach ($parsedData as $item) {
+            $item = $this->parseValidatorContract->validate($item, $this->validationRules());
+            $attributes = $this->parseSize($item['sizes']);
+            $topping = $this->parseTopping($item['toppings']);
+            $collectSize->push(new ProductDTO(
+                id: $item['id'],
+                name: html_entity_decode($item['name']),
+                images: $item['image'],
+                imagesMobile: $item['image_mobile'],
+                toppings: $topping,
+                sizes: $attributes['size'],
+                flavors: $attributes['flavor'],
+                attributes: new ProductSizeDTO(
+                    attributes: $attributes['attribute'],
+                )
+            ));
+            $collectSize->push($attributes['size']);
+            $collectTopping->push($topping);
+            $collectFlavor->push($attributes['flavor']);
+        }
+        $parseAttribute = $this->parseAttribute($collectSize, $collectTopping, $collectFlavor);
+
+        return new ParserProductDataDTO(
+            products: $products,
+            attributes: $parseAttribute,
+        );
+    }
+
+    /**
+     * Prepare products before parse
+     *
+     * @param Document $xml
+     * @return array
+     * @throws InvalidSelectorException
+     */
+    protected function prepareParsedProducts(Document $xml): array
+    {
+        $stringRawHtml = $xml->find('script');
         $stringHtml = $stringRawHtml[8]->text();
         $array = explode("'", ($stringHtml));
         $str = preg_replace_callback('/\\\\u([0-9a-fA-F]{4})/', function ($match) {
             return mb_convert_encoding(pack('H*', $match[1]), 'UTF-8', 'UCS-2BE');
         }, $array[1]);
         $new = json_decode($str, true, 100);
-        $productArray = Arr::pluck($new['data']['groups'], 'products');
-        $products = call_user_func_array('array_merge', $productArray);
+        $parsedData = Arr::pluck($new['data']['groups'], 'products');
 
-        $collectSize = collect();
-        $collectTopping = collect();
-        $collectFlavor = collect();
-        foreach ($products as $item) {
-            $item = $this->parseValidatorContract->validate($item, $this->validationRules());
-            $attribute = $this->parseSize($item['sizes']);
-            $topping = $this->parseTopping($item['toppings']);
-            $this->products[] = new ProductDTO(
-                id: $item['id'],
-                name: html_entity_decode($item['name']),
-                image: $item['image'],
-                imageMobile: $item['image_mobile'],
-                topping: $topping,
-                sizes: $attribute['size'],
-                flavors: $attribute['flavor'],
-                attribute: new ProductSizeDTO(
-                    attribute: $attribute['attribute'],
-                )
-            );
-            $collectSize->push($attribute['size']);
-            $collectTopping->push($topping);
-            $collectFlavor->push($attribute['flavor']);
-        }
-        $parseAttribute = $this->parseAttribute($collectSize, $collectTopping, $collectFlavor);
-
-        return new ParserProductDataDTO(
-            products: $this->products,
-            attributes: $parseAttribute,
-        );
+        return call_user_func_array('array_merge', $parsedData);
     }
 
     /**
@@ -100,17 +102,14 @@ class DominoParseDriver implements ParseDriverContract
      */
     protected function parseAttribute(Collection $size, Collection $topping, Collection $flavor): AttributeDTO
     {
-        $attrSize = collect();
-        $attrTopping = collect();
-        $attrFlavor = collect();
-        $attrSize->push(collectionUniqueKey($size->flatten(1), 'id'));
-        $attrTopping->push(collectionUniqueKey($topping->flatten(1), 'id'));
-        $attrFlavor->push(collectionUniqueKey($flavor->flatten(1), 'id'));
+        $attrSize = $this->removeDuplicates($size->flatten(1), 'id');
+        $attrTopping = $this->removeDuplicates($topping->flatten(1), 'id');
+        $attrFlavor = $this->removeDuplicates($flavor->flatten(1), 'id');
 
         return new AttributeDTO(
-            size: $attrSize,
-            flavor: $attrFlavor,
-            topping: $attrTopping
+            sizes: $attrSize,
+            flavors: $attrFlavor,
+            toppings: $attrTopping
         );
     }
 

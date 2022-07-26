@@ -22,8 +22,8 @@ class ParseOrigamiTest extends ParseTestCase
         $response = $this->parse($config, 'origami', 'DiDom');
         $this->assertNotEmpty($response);
         $this->assertNotEmpty($response->products[0]);
-        $this->assertNotNull($response->attributes->size[0]);
-        $this->assertNotNull($response->attributes->topping[0]);
+        $this->assertNotNull($response->attributes->sizes[0]);
+        $this->assertNotNull($response->attributes->toppings[0]);
     }
 
     public function testOrigamiValidationProblemParse()

@@ -22,9 +22,9 @@ class ParseDominoTest extends ParseTestCase
         $response = $this->parse($config, 'dominoParse', 'DiDom');
         $this->assertNotEmpty($response);
         $this->assertNotEmpty($response->products[0]);
-        $this->assertNotNull($response->attributes->size[0]);
-        $this->assertNotNull($response->attributes->topping[0]);
-        $this->assertNotNull($response->attributes->flavor[0]);
+        $this->assertNotNull($response->attributes->sizes[0]);
+        $this->assertNotNull($response->attributes->toppings[0]);
+        $this->assertNotNull($response->attributes->flavors[0]);
     }
 
     public function testParserDominoValidationProblemParse()

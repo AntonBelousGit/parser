@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace App\Services\ConnectService\Contracts;
+namespace App\Services\ConnectionService\Contracts;
 
-interface ConnectServiceContract
+interface ConnectionServiceContract
 {
     /**
      * Connect to parsed target - connection url use Guzzle
@@ -12,5 +12,5 @@ interface ConnectServiceContract
      * @param string $url
      * @return mixed
      */
-    public function connect(string $url): mixed;
+    public function getHtml(string $url): mixed;
 }

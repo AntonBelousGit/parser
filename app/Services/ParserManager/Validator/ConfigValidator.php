@@ -6,7 +6,7 @@ namespace App\Services\ParserManager\Validator;
 
 use App\Services\BaseValidator;
 
-use App\Services\ConnectService\ConnectService;
+use App\Services\ConnectionService\ConnectionService;
 use App\Services\ParserManager\Contracts\ConfigValidatorContract;
 use App\Services\ParserManager\Exception\InvalidConfigDataException;
 use Illuminate\Validation\Factory as ValidationFactory;
@@ -14,12 +14,12 @@ use Throwable;
 
 class ConfigValidator extends BaseValidator implements ConfigValidatorContract
 {
-    protected ConnectService $directory;
+    protected ConnectionService $directory;
 
     public function __construct(ValidationFactory $validationFactory)
     {
         parent::__construct($validationFactory);
-        $this->directory = new ConnectService();
+        $this->directory = new ConnectionService();
     }
 
     /**
@@ -47,7 +47,7 @@ class ConfigValidator extends BaseValidator implements ConfigValidatorContract
     protected function getValidationRules(): array
     {
         return [
-            'parser' => ['required', 'string',
+            'driver' => ['required', 'string',
                 function ($attribute, $value, $fail) {
                     if (!class_exists($value)) {
                         $fail('The ' . $attribute . ' is invalid.');

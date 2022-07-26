@@ -18,7 +18,7 @@ class ParseManager implements ParseManagerContract
      * @return ParserProductDataDTO
      * @throws BindingResolutionException
      */
-    public function callParse(string $driverName, string $url): ParserProductDataDTO
+    public function parse(string $driverName, string $url): ParserProductDataDTO
     {
         $driver = app()->make($driverName);
 

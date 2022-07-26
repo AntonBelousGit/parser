@@ -13,22 +13,22 @@ class ProductDTO
      *
      * @param string $id
      * @param string $name
-     * @param array $image
-     * @param array $imageMobile
-     * @param Collection $topping
+     * @param array $images
+     * @param array $imagesMobile
+     * @param Collection $toppings
      * @param Collection $sizes
      * @param Collection $flavors
-     * @param AttributeDTO $attribute
+     * @param AttributeDTO $attributes
      */
     public function __construct(
         public string $id,
         public string $name,
-        public array $image,
-        public array $imageMobile,
-        public Collection $topping,
+        public array $images,
+        public array $imagesMobile,
+        public Collection $toppings,
         public Collection $sizes,
         public Collection $flavors,
-        public AttributeDTO $attribute
+        public AttributeDTO $attributes
     ) {
     }
 }

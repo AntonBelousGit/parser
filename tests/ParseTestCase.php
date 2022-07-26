@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Tests;
 
-use App\Services\ConnectService\ConnectService;
+use App\Services\ConnectionService\ConnectionService;
 use App\Services\ParserManager\DTOs\ParserProductDataDTO;
 use App\Services\ParserManager\ParseManager;
 use DiDom\Document;
@@ -30,11 +30,11 @@ abstract class ParseTestCase extends BaseTestCase
     {
         $filePath = storage_path("app/public/file/{$parseName}.xml");
         $document = $type === 'DiDom' ? new Document($filePath, true) : File::get($filePath);
-        $mock = Mockery::mock(ConnectService::class)->makePartial();
+        $mock = Mockery::mock(ConnectionService::class)->makePartial();
         $mock->shouldReceive('connect')->andReturns($document);
-        app()->instance(ConnectService::class, $mock);
+        app()->instance(ConnectionService::class, $mock);
         $parsingManager = app(ParseManager::class);
 
-        return $parsingManager->callParse($config['parser'], $config['url']);
+        return $parsingManager->parse($config['driver'], $config['url']);
     }
 }

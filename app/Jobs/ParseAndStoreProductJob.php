@@ -41,7 +41,7 @@ class ParseAndStoreProductJob implements ShouldQueue
         ConfigValidatorContract $configValidatorContract
     ) {
         $configValid = $configValidatorContract->validate($this->config);
-        $data = $parseManagerContract->callParse($configValid['parser'], $configValid['url']);
+        $data = $parseManagerContract->parse($configValid['driver'], $configValid['url']);
         $storeServiceContract->store($data);
     }
 }

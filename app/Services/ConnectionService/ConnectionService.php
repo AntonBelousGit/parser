@@ -2,13 +2,13 @@
 
 declare(strict_types=1);
 
-namespace App\Services\ConnectService;
+namespace App\Services\ConnectionService;
 
-use App\Services\ConnectService\Contracts\ConnectServiceContract;
+use App\Services\ConnectionService\Contracts\ConnectionServiceContract;
 use GuzzleHttp\Client;
 use GuzzleHttp\Exception\GuzzleException;
 
-class ConnectService implements ConnectServiceContract
+class ConnectionService implements ConnectionServiceContract
 {
     /**
      * Connect to parsed url use Guzzle
@@ -18,7 +18,7 @@ class ConnectService implements ConnectServiceContract
      * @return string
      * @throws GuzzleException
      */
-    public function connect(string $url): string
+    public function getHtml(string $url): string
     {
         $client = new Client();
         $body = $client->get($url)->getBody();

@@ -14,5 +14,5 @@ interface ParseManagerContract
      * @param string $url
      * @return ParserProductDataDTO
      */
-    public function callParse(string $driverName, string $url): ParserProductDataDTO;
+    public function parse(string $driverName, string $url): ParserProductDataDTO;
 }

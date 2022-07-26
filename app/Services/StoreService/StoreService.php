@@ -24,9 +24,9 @@ class StoreService implements StoreServiceContract
      * Attribute model
      */
     const ATTRIBUTEMODEL = [
-        'size' => Size::class,
-        'flavor' => Flavor::class,
-        'topping' => Topping::class
+        'sizes' => Size::class,
+        'flavors' => Flavor::class,
+        'toppings' => Topping::class
     ];
 
     /**
@@ -58,10 +58,10 @@ class StoreService implements StoreServiceContract
     /**
      * Update or Create Product method
      *
-     * @param array $array
+     * @param Collection $array $array
      * @return void
      */
-    protected function updateOrCreateProduct(array $array): void
+    protected function updateOrCreateProduct(Collection $array): void
     {
         foreach ($array as $item) {
             $updateProduct = $this->productRepositories->getProductByID($item->id);
@@ -81,9 +81,11 @@ class StoreService implements StoreServiceContract
      */
     protected function createProduct(ParsedProduct $item): void
     {
-        $product = Product::create(['id' => $item->id, 'name' => $item->name, 'image' => $item->image, 'image_mobile' => $item->imageMobile]);
-        $product->topping()->attach(Arr::pluck($item->topping, 'id'));
-        $product->attributeProduct()->createMany($item->attribute->attribute);
+        $product = Product::create(['id' => $item->id, 'name' => $item->name, 'image' => $item->images, 'image_mobile' => $item->imagesMobile]);
+        $product->topping()->attach(Arr::pluck($item->toppings, 'id'));
+        if (!empty($item->attributes->attributes)) {
+            $product->attributeProduct()->createMany($item->attributes->attributes);
+        }
     }
 
     /**
@@ -95,19 +97,21 @@ class StoreService implements StoreServiceContract
      */
     protected function updateProduct(Product $product, ParsedProduct $data): void
     {
-        $product->update(['id' => $data->id, 'name' => $data->name, 'image' => $data->image, 'image_mobile' => $data->imageMobile]);
-        $product->topping()->sync(Arr::pluck($data->topping, 'id'));
-        foreach ($data->attribute->attribute as $item) {
-            $data = [
-                'product_id' => $product->id,
-                'size_id' => $item['size_id'],
-                'flavor_id' => $item['flavor_id']
-            ];
-            $attribute = Attribute::where($data)->first();
-            if ($attribute) {
-                $attribute->update(['price' => $item['price']]);
-            } else {
-                $product->attributeProduct()->create($item);
+        $product->update(['id' => $data->id, 'name' => $data->name, 'image' => $data->images, 'image_mobile' => $data->imagesMobile]);
+        $product->topping()->sync(Arr::pluck($data->toppings, 'id'));
+        if (!empty($data->attributes->attributes)) {
+            foreach ($data->attributes->attributes as $item) {
+                $data = [
+                    'product_id' => $product->id,
+                    'size_id' => $item['size_id'],
+                    'flavor_id' => $item['flavor_id']
+                ];
+                $attribute = Attribute::where($data)->first();
+                if ($attribute) {
+                    $attribute->update(['price' => $item['price']]);
+                } else {
+                    $product->attributeProduct()->create($item);
+                }
             }
         }
     }

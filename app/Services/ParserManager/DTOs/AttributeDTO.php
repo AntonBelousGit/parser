@@ -11,14 +11,14 @@ class AttributeDTO
     /**
      * Attribute constructor.
      *
-     * @param Collection $size
-     * @param Collection $flavor
-     * @param Collection $topping
+     * @param Collection $sizes
+     * @param Collection $flavors
+     * @param Collection $toppings
      */
     public function __construct(
-        public Collection $size,
-        public Collection $flavor,
-        public Collection $topping
+        public Collection $sizes,
+        public Collection $flavors,
+        public Collection $toppings
     ) {
     }
 }

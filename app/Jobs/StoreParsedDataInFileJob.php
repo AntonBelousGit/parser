@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\Jobs;
 
-use App\Services\ConnectService\Contracts\ConnectServiceContract;
+use App\Services\ConnectionService\Contracts\ConnectionServiceContract;
 use App\Services\ParserManager\Contracts\ConfigValidatorContract;
 use File;
 use Illuminate\Bus\Queueable;
@@ -25,14 +25,14 @@ class StoreParsedDataInFileJob implements ShouldQueue
      * Parser site and store in file
      *
      * @param ConfigValidatorContract $configValidatorContract
-     * @param ConnectServiceContract $parseServiceContract
+     * @param ConnectionServiceContract $parseServiceContract
      */
     public function handle(
         ConfigValidatorContract $configValidatorContract,
-        ConnectServiceContract $parseServiceContract
+        ConnectionServiceContract $parseServiceContract
     ) {
         $configValid = $configValidatorContract->validate($this->config);
-        $html = $parseServiceContract->connect($configValid['url']);
+        $html = $parseServiceContract->getHtml($configValid['url']);
         File::put(storage_path("/app/public/file/{$this->name}.xml"), $html);
     }
 }

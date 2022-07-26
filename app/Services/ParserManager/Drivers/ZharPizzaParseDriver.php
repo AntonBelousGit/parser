@@ -4,8 +4,6 @@ declare(strict_types=1);
 
 namespace App\Services\ParserManager\Drivers;
 
-use App\Services\ConnectService\Contracts\ConnectServiceContract;
-use App\Services\ParserManager\Contracts\ParseDriverContract;
 use App\Services\ParserManager\Contracts\ParseValidatorContract;
 use App\Services\ParserManager\DTOs\AttributeDTO;
 use App\Services\ParserManager\DTOs\ParserProductDataDTO;
@@ -16,24 +14,15 @@ use App\Services\ParserManager\DTOs\ToppingDTO;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Str;
 
-class ZharPizzaParseDriver implements ParseDriverContract
+class ZharPizzaParseDriver extends BaseDriver
 {
-    /**
-     * All products
-     *
-     * @var array
-     */
-    protected array $products = [];
-
     /**
      * ZharPizzaParseService constructor.
      *
      * @param ParseValidatorContract $parseValidatorContract
-     * @param ConnectServiceContract $parseServiceContract
      */
     public function __construct(
         protected ParseValidatorContract $parseValidatorContract,
-        protected ConnectServiceContract $parseServiceContract
     ) {
     }
 
@@ -45,33 +34,34 @@ class ZharPizzaParseDriver implements ParseDriverContract
      */
     public function parseProduct(string $url): ParserProductDataDTO
     {
-        $productsParse = json_decode($this->parseServiceContract->connect($url));
+        $productsParse = json_decode($this->getHtml($url));
         $collectSize = collect();
         $collectTopping = collect();
+        $products = collect();
         foreach ($productsParse->products as $item) {
             $item = $this->parseValidatorContract->validate(collect($item)->toArray(), $this->validationRules());
             $image = (json_decode($item['gallery']));
-            $topping = $this->parseJsonTopping($item['descr']);
-            $attribute = $this->parseJsonSize($item['json_options']);
-            $this->products[] = new ProductDTO(
+            $toppings = $this->parseJsonTopping($item['descr']);
+            $attributes = $this->parseJsonSize($item['json_options']);
+            $products->push(new ProductDTO(
                 id: $item['uid'],
                 name: $item['title'],
-                image: $image,
-                imageMobile: $image,
-                topping: $topping,
-                sizes: $attribute,
+                images: $image,
+                imagesMobile: $image,
+                toppings: $toppings,
+                sizes: $attributes,
                 flavors: collect(),
-                attribute: new ProductSizeDTO(
-                    attribute: collect([['size_id' => $attribute[0]->id ?? '35-sm', 'flavor_id' => '', 'price' => (float)$item['price']]]),
+                attributes: new ProductSizeDTO(
+                    attributes: collect([['size_id' => $attributes[0]->id ?? '35-sm', 'flavor_id' => '', 'price' => (float)$item['price']]]),
                 )
-            );
-            $collectSize->push($attribute);
-            $collectTopping->push($topping);
+            ));
+            $collectSize->push($attributes);
+            $collectTopping->push($toppings);
         }
         $parseAttribute = $this->parseAttribute($collectSize, $collectTopping);
 
         return new ParserProductDataDTO(
-            products: $this->products,
+            products: $products,
             attributes: $parseAttribute,
         );
     }
@@ -85,15 +75,13 @@ class ZharPizzaParseDriver implements ParseDriverContract
      */
     public function parseAttribute(Collection $size, Collection $topping): AttributeDTO
     {
-        $attrSize = collect();
-        $attrTopping = collect();
-        $attrSize->push(collectionUniqueKey($size->flatten(1), 'id'));
-        $attrTopping->push(collectionUniqueKey($topping->flatten(1), 'id'));
+        $attrSize = $this->removeDuplicates($size->flatten(1), 'id');
+        $attrTopping = $this->removeDuplicates($topping->flatten(1), 'id');
 
         return new AttributeDTO(
-            size: $attrSize,
-            flavor: collect(),
-            topping: $attrTopping
+            sizes: $attrSize,
+            flavors: collect(),
+            toppings: $attrTopping
         );
     }
 

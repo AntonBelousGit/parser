@@ -34,28 +34,28 @@ abstract class TestCase extends BaseTestCase
     {
         return
             new ParserProductDataDTO(
-                products: [
+                products: collect(
                     new ProductDTO(
                         id: $id,
                         name: "Пiца 'PARSE'",
-                        image: [
+                        images: [
                         "https://media.dominos.ua/__sized__/menu/product_osg_image/2021/07/27/PizzaMNHTTNingFULL-min-thumbnail-2300x2300-70.jpg",
                         ],
-                        imageMobile: [
+                        imagesMobile: [
                         "https://media.dominos.ua/__sized__/menu/product_osg_image_mobile/2021/07/27/Manhatten_slice_collageweb-min-thumbnail-2300x2300-70.jpg",
                         ],
-                        topping: collect([new ToppingDTO(id: $topping->id, name: "Соус HELL")]),
+                        toppings: collect([new ToppingDTO(id: $topping->id, name: "Соус HELL")]),
                         sizes: collect([new SizeDTO(id: $size->id, name: "BIG BOY")]),
                         flavors: collect([new FlavorDTO(id: $flavor->id, name: "Holly")]),
-                        attribute: new ProductSizeDTO(
-                            attribute: collect([['size_id' => $size->id, 'flavor_id' => $flavor->id, 'price' => $price]]),
+                        attributes: new ProductSizeDTO(
+                            attributes: collect([['size_id' => $size->id, 'flavor_id' => $flavor->id, 'price' => $price]]),
                         ),
                     )
-                ],
+                ),
                 attributes: new AttributeDTO(
-                    size: collect([new SizeDTO(id: $size->id, name: 'BIG BOY')]),
-                    flavor: collect([new FlavorDTO(id: $flavor->id, name: 'Holly')]),
-                    topping: collect([new ToppingDTO(id: $topping->id, name: 'Соус HELL')]),
+                    sizes: collect([new SizeDTO(id: $size->id, name: 'BIG BOY')]),
+                    flavors: collect([new FlavorDTO(id: $flavor->id, name: 'Holly')]),
+                    toppings: collect([new ToppingDTO(id: $topping->id, name: 'Соус HELL')]),
                 ),
             )
         ;

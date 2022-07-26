@@ -4,8 +4,6 @@ declare(strict_types=1);
 
 namespace App\Services\ParserManager\Drivers;
 
-use App\Services\ConnectService\Contracts\ConnectServiceContract;
-use App\Services\ParserManager\Contracts\ParseDriverContract;
 use App\Services\ParserManager\Contracts\ParseValidatorContract;
 use App\Services\ParserManager\DTOs\AttributeDTO;
 use App\Services\ParserManager\DTOs\ParserProductDataDTO;
@@ -18,24 +16,15 @@ use DiDom\Exceptions\InvalidSelectorException;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Str;
 
-class OrigamiPizzaParseDriver implements ParseDriverContract
+class OrigamiPizzaParseDriver extends BaseDriver
 {
-    /**
-     * All products
-     *
-     * @var array
-     */
-    protected array $products = [];
-
     /**
      * OrigamiPizzaParseDriver constructor.
      *
      * @param ParseValidatorContract $parseValidatorContract
-     * @param ConnectServiceContract $parseServiceContract
      */
     public function __construct(
         protected ParseValidatorContract $parseValidatorContract,
-        protected ConnectServiceContract $parseServiceContract,
     ) {
     }
 
@@ -48,46 +37,58 @@ class OrigamiPizzaParseDriver implements ParseDriverContract
      */
     public function parseProduct(string $url): ParserProductDataDTO
     {
-        $productsParse = new Document($this->parseServiceContract->connect($url));
-        $products = $productsParse->find('.productblock');
+        $productsParse = new Document($this->getHtml($url));
+        $parsedData = $productsParse->find('.productblock');
         $collectTopping = collect();
-        foreach ($products as $item) {
-            $name = $item->find('.product-info > h3')[0]->text();
-            $id = Str::slug($name);
-            $topping = $item->find('.product-info > .product-text > p')[0]->text();
-            $price = $item->find('.product-info > p')[0]->text();
-            $image = "https://origami.od.ua/" . $item->find('.productitem > img')[0]->attr('src');
-            $data = [
-                'id' => $id,
-                'name' => $name,
-                'image' => $image,
-                'image_mobile' => $image,
-                'topping' => $topping,
-                'price' => $price
-            ];
-
-            $item = $this->parseValidatorContract->validate($data, $this->validationRules());
-            $topping = $this->parseTopping($item['topping']);
-            $this->products[] = new ProductDTO(
-                id: $item['id'],
-                name: $item['name'],
-                image: [$item['image']],
-                imageMobile: [$item['image']],
-                topping: $topping,
+        $products = collect();
+        foreach ($parsedData as $product) {
+            $data = $this->prepareParsedProducts($product);
+            $product = $this->parseValidatorContract->validate($data, $this->validationRules());
+            $topping = $this->parseTopping($product['topping']);
+            $products->push(new ProductDTO(
+                id: $product['id'],
+                name: $product['name'],
+                images: [$product['image']],
+                imagesMobile: [$product['image']],
+                toppings: $topping,
                 sizes: collect(),
                 flavors: collect(),
-                attribute: new ProductSizeDTO(
-                    attribute: collect([['size_id' => 'standard', 'flavor_id' => '', 'price' => (float)str_replace('грн', '', $item['price'])]]),
+                attributes: new ProductSizeDTO(
+                    attributes: collect([['size_id' => 'standard', 'flavor_id' => '', 'price' => (float)str_replace('грн', '', $product['price'])]]),
                 )
-            );
+            ));
             $collectTopping->push($topping);
         }
         $parseAttribute = $this->parseAttribute($collectTopping);
 
         return new ParserProductDataDTO(
-            products: $this->products,
+            products: $products,
             attributes: $parseAttribute,
         );
+    }
+
+    /**
+     * Prepare product before parse
+     *
+     * @param $product
+     * @return array
+     */
+    protected function prepareParsedProducts($product): array
+    {
+        $name = $product->find('.product-info > h3')[0]->text();
+        $id = Str::slug($name);
+        $topping = $product->find('.product-info > .product-text > p')[0]->text();
+        $price = $product->find('.product-info > p')[0]->text();
+        $image = "https://origami.od.ua/" . $product->find('.productitem > img')[0]->attr('src');
+
+        return [
+            'id' => $id,
+            'name' => $name,
+            'image' => $image,
+            'image_mobile' => $image,
+            'topping' => $topping,
+            'price' => $price
+        ];
     }
 
     /**
@@ -98,13 +99,12 @@ class OrigamiPizzaParseDriver implements ParseDriverContract
      */
     protected function parseAttribute(Collection $topping): AttributeDTO
     {
-        $attrTopping = collect();
-        $attrTopping->push(collectionUniqueKey($topping->flatten(1), 'id'));
+        $attrTopping = $this->removeDuplicates($topping->flatten(1), 'id');
 
         return new AttributeDTO(
-            size: collect([new SizeDTO(id: 'standard', name: 'Standard')]),
-            flavor: collect(),
-            topping: $attrTopping
+            sizes: collect([new SizeDTO(id: 'standard', name: 'Standard')]),
+            flavors: collect(),
+            toppings: $attrTopping
         );
     }
 

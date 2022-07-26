@@ -22,8 +22,8 @@ class ParseVdhBarTest extends ParseTestCase
         $response = $this->parse($config, 'vdhBar');
         $this->assertNotEmpty($response);
         $this->assertNotEmpty($response->products[0]);
-        $this->assertNotNull($response->attributes->size[0]);
-        $this->assertNotNull($response->attributes->topping[0]);
+        $this->assertNotNull($response->attributes->sizes[0]);
+        $this->assertNotNull($response->attributes->toppings[0]);
     }
 
     public function testVdhBarWrongTypeParse()

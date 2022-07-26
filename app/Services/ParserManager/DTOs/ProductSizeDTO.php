@@ -11,10 +11,10 @@ class ProductSizeDTO extends AttributeDTO
     /**
      * ProductSize constructor.
      *
-     * @param Collection $attribute
+     * @param Collection $attributes
      */
     public function __construct(
-        public Collection $attribute,
+        public Collection $attributes,
     ) {
     }
 }
