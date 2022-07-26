@@ -16,6 +16,7 @@ use DiDom\Document;
 use DiDom\Exceptions\InvalidSelectorException;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Collection;
+use Illuminate\Support\Str;
 
 class DominoParseDriver extends BaseDriver
 {
@@ -143,7 +144,8 @@ class DominoParseDriver extends BaseDriver
     {
         $tempCollect = collect();
         foreach ($data as $item) {
-            $tempCollect->push(new ToppingDTO(id: $item['id'], name: html_entity_decode($item['name'])));
+            $name = html_entity_decode($item['name']);
+            $tempCollect->push(new ToppingDTO(id: Str::slug($name), name: $name));
         }
 
         return $tempCollect;
