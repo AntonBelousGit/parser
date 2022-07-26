@@ -10,6 +10,7 @@ use App\Models\History;
 use App\Models\Product;
 use App\Models\Size;
 use App\Models\Topping;
+use App\Services\ParserManager\DTOs\ParserProductDataDTO;
 use App\Services\StoreService\Exception\InvalidStoreServiceDataException;
 use App\Services\StoreService\StoreService;
 use Illuminate\Foundation\Testing\RefreshDatabase;
@@ -128,22 +129,21 @@ class StoreManagerServiceTest extends TestCase
     /**
      * Check equals update data dnd updated Product
      *
-     * @param $productData
+     * @param ParserProductDataDTO $productData
      * @param Product $testedModel
      */
-    private function checkEqualsUpdatedDataUpdatedProduct($productData, Product $testedModel)
+    private function checkEqualsUpdatedDataUpdatedProduct(ParserProductDataDTO $productData, Product $testedModel)
     {
         $productData = $productData->products[0];
         $this->assertEquals($testedModel['id'], $productData->id);
         $this->assertEquals($testedModel['name'], $productData->name);
-        $this->assertEquals($testedModel['image'], $productData->image);
-        $this->assertEquals($testedModel['image'], $productData->image);
-        $this->assertEquals($testedModel['image_mobile'], $productData->imageMobile);
-        $this->assertEquals($testedModel['topping'][0]['id'], $productData->topping[0]->id);
-        $this->assertEquals($testedModel['topping'][0]['name'], $productData->topping[0]->name);
-        $this->assertEquals($testedModel['attributeProduct'][0]['size_id'], $productData->attribute->attribute[0]['size_id']);
-        $this->assertEquals($testedModel['attributeProduct'][0]['flavor_id'], $productData->attribute->attribute[0]['flavor_id']);
-        $this->assertEquals($testedModel['attributeProduct'][0]['price'], $productData->attribute->attribute[0]['price']);
+        $this->assertEquals($testedModel['image'], $productData->images);
+        $this->assertEquals($testedModel['image_mobile'], $productData->imagesMobile);
+        $this->assertEquals($testedModel['topping'][0]['id'], $productData->toppings[0]->id);
+        $this->assertEquals($testedModel['topping'][0]['name'], $productData->toppings[0]->name);
+        $this->assertEquals($testedModel['attributeProduct'][0]['size_id'], $productData->attributes->attributes[0]['size_id']);
+        $this->assertEquals($testedModel['attributeProduct'][0]['flavor_id'], $productData->attributes->attributes[0]['flavor_id']);
+        $this->assertEquals($testedModel['attributeProduct'][0]['price'], $productData->attributes->attributes[0]['price']);
     }
 
     /**

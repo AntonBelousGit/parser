@@ -12,6 +12,7 @@ use App\Services\ParserManager\DTOs\ProductSizeDTO;
 use App\Services\ParserManager\DTOs\SizeDTO;
 use App\Services\ParserManager\DTOs\ToppingDTO;
 use DiDom\Document;
+use DiDom\Element;
 use DiDom\Exceptions\InvalidSelectorException;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Str;
@@ -70,10 +71,11 @@ class OrigamiPizzaParseDriver extends BaseDriver
     /**
      * Prepare product before parse
      *
-     * @param $product
+     * @param Element $product
      * @return array
+     * @throws InvalidSelectorException
      */
-    protected function prepareParsedProducts($product): array
+    protected function prepareParsedProducts(Element $product): array
     {
         $name = $product->find('.product-info > h3')[0]->text();
         $id = Str::slug($name);
@@ -109,16 +111,16 @@ class OrigamiPizzaParseDriver extends BaseDriver
     /**
      * Parse attribute topping
      *
-     * @param $data
+     * @param string $data
      * @return Collection
      */
-    protected function parseTopping($data): Collection
+    protected function parseTopping(string $data): Collection
     {
         $tempCollect = collect();
         $array = array_map('trim', explode(',', $data));
         foreach ($array as $item) {
             $cleanValueHtml = trim(strip_tags($item));
-            $tempCollect->push(new ToppingDTO(id: Str::slug($cleanValueHtml), name: $cleanValueHtml));
+            $tempCollect->push(new ToppingDTO(id: Str::slug($cleanValueHtml), name: Str::ucfirst($cleanValueHtml)));
         }
 
         return $tempCollect;

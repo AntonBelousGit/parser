@@ -81,16 +81,16 @@ class VdhPizzaParseDriver extends BaseDriver
     /**
      * Parse attribute topping from json
      *
-     * @param $data
+     * @param string $data
      * @return Collection
      */
-    protected function parseJsonTopping($data): Collection
+    protected function parseJsonTopping(string $data): Collection
     {
         $tempCollect = collect();
         $array = array_map('trim', explode(',', $data));
         foreach ($array as $item) {
             $cleanValueHtml = trim(strip_tags($item));
-            $tempCollect->push(new ToppingDTO(id:Str::slug($cleanValueHtml), name:$cleanValueHtml));
+            $tempCollect->push(new ToppingDTO(id: Str::slug($cleanValueHtml), name: Str::ucfirst($cleanValueHtml)));
         }
 
         return $tempCollect;

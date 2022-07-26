@@ -85,15 +85,15 @@ class ZharPizzaParseDriver extends BaseDriver
     /**
      * Parse attribute topping from json
      *
-     * @param $data
+     * @param string $data
      * @return Collection
      */
-    protected function parseJsonTopping($data): Collection
+    protected function parseJsonTopping(string $data): Collection
     {
         $tempCollect = collect();
         $array = array_map('trim', explode(',', $data));
         foreach ($array as $item) {
-            $tempCollect->push(new ToppingDTO(id:Str::slug($item), name:$item));
+            $tempCollect->push(new ToppingDTO(id: Str::slug($item), name: Str::ucfirst($item)));
         }
 
         return $tempCollect;
@@ -102,10 +102,10 @@ class ZharPizzaParseDriver extends BaseDriver
     /**
      *Parse attribute size from json
      *
-     * @param $data
+     * @param string $data
      * @return Collection
      */
-    protected function parseJsonSize($data): Collection
+    protected function parseJsonSize(string $data): Collection
     {
         if ($data) {
             $data = json_decode($data);

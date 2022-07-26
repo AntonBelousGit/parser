@@ -47,7 +47,7 @@ class DominoParseDriver extends BaseDriver
             $item = $this->parseValidatorContract->validate($item, $this->validationRules());
             $attributes = $this->parseSize($item['sizes']);
             $topping = $this->parseTopping($item['toppings']);
-            $collectSize->push(new ProductDTO(
+            $products->push(new ProductDTO(
                 id: $item['id'],
                 name: html_entity_decode($item['name']),
                 images: $item['image'],
@@ -112,10 +112,10 @@ class DominoParseDriver extends BaseDriver
     /**
      * Parse attribute size
      *
-     * @param $data
+     * @param array $data
      * @return Collection
      */
-    protected function parseSize($data): Collection
+    protected function parseSize(array $data): Collection
     {
         $tempCollection = collect(['size' => collect(), 'flavor' => collect(), 'attribute' => collect()]);
         foreach ($data as $size) {
@@ -136,10 +136,10 @@ class DominoParseDriver extends BaseDriver
     /**
      * Parse attribute topping
      *
-     * @param $data
+     * @param array $data
      * @return Collection
      */
-    protected function parseTopping($data): Collection
+    protected function parseTopping(array $data): Collection
     {
         $tempCollect = collect();
         foreach ($data as $item) {

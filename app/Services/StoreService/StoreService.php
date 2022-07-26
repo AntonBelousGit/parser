@@ -11,6 +11,7 @@ use App\Models\Size;
 use App\Models\Topping;
 use App\Repositories\ProductRepositories;
 use App\Services\ParserManager\DTOs\AttributeDTO;
+use App\Services\ParserManager\DTOs\ParserProductDataDTO;
 use App\Services\ParserManager\DTOs\ProductDTO as ParsedProduct;
 use App\Services\StoreService\Contracts\StoreServiceContract;
 use App\Services\StoreService\Validator\AttributeValidator;
@@ -44,12 +45,12 @@ class StoreService implements StoreServiceContract
     /**
      * Store or update parsed data
      *
-     * @param $data
+     * @param ParserProductDataDTO $data
      * @return void
      * @throws Exception\InvalidStoreServiceDataException
      * @throws Throwable
      */
-    public function store($data): void
+    public function store(ParserProductDataDTO $data): void
     {
         $this->updateOrCreateAttribute($data->attributes);
         $this->updateOrCreateProduct($data->products);
@@ -58,17 +59,17 @@ class StoreService implements StoreServiceContract
     /**
      * Update or Create Product method
      *
-     * @param Collection $array $array
+     * @param Collection $products
      * @return void
      */
-    protected function updateOrCreateProduct(Collection $array): void
+    protected function updateOrCreateProduct(Collection $products): void
     {
-        foreach ($array as $item) {
-            $updateProduct = $this->productRepositories->getProductByID($item->id);
+        foreach ($products as $product) {
+            $updateProduct = $this->productRepositories->getProductByID($product->id);
             if ($updateProduct) {
-                $this->updateProduct($updateProduct, $item);
+                $this->updateProduct($updateProduct, $product);
             } else {
-                $this->createProduct($item);
+                $this->createProduct($product);
             }
         }
     }
