@@ -102,14 +102,10 @@ class DominoParseDriver extends BaseDriver
      */
     protected function parseAttribute(Collection $size, Collection $topping, Collection $flavor): AttributeDTO
     {
-        $attrSize = $this->removeDuplicates($size->flatten(1), 'id');
-        $attrTopping = $this->removeDuplicates($topping->flatten(1), 'id');
-        $attrFlavor = $this->removeDuplicates($flavor->flatten(1), 'id');
-
         return new AttributeDTO(
-            sizes: $attrSize,
-            flavors: $attrFlavor,
-            toppings: $attrTopping
+            sizes: $this->removeDuplicates($size->flatten(1), 'id'),
+            flavors: $this->removeDuplicates($flavor->flatten(1), 'id'),
+            toppings: $this->removeDuplicates($topping->flatten(1), 'id')
         );
     }
 

@@ -71,12 +71,10 @@ class VdhPizzaParseDriver extends BaseDriver
      */
     public function parseAttribute(Collection $topping): AttributeDTO
     {
-        $attrTopping = $this->removeDuplicates($topping->flatten(1), 'id');
-
         return new AttributeDTO(
             sizes: collect([new SizeDTO(id:'standard', name: 'Standard')]),
             flavors: collect(),
-            toppings: $attrTopping
+            toppings: $this->removeDuplicates($topping->flatten(1), 'id')
         );
     }
 

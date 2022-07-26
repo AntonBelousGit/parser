@@ -75,13 +75,10 @@ class ZharPizzaParseDriver extends BaseDriver
      */
     public function parseAttribute(Collection $size, Collection $topping): AttributeDTO
     {
-        $attrSize = $this->removeDuplicates($size->flatten(1), 'id');
-        $attrTopping = $this->removeDuplicates($topping->flatten(1), 'id');
-
         return new AttributeDTO(
-            sizes: $attrSize,
+            sizes: $this->removeDuplicates($size->flatten(1), 'id'),
             flavors: collect(),
-            toppings: $attrTopping
+            toppings: $this->removeDuplicates($topping->flatten(1), 'id')
         );
     }
 
