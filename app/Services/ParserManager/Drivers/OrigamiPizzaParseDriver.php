@@ -118,8 +118,8 @@ class OrigamiPizzaParseDriver extends BaseDriver
     {
         $tempCollect = collect();
         $array = array_map('trim', explode(',', $data));
-        foreach ($array as $item) {
-            $cleanValueHtml = trim(strip_tags($item));
+        foreach ($array as $topping) {
+            $cleanValueHtml = trim(strip_tags($topping));
             $tempCollect->push(new ToppingDTO(id: Str::slug($cleanValueHtml), name: Str::ucfirst($cleanValueHtml)));
         }
 

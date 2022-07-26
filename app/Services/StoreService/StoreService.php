@@ -101,17 +101,17 @@ class StoreService implements StoreServiceContract
         $product->update(['id' => $data->id, 'name' => $data->name, 'image' => $data->images, 'image_mobile' => $data->imagesMobile]);
         $product->topping()->sync(Arr::pluck($data->toppings, 'id'));
         if (!empty($data->attributes->attributes)) {
-            foreach ($data->attributes->attributes as $item) {
+            foreach ($data->attributes->attributes as $attribute) {
                 $data = [
                     'product_id' => $product->id,
-                    'size_id' => $item['size_id'],
-                    'flavor_id' => $item['flavor_id']
+                    'size_id' => $attribute['size_id'],
+                    'flavor_id' => $attribute['flavor_id']
                 ];
-                $attribute = Attribute::where($data)->first();
-                if ($attribute) {
-                    $attribute->update(['price' => $item['price']]);
+                $attributeModel = Attribute::where($data)->first();
+                if ($attributeModel) {
+                    $attributeModel->update(['price' => $attribute['price']]);
                 } else {
-                    $product->attributeProduct()->create($item);
+                    $product->attributeProduct()->create($attribute);
                 }
             }
         }
@@ -141,9 +141,9 @@ class StoreService implements StoreServiceContract
      */
     protected function attribute(string $attributeKey, Collection $attributeData): void
     {
-        foreach ($attributeData->flatten() as $item) {
-            $item = $this->attributeValidator->validate(['id' => $item->id, 'name' => $item->name]);
-            (self::ATTRIBUTEMODEL[$attributeKey])::query()->updateOrCreate(['id' => $item['id']], $item);
+        foreach ($attributeData->flatten() as $attribute) {
+            $attribute = $this->attributeValidator->validate(['id' => $attribute->id, 'name' => $attribute->name]);
+            (self::ATTRIBUTEMODEL[$attributeKey])::query()->updateOrCreate(['id' => $attribute['id']], $attribute);
         }
     }
 }

@@ -37,20 +37,20 @@ class VdhPizzaParseDriver extends BaseDriver
         $productsParse = json_decode($this->getHtml($url));
         $collectTopping = collect();
         $products = collect();
-        foreach ($productsParse->products as $item) {
-            $item = $this->parseValidatorContract->validate(collect($item)->toArray(), $this->validationRules());
-            $image = (json_decode($item['gallery']));
-            $topping = $this->parseJsonTopping($item['descr']);
+        foreach ($productsParse->products as $product) {
+            $product = $this->parseValidatorContract->validate(collect($product)->toArray(), $this->validationRules());
+            $image = (json_decode($product['gallery']));
+            $topping = $this->parseJsonTopping($product['descr']);
             $products->push(new ProductDTO(
-                id: $item['uid'],
-                name: $item['title'],
+                id: $product['uid'],
+                name: $product['title'],
                 images: $image,
                 imagesMobile: $image,
                 toppings: $topping,
                 sizes: collect(),
                 flavors: collect(),
                 attributes: new ProductSizeDTO(
-                    attributes: collect([['size_id' => 'standard', 'flavor_id' => '', 'price' => (float)$item['price']]]),
+                    attributes: collect([['size_id' => 'standard', 'flavor_id' => '', 'price' => (float)$product['price']]]),
                 )
             ));
             $collectTopping->push($topping);
@@ -88,8 +88,8 @@ class VdhPizzaParseDriver extends BaseDriver
     {
         $tempCollect = collect();
         $array = array_map('trim', explode(',', $data));
-        foreach ($array as $item) {
-            $cleanValueHtml = trim(strip_tags($item));
+        foreach ($array as $topping) {
+            $cleanValueHtml = trim(strip_tags($topping));
             $tempCollect->push(new ToppingDTO(id: Str::slug($cleanValueHtml), name: Str::ucfirst($cleanValueHtml)));
         }
 

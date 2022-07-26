@@ -44,15 +44,15 @@ class DominoParseDriver extends BaseDriver
         $collectSize = collect();
         $collectTopping = collect();
         $collectFlavor = collect();
-        foreach ($parsedData as $item) {
-            $item = $this->parseValidatorContract->validate($item, $this->validationRules());
-            $attributes = $this->parseSize($item['sizes']);
-            $topping = $this->parseTopping($item['toppings']);
+        foreach ($parsedData as $product) {
+            $product = $this->parseValidatorContract->validate($product, $this->validationRules());
+            $attributes = $this->parseSize($product['sizes']);
+            $topping = $this->parseTopping($product['toppings']);
             $products->push(new ProductDTO(
-                id: $item['id'],
-                name: html_entity_decode($item['name']),
-                images: $item['image'],
-                imagesMobile: $item['image_mobile'],
+                id: $product['id'],
+                name: html_entity_decode($product['name']),
+                images: $product['image'],
+                imagesMobile: $product['image_mobile'],
                 toppings: $topping,
                 sizes: $attributes['size'],
                 flavors: $attributes['flavor'],
@@ -143,8 +143,8 @@ class DominoParseDriver extends BaseDriver
     protected function parseTopping(array $data): Collection
     {
         $tempCollect = collect();
-        foreach ($data as $item) {
-            $name = html_entity_decode($item['name']);
+        foreach ($data as $topping) {
+            $name = html_entity_decode($topping['name']);
             $tempCollect->push(new ToppingDTO(id: Str::slug($name), name: $name));
         }
 

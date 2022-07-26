@@ -38,21 +38,21 @@ class ZharPizzaParseDriver extends BaseDriver
         $collectSize = collect();
         $collectTopping = collect();
         $products = collect();
-        foreach ($productsParse->products as $item) {
-            $item = $this->parseValidatorContract->validate(collect($item)->toArray(), $this->validationRules());
-            $image = (json_decode($item['gallery']));
-            $toppings = $this->parseJsonTopping($item['descr']);
-            $attributes = $this->parseJsonSize($item['json_options']);
+        foreach ($productsParse->products as $product) {
+            $product = $this->parseValidatorContract->validate(collect($product)->toArray(), $this->validationRules());
+            $image = (json_decode($product['gallery']));
+            $toppings = $this->parseJsonTopping($product['descr']);
+            $attributes = $this->parseJsonSize($product['json_options']);
             $products->push(new ProductDTO(
-                id: $item['uid'],
-                name: $item['title'],
+                id: $product['uid'],
+                name: $product['title'],
                 images: $image,
                 imagesMobile: $image,
                 toppings: $toppings,
                 sizes: $attributes,
                 flavors: collect(),
                 attributes: new ProductSizeDTO(
-                    attributes: collect([['size_id' => $attributes[0]->id ?? '35-sm', 'flavor_id' => '', 'price' => (float)$item['price']]]),
+                    attributes: collect([['size_id' => $attributes[0]->id ?? '35-sm', 'flavor_id' => '', 'price' => (float)$product['price']]]),
                 )
             ));
             $collectSize->push($attributes);
@@ -110,8 +110,8 @@ class ZharPizzaParseDriver extends BaseDriver
         if ($data) {
             $data = json_decode($data);
             $tempCollect = collect();
-            foreach ($data[0]->values as $item) {
-                $tempCollect->push(new SizeDTO(id:Str::slug($item), name:$item));
+            foreach ($data[0]->values as $size) {
+                $tempCollect->push(new SizeDTO(id:Str::slug($size), name:$size));
             }
 
             return $tempCollect;
