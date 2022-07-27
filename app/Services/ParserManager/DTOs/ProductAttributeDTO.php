@@ -6,7 +6,7 @@ namespace App\Services\ParserManager\DTOs;
 
 use Illuminate\Support\Collection;
 
-class ProductSizeDTO extends AttributeDTO
+class ProductAttributeDTO
 {
     /**
      * ProductSize constructor.

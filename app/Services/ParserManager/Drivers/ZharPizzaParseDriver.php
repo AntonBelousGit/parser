@@ -8,7 +8,7 @@ use App\Services\ParserManager\Contracts\ParseValidatorContract;
 use App\Services\ParserManager\DTOs\AttributeDTO;
 use App\Services\ParserManager\DTOs\ParserProductDataDTO;
 use App\Services\ParserManager\DTOs\ProductDTO;
-use App\Services\ParserManager\DTOs\ProductSizeDTO;
+use App\Services\ParserManager\DTOs\ProductAttributeDTO;
 use App\Services\ParserManager\DTOs\SizeDTO;
 use App\Services\ParserManager\DTOs\ToppingDTO;
 use Illuminate\Support\Collection;
@@ -51,7 +51,7 @@ class ZharPizzaParseDriver extends BaseDriver
                 toppings: $toppings,
                 sizes: $attributes,
                 flavors: collect(),
-                attributes: new ProductSizeDTO(
+                attributes: new ProductAttributeDTO(
                     attributes: collect([['size_id' => $attributes[0]->id ?? '35-sm', 'flavor_id' => '', 'price' => (float)$product['price']]]),
                 )
             ));

@@ -11,7 +11,7 @@ use App\Services\ParserManager\DTOs\AttributeDTO;
 use App\Services\ParserManager\DTOs\FlavorDTO;
 use App\Services\ParserManager\DTOs\ParserProductDataDTO;
 use App\Services\ParserManager\DTOs\ProductDTO;
-use App\Services\ParserManager\DTOs\ProductSizeDTO;
+use App\Services\ParserManager\DTOs\ProductAttributeDTO;
 use App\Services\ParserManager\DTOs\SizeDTO;
 use App\Services\ParserManager\DTOs\ToppingDTO;
 use Illuminate\Foundation\Testing\TestCase as BaseTestCase;
@@ -48,7 +48,7 @@ abstract class TestCase extends BaseTestCase
                             toppings: collect([new ToppingDTO(id: (string)$topping->id, name: "Соус HELL")]),
                             sizes: collect([new SizeDTO(id: (string)$size->id, name: "BIG BOY")]),
                             flavors: collect([new FlavorDTO(id: (string)$flavor->id, name: "Holly")]),
-                            attributes: new ProductSizeDTO(
+                            attributes: new ProductAttributeDTO(
                                 attributes: collect([['size_id' => $size->id, 'flavor_id' => $flavor->id, 'price' => $price]]),
                             ),
                         )

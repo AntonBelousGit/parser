@@ -8,7 +8,7 @@ use App\Services\ParserManager\Contracts\ParseValidatorContract;
 use App\Services\ParserManager\DTOs\AttributeDTO;
 use App\Services\ParserManager\DTOs\ParserProductDataDTO;
 use App\Services\ParserManager\DTOs\ProductDTO;
-use App\Services\ParserManager\DTOs\ProductSizeDTO;
+use App\Services\ParserManager\DTOs\ProductAttributeDTO;
 use App\Services\ParserManager\DTOs\SizeDTO;
 use App\Services\ParserManager\DTOs\ToppingDTO;
 use Illuminate\Support\Collection;
@@ -49,7 +49,7 @@ class VdhPizzaParseDriver extends BaseDriver
                 toppings: $topping,
                 sizes: collect(),
                 flavors: collect(),
-                attributes: new ProductSizeDTO(
+                attributes: new ProductAttributeDTO(
                     attributes: collect([['size_id' => 'standard', 'flavor_id' => '', 'price' => (float)$product['price']]]),
                 )
             ));

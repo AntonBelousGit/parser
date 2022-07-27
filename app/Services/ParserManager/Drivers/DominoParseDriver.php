@@ -9,7 +9,7 @@ use App\Services\ParserManager\DTOs\AttributeDTO;
 use App\Services\ParserManager\DTOs\FlavorDTO;
 use App\Services\ParserManager\DTOs\ParserProductDataDTO;
 use App\Services\ParserManager\DTOs\ProductDTO;
-use App\Services\ParserManager\DTOs\ProductSizeDTO;
+use App\Services\ParserManager\DTOs\ProductAttributeDTO;
 use App\Services\ParserManager\DTOs\SizeDTO;
 use App\Services\ParserManager\DTOs\ToppingDTO;
 use DiDom\Document;
@@ -56,7 +56,7 @@ class DominoParseDriver extends BaseDriver
                 toppings: $topping,
                 sizes: $attributes['size'],
                 flavors: $attributes['flavor'],
-                attributes: new ProductSizeDTO(
+                attributes: new ProductAttributeDTO(
                     attributes: $attributes['attribute'],
                 )
             ));

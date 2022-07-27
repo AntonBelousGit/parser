@@ -18,7 +18,7 @@ class ProductDTO
      * @param Collection $toppings
      * @param Collection $sizes
      * @param Collection $flavors
-     * @param AttributeDTO $attributes
+     * @param ProductAttributeDTO $attributes
      */
     public function __construct(
         public string $id,
@@ -28,7 +28,7 @@ class ProductDTO
         public Collection $toppings,
         public Collection $sizes,
         public Collection $flavors,
-        public AttributeDTO $attributes
+        public ProductAttributeDTO $attributes
     ) {
     }
 }
