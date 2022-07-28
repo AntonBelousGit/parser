@@ -50,7 +50,7 @@ class SushiBossParseDriver extends BaseDriver
             $product = $this->parseValidatorContract->validate($product, $this->validationRules());
             $attributes = $this->prepareAttribute($product['sizes'], $product['flavors'], $product['toppings']);
             $products->push(new ProductDTO(
-                id: $product['id'],
+                id: $product['id'].'-sushiboss',
                 name: $product['name'],
                 url: $url,
                 images: $product['image'],

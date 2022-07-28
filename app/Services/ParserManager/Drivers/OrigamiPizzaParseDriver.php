@@ -47,7 +47,7 @@ class OrigamiPizzaParseDriver extends BaseDriver
             $product = $this->parseValidatorContract->validate($data, $this->validationRules());
             $topping = $this->parseTopping($product['topping']);
             $products->push(new ProductDTO(
-                id: $product['id'],
+                id: $product['id'].'-origami',
                 name: $product['name'],
                 url: $url,
                 images: [$product['image']],
