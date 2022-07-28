@@ -44,9 +44,8 @@ class ZharPizzaParseDriver extends BaseDriver
             $toppings = $this->parseJsonTopping($product['descr']);
             $attributes = $this->parseJsonSize($product['json_options']);
             $products->push(new ProductDTO(
-                id: $product['uid'],
+                id: $product['url'],
                 name: $product['title'],
-                url: $url,
                 images: $image,
                 imagesMobile: $image,
                 toppings: $toppings,
@@ -129,7 +128,7 @@ class ZharPizzaParseDriver extends BaseDriver
     protected function validationRules(): array
     {
         return [
-            'uid' => ['required','string','max:50'],
+            'url' => ['required','string'],
             'title' => ['required', 'string','max:50'],
             'price' => ['required', 'string','max:50'],
             'descr' => ['required', 'string'],

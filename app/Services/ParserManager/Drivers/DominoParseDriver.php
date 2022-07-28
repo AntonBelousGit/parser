@@ -49,9 +49,8 @@ class DominoParseDriver extends BaseDriver
             $attributes = $this->parseSize($product['sizes']);
             $topping = $this->parseTopping($product['toppings']);
             $products->push(new ProductDTO(
-                id: $product['id'],
+                id: $product['link'],
                 name: html_entity_decode($product['name']),
-                url: $url,
                 images: $product['image'],
                 imagesMobile: $product['image_mobile'],
                 toppings: $topping,
@@ -90,7 +89,6 @@ class DominoParseDriver extends BaseDriver
         }, $array[1]);
         $new = json_decode($str, true, 100);
         $parsedData = Arr::pluck($new['data']['groups'], 'products');
-
         return call_user_func_array('array_merge', $parsedData);
     }
 
@@ -161,7 +159,7 @@ class DominoParseDriver extends BaseDriver
     protected function validationRules(): array
     {
         return [
-            'id' => ['required', 'string', 'max:50'],
+            'link' => ['required', 'string', 'max:200'],
             'name' => ['required', 'string', 'max:200'],
             'image' => ['required', 'array', 'min:1'],
             'image.*' => ['required'],

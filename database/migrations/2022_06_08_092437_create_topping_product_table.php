@@ -16,7 +16,7 @@ return new class extends Migration
         Schema::create('topping_product', function (Blueprint $table) {
             $table->id();
             $table->string('topping_id', 50)->references('id')->on('toppings');
-            $table->string('product_id', 50)->references('id')->on('products');
+            $table->string('product_id')->references('id')->on('products');
         });
     }
 

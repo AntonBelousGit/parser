@@ -39,7 +39,6 @@ abstract class TestCase extends BaseTestCase
                         new ProductDTO(
                             id: $id,
                             name: "Пiца 'PARSE'",
-                            url: 'https://media.dominos.ua/',
                             images: [
                     "https://media.dominos.ua/__sized__/menu/product_osg_image/2021/07/27/PizzaMNHTTNingFULL-min-thumbnail-2300x2300-70.jpg",
                 ],

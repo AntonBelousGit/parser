@@ -52,7 +52,6 @@ class SushiBossParseDriver extends BaseDriver
             $products->push(new ProductDTO(
                 id: $product['id'].'-sushiboss',
                 name: $product['name'],
-                url: $url,
                 images: $product['image'],
                 imagesMobile: $product['image'],
                 toppings: $product['toppings'],
@@ -88,6 +87,7 @@ class SushiBossParseDriver extends BaseDriver
         $topping = collect();
         $image = [$xml->first('img')->attr('src')];
         $name = $xml->first('.us-module-title > a')->text();
+        $url = $xml->first('.us-module-title > a')->attr('href');
         $sizeTemp = $xml->first('.options-category > div > div')?->find('.radio-inline> label');
         if ($sizeTemp) {
             $size = $this->parseSize($sizeTemp);
@@ -110,7 +110,7 @@ class SushiBossParseDriver extends BaseDriver
             $topping = $this->parseTopping($toppingTemp);
         }
 
-        return ['id' => Str::slug($name), 'image' => $image, 'name' => $name, 'sizes' => $size, 'flavors' => $flavor, 'toppings' => $topping];
+        return ['id' => $url, 'image' => $image, 'name' => $name, 'sizes' => $size, 'flavors' => $flavor, 'toppings' => $topping];
     }
 
     /**
@@ -242,7 +242,7 @@ class SushiBossParseDriver extends BaseDriver
     protected function validationRules(): array
     {
         return [
-            'id' => ['required', 'string', 'max:50'],
+            'id' => ['required', 'string'],
             'name' => ['required', 'string', 'max:50'],
             'image' => ['required', 'array', 'min:1'],
             'image.*' => ['required'],

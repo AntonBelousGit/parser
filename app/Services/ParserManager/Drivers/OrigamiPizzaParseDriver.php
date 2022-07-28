@@ -49,7 +49,6 @@ class OrigamiPizzaParseDriver extends BaseDriver
             $products->push(new ProductDTO(
                 id: $product['id'].'-origami',
                 name: $product['name'],
-                url: $url,
                 images: [$product['image']],
                 imagesMobile: [$product['image']],
                 toppings: $topping,
@@ -79,13 +78,15 @@ class OrigamiPizzaParseDriver extends BaseDriver
     protected function prepareParsedProducts(Element $product): array
     {
         $name = $product->find('.product-info > h3')[0]->text();
-        $id = Str::slug($name);
+        $id = $product->first('.product-info > .product-btn-add')->attr('onclick');
+        preg_match_all('/\d+/', $id, $out);
+        $url = 'https://origami.od.ua/index.php?route=product/product&product_id='. $out[0][0];
         $topping = $product->find('.product-info > .product-text > p')[0]->text();
         $price = $product->find('.product-info > p')[0]->text();
         $image = "https://origami.od.ua/" . $product->find('.productitem > img')[0]->attr('src');
 
         return [
-            'id' => $id,
+            'id' => $url,
             'name' => $name,
             'image' => $image,
             'image_mobile' => $image,
@@ -135,7 +136,7 @@ class OrigamiPizzaParseDriver extends BaseDriver
     protected function validationRules(): array
     {
         return [
-            'id' => ['required', 'string', 'max:50'],
+            'id' => ['required', 'string'],
             'name' => ['required', 'string', 'max:50'],
             'image' => ['required', 'string'],
             'image_mobile' => ['required', 'string'],

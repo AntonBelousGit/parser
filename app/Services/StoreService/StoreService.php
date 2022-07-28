@@ -82,7 +82,7 @@ class StoreService implements StoreServiceContract
      */
     protected function createProduct(ParsedProduct $item): void
     {
-        $product = Product::create(['id' => $item->id, 'name' => $item->name,'url'=> $item->url, 'image' => $item->images, 'image_mobile' => $item->imagesMobile]);
+        $product = Product::create(['id' => $item->id, 'name' => $item->name, 'image' => $item->images, 'image_mobile' => $item->imagesMobile]);
         $product->topping()->attach(Arr::pluck($item->toppings, 'id'));
         if (!empty($item->attributes->attributes)) {
             $product->attributeProduct()->createMany($item->attributes->attributes);
@@ -98,7 +98,7 @@ class StoreService implements StoreServiceContract
      */
     protected function updateProduct(Product $product, ParsedProduct $data): void
     {
-        $product->update(['id' => $data->id, 'name' => $data->name,'url'=> $data->url , 'image' => $data->images, 'image_mobile' => $data->imagesMobile]);
+        $product->update(['id' => $data->id, 'name' => $data->name, 'image' => $data->images, 'image_mobile' => $data->imagesMobile]);
         $product->topping()->sync(Arr::pluck($data->toppings, 'id'));
         if (!empty($data->attributes->attributes)) {
             foreach ($data->attributes->attributes as $attribute) {

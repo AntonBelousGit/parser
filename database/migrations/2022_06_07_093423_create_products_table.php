@@ -13,9 +13,8 @@ return new class extends Migration {
     public function up()
     {
         Schema::create('products', function (Blueprint $table) {
-            $table->string('id', 50)->index()->unique();
+            $table->string('id')->index()->unique();
             $table->string('name', 100);
-            $table->string('url');
             $table->json('image');
             $table->json('image_mobile');
             $table->timestamps();
