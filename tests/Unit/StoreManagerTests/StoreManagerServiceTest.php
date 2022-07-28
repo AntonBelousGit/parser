@@ -38,7 +38,7 @@ class StoreManagerServiceTest extends TestCase
         Product::factory()->create(['id' => $this->id])->each(function ($product) {
             $product->topping()->attach($this->topping->id);
             $product->attributeProduct()
-                ->create([ 'product_id' => $product->id, 'size_id' => $this->size['id'], 'flavor_id' => $this->flavor['id'], 'price' => 180]);
+                ->create([ 'product_id' => $product->id, 'size_id' => $this->size['id'], 'flavor_id' => $this->flavor['id'],'topping_id'=> $this->topping['id'], 'price' => 180]);
         });
     }
 

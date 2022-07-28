@@ -45,7 +45,6 @@ class SushiBossParseDriver extends BaseDriver
         $collectSize = collect();
         $collectTopping = collect();
         $collectFlavor = collect();
-
         foreach ($parsedData as $product) {
             $product = $this->prepareParsedProduct($product);
             $product = $this->parseValidatorContract->validate($product, $this->validationRules());
@@ -248,7 +247,7 @@ class SushiBossParseDriver extends BaseDriver
             'image' => ['required', 'array', 'min:1'],
             'image.*' => ['required'],
             'toppings' => ['nullable'],
-            'sizes' => ['filled'],
+            'sizes' => ['required'],
             'flavors' => ['nullable'],
         ];
     }

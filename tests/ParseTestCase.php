@@ -31,7 +31,7 @@ abstract class ParseTestCase extends BaseTestCase
         $filePath = storage_path("app/public/file/{$parseName}.xml");
         $document = $type === 'DiDom' ? new Document($filePath, true) : File::get($filePath);
         $mock = Mockery::mock(ConnectionService::class)->makePartial();
-        $mock->shouldReceive('connect')->andReturns($document);
+        $mock->shouldReceive('getHtml')->andReturns($document);
         app()->instance(ConnectionService::class, $mock);
         $parsingManager = app(ParseManager::class);
 

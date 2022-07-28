@@ -39,6 +39,7 @@ abstract class TestCase extends BaseTestCase
                         new ProductDTO(
                             id: $id,
                             name: "Пiца 'PARSE'",
+                            url: 'https://media.dominos.ua/',
                             images: [
                     "https://media.dominos.ua/__sized__/menu/product_osg_image/2021/07/27/PizzaMNHTTNingFULL-min-thumbnail-2300x2300-70.jpg",
                 ],
@@ -49,7 +50,7 @@ abstract class TestCase extends BaseTestCase
                             sizes: collect([new SizeDTO(id: (string)$size->id, name: "BIG BOY")]),
                             flavors: collect([new FlavorDTO(id: (string)$flavor->id, name: "Holly")]),
                             attributes: new ProductAttributeDTO(
-                                attributes: collect([['size_id' => $size->id, 'flavor_id' => $flavor->id, 'price' => $price]]),
+                                attributes: collect([['size_id' => $size->id, 'flavor_id' => $flavor->id,'topping_id'=> $topping->id, 'price' => $price]]),
                             ),
                         )
                     ]
