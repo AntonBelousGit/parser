@@ -14,6 +14,7 @@ class ProductFactory extends Factory
     {
         return [
             'name' => $this->faker->name(),
+            'url' => $this->faker->url(),
             'image' => $this->faker->imageUrl(),
             'image_mobile' => $this->faker->imageUrl(),
             'created_at' => Carbon::now(),
