@@ -55,7 +55,7 @@ class OrigamiPizzaParseDriver extends BaseDriver
                 sizes: collect(),
                 flavors: collect(),
                 attributes: new ProductAttributeDTO(
-                    attributes: collect([['size_id' => 'standard', 'flavor_id' => '','topping_id' => '', 'price' => (float)str_replace('грн', '', $product['price'])]]),
+                    attributes: collect([['size_id' => 'standartna', 'flavor_id' => '','topping_id' => '', 'price' => (float)str_replace('грн', '', $product['price'])]]),
                 )
             ));
             $collectTopping->push($topping);
@@ -104,7 +104,7 @@ class OrigamiPizzaParseDriver extends BaseDriver
     protected function parseAttribute(Collection $topping): AttributeDTO
     {
         return new AttributeDTO(
-            sizes: collect([new SizeDTO(id: 'standard', name: 'Standard')]),
+            sizes: collect([new SizeDTO(id: 'standartna', name: 'Стандартна')]),
             flavors: collect(),
             toppings: $this->removeDuplicates($topping->flatten(1), 'id')
         );

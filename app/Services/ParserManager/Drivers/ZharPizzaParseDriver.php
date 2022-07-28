@@ -117,7 +117,7 @@ class ZharPizzaParseDriver extends BaseDriver
             return $tempCollect;
         }
 
-        return collect([new SizeDTO(id:'standard', name:'Standard')]);
+        return collect([new SizeDTO(id:'standartna', name:'Стандартна')]);
     }
 
     /**

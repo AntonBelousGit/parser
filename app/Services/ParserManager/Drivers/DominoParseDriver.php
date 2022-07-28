@@ -26,7 +26,8 @@ class DominoParseDriver extends BaseDriver
      */
     public function __construct(
         protected ParseValidatorContract $parseValidatorContract,
-    ) {
+    )
+    {
     }
 
     /**
@@ -119,12 +120,14 @@ class DominoParseDriver extends BaseDriver
     {
         $tempCollection = collect(['size' => collect(), 'flavor' => collect(), 'attribute' => collect()]);
         foreach ($data as $size) {
-            $tempCollection['size']->push(new SizeDTO(id: $size['id'], name: html_entity_decode($size['name'])));
+            $sizeName = html_entity_decode($size['name']);
+            $tempCollection['size']->push(new SizeDTO(id: Str::slug($sizeName), name: $sizeName));
             foreach ($size['flavors'] as $flavor) {
-                $tempCollection['flavor']->push(new FlavorDTO(id: $flavor['id'], name: html_entity_decode($flavor['name'])));
+                $flavorName = html_entity_decode($flavor['name']);
+                $tempCollection['flavor']->push(new FlavorDTO(id: Str::slug($flavorName), name: $flavorName));
                 $tempCollection['attribute']->push([
-                    'size_id' => $size['id'],
-                    'flavor_id' => $flavor['id'],
+                    'size_id' => Str::slug($sizeName),
+                    'flavor_id' => Str::slug($flavorName),
                     'topping_id' => '',
                     'price' => $flavor['product']['price']
                 ]);
