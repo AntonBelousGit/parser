@@ -13,6 +13,7 @@ class ProductDTO
      *
      * @param string $id
      * @param string $name
+     * @param string $url
      * @param array $images
      * @param array $imagesMobile
      * @param Collection $toppings
@@ -23,6 +24,7 @@ class ProductDTO
     public function __construct(
         public string $id,
         public string $name,
+        public string $url,
         public array $images,
         public array $imagesMobile,
         public Collection $toppings,

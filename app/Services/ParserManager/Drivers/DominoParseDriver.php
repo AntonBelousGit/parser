@@ -21,7 +21,7 @@ use Illuminate\Support\Str;
 class DominoParseDriver extends BaseDriver
 {
     /**
-     * DominoParseService constructor.
+     * DominoParseDriver constructor.
      * @param ParseValidatorContract $parseValidatorContract
      */
     public function __construct(
@@ -51,6 +51,7 @@ class DominoParseDriver extends BaseDriver
             $products->push(new ProductDTO(
                 id: $product['id'],
                 name: html_entity_decode($product['name']),
+                url: $url,
                 images: $product['image'],
                 imagesMobile: $product['image_mobile'],
                 toppings: $topping,
@@ -126,6 +127,7 @@ class DominoParseDriver extends BaseDriver
                 $tempCollection['attribute']->push([
                     'size_id' => $size['id'],
                     'flavor_id' => $flavor['id'],
+                    'topping_id' => '',
                     'price' => $flavor['product']['price']
                 ]);
             }

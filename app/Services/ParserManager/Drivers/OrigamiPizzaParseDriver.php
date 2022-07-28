@@ -49,13 +49,14 @@ class OrigamiPizzaParseDriver extends BaseDriver
             $products->push(new ProductDTO(
                 id: $product['id'],
                 name: $product['name'],
+                url: $url,
                 images: [$product['image']],
                 imagesMobile: [$product['image']],
                 toppings: $topping,
                 sizes: collect(),
                 flavors: collect(),
                 attributes: new ProductAttributeDTO(
-                    attributes: collect([['size_id' => 'standard', 'flavor_id' => '', 'price' => (float)str_replace('грн', '', $product['price'])]]),
+                    attributes: collect([['size_id' => 'standard', 'flavor_id' => '','topping_id' => '', 'price' => (float)str_replace('грн', '', $product['price'])]]),
                 )
             ));
             $collectTopping->push($topping);

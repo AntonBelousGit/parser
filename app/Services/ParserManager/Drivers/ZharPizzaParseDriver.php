@@ -17,7 +17,7 @@ use Illuminate\Support\Str;
 class ZharPizzaParseDriver extends BaseDriver
 {
     /**
-     * ZharPizzaParseService constructor.
+     * ZharPizzaParseDriver constructor.
      *
      * @param ParseValidatorContract $parseValidatorContract
      */
@@ -46,13 +46,14 @@ class ZharPizzaParseDriver extends BaseDriver
             $products->push(new ProductDTO(
                 id: $product['uid'],
                 name: $product['title'],
+                url: $url,
                 images: $image,
                 imagesMobile: $image,
                 toppings: $toppings,
                 sizes: $attributes,
                 flavors: collect(),
                 attributes: new ProductAttributeDTO(
-                    attributes: collect([['size_id' => $attributes[0]->id ?? '35-sm', 'flavor_id' => '', 'price' => (float)$product['price']]]),
+                    attributes: collect([['size_id' => $attributes[0]->id ?? '35-sm', 'flavor_id' => '', 'topping_id' => '', 'price' => (float)$product['price']]]),
                 )
             ));
             $collectSize->push($attributes);

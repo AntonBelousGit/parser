@@ -4,8 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-return new class extends Migration
-{
+return new class extends Migration {
     /**
      * Run the migrations.
      *
@@ -18,6 +17,7 @@ return new class extends Migration
             $table->string('product_id', 50)->references('id')->on('products')->onUpdate('cascade')->index();
             $table->string('size_id', 50)->references('id')->on('sizes')->onUpdate('cascade')->index();
             $table->string('flavor_id', 50)->references('id')->on('flavors')->onUpdate('cascade')->index();
+            $table->string('topping_id', 50)->references('id')->on('toppings')->onUpdate('cascade')->index();
             $table->float('price')->nullable();
             $table->timestamps();
         });

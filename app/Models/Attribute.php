@@ -32,6 +32,7 @@ class Attribute extends Model
             'updated_at',
             'flavor_id',
             'size_id',
+            'topping_id',
             'product_id'
         ];
     }

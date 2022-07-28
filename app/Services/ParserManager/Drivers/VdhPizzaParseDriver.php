@@ -44,13 +44,14 @@ class VdhPizzaParseDriver extends BaseDriver
             $products->push(new ProductDTO(
                 id: $product['uid'],
                 name: $product['title'],
+                url: $url,
                 images: $image,
                 imagesMobile: $image,
                 toppings: $topping,
                 sizes: collect(),
                 flavors: collect(),
                 attributes: new ProductAttributeDTO(
-                    attributes: collect([['size_id' => 'standard', 'flavor_id' => '', 'price' => (float)$product['price']]]),
+                    attributes: collect([['size_id' => 'standard', 'flavor_id' => '','topping_id' => '', 'price' => (float)$product['price']]]),
                 )
             ));
             $collectTopping->push($topping);
