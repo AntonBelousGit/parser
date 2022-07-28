@@ -136,7 +136,7 @@ class OrigamiPizzaParseDriver extends BaseDriver
     {
         return [
             'id' => ['required', 'string', 'max:50'],
-            'name' => ['required', 'string', 'max:200'],
+            'name' => ['required', 'string', 'max:50'],
             'image' => ['required', 'string'],
             'image_mobile' => ['required', 'string'],
             'topping' => ['required', 'string'],

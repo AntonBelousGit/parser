@@ -244,7 +244,7 @@ class SushiBossParseDriver extends BaseDriver
     {
         return [
             'id' => ['required', 'string', 'max:50'],
-            'name' => ['required', 'string', 'max:200'],
+            'name' => ['required', 'string', 'max:50'],
             'image' => ['required', 'array', 'min:1'],
             'image.*' => ['required'],
             'toppings' => ['nullable'],

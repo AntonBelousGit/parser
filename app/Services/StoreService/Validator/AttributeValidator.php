@@ -38,7 +38,7 @@ class AttributeValidator extends BaseValidator implements AttributeValidatorCont
     {
         return [
             'id' => ['required','string','max:50'],
-            'name' => ['required', 'string','max:200'],
+            'name' => ['required', 'string','max:50'],
         ];
     }
 

@@ -130,8 +130,8 @@ class ZharPizzaParseDriver extends BaseDriver
     {
         return [
             'uid' => ['required','string','max:50'],
-            'title' => ['required', 'string'],
-            'price' => ['required', 'string'],
+            'title' => ['required', 'string','max:50'],
+            'price' => ['required', 'string','max:50'],
             'descr' => ['required', 'string'],
             'gallery' => ['required', 'string'],
             'json_options' => ['nullable', 'string'],
