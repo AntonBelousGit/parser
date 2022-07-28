@@ -11,10 +11,12 @@ class SizeDTO
      *
      * @param string $id
      * @param string $name
+     * @param float $price
      */
     public function __construct(
         public string $id,
         public string $name,
+        public float $price = 0
     ) {
     }
 }
