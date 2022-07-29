@@ -26,8 +26,7 @@ class DominoParseDriver extends BaseDriver
      */
     public function __construct(
         protected ParseValidatorContract $parseValidatorContract,
-    )
-    {
+    ) {
     }
 
     /**

@@ -49,7 +49,7 @@ class SushiBossParseDriver extends BaseDriver
             $product = $this->parseValidatorContract->validate($product, $this->validationRules());
             $attributes = $this->prepareAttribute($product['sizes'], $product['flavors'], $product['toppings']);
             $products->push(new ProductDTO(
-                id: $product['usl'],
+                id: $product['url'],
                 name: $product['name'],
                 images: $product['image'],
                 imagesMobile: $product['image'],
@@ -84,7 +84,7 @@ class SushiBossParseDriver extends BaseDriver
         $size = collect();
         $flavor = collect();
         $topping = collect();
-        $image = [$xml->first('img')->attr('src')];
+        $image = array($xml->first('img')->attr('src'));
         $name = $xml->first('.us-module-title > a')->text();
         $url = $xml->first('.us-module-title > a')->attr('href');
         $sizeTemp = $xml->first('.options-category > div > div')?->find('.radio-inline> label');

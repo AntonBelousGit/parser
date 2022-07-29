@@ -39,7 +39,7 @@ class VdhPizzaParseDriver extends BaseDriver
         $products = collect();
         foreach ($productsParse->products as $product) {
             $product = $this->parseValidatorContract->validate(collect($product)->toArray(), $this->validationRules());
-            $image = (json_decode($product['gallery']));
+            $image = json_decode($product['gallery']);
             $topping = $this->parseJsonTopping($product['descr']);
             $products->push(new ProductDTO(
                 id: $product['url'],
