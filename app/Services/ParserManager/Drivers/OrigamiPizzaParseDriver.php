@@ -47,7 +47,7 @@ class OrigamiPizzaParseDriver extends BaseDriver
             $product = $this->parseValidatorContract->validate($data, $this->validationRules());
             $topping = $this->parseTopping($product['topping']);
             $products->push(new ProductDTO(
-                id: $product['id'].'-origami',
+                id: $product['url'],
                 name: $product['name'],
                 images: [$product['image']],
                 imagesMobile: [$product['image']],
@@ -86,7 +86,7 @@ class OrigamiPizzaParseDriver extends BaseDriver
         $image = "https://origami.od.ua/" . $product->find('.productitem > img')[0]->attr('src');
 
         return [
-            'id' => $url,
+            'url' => $url,
             'name' => $name,
             'image' => $image,
             'image_mobile' => $image,
@@ -136,7 +136,7 @@ class OrigamiPizzaParseDriver extends BaseDriver
     protected function validationRules(): array
     {
         return [
-            'id' => ['required', 'string'],
+            'url' => ['required', 'string'],
             'name' => ['required', 'string', 'max:50'],
             'image' => ['required', 'string'],
             'image_mobile' => ['required', 'string'],

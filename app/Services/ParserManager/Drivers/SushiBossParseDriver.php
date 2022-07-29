@@ -50,7 +50,7 @@ class SushiBossParseDriver extends BaseDriver
             $product = $this->parseValidatorContract->validate($product, $this->validationRules());
             $attributes = $this->prepareAttribute($product['sizes'], $product['flavors'], $product['toppings']);
             $products->push(new ProductDTO(
-                id: $product['id'].'-sushiboss',
+                id: $product['usl'],
                 name: $product['name'],
                 images: $product['image'],
                 imagesMobile: $product['image'],
@@ -110,7 +110,7 @@ class SushiBossParseDriver extends BaseDriver
             $topping = $this->parseTopping($toppingTemp);
         }
 
-        return ['id' => $url, 'image' => $image, 'name' => $name, 'sizes' => $size, 'flavors' => $flavor, 'toppings' => $topping];
+        return ['url' => $url, 'image' => $image, 'name' => $name, 'sizes' => $size, 'flavors' => $flavor, 'toppings' => $topping];
     }
 
     /**
@@ -242,7 +242,7 @@ class SushiBossParseDriver extends BaseDriver
     protected function validationRules(): array
     {
         return [
-            'id' => ['required', 'string'],
+            'url' => ['required', 'string'],
             'name' => ['required', 'string', 'max:50'],
             'image' => ['required', 'array', 'min:1'],
             'image.*' => ['required'],
