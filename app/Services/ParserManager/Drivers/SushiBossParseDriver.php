@@ -15,14 +15,13 @@ use App\Services\ParserManager\DTOs\ToppingDTO;
 use DiDom\Document;
 use DiDom\Element;
 use DiDom\Exceptions\InvalidSelectorException;
-use Illuminate\Support\Arr;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Str;
 
 class SushiBossParseDriver extends BaseDriver
 {
     /**
-     * DominoParseService constructor.
+     * SushiBossParseDriver constructor.
      * @param ParseValidatorContract $parseValidatorContract
      */
     public function __construct(
@@ -102,9 +101,9 @@ class SushiBossParseDriver extends BaseDriver
             unset($flavorTemp[0]);
             $flavor = $this->parseFlavor($flavorTemp);
         }
+
         $toppingTemp = $xml->find('.options-category > div');
         $toppingTemp = !empty(end($toppingTemp)) ? end($toppingTemp)->find('select > option') : null;
-
         if ($toppingTemp) {
             unset($toppingTemp[0]);
             $topping = $this->parseTopping($toppingTemp);
