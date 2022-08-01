@@ -9,7 +9,7 @@ use Illuminate\Contracts\Container\BindingResolutionException;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\ParseTestCase;
 
-class ParseSushiBossTest extends ParseTestCase
+class SushiBossParseTest extends ParseTestCase
 {
     use RefreshDatabase;
 

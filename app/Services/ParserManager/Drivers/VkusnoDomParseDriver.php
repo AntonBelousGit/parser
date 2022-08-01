@@ -17,7 +17,7 @@ use DiDom\Exceptions\InvalidSelectorException;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Str;
 
-class OrigamiPizzaParseDriver extends BaseDriver
+class VkusnoDomParseDriver extends BaseDriver
 {
     /**
      * OrigamiPizzaParseDriver constructor.
@@ -39,7 +39,8 @@ class OrigamiPizzaParseDriver extends BaseDriver
     public function parseProduct(string $url): ParserProductDataDTO
     {
         $productsParse = new Document($this->getHtml($url));
-        $parsedData = $productsParse->find('.productblock');
+
+        $parsedData = $productsParse->find('.row-catalog > .product-in-row > div > .product-wrapper');
         $collectTopping = collect();
         $products = collect();
         foreach ($parsedData as $product) {
@@ -60,6 +61,7 @@ class OrigamiPizzaParseDriver extends BaseDriver
             ));
             $collectTopping->push($topping);
         }
+
         $parseAttribute = $this->parseAttribute($collectTopping);
 
         return new ParserProductDataDTO(
@@ -77,13 +79,14 @@ class OrigamiPizzaParseDriver extends BaseDriver
      */
     protected function prepareParsedProducts(Element $product): array
     {
-        $name = $product->find('.product-info > h3')[0]->text();
-        $id = $product->first('.product-info > .product-btn-add')->attr('onclick');
-        preg_match('/\d+/', $id, $out);
-        $url = 'https://origami.od.ua/index.php?route=product/product&product_id='. $out[0];
-        $topping = $product->find('.product-info > .product-text > p')[0]->text();
-        $price = $product->find('.product-info > p')[0]->text();
-        $image = "https://origami.od.ua/" . $product->find('.productitem > img')[0]->attr('src');
+        $productContent = $product->first('.product-content');
+        $name = $productContent->first('div > a')->text();
+        $url = 'https://vkusno-dom.com'.$productContent->first('div > a')->attr('href');
+        $topping = $productContent->first('.description > p')->text();
+        $priceRaw = $productContent->find('.price > div')[0]->text();
+        preg_match('/\d+/', $priceRaw, $price);
+        $price = $price[0];
+        $image = 'https://vkusno-dom.com'. $product->first('.img > a > img')->attr('src');
 
         return [
             'url' => $url,
@@ -141,7 +144,7 @@ class OrigamiPizzaParseDriver extends BaseDriver
             'image' => ['required', 'string'],
             'image_mobile' => ['required', 'string'],
             'topping' => ['required', 'string'],
-            'price' => ['required', 'string']
+            'price' => ['required', 'string', 'max:10']
         ];
     }
 }

@@ -8,8 +8,9 @@ use Exception;
 use Illuminate\Contracts\Container\BindingResolutionException;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\ParseTestCase;
+use Throwable;
 
-class ParseOrigamiTest extends ParseTestCase
+class VkusnoDomParseTest extends ParseTestCase
 {
     use RefreshDatabase;
 
@@ -18,8 +19,8 @@ class ParseOrigamiTest extends ParseTestCase
      */
     public function testOrigamiParse()
     {
-        $config = config('parsers.origami');
-        $response = $this->parse($config, 'origami', 'DiDom');
+        $config = config('parsers.vkusnoDom');
+        $response = $this->parse($config, 'vkusnoDom', 'DiDom');
         $this->assertNotEmpty($response);
         $this->assertNotEmpty($response->products[0]);
         $this->assertNotNull($response->attributes->sizes[0]);
@@ -28,9 +29,9 @@ class ParseOrigamiTest extends ParseTestCase
 
     public function testOrigamiValidationProblemParse()
     {
-        $config = config('parsers.origami');
+        $config = config('parsers.vkusnoDom');
         try {
-            $this->parse($config, 'corruptFile/origamiValidation', 'DiDom');
+            $this->parse($config, 'corruptFile/vkusnoDomValidation', 'DiDom');
         } catch (Exception $exception) {
             $message = $exception->getMessage();
             $this->assertStringContainsString('Parse data is invalid', $message);
@@ -38,16 +39,16 @@ class ParseOrigamiTest extends ParseTestCase
     }
 
     /**
-     * Change tag h3 to h2
+     * Change tag p to span
      */
     public function testOrigamiCorruptedFileParse()
     {
-        $config = config('parsers.origami');
+        $config = config('parsers.vkusnoDom');
         try {
-            $this->parse($config, 'corruptFile/origamiCorrupted', 'DiDom');
-        } catch (Exception $exception) {
+            $this->parse($config, 'corruptFile/vkusnoDomCorruptedParse', 'DiDom');
+        } catch (Throwable $exception) {
             $message = $exception->getMessage();
-            $this->assertStringContainsString('Undefined array key 0', $message);
+            $this->assertStringContainsString('Call to a member function text() on null', $message);
         }
     }
 }

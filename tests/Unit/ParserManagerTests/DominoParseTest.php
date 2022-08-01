@@ -9,7 +9,7 @@ use Illuminate\Contracts\Container\BindingResolutionException;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\ParseTestCase;
 
-class ParseDominoTest extends ParseTestCase
+class DominoParseTest extends ParseTestCase
 {
     use RefreshDatabase;
 

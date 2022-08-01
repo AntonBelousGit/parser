@@ -16,7 +16,7 @@ class Product extends Model
 
     public $keyType = 'string';
 
-    protected $fillable = ['id', 'name', 'url', 'image', 'image_mobile'];
+    protected $fillable = ['id', 'name', 'image', 'image_mobile'];
 
     protected $casts =
         [

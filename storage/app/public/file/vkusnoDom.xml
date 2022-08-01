@@ -1,0 +1,1361 @@
+<!DOCTYPE html>
+<html lang="ru-RU" itemscope="" itemtype="http://schema.org/WebPage">
+<head>
+    <meta charset="UTF-8"/>
+
+    <title>Пицца -  Вкусный дом</title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0" />
+	
+    <link rel="stylesheet" href="/wp-content/themes/xx/css/custom_scroll.css"/>
+    <link rel="stylesheet" href="/wp-content/themes/xx/css/style-7.css?1659347666"/>
+    <link rel="stylesheet" href="/wp-content/themes/xx/style.css?1659347666"/>
+    <link rel="stylesheet" href="/wp-content/themes/xx/css/responsive.css?1659347666"/>
+    
+	<link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+    <meta name='robots' content='max-image-preview:large' />
+<style id='global-styles-inline-css' type='text/css'>
+body{--wp--preset--color--black: #000000;--wp--preset--color--cyan-bluish-gray: #abb8c3;--wp--preset--color--white: #ffffff;--wp--preset--color--pale-pink: #f78da7;--wp--preset--color--vivid-red: #cf2e2e;--wp--preset--color--luminous-vivid-orange: #ff6900;--wp--preset--color--luminous-vivid-amber: #fcb900;--wp--preset--color--light-green-cyan: #7bdcb5;--wp--preset--color--vivid-green-cyan: #00d084;--wp--preset--color--pale-cyan-blue: #8ed1fc;--wp--preset--color--vivid-cyan-blue: #0693e3;--wp--preset--color--vivid-purple: #9b51e0;--wp--preset--gradient--vivid-cyan-blue-to-vivid-purple: linear-gradient(135deg,rgba(6,147,227,1) 0%,rgb(155,81,224) 100%);--wp--preset--gradient--light-green-cyan-to-vivid-green-cyan: linear-gradient(135deg,rgb(122,220,180) 0%,rgb(0,208,130) 100%);--wp--preset--gradient--luminous-vivid-amber-to-luminous-vivid-orange: linear-gradient(135deg,rgba(252,185,0,1) 0%,rgba(255,105,0,1) 100%);--wp--preset--gradient--luminous-vivid-orange-to-vivid-red: linear-gradient(135deg,rgba(255,105,0,1) 0%,rgb(207,46,46) 100%);--wp--preset--gradient--very-light-gray-to-cyan-bluish-gray: linear-gradient(135deg,rgb(238,238,238) 0%,rgb(169,184,195) 100%);--wp--preset--gradient--cool-to-warm-spectrum: linear-gradient(135deg,rgb(74,234,220) 0%,rgb(151,120,209) 20%,rgb(207,42,186) 40%,rgb(238,44,130) 60%,rgb(251,105,98) 80%,rgb(254,248,76) 100%);--wp--preset--gradient--blush-light-purple: linear-gradient(135deg,rgb(255,206,236) 0%,rgb(152,150,240) 100%);--wp--preset--gradient--blush-bordeaux: linear-gradient(135deg,rgb(254,205,165) 0%,rgb(254,45,45) 50%,rgb(107,0,62) 100%);--wp--preset--gradient--luminous-dusk: linear-gradient(135deg,rgb(255,203,112) 0%,rgb(199,81,192) 50%,rgb(65,88,208) 100%);--wp--preset--gradient--pale-ocean: linear-gradient(135deg,rgb(255,245,203) 0%,rgb(182,227,212) 50%,rgb(51,167,181) 100%);--wp--preset--gradient--electric-grass: linear-gradient(135deg,rgb(202,248,128) 0%,rgb(113,206,126) 100%);--wp--preset--gradient--midnight: linear-gradient(135deg,rgb(2,3,129) 0%,rgb(40,116,252) 100%);--wp--preset--duotone--dark-grayscale: url('#wp-duotone-dark-grayscale');--wp--preset--duotone--grayscale: url('#wp-duotone-grayscale');--wp--preset--duotone--purple-yellow: url('#wp-duotone-purple-yellow');--wp--preset--duotone--blue-red: url('#wp-duotone-blue-red');--wp--preset--duotone--midnight: url('#wp-duotone-midnight');--wp--preset--duotone--magenta-yellow: url('#wp-duotone-magenta-yellow');--wp--preset--duotone--purple-green: url('#wp-duotone-purple-green');--wp--preset--duotone--blue-orange: url('#wp-duotone-blue-orange');--wp--preset--font-size--small: 13px;--wp--preset--font-size--medium: 20px;--wp--preset--font-size--large: 36px;--wp--preset--font-size--x-large: 42px;}.has-black-color{color: var(--wp--preset--color--black) !important;}.has-cyan-bluish-gray-color{color: var(--wp--preset--color--cyan-bluish-gray) !important;}.has-white-color{color: var(--wp--preset--color--white) !important;}.has-pale-pink-color{color: var(--wp--preset--color--pale-pink) !important;}.has-vivid-red-color{color: var(--wp--preset--color--vivid-red) !important;}.has-luminous-vivid-orange-color{color: var(--wp--preset--color--luminous-vivid-orange) !important;}.has-luminous-vivid-amber-color{color: var(--wp--preset--color--luminous-vivid-amber) !important;}.has-light-green-cyan-color{color: var(--wp--preset--color--light-green-cyan) !important;}.has-vivid-green-cyan-color{color: var(--wp--preset--color--vivid-green-cyan) !important;}.has-pale-cyan-blue-color{color: var(--wp--preset--color--pale-cyan-blue) !important;}.has-vivid-cyan-blue-color{color: var(--wp--preset--color--vivid-cyan-blue) !important;}.has-vivid-purple-color{color: var(--wp--preset--color--vivid-purple) !important;}.has-black-background-color{background-color: var(--wp--preset--color--black) !important;}.has-cyan-bluish-gray-background-color{background-color: var(--wp--preset--color--cyan-bluish-gray) !important;}.has-white-background-color{background-color: var(--wp--preset--color--white) !important;}.has-pale-pink-background-color{background-color: var(--wp--preset--color--pale-pink) !important;}.has-vivid-red-background-color{background-color: var(--wp--preset--color--vivid-red) !important;}.has-luminous-vivid-orange-background-color{background-color: var(--wp--preset--color--luminous-vivid-orange) !important;}.has-luminous-vivid-amber-background-color{background-color: var(--wp--preset--color--luminous-vivid-amber) !important;}.has-light-green-cyan-background-color{background-color: var(--wp--preset--color--light-green-cyan) !important;}.has-vivid-green-cyan-background-color{background-color: var(--wp--preset--color--vivid-green-cyan) !important;}.has-pale-cyan-blue-background-color{background-color: var(--wp--preset--color--pale-cyan-blue) !important;}.has-vivid-cyan-blue-background-color{background-color: var(--wp--preset--color--vivid-cyan-blue) !important;}.has-vivid-purple-background-color{background-color: var(--wp--preset--color--vivid-purple) !important;}.has-black-border-color{border-color: var(--wp--preset--color--black) !important;}.has-cyan-bluish-gray-border-color{border-color: var(--wp--preset--color--cyan-bluish-gray) !important;}.has-white-border-color{border-color: var(--wp--preset--color--white) !important;}.has-pale-pink-border-color{border-color: var(--wp--preset--color--pale-pink) !important;}.has-vivid-red-border-color{border-color: var(--wp--preset--color--vivid-red) !important;}.has-luminous-vivid-orange-border-color{border-color: var(--wp--preset--color--luminous-vivid-orange) !important;}.has-luminous-vivid-amber-border-color{border-color: var(--wp--preset--color--luminous-vivid-amber) !important;}.has-light-green-cyan-border-color{border-color: var(--wp--preset--color--light-green-cyan) !important;}.has-vivid-green-cyan-border-color{border-color: var(--wp--preset--color--vivid-green-cyan) !important;}.has-pale-cyan-blue-border-color{border-color: var(--wp--preset--color--pale-cyan-blue) !important;}.has-vivid-cyan-blue-border-color{border-color: var(--wp--preset--color--vivid-cyan-blue) !important;}.has-vivid-purple-border-color{border-color: var(--wp--preset--color--vivid-purple) !important;}.has-vivid-cyan-blue-to-vivid-purple-gradient-background{background: var(--wp--preset--gradient--vivid-cyan-blue-to-vivid-purple) !important;}.has-light-green-cyan-to-vivid-green-cyan-gradient-background{background: var(--wp--preset--gradient--light-green-cyan-to-vivid-green-cyan) !important;}.has-luminous-vivid-amber-to-luminous-vivid-orange-gradient-background{background: var(--wp--preset--gradient--luminous-vivid-amber-to-luminous-vivid-orange) !important;}.has-luminous-vivid-orange-to-vivid-red-gradient-background{background: var(--wp--preset--gradient--luminous-vivid-orange-to-vivid-red) !important;}.has-very-light-gray-to-cyan-bluish-gray-gradient-background{background: var(--wp--preset--gradient--very-light-gray-to-cyan-bluish-gray) !important;}.has-cool-to-warm-spectrum-gradient-background{background: var(--wp--preset--gradient--cool-to-warm-spectrum) !important;}.has-blush-light-purple-gradient-background{background: var(--wp--preset--gradient--blush-light-purple) !important;}.has-blush-bordeaux-gradient-background{background: var(--wp--preset--gradient--blush-bordeaux) !important;}.has-luminous-dusk-gradient-background{background: var(--wp--preset--gradient--luminous-dusk) !important;}.has-pale-ocean-gradient-background{background: var(--wp--preset--gradient--pale-ocean) !important;}.has-electric-grass-gradient-background{background: var(--wp--preset--gradient--electric-grass) !important;}.has-midnight-gradient-background{background: var(--wp--preset--gradient--midnight) !important;}.has-small-font-size{font-size: var(--wp--preset--font-size--small) !important;}.has-medium-font-size{font-size: var(--wp--preset--font-size--medium) !important;}.has-large-font-size{font-size: var(--wp--preset--font-size--large) !important;}.has-x-large-font-size{font-size: var(--wp--preset--font-size--x-large) !important;}
+</style>
+<script >(function(a,d){if(a._nsl===d){a._nsl=[];var c=function(){if(a.jQuery===d)setTimeout(c,33);else{for(var b=0;b<a._nsl.length;b++)a._nsl[b].call(a,a.jQuery);a._nsl={push:function(b){b.call(a,a.jQuery)}}}};c()}})(window);</script><link hreflang="uk" href="https://vkusno-dom.com/ua/pizza/" rel="alternate" />
+<link hreflang="x-default" href="https://vkusno-dom.com/pizza/" rel="alternate" />
+<link rel="icon" href="https://vkusno-dom.com/wp-content/uploads/2020/09/favikon256-150x150.ico" sizes="32x32" />
+<link rel="icon" href="https://vkusno-dom.com/wp-content/uploads/2020/09/favikon256.ico" sizes="192x192" />
+<link rel="apple-touch-icon" href="https://vkusno-dom.com/wp-content/uploads/2020/09/favikon256.ico" />
+<meta name="msapplication-TileImage" content="https://vkusno-dom.com/wp-content/uploads/2020/09/favikon256.ico" />
+<style >div.nsl-container[data-align="left"] {
+    text-align: left;
+}
+
+div.nsl-container[data-align="center"] {
+    text-align: center;
+}
+
+div.nsl-container[data-align="right"] {
+    text-align: right;
+}
+
+
+div.nsl-container .nsl-container-buttons a {
+    text-decoration: none !important;
+    box-shadow: none !important;
+    border: 0;
+}
+
+div.nsl-container .nsl-container-buttons {
+    display: flex;
+    padding: 5px 0;
+}
+
+div.nsl-container-block .nsl-container-buttons {
+    flex-flow: column;
+    align-items: center;
+}
+
+div.nsl-container-block .nsl-container-buttons a {
+    flex: 1 1 auto;
+    display: block;
+    margin: 5px 0;
+    max-width: 280px;
+    width: 100%;
+}
+
+div.nsl-container-inline {
+    margin: -5px;
+    text-align: left;
+}
+
+div.nsl-container-inline .nsl-container-buttons {
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+div.nsl-container-inline .nsl-container-buttons a {
+    margin: 5px;
+    display: inline-block;
+}
+
+div.nsl-container-grid .nsl-container-buttons {
+    flex-flow: row;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+div.nsl-container-grid .nsl-container-buttons a {
+    flex: 1 1 auto;
+    display: block;
+    margin: 5px;
+    max-width: 280px;
+    width: 100%;
+}
+
+@media only screen and (min-width: 650px) {
+    div.nsl-container-grid .nsl-container-buttons a {
+        width: auto;
+    }
+}
+
+div.nsl-container .nsl-button {
+    cursor: pointer;
+    vertical-align: top;
+    border-radius: 4px;
+}
+
+div.nsl-container .nsl-button-default {
+    color: #fff;
+    display: flex;
+}
+
+div.nsl-container .nsl-button-icon {
+    display: inline-block;
+}
+
+div.nsl-container .nsl-button-svg-container {
+    flex: 0 0 auto;
+    padding: 8px;
+    display: flex;
+    align-items: center;
+}
+
+div.nsl-container svg {
+    height: 24px;
+    width: 24px;
+    vertical-align: top;
+}
+
+div.nsl-container .nsl-button-default div.nsl-button-label-container {
+    margin: 0 24px 0 12px;
+    padding: 10px 0;
+    font-family: Helvetica, Arial, sans-serif;
+    font-size: 16px;
+    line-height: 20px;
+    letter-spacing: .25px;
+    overflow: hidden;
+    text-align: center;
+    text-overflow: clip;
+    white-space: nowrap;
+    flex: 1 1 auto;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-transform: none;
+    display: inline-block;
+}
+
+div.nsl-container .nsl-button-google[data-skin="dark"] .nsl-button-svg-container {
+    margin: 1px;
+    padding: 7px;
+    border-radius: 3px;
+    background: #fff;
+}
+
+div.nsl-container .nsl-button-google[data-skin="light"] {
+    border-radius: 1px;
+    box-shadow: 0 1px 5px 0 rgba(0, 0, 0, .25);
+    color: RGBA(0, 0, 0, 0.54);
+}
+
+div.nsl-container .nsl-button-apple .nsl-button-svg-container {
+    padding: 0 6px;
+}
+
+div.nsl-container .nsl-button-apple .nsl-button-svg-container svg {
+    height: 40px;
+    width: auto;
+}
+
+div.nsl-container .nsl-button-apple[data-skin="light"] {
+    color: #000;
+    box-shadow: 0 0 0 1px #000;
+}
+
+div.nsl-container .nsl-button-facebook[data-skin="white"] {
+    color: #000;
+    box-shadow: inset 0 0 0 1px #000;
+}
+
+div.nsl-container .nsl-button-facebook[data-skin="light"] {
+    color: #1877F2;
+    box-shadow: inset 0 0 0 1px #1877F2;
+}
+
+div.nsl-container .nsl-button-apple div.nsl-button-label-container {
+    font-size: 17px;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+}
+
+.nsl-clear {
+    clear: both;
+}
+
+/*Button align start*/
+div.nsl-container-block[data-align="left"] .nsl-container-buttons {
+    align-items: flex-start;
+}
+
+div.nsl-container-block[data-align="center"] .nsl-container-buttons {
+    align-items: center;
+}
+
+div.nsl-container-block[data-align="right"] .nsl-container-buttons {
+    align-items: flex-end;
+}
+
+div.nsl-container-inline[data-align="left"] .nsl-container-buttons {
+    justify-content: flex-start;
+}
+
+div.nsl-container-inline[data-align="center"] .nsl-container-buttons {
+    justify-content: center;
+}
+
+div.nsl-container-inline[data-align="right"] .nsl-container-buttons {
+    justify-content: flex-end;
+}
+
+
+div.nsl-container-grid[data-align="left"] .nsl-container-buttons {
+    justify-content: flex-start;
+}
+
+div.nsl-container-grid[data-align="center"] .nsl-container-buttons {
+    justify-content: center;
+}
+
+div.nsl-container-grid[data-align="right"] .nsl-container-buttons {
+    justify-content: flex-end;
+}
+
+div.nsl-container-grid[data-align="space-around"] .nsl-container-buttons {
+    justify-content: space-around;
+}
+
+div.nsl-container-grid[data-align="space-between"] .nsl-container-buttons {
+    justify-content: space-between;
+}
+
+/* Button align end*/</style>	
+    
+	    <script >
+        var gift_1_price = 450;
+        var gift_2_price = 700;
+        var gift_1 = '';
+        var gift_2 = '';
+    </script>
+	
+   
+
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-177551859-1"></script>
+    <script>
+        var ajax_url = "https://vkusno-dom.com/wp-admin/admin-ajax.php";
+		
+		
+
+		function gSendEvent($eventCategory, $eventAction, $eventLabel) {
+			 
+			 try {
+				 ga('send', 'event', $eventCategory,  $eventAction,  'f '+$eventLabel);
+				} catch (e) {}
+			 
+			 try {
+				 gtag('event', $eventAction, {'event_category': $eventCategory,  'event_label': $eventLabel});
+				} catch (e) {}
+			 
+			 try {
+				 dataLayer.push({'event': $eventAction, 'eventCategory': $eventCategory,  'eventAction': $eventAction,  'eventLabel': $eventLabel});
+				}  catch (e) {}
+			 
+			 return true;
+			}
+		
+    </script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+
+        function gtag() {
+            dataLayer.push(arguments);
+        }
+
+        gtag('js', new Date());
+
+
+
+        
+        gtag('config', 'UA-177551859-1'); /* default */
+        gtag('set', 'UA-177551859-1', {'groups': 'default'});
+
+        
+    </script>
+
+
+    
+
+    <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon"/>
+
+    <link rel="apple-touch-icon" href="/icons/logo-v2-32.jpg" sizes="32x32"/>
+    <link rel="apple-touch-icon" href="/icons/logo-v2-72.jpg" sizes="72x72"/>
+    <link rel="apple-touch-icon" href="/icons/logo-v2-124.jpg" sizes="124x124"/>
+    <link rel="apple-touch-icon" href="/icons/logo-v2-114.jpg" sizes="114x114"/>
+    <link rel="apple-touch-icon" href="/icons/logo-v2-512.jpg" sizes="512x512"/>
+    <meta name="google-site-verification" content="dpK6SYoMM0T7X3kZMXGRCZgsVOwjJ76Dxg5XaVPKjTc" />
+
+
+    <link rel="canonical" href="/pizza/" /><meta  itemprop="description"  name="description" content="Онлайн ресторан доставки еды. Пицца - доставка на дом и в офис в Вкусный дом"><meta name="keywords" content="Пицца онлайн-ресторан, доставка пиццы, суши, роллов, wok, bbq"><meta  itemprop="image"  property="og:image" content="https://vkusno-dom.com/wp-content/uploads/2021/10/pitstsa-2.png" /><meta property="og:url" content="/pizza/" /><meta property="og:type" content="website" /><meta property="og:title" content="Пицца -  Вкусный дом"/><meta property="og:description" content="Онлайн ресторан доставки еды. Пицца - доставка на дом и в офис в Вкусный дом" /><meta property="og:locale" content="ru_RU" /><meta property="og:site_name" content="Вкусный дом" /><meta property="twitter:card" content="summary" /><link rel="canonical" href="/pizza/">
+</head>
+
+<body class="archive tax-prodcat term-pizza term-90 wp-custom-logo" data-restoran_city_id="7"
+                             data-lang="ru" >
+	<div class="blur">
+
+		<div class="fixed-header">
+			<div class="container flex-center"></div>
+		</div>
+		<div id="top"></div>
+
+
+		
+		
+		
+		<div class="wrapper">
+			<header class="navbar navbar-inverse main_header" itemprop="author" itemscope itemtype="https://schema.org/Organization">
+								<meta itemprop="name" content="vkusno-dom">
+				<meta itemprop="logo" content="/wp-content/uploads/2020/11/cropped-200095800656_244085222-1.png">
+				<meta itemprop="image" content="/wp-content/uploads/2020/11/cropped-200095800656_244085222-1.png">
+				<meta itemprop="description" content="Доставка суши роллов бесплатно по городу Черноморск">
+				<meta itemprop="url" content="/">
+				<div itemprop = "address" itemscope itemtype = "https://schema.org/PostalAddress">
+	                <meta itemprop="email" content="info.vkysnodom@gmail.com">
+	                <meta itemprop = "streetAddress" content="Чорноморськ, проспект Миру, 27б">
+	            </div>
+				
+				<div class="navbar-header">
+					<div class="container f_middle_between">
+						<div class="btn btn-link btn_main_menu">
+							<i class="im-menu"></i>
+						</div>
+						<a href="/" class="custom-logo-link" rel="home"><img width="206" height="121" src="/wp-content/uploads/2020/11/cropped-200095800656_244085222-1.png" class="custom-logo" alt="Вкусный дом" /></a>						<div class="header-top">
+							<div class="flex">
+								<nav class="main_nav">
+									<div class="mob close-button"><i class="im-close"></i></div>
+									<div class="main_nav_cont">
+										<div class="menu-cont">
+											<div class="title mob">Меню
+												<div class="arrow"></div>
+											</div>
+											<div class="main-terms-header mob">
+												<a class="term-link aktsii novinki" href="/novinki/"><span class="term-img-cont"> <img style="width: 36px;" class="term-img" src="/wp-content/uploads/2020/12/discount-1.png" width="36" height="36"></span><span class="term-name">Новинки</span></a><a class="term-link  cety" href="/cety/"><span class="term-img-cont"> <img style="width: 51px;" class="term-img" src="/wp-content/uploads/2020/12/sushi-roll-1.png" width="51" height="51"></span><span class="term-name">Cеты</span></a><a class="term-link  rolly" href="/rolly/"><span class="term-img-cont"> <img style="width: 51px;" class="term-img" src="/wp-content/uploads/2020/12/sushi-7-1.png" width="51" height="50"></span><span class="term-name">Роллы</span></a><a class="term-link  sushi" href="/sushi/"><span class="term-img-cont"> <img style="width: 56px;" class="term-img" src="/wp-content/uploads/2020/12/sushi-8-1.png" width="56" height="35"></span><span class="term-name">Суши</span></a><a class="term-link  supi-i-vogi" href="/supi-i-vogi/"><span class="term-img-cont"> <img style="width: 47px;" class="term-img" src="/wp-content/uploads/2020/12/ramen-1.png" width="47" height="47"></span><span class="term-name">Воки\Супы</span></a><a class="term-link  salaty" href="/salaty/"><span class="term-img-cont"> <img style="width: 56px;" class="term-img" src="/wp-content/uploads/2020/12/frame-388-1.png" width="56" height="56"></span><span class="term-name">Салаты</span></a><a class="term-link  mangal-i-fritur" href="/mangal-i-fritur/"><span class="term-img-cont"> <img style="width: 51px;" class="term-img" src="/wp-content/uploads/2021/08/kisspng-barbecue-cooking-kitchen-utensil-clip-art-spareribs-clipart-5adf5b80cfec60.8010911015245873928517-e1630019994583.png" width="51" height="51"></span><span class="term-name">Мангал</span></a><a class="term-link active pizza" href="#" onclick="return false;"><span class="term-img-cont"> <img style="width: 55px;" class="term-img" src="/wp-content/uploads/2021/10/pitstsa-2.png" width="55" height="57"></span><span class="term-name">Пицца</span></a><a class="term-link  zakuski" href="/zakuski/"><span class="term-img-cont"> <img style="width: 50px;" class="term-img" src="/wp-content/uploads/2021/09/kisspng-french-fries-hamburger-junk-food-restaurant-patatas-fritas-iconos-gratis-de-comida-5c4959df49c7c7.2017908815483110073022-e1630792181363.png" width="50" height="50"></span><span class="term-name">Закуски</span></a><a class="term-link  goryachie-i-holodnie-bluda" href="/goryachie-i-holodnie-bluda/"><span class="term-img-cont"> <img style="width: 43px;" class="term-img" src="/wp-content/uploads/2020/12/soy-sauce-1.png" width="43" height="43"></span><span class="term-name">Соуса</span></a><a class="term-link  napitki-i-sousi" href="/napitki-i-sousi/"><span class="term-img-cont"> <img style="width: 56px;" class="term-img" src="/wp-content/uploads/2020/12/frame-388.png" width="56" height="56"></span><span class="term-name">Напитки</span></a>											</div>
+
+											<div class="active" id="main_menu" >
+
+												<ul class="nav navbar-nav">
+													<li id="menu-item-11373" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-11373"><a href="/#about">О нас</a></li>
+<li id="menu-item-11374" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-11374"><a href="/#contacts">Контакты</a></li>
+<li id="menu-item-11375" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-11375"><a href="/#payment_delivery">Доставка и оплата</a></li>
+<li id="menu-item-11717" class="menu_sale menu-item menu-item-type-post_type menu-item-object-page menu-item-11717"><a href="/action/">Акции</a></li>
+												</ul>
+
+												<ul class="nav navbar-nav navbar-right col-md-2 hidden">
+
+													<li class="visible-xs">
+														<form action="/" class="main_menu_select">
+															<select name="sel_city" id="sel_city" class=""
+																	onchange="setval(this);">
+
+
+																
+															</select>
+														</form>
+													</li>
+
+												</ul>
+
+											</div>
+										</div>
+																					<div class="mob">
+												<div class="social_icons">
+													<a target="_blank" href="https://instagram.com/vkysni_dom?igshid=a7ml5oy9ih21" class="icon insta"><img src="/wp-content/themes/xx/img/inst.png"></a><a target="_blank" href="https://www.facebook.com/profile.php?id=100058574498086" class="icon facebook"><img src="/wp-content/themes/xx/img/facebook.png"></a>												</div>
+											</div>
+
+																				<ul class="nav mob phones">
+
+																							<li>
+													<a href="tel:0730410151"
+													   onClick="gtagEvent('call-mobile-press', {'event_category': 'call-mobile', 'event_action': 'press-ru', 'event_label': 'tel 073 04 101 51'} );">073 04 101 51</a>
+												</li>
+											
+																							<li>
+													<a href="tel:0990410151"
+													   onClick="gtagEvent('call-mobile-press', {'event_category': 'call-mobile', 'event_action': 'press-ru', 'event_label': 'tel 099 04 101 51'} );">099 04 101 51</a>
+												</li>
+											
+																							<li>
+													<a href="tel:0970410151"
+													   onClick="gtagEvent('call-mobile-press', {'event_category': 'call-mobile', 'event_action': 'press-ru', 'event_label': 'tel 097 04 101 51'} );">097 04 101 51</a>
+												</li>
+											
+										</ul>
+									</div>
+								</nav>
+															</div>
+							<div class="flex-center header-second-row">
+								<div class="hidden-xs header1 order_take_text" style="display: block;">
+									<div class="">
+										Прием заказов									</div>
+									<span>
+										   с 10-00 до 22:30										</span>
+
+								</div>
+
+
+								<!--<form action="/" >
+								<select name="city_menu" id="city_menu" class="city_menu" onchange="setval(this);" >
+
+
+									
+								</select>
+							</form>-->
+
+								<a class="btn btn-link btn_phone_menu"
+								   href="tel:0730410151"
+								   onClick="gtagEvent('call-mobile-press', {'event_category': 'call-mobile', 'event_action': 'press-ru', 'event_label': 'tel 073 04 101 51'} );">073 04 101 51									<img src="/wp-content/themes/xx/img/phone.png" width="42"
+										 height="42" alt="">
+								</a>
+
+
+								<div class="collapse navbar-collapse phone_menu" id="phone_menu">
+									<ul class="nav">
+
+																					<li itemprop="telephone"><a class="phone-click"
+												   href="tel:0730410151"
+												   onClick="gtagEvent('call-mobile-press', {'event_category': 'call-mobile', 'event_action': 'press-ru', 'event_label': 'tel 073 04 101 51'} );">073 04 101 51</a>
+											</li>
+										
+																					<li itemprop="telephone"><a href="tel:0990410151"
+												   onClick="gtagEvent('call-mobile-press', {'event_category': 'call-mobile', 'event_action': 'press-ru', 'event_label': 'tel 099 04 101 51'} );">099 04 101 51</a>
+											</li>
+										
+																					<li itemprop="telephone"><a href="tel:0970410151"
+												   onClick="gtagEvent('call-mobile-press', {'event_category': 'call-mobile', 'event_action': 'press-ru', 'event_label': 'tel 097 04 101 51'} );">097 04 101 51</a>
+											</li>
+										
+									</ul>
+								</div>
+								<!--<div class="social flex">
+									<a href="" class="inst"></a>
+									<a href="" class="facebook"></a>
+								</div>-->
+																	<div class="social_icons pc">
+										<a target="_blank" href="https://instagram.com/vkysni_dom?igshid=a7ml5oy9ih21" class="icon insta"><img src="/wp-content/themes/xx/img/inst.png"></a><a target="_blank" href="https://www.facebook.com/profile.php?id=100058574498086" class="icon facebook"><img src="/wp-content/themes/xx/img/facebook.png"></a>									</div>
+																<div class="dropdown basket-dropdown">
+									<a href="/basket" class="btn btn-link btn_cart">
+										<!-- количество позиций-->
+										<span class="basket-count basket">0</span>
+										<!-- сумма заказа-->
+
+									</a>
+																			<div class="header-cart">
+											<div class="header-cart-cont">
+												<i class="im-up "></i>
+												<div class="title">Корзина</div>
+												<div class="html"></div>
+											</div>
+										</div>
+																	</div>
+							</div>
+
+						</div>
+
+
+					</div>
+				</div>
+			</header>
+
+			
+			
+
+				<nav class="top_menu true-top-menu">
+					<div class="container ">
+						<div class="top_menu_container">
+							<div class="f_middle_center">
+
+								<a class="term-link aktsii novinki" href="/novinki/"><span class="term-img-cont"> <img style="width: 36px;" class="term-img" src="/wp-content/uploads/2020/12/discount-1.png" width="36" height="36"></span><span class="term-name">Новинки</span></a><a class="term-link  cety" href="/cety/"><span class="term-img-cont"> <img style="width: 51px;" class="term-img" src="/wp-content/uploads/2020/12/sushi-roll-1.png" width="51" height="51"></span><span class="term-name">Cеты</span></a><a class="term-link  rolly" href="/rolly/"><span class="term-img-cont"> <img style="width: 51px;" class="term-img" src="/wp-content/uploads/2020/12/sushi-7-1.png" width="51" height="50"></span><span class="term-name">Роллы</span></a><a class="term-link  sushi" href="/sushi/"><span class="term-img-cont"> <img style="width: 56px;" class="term-img" src="/wp-content/uploads/2020/12/sushi-8-1.png" width="56" height="35"></span><span class="term-name">Суши</span></a><a class="term-link  supi-i-vogi" href="/supi-i-vogi/"><span class="term-img-cont"> <img style="width: 47px;" class="term-img" src="/wp-content/uploads/2020/12/ramen-1.png" width="47" height="47"></span><span class="term-name">Воки\Супы</span></a><a class="term-link  salaty" href="/salaty/"><span class="term-img-cont"> <img style="width: 56px;" class="term-img" src="/wp-content/uploads/2020/12/frame-388-1.png" width="56" height="56"></span><span class="term-name">Салаты</span></a><a class="term-link  mangal-i-fritur" href="/mangal-i-fritur/"><span class="term-img-cont"> <img style="width: 51px;" class="term-img" src="/wp-content/uploads/2021/08/kisspng-barbecue-cooking-kitchen-utensil-clip-art-spareribs-clipart-5adf5b80cfec60.8010911015245873928517-e1630019994583.png" width="51" height="51"></span><span class="term-name">Мангал</span></a><a class="term-link active pizza" href="#" onclick="return false;"><span class="term-img-cont"> <img style="width: 55px;" class="term-img" src="/wp-content/uploads/2021/10/pitstsa-2.png" width="55" height="57"></span><span class="term-name">Пицца</span></a><a class="term-link  zakuski" href="/zakuski/"><span class="term-img-cont"> <img style="width: 50px;" class="term-img" src="/wp-content/uploads/2021/09/kisspng-french-fries-hamburger-junk-food-restaurant-patatas-fritas-iconos-gratis-de-comida-5c4959df49c7c7.2017908815483110073022-e1630792181363.png" width="50" height="50"></span><span class="term-name">Закуски</span></a><a class="term-link  goryachie-i-holodnie-bluda" href="/goryachie-i-holodnie-bluda/"><span class="term-img-cont"> <img style="width: 43px;" class="term-img" src="/wp-content/uploads/2020/12/soy-sauce-1.png" width="43" height="43"></span><span class="term-name">Соуса</span></a><a class="term-link  napitki-i-sousi" href="/napitki-i-sousi/"><span class="term-img-cont"> <img style="width: 56px;" class="term-img" src="/wp-content/uploads/2020/12/frame-388.png" width="56" height="56"></span><span class="term-name">Напитки</span></a>							</div>
+						</div>
+					</div>
+				</nav>
+
+				
+
+	
+    <main class="content">
+
+        <section class="container">
+
+            <input hidden id="city" value="7"/>
+            <input type="hidden" class="term_slug_name" value="/pizza/">
+            <input type="hidden" value="90" name="term_id" class="term_id">
+
+            
+			            <div id="breadcrumb" class="catalog_breadcrumb">
+                
+				
+								
+				
+				<ol class="breadcrumb">
+                    
+					<li>
+                        <a href="/"> Главная </a>
+                    </li>
+					
+                    					
+                    <li class="active"><a href="#">Пицца</a></li>
+                </ol>
+				
+				
+				
+                                    <div class="sort_criterion pc">
+                        <form action="/" class="" method="post">
+
+                            <div class="text">Сортировка по:</div>
+
+                            <select name="sort" id="sort" class=" sort-selector" onchange="_showOnChange(this.value);">
+
+                                <option class="criterion" data-sort="top"
+                                        value="top" selected>
+                                    по популярности                                </option>
+
+                                <option class="criterion" data-sort="asc"
+                                        value="asc" >
+                                    по возрастанию цены                                </option>
+
+                                <option class="criterion" data-sort="desc"
+                                        value="desc" >
+                                    по убыванию цены                                </option>
+
+                            </select>
+
+                        </form>
+                    </div>
+                
+            </div>
+                        <div class="mobile-filter-button">
+                <!--<img src="/img/filter-button.png" width="29" height="26" alt="">-->
+                Фильтрировать
+            </div>
+            <div class="row pt_15">
+
+
+                
+            </div>
+
+
+            <div class="row category-row">
+
+                <div class="open_filter_button"><span></span><span></span><span></span></div>
+                <div class="col-xs-12  category_main_row col-lg-12 col-sm-12 full">
+
+                    
+
+                            
+                        
+
+                    <div class="row row-catalog products_align_row" id="cards_cont"
+                         data-default_posts_per_page="15">
+
+                        <div class="product-in-row product_align my_product_wrapper" data-id="12567"><div>
+                        <div class="product-wrapper"><div class="img"><a class="my_product_img" href="/pizza/pitstsa-morskaya/"><img width="258" height="218" src="/wp-content/uploads/2020/12/more-258x218.jpg" class="attachment-product_in_row size-product_in_row wp-post-image" alt="Море" loading="lazy" /></a></div><div class="product-content"><div class="title"><a href="/pizza/pitstsa-morskaya/" >Пицца Морская</a></div><div class="description"><p style="text-align: center;">Мидии, креветки, оливки, маслины, сливочный соус, сыр моцарелла, сыр чеддер</p></div><div class="card_checkout flex-center"><div class="price"><div>190<span class="currency">грн</span></div><div class="quantity_in_row "><div class="quantity">8 шт.</div><div class="separator">/</div><div class="weight">750 г</div></div></div><button name="addtocart" data-goodid="12567"
+                                                class="addtocart-good-butto  addtocart-button"
+                                                data-empty="+">+</button></div><div class="hidden-product-info flex"><div class="quantity">8 шт.</div><div class="separator">/</div><div class="weight">750 г</div></div></div>
+				</div></div></div><div class="product-in-row product_align my_product_wrapper" data-id="12541"><div>
+                        <div class="product-wrapper"><div class="img"><a class="my_product_img" href="/pizza/pitstsa-kabanosi/"><img width="258" height="218" src="/wp-content/uploads/2020/12/kaban-258x218.jpg" class="attachment-product_in_row size-product_in_row wp-post-image" alt="Кабаноси" loading="lazy" /></a></div><div class="product-content"><div class="title"><a href="/pizza/pitstsa-kabanosi/" >Пицца Кабаноси</a></div><div class="description"><p style="text-align: center;">Запеченая свинина, грибы, крымский лук, кукуруза, помидор, сыр моцарелла, сыр чеддер, томатный соус</p></div><div class="card_checkout flex-center"><div class="price"><div>190<span class="currency">грн</span></div><div class="quantity_in_row "><div class="quantity">8 шт.</div><div class="separator">/</div><div class="weight">800 г</div></div></div><button name="addtocart" data-goodid="12541"
+                                                class="addtocart-good-butto  addtocart-button"
+                                                data-empty="+">+</button></div><div class="hidden-product-info flex"><div class="quantity">8 шт.</div><div class="separator">/</div><div class="weight">800 г</div></div></div>
+				</div></div></div><div class="product-in-row product_align my_product_wrapper" data-id="12561"><div>
+                        <div class="product-wrapper"><div class="img"><a class="my_product_img" href="/pizza/pepperoni/"><img width="258" height="218" src="/wp-content/uploads/2020/12/pepper-258x218.jpg" class="attachment-product_in_row size-product_in_row wp-post-image" alt="Пепперони" loading="lazy" /></a><div class="product_badge spicy"><img  src="/wp-content/themes/xx/img/spicy.png" width="83" height="74"></div></div><div class="product-content"><div class="title"><a href="/pizza/pepperoni/" >Пицца Пепперони</a></div><div class="description"><p style="text-align: center;">Салями, острый соус ширачи, помидор, сыр моцарелла, сыр чеддер, томатный соус</p></div><div class="card_checkout flex-center"><div class="price"><div>160<span class="currency">грн</span></div><div class="quantity_in_row "><div class="quantity">8 шт.</div><div class="separator">/</div><div class="weight">750 г</div></div></div><button name="addtocart" data-goodid="12561"
+                                                class="addtocart-good-butto  addtocart-button"
+                                                data-empty="+">+</button></div><div class="hidden-product-info flex"><div class="quantity">8 шт.</div><div class="separator">/</div><div class="weight">750 г</div></div></div>
+				</div></div></div><div class="product-in-row product_align my_product_wrapper" data-id="12538"><div>
+                        <div class="product-wrapper"><div class="img"><a class="my_product_img" href="/pizza/pitstsa-4-myasa/"><img width="258" height="218" src="/wp-content/uploads/2020/12/4-myasa-258x218.jpg" class="attachment-product_in_row size-product_in_row wp-post-image" alt="4 мяса" loading="lazy" /></a></div><div class="product-content"><div class="title"><a href="/pizza/pitstsa-4-myasa/" >Пицца 4 Мяса</a></div><div class="description"><p style="text-align: center;">Ветчина, бекон, куриное филе, охотничьи сосиски, сыр моцарелла, сыр чеддер, помидор, томатный соус</p></div><div class="card_checkout flex-center"><div class="price"><div>170<span class="currency">грн</span></div><div class="quantity_in_row "><div class="quantity">8 шт.</div><div class="separator">/</div><div class="weight">750 г</div></div></div><button name="addtocart" data-goodid="12538"
+                                                class="addtocart-good-butto  addtocart-button"
+                                                data-empty="+">+</button></div><div class="hidden-product-info flex"><div class="quantity">8 шт.</div><div class="separator">/</div><div class="weight">750 г</div></div></div>
+				</div></div></div><div class="product-in-row product_align my_product_wrapper" data-id="12572"><div>
+                        <div class="product-wrapper"><div class="img"><a class="my_product_img" href="/pizza/pitstsa-buffalo/"><img width="258" height="218" src="/wp-content/uploads/2020/12/buffalo-258x218.jpg" class="attachment-product_in_row size-product_in_row wp-post-image" alt="Буффало" loading="lazy" /></a></div><div class="product-content"><div class="title"><a href="/pizza/pitstsa-buffalo/" >Пицца Буффало</a></div><div class="description"><p style="text-align: center;">Запеченая говядина, грибы, помидор, томатный соус, сыр моцарелла, сыр чеддер</p></div><div class="card_checkout flex-center"><div class="price"><div>180<span class="currency">грн</span></div><div class="quantity_in_row "><div class="quantity">8 шт.</div><div class="separator">/</div><div class="weight">750 г</div></div></div><button name="addtocart" data-goodid="12572"
+                                                class="addtocart-good-butto  addtocart-button"
+                                                data-empty="+">+</button></div><div class="hidden-product-info flex"><div class="quantity">8 шт.</div><div class="separator">/</div><div class="weight">750 г</div></div></div>
+				</div></div></div><div class="product-in-row product_align my_product_wrapper" data-id="12532"><div>
+                        <div class="product-wrapper"><div class="img"><a class="my_product_img" href="/pizza/pitstsa-gavajskaya/"><img width="258" height="218" src="/wp-content/uploads/2020/12/gavai-258x218.jpg" class="attachment-product_in_row size-product_in_row wp-post-image" alt="Гаваи" loading="lazy" /></a></div><div class="product-content"><div class="title"><a href="/pizza/pitstsa-gavajskaya/" >Пицца Гавайская</a></div><div class="description"><p style="text-align: center;">Куриное филе, ананасы, сыр моцарелла, сыр чеддер, сливочный соус</p></div><div class="card_checkout flex-center"><div class="price"><div>165<span class="currency">грн</span></div><div class="quantity_in_row "><div class="quantity">8 шт.</div><div class="separator">/</div><div class="weight">750 г</div></div></div><button name="addtocart" data-goodid="12532"
+                                                class="addtocart-good-butto  addtocart-button"
+                                                data-empty="+">+</button></div><div class="hidden-product-info flex"><div class="quantity">8 шт.</div><div class="separator">/</div><div class="weight">750 г</div></div></div>
+				</div></div></div><div class="product-in-row product_align my_product_wrapper" data-id="12553"><div>
+                        <div class="product-wrapper"><div class="img"><a class="my_product_img" href="/pizza/pitstsa-nyu-jork/"><img width="258" height="218" src="/wp-content/uploads/2020/12/jork-258x218.jpg" class="attachment-product_in_row size-product_in_row wp-post-image" alt="Нью-Йорк" loading="lazy" /></a><div class="product_badge spicy"><img  src="/wp-content/themes/xx/img/spicy.png" width="83" height="74"></div></div><div class="product-content"><div class="title"><a href="/pizza/pitstsa-nyu-jork/" >Пицца Нью-Йорк</a></div><div class="description"><p style="text-align: center;">Ветчина, бекон, острый соус ширачи, ананас, сыр моцарелла, сыр чеддер, томатный соус</p></div><div class="card_checkout flex-center"><div class="price"><div>170<span class="currency">грн</span></div><div class="quantity_in_row "><div class="quantity">8 шт.</div><div class="separator">/</div><div class="weight">750 г</div></div></div><button name="addtocart" data-goodid="12553"
+                                                class="addtocart-good-butto  addtocart-button"
+                                                data-empty="+">+</button></div><div class="hidden-product-info flex"><div class="quantity">8 шт.</div><div class="separator">/</div><div class="weight">750 г</div></div></div>
+				</div></div></div><div class="product-in-row product_align my_product_wrapper" data-id="12535"><div>
+                        <div class="product-wrapper"><div class="img"><a class="my_product_img" href="/pizza/pitstsa-4-syra/"><img width="258" height="218" src="/wp-content/uploads/2020/12/img_5461-yarkost-258x218.jpg" class="attachment-product_in_row size-product_in_row wp-post-image" alt="Пицца 4 Сыра" loading="lazy" /></a></div><div class="product-content"><div class="title"><a href="/pizza/pitstsa-4-syra/" >Пицца 4 Сыра</a></div><div class="description"><p style="text-align: center;">Сыр моцарелла, сыр чеддер, сыр дорблю, сыр пармезан, сливочный соус</p></div><div class="card_checkout flex-center"><div class="price"><div>170<span class="currency">грн</span></div><div class="quantity_in_row "><div class="quantity">8 шт.</div><div class="separator">/</div><div class="weight">700 г</div></div></div><button name="addtocart" data-goodid="12535"
+                                                class="addtocart-good-butto  addtocart-button"
+                                                data-empty="+">+</button></div><div class="hidden-product-info flex"><div class="quantity">8 шт.</div><div class="separator">/</div><div class="weight">700 г</div></div></div>
+				</div></div></div><div class="product-in-row product_align my_product_wrapper" data-id="12550"><div>
+                        <div class="product-wrapper"><div class="img"><a class="my_product_img" href="/pizza/pitstsa-tehas/"><img width="258" height="218" src="/wp-content/uploads/2020/12/tehas-258x218.jpg" class="attachment-product_in_row size-product_in_row wp-post-image" alt="Техас" loading="lazy" /></a></div><div class="product-content"><div class="title"><a href="/pizza/pitstsa-tehas/" >Пицца Техас</a></div><div class="description"><p style="text-align: center;">Охотничьи сосиски, крымский лук, кукуруза, сыр моцарелла, сыр чеддер, томатный соус</p></div><div class="card_checkout flex-center"><div class="price"><div>160<span class="currency">грн</span></div><div class="quantity_in_row "><div class="quantity">8 шт.</div><div class="separator">/</div><div class="weight">750 г</div></div></div><button name="addtocart" data-goodid="12550"
+                                                class="addtocart-good-butto  addtocart-button"
+                                                data-empty="+">+</button></div><div class="hidden-product-info flex"><div class="quantity">8 шт.</div><div class="separator">/</div><div class="weight">750 г</div></div></div>
+				</div></div></div><div class="product-in-row product_align my_product_wrapper" data-id="12564"><div>
+                        <div class="product-wrapper"><div class="img"><a class="my_product_img" href="/pizza/pitstsa-vegetarianskaya/"><img width="258" height="218" src="/wp-content/uploads/2020/12/vega-258x218.jpg" class="attachment-product_in_row size-product_in_row wp-post-image" alt="Вегетарианская" loading="lazy" /></a></div><div class="product-content"><div class="title"><a href="/pizza/pitstsa-vegetarianskaya/" >Пицца Вегетарианская</a></div><div class="description"><p style="text-align: center;">Сладкий перец, крымский лук, помидор, грибы, сыр моцарелла, сыр чеддер, томатный соус</p></div><div class="card_checkout flex-center"><div class="price"><div>150<span class="currency">грн</span></div><div class="quantity_in_row "><div class="quantity">8 шт.</div><div class="separator">/</div><div class="weight">750 г</div></div></div><button name="addtocart" data-goodid="12564"
+                                                class="addtocart-good-butto  addtocart-button"
+                                                data-empty="+">+</button></div><div class="hidden-product-info flex"><div class="quantity">8 шт.</div><div class="separator">/</div><div class="weight">750 г</div></div></div>
+				</div></div></div><div class="product-in-row product_align my_product_wrapper" data-id="12558"><div>
+                        <div class="product-wrapper"><div class="img"><a class="my_product_img" href="/pizza/pitstsa-ohotnik/"><img width="258" height="218" src="/wp-content/uploads/2020/12/ohotnik-258x218.jpg" class="attachment-product_in_row size-product_in_row wp-post-image" alt="Охотник" loading="lazy" /></a></div><div class="product-content"><div class="title"><a href="/pizza/pitstsa-ohotnik/" >Пицца Охотник</a></div><div class="description"><p style="text-align: center;">Охотничьи сосиски, помидор, сыр моцарелла, сыр чеддер, томатный соус</p></div><div class="card_checkout flex-center"><div class="price"><div>155<span class="currency">грн</span></div><div class="quantity_in_row "><div class="quantity">8 шт.</div><div class="separator">/</div><div class="weight">750 г</div></div></div><button name="addtocart" data-goodid="12558"
+                                                class="addtocart-good-butto  addtocart-button"
+                                                data-empty="+">+</button></div><div class="hidden-product-info flex"><div class="quantity">8 шт.</div><div class="separator">/</div><div class="weight">750 г</div></div></div>
+				</div></div></div><div class="product-in-row product_align my_product_wrapper" data-id="12528"><div>
+                        <div class="product-wrapper"><div class="img"><a class="my_product_img" href="/pizza/margarita/"><img width="258" height="218" src="/wp-content/uploads/2020/12/margo-menshe2-258x218.jpg" class="attachment-product_in_row size-product_in_row wp-post-image" alt="Маргарита" loading="lazy" /></a></div><div class="product-content"><div class="title"><a href="/pizza/margarita/" >Пицца Маргарита</a></div><div class="description"><p style="text-align: center;">Сыр моцарелла, сыр чеддер, помидор, томатный соус</p></div><div class="card_checkout flex-center"><div class="price"><div>140<span class="currency">грн</span></div><div class="quantity_in_row "><div class="quantity">8 шт.</div><div class="separator">/</div><div class="weight">700 г</div></div></div><button name="addtocart" data-goodid="12528"
+                                                class="addtocart-good-butto  addtocart-button"
+                                                data-empty="+">+</button></div><div class="hidden-product-info flex"><div class="quantity">8 шт.</div><div class="separator">/</div><div class="weight">700 г</div></div></div>
+				</div></div></div>                    </div>
+
+                                    </div>
+                                    <div class="col-lg-3 col-sm-4 mob">
+                        <div class="filters-block">
+                        <div class="filters-overflow">
+                        <div class="sort_criterion">
+                            <form action="/" class="" method="post">
+
+                                <div class="text mob">Сортировка по:</div>
+                                <div class="flex_center">
+                                    <select name="sort" class=" sort-selector" onchange="_showOnChange(this.value);">
+
+                                        <option class="criterion" data-sort="top"
+                                                value="top" selected>
+                                            по популярности                                        </option>
+
+                                        <option class="criterion" data-sort="asc"
+                                                value="asc" >
+                                            по возростанию цены                                        </option>
+
+                                        <option class="criterion" data-sort="desc"
+                                                value="desc" >
+                                            по убыванию цены                                        </option>
+
+                                    </select>
+                                    <div class="sort_close pc">
+
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                            <div class="mob close-button"><i class="im-close"></i></div>
+                                                    </div>
+                        </div>
+                    </div>
+
+            </div>
+
+        </section>
+
+    </main>
+
+
+
+
+			<div class="footer_search hidden">
+				<div class="row">
+					<form method="get" action="/" id="search-form" class="col-xs-8 col-xs-offset-2 form_search">
+<!--						<input type="hidden" name="mode" value="search">-->
+						<input type="search" id="s"  name="s" class="form-control" placeholder="Введите для поиска">
+<!--						<input type="hidden" name="post_type" value="product_items">-->
+						<button class="btn btn-link"><i class="im-search"></i></button>
+					</form>
+				</div>
+			</div>
+
+
+
+			<footer>
+				<div class="container ">
+                    <div class="flex footer_flex">
+                    <div class="footer-logo">
+                        <a href="/" class="custom-logo-link" rel="home"><img width="206" height="121" src="/wp-content/uploads/2020/11/cropped-200095800656_244085222-1.png" class="custom-logo" alt="Вкусный дом" /></a>                    </div>
+                    <ul class="nav navbar-nav footer_menu">
+                        <li id="menu-item-11390" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-11390"><a href="/#payment_delivery">Доставка и оплата</a></li>
+<li id="menu-item-11391" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-11391"><a href="/#contacts">Контакты</a></li>
+<li id="menu-item-11175" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-privacy-policy menu-item-11175"><a href="/politika-konfidentsialnosti/">Политика конфиденциальности</a></li>
+<li id="menu-item-11178" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-11178"><a href="/polzovatelskoe-soglashenie/">Пользовательское соглашение</a></li>
+                    </ul>
+                    <div class=" header1 order_take_text">
+                        <div class="">
+                            Прием заказов                        </div>
+                        <span>
+                                       с 10-00 до 22:30                                    </span>
+                        <ul class="nav navbar-nav">
+                            <li id="menu-item-11699" class="menu_sale menu-item menu-item-type-post_type menu-item-object-page menu-item-11699"><a href="/action/">Акции</a></li>
+                        </ul>
+                    </div>
+                    <div class="footer-phones">
+                        <div class="phones">
+                                                    <a href="tel:+380730410151"  >073 04 101 51</a>
+                        
+                                                    <a href="tel:+380990410151" >099 04 101 51</a>
+                        
+                                                    <a href="tel:+380970410151" >097 04 101 51</a>
+                                                </div>
+                        <div class="social_icons">
+                            <a target="_blank" href="https://instagram.com/vkysni_dom?igshid=a7ml5oy9ih21" class="icon insta"><img src="/wp-content/themes/xx/img/inst.png"></a><a target="_blank" href="https://www.facebook.com/profile.php?id=100058574498086" class="icon facebook"><img src="/wp-content/themes/xx/img/facebook.png"></a>                        </div>
+                    </div>
+                    </div>
+				</div>
+			</footer>
+
+
+
+
+
+			<div class="developer">
+				2020-2021. Вкусный дом. Все права защищены <span class="second-row">by <a href="https://web.soft-pro.com" target="_blank">web.Soft-Pro.com</a></span>
+			</div>
+
+		</div>
+
+
+
+		<a href="#top" class="totop hidden-xs"></a>
+
+	</div>
+
+
+
+
+
+
+
+	
+
+	<div class="form-send-popup popup">
+		<div class="mini">
+			<div class="close"><i class="im-close"></i></div>
+			<img src="/wp-content/themes/xx/img/check.png" alt="">
+			<div class="title">
+				Сообщение принято
+			</div>
+			<div class="description">
+				С вами свяжутся в ближайшее время
+			</div>
+		</div>
+	</div>
+	
+	<div class="popup callback-popup">
+		<form action="" class="callback-form mini">
+			<div class="close"><i class="im-close"></i></div>
+			<div class="title">Связаться с нами</div>
+			<div class="form-cont">
+				<div class="input-row">
+					<div class="label">Имя </div>
+					<input type="text" class="required" name="name" value="">
+				</div>
+				<div class="input-row">
+					<div class="label">Телефон</div>
+					<input type="text" class="required phone" name="phone" value="">
+				</div>
+
+				<button class="submit" type="submit">Отправить</button>
+
+			</div>
+		</form>
+	</div>
+
+
+		
+	
+	<div class="popup form_loader">
+		<div class="mini">
+			<div class="loader"></div>
+		</div>
+	</div>
+	
+	
+	
+		<div class="accept-cookie">
+		<div class="container flex">
+			<div class="text">Мы используем «cookies». Принимая, Вы позволяете нам анонимно собирать статистические данные для улучшения работы сайта. Условия обработки данных посетителей сайта см. в Политике конфиденциальности</div>
+			<button class="accept-cookie-button">Принимаю</button>
+		</div>
+	</div>
+			<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+
+		<script>
+		 window.template_dir = "/wp-content/themes/xx";
+		 window.cur_lang     = "ru";
+		</script>
+
+		<script src="/wp-content/themes/xx/js/bundle-13.js?1659347666"></script>
+		<!--<script src="//cdn.jsdelivr.net/jquery.mcustomscrollbar/3.0.6/jquery.mCustomScrollbar.concat.min.js"></script>-->
+
+
+		<script src="/wp-content/themes/xx/js/jquery.mCustomScrollbar.concat.min.js"></script>
+		<script src="/wp-content/themes/xx/js/flipdown.js"></script>
+		<script src="/wp-content/themes/xx/js/app.js?1659347666"></script>
+
+
+		
+
+
+		
+		<script >(function (undefined) {var _targetWindow ="prefer-popup";
+window.NSLPopup = function (url, title, w, h) {
+    var userAgent = navigator.userAgent,
+        mobile = function () {
+            return /\b(iPhone|iP[ao]d)/.test(userAgent) ||
+                /\b(iP[ao]d)/.test(userAgent) ||
+                /Android/i.test(userAgent) ||
+                /Mobile/i.test(userAgent);
+        },
+        screenX = window.screenX !== undefined ? window.screenX : window.screenLeft,
+        screenY = window.screenY !== undefined ? window.screenY : window.screenTop,
+        outerWidth = window.outerWidth !== undefined ? window.outerWidth : document.documentElement.clientWidth,
+        outerHeight = window.outerHeight !== undefined ? window.outerHeight : document.documentElement.clientHeight - 22,
+        targetWidth = mobile() ? null : w,
+        targetHeight = mobile() ? null : h,
+        V = screenX < 0 ? window.screen.width + screenX : screenX,
+        left = parseInt(V + (outerWidth - targetWidth) / 2, 10),
+        right = parseInt(screenY + (outerHeight - targetHeight) / 2.5, 10),
+        features = [];
+    if (targetWidth !== null) {
+        features.push('width=' + targetWidth);
+    }
+    if (targetHeight !== null) {
+        features.push('height=' + targetHeight);
+    }
+    features.push('left=' + left);
+    features.push('top=' + right);
+    features.push('scrollbars=1');
+
+    var newWindow = window.open(url, title, features.join(','));
+
+    if (window.focus) {
+        newWindow.focus();
+    }
+
+    return newWindow;
+};
+
+var isWebView = null;
+
+function checkWebView() {
+    if (isWebView === null) {
+        function _detectOS(ua) {
+            if (/Android/.test(ua)) {
+                return "Android";
+            } else if (/iPhone|iPad|iPod/.test(ua)) {
+                return "iOS";
+            } else if (/Windows/.test(ua)) {
+                return "Windows";
+            } else if (/Mac OS X/.test(ua)) {
+                return "Mac";
+            } else if (/CrOS/.test(ua)) {
+                return "Chrome OS";
+            } else if (/Firefox/.test(ua)) {
+                return "Firefox OS";
+            }
+            return "";
+        }
+
+        function _detectBrowser(ua) {
+            var android = /Android/.test(ua);
+
+            if (/CriOS/.test(ua)) {
+                return "Chrome for iOS";
+            } else if (/Edge/.test(ua)) {
+                return "Edge";
+            } else if (android && /Silk\//.test(ua)) {
+                return "Silk";
+            } else if (/Chrome/.test(ua)) {
+                return "Chrome";
+            } else if (/Firefox/.test(ua)) {
+                return "Firefox";
+            } else if (android) {
+                return "AOSP";
+            } else if (/MSIE|Trident/.test(ua)) {
+                return "IE";
+            } else if (/Safari\//.test(ua)) {
+                return "Safari";
+            } else if (/AppleWebKit/.test(ua)) {
+                return "WebKit";
+            }
+            return "";
+        }
+
+        function _detectBrowserVersion(ua, browser) {
+            if (browser === "Chrome for iOS") {
+                return _getVersion(ua, "CriOS/");
+            } else if (browser === "Edge") {
+                return _getVersion(ua, "Edge/");
+            } else if (browser === "Chrome") {
+                return _getVersion(ua, "Chrome/");
+            } else if (browser === "Firefox") {
+                return _getVersion(ua, "Firefox/");
+            } else if (browser === "Silk") {
+                return _getVersion(ua, "Silk/");
+            } else if (browser === "AOSP") {
+                return _getVersion(ua, "Version/");
+            } else if (browser === "IE") {
+                return /IEMobile/.test(ua) ? _getVersion(ua, "IEMobile/") :
+                    /MSIE/.test(ua) ? _getVersion(ua, "MSIE ")
+                        :
+                        _getVersion(ua, "rv:");
+            } else if (browser === "Safari") {
+                return _getVersion(ua, "Version/");
+            } else if (browser === "WebKit") {
+                return _getVersion(ua, "WebKit/");
+            }
+            return "0.0.0";
+        }
+
+        function _getVersion(ua, token) {
+            try {
+                return _normalizeSemverString(ua.split(token)[1].trim().split(/[^\w\.]/)[0]);
+            } catch (o_O) {
+            }
+            return "0.0.0";
+        }
+
+        function _normalizeSemverString(version) {
+            var ary = version.split(/[\._]/);
+            return (parseInt(ary[0], 10) || 0) + "." +
+                (parseInt(ary[1], 10) || 0) + "." +
+                (parseInt(ary[2], 10) || 0);
+        }
+
+        function _isWebView(ua, os, browser, version, options) {
+            switch (os + browser) {
+                case "iOSSafari":
+                    return false;
+                case "iOSWebKit":
+                    return _isWebView_iOS(options);
+                case "AndroidAOSP":
+                    return false;
+                case "AndroidChrome":
+                    return parseFloat(version) >= 42 ? /; wv/.test(ua) : /\d{2}\.0\.0/.test(version) ? true : _isWebView_Android(options);
+            }
+            return false;
+        }
+
+        function _isWebView_iOS(options) {
+            var document = (window["document"] || {});
+
+            if ("WEB_VIEW" in options) {
+                return options["WEB_VIEW"];
+            }
+            return !("fullscreenEnabled" in document || "webkitFullscreenEnabled" in document || false);
+        }
+
+        function _isWebView_Android(options) {
+            if ("WEB_VIEW" in options) {
+                return options["WEB_VIEW"];
+            }
+            return !("requestFileSystem" in window || "webkitRequestFileSystem" in window || false);
+        }
+
+        var options = {};
+        var nav = window.navigator || {};
+        var ua = nav.userAgent || "";
+        var os = _detectOS(ua);
+        var browser = _detectBrowser(ua);
+        var browserVersion = _detectBrowserVersion(ua, browser);
+
+        isWebView = _isWebView(ua, os, browser, browserVersion, options);
+    }
+
+    return isWebView;
+}
+
+function isAllowedWebViewForUserAgent() {
+    var nav = window.navigator || {};
+    var ua = nav.userAgent || "";
+    if (/Instagram/.test(ua)) {
+        /*Instagram WebView*/
+        return true;
+    } else if (/FBAV/.test(ua) || /FBAN/.test(ua)) {
+        /*Facebook WebView*/
+        return true;
+    }
+
+    return false;
+}
+
+window._nsl.push(function ($) {
+
+    window.nslRedirect = function (url) {
+        $('<div style="position:fixed;z-index:1000000;left:0;top:0;width:100%;height:100%;"></div>').appendTo('body');
+        window.location = url;
+    };
+
+    var targetWindow = _targetWindow || 'prefer-popup',
+        lastPopup = false;
+
+    $(document.body).on('click', 'a[data-plugin="nsl"][data-action="connect"],a[data-plugin="nsl"][data-action="link"]', function (e) {
+        if (lastPopup && !lastPopup.closed) {
+            e.preventDefault();
+            lastPopup.focus();
+        } else {
+
+            var $target = $(this),
+                href = $target.attr('href'),
+                success = false;
+            if (href.indexOf('?') !== -1) {
+                href += '&';
+            } else {
+                href += '?';
+            }
+            var redirectTo = $target.data('redirect');
+            if (redirectTo === 'current') {
+                href += 'redirect=' + encodeURIComponent(window.location.href) + '&';
+            } else if (redirectTo && redirectTo !== '') {
+                href += 'redirect=' + encodeURIComponent(redirectTo) + '&';
+            }
+
+            if (targetWindow !== 'prefer-same-window' && checkWebView()) {
+                targetWindow = 'prefer-same-window';
+            }
+
+            if (targetWindow === 'prefer-popup') {
+
+                lastPopup = NSLPopup(href + 'display=popup', 'nsl-social-connect', $target.data('popupwidth'), $target.data('popupheight'));
+                if (lastPopup) {
+                    success = true;
+                    e.preventDefault();
+                }
+            } else if (targetWindow === 'prefer-new-tab') {
+                var newTab = window.open(href + 'display=popup', '_blank');
+                if (newTab) {
+                    if (window.focus) {
+                        newTab.focus();
+                    }
+                    success = true;
+                    e.preventDefault();
+                }
+            }
+
+            if (!success) {
+                window.location = href;
+                e.preventDefault();
+            }
+        }
+    });
+
+    var googleLoginButton = $('a[data-plugin="nsl"][data-provider="google"]');
+    if (googleLoginButton.length && checkWebView() && !isAllowedWebViewForUserAgent()) {
+        googleLoginButton.remove();
+    }
+});})();</script>		
+		
+		
+		<script async="" defer="" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDj01MsteQdSEQI4H1Abe-irxzLaJXVVOU&amp;callback=initializeMap&libraries=&v=weekly"></script>
+				<script>
+				var map, marker, zone_coordinates;
+				
+					function initializeMap() {
+						if(!jQuery('div#map-wrapper').length)
+							return
+						var centerChernomorsk = {
+							lat: 46.29911383354405,
+							lng: 30.654877414673894
+						 };
+						map = new google.maps.Map(document.getElementById("map-wrapper"), {
+							center: centerChernomorsk,
+							zoom: 11
+						});
+													zone_coordinates = JSON.parse('[{"lat":46.2877188,"lng":30.6582477},{"lat":46.2891152,"lng":30.6640487},{"lat":46.2903607,"lng":30.6629114},{"lat":46.2933854,"lng":30.6638127},{"lat":46.2941712,"lng":30.6633191},{"lat":46.2946902,"lng":30.6635123},{"lat":46.2956835,"lng":30.6629114},{"lat":46.2968992,"lng":30.6634693},{"lat":46.3030327,"lng":30.6677768},{"lat":46.3038332,"lng":30.6687853},{"lat":46.3049746,"lng":30.6695363},{"lat":46.3055082,"lng":30.669944},{"lat":46.3085759,"lng":30.6729052},{"lat":46.311155,"lng":30.6602881},{"lat":46.3194619,"lng":30.6474993},{"lat":46.3192618,"lng":30.6464157},{"lat":46.3210031,"lng":30.6467161},{"lat":46.3212476,"lng":30.6432293},{"lat":46.3200998,"lng":30.6383209},{"lat":46.3178547,"lng":30.6342869},{"lat":46.3125489,"lng":30.6333428},{"lat":46.3120746,"lng":30.6391792},{"lat":46.3090584,"lng":30.6393938},{"lat":46.308258,"lng":30.6407778},{"lat":46.3063458,"lng":30.6408208},{"lat":46.3063236,"lng":30.6354456},{"lat":46.3037517,"lng":30.6354778},{"lat":46.3034256,"lng":30.6382566},{"lat":46.2988968,"lng":30.6381064},{"lat":46.2986707,"lng":30.6384765},{"lat":46.2985928,"lng":30.6387555},{"lat":46.2976959,"lng":30.6384121},{"lat":46.2974068,"lng":30.6386696},{"lat":46.2973475,"lng":30.6381546},{"lat":46.2970732,"lng":30.6374787},{"lat":46.2964654,"lng":30.6361054},{"lat":46.2935595,"lng":30.6362556},{"lat":46.2937522,"lng":30.6408476},{"lat":46.2958131,"lng":30.6408154},{"lat":46.2959613,"lng":30.6436693},{"lat":46.2940413,"lng":30.6438087},{"lat":46.2939895,"lng":30.6442889},{"lat":46.2940395,"lng":30.646102},{"lat":46.2889935,"lng":30.6465966},{"lat":46.2893794,"lng":30.6543262},{"lat":46.289309,"lng":30.6545676},{"lat":46.2893794,"lng":30.6550772},{"lat":46.2894535,"lng":30.6565202},{"lat":46.2895797,"lng":30.6571962},{"lat":46.289298,"lng":30.657089},{"lat":46.2884677,"lng":30.6575932}]');
+							zone = new google.maps.Polygon({
+								path: zone_coordinates,
+								strokeColor: "#d68910",
+								fillColor: "#d68910",
+								fillOpacity: 0.3,
+								strokeOpacity: 1,
+								strokeWeight: 1,
+							});
+							zone.setMap(map);
+
+														//var center = JSON.parse('');
+								//console.log(center);
+								// var marker = new google.maps.Marker(
+									// {
+										// position: center[0],
+										// map:map,
+										// title: "Цена доставки:200"									// }
+								// );
+								var infowindow = new google.maps.InfoWindow({
+									content: "При заказе от 200 грн - доставка бесплатно. При заказе меньше  200 грн - доставка по тарифам такси ",
+								 });
+								// marker.setMap(map);
+								google.maps.event.addListener(zone, 'click', function(event) {
+									infowindow.setContent("Цена доставки:200");
+									infowindow.setPosition(event.latLng);
+									infowindow.open(map);
+								});
+														zone_coordinates = JSON.parse('[{"lat":46.306429,"lng":30.6260927},{"lat":46.3215316,"lng":30.6248267},{"lat":46.3211463,"lng":30.6026823},{"lat":46.3053469,"lng":30.604356}]');
+							zone = new google.maps.Polygon({
+								path: zone_coordinates,
+								strokeColor: "#66bb6a",
+								fillColor: "#66bb6a",
+								fillOpacity: 0.3,
+								strokeOpacity: 1,
+								strokeWeight: 1,
+							});
+							zone.setMap(map);
+
+														//var center = JSON.parse('[{"lat":46.31343925,"lng":30.61459135}]');
+								//console.log(center);
+								// var marker = new google.maps.Marker(
+									// {
+										// position: center[0],
+										// map:map,
+										// title: "Цена доставки:500"									// }
+								// );
+								var infowindow = new google.maps.InfoWindow({
+									content: "При заказе от 500 грн - доставка бесплатно. При заказе меньше  500 грн - доставка по тарифам такси ",
+								 });
+								// marker.setMap(map);
+								google.maps.event.addListener(zone, 'click', function(event) {
+									infowindow.setContent("Цена доставки:500");
+									infowindow.setPosition(event.latLng);
+									infowindow.open(map);
+								});
+														zone_coordinates = JSON.parse('[{"lat":46.3314444,"lng":30.5851157},{"lat":46.3300035,"lng":30.5849763},{"lat":46.3225984,"lng":30.5841394},{"lat":46.3211463,"lng":30.6026823},{"lat":46.3211906,"lng":30.6047066},{"lat":46.3218797,"lng":30.6046422},{"lat":46.3261473,"lng":30.5970462},{"lat":46.3285403,"lng":30.5919715},{"lat":46.3285181,"lng":30.5901046},{"lat":46.3307406,"lng":30.5859526}]');
+							zone = new google.maps.Polygon({
+								path: zone_coordinates,
+								strokeColor: "#66bb6a",
+								fillColor: "#66bb6a",
+								fillOpacity: 0.3,
+								strokeOpacity: 1,
+								strokeWeight: 1,
+							});
+							zone.setMap(map);
+
+														//var center = JSON.parse('');
+								//console.log(center);
+								// var marker = new google.maps.Marker(
+									// {
+										// position: center[0],
+										// map:map,
+										// title: "Цена доставки:500"									// }
+								// );
+								var infowindow = new google.maps.InfoWindow({
+									content: "При заказе от 500 грн - доставка бесплатно. При заказе меньше  500 грн - доставка по тарифам такси ",
+								 });
+								// marker.setMap(map);
+								google.maps.event.addListener(zone, 'click', function(event) {
+									infowindow.setContent("Цена доставки:500");
+									infowindow.setPosition(event.latLng);
+									infowindow.open(map);
+								});
+														zone_coordinates = JSON.parse('[{"lat":46.2741985,"lng":30.6129791},{"lat":46.2741096,"lng":30.6345869},{"lat":46.2737536,"lng":30.6361318},{"lat":46.2737536,"lng":30.6369043},{"lat":46.2715288,"lng":30.6456376},{"lat":46.2766606,"lng":30.6480194},{"lat":46.2836307,"lng":30.6532551},{"lat":46.2866261,"lng":30.6563021},{"lat":46.2877188,"lng":30.6581618},{"lat":46.289298,"lng":30.6570031},{"lat":46.2895797,"lng":30.6571103},{"lat":46.2894535,"lng":30.6564343},{"lat":46.289309,"lng":30.6544817},{"lat":46.2893794,"lng":30.6542403},{"lat":46.2889935,"lng":30.6465107},{"lat":46.2940395,"lng":30.6460161},{"lat":46.2935595,"lng":30.6361697},{"lat":46.2964654,"lng":30.6360195},{"lat":46.2963493,"lng":30.6271928},{"lat":46.2820414,"lng":30.6287105},{"lat":46.2811159,"lng":30.6180547}]');
+							zone = new google.maps.Polygon({
+								path: zone_coordinates,
+								strokeColor: "#66bb6a",
+								fillColor: "#66bb6a",
+								fillOpacity: 0.3,
+								strokeOpacity: 1,
+								strokeWeight: 1,
+							});
+							zone.setMap(map);
+
+														//var center = JSON.parse('');
+								//console.log(center);
+								// var marker = new google.maps.Marker(
+									// {
+										// position: center[0],
+										// map:map,
+										// title: "Цена доставки:500"									// }
+								// );
+								var infowindow = new google.maps.InfoWindow({
+									content: "При заказе от 500 грн - доставка бесплатно. При заказе меньше  500 грн - доставка по тарифам такси ",
+								 });
+								// marker.setMap(map);
+								google.maps.event.addListener(zone, 'click', function(event) {
+									infowindow.setContent("Цена доставки:500");
+									infowindow.setPosition(event.latLng);
+									infowindow.open(map);
+								});
+														zone_coordinates = JSON.parse('[{"lat":46.3396468,"lng":30.647201},{"lat":46.338432,"lng":30.644154},{"lat":46.3338987,"lng":30.6387037},{"lat":46.3340765,"lng":30.6370729},{"lat":46.3336024,"lng":30.6368584},{"lat":46.3325356,"lng":30.6356138},{"lat":46.3336024,"lng":30.6320948},{"lat":46.3350098,"lng":30.6310219},{"lat":46.3355728,"lng":30.6308502},{"lat":46.3356765,"lng":30.6305927},{"lat":46.3358098,"lng":30.6305391},{"lat":46.3359284,"lng":30.6307644},{"lat":46.3362098,"lng":30.6308609},{"lat":46.3366173,"lng":30.6306464},{"lat":46.3369135,"lng":30.630067},{"lat":46.3372321,"lng":30.6300992},{"lat":46.3367506,"lng":30.6273097},{"lat":46.3365984,"lng":30.6259222},{"lat":46.3361169,"lng":30.625654},{"lat":46.3358354,"lng":30.6250853},{"lat":46.3355391,"lng":30.6250746},{"lat":46.3353243,"lng":30.6248386},{"lat":46.3342206,"lng":30.6212337},{"lat":46.3335094,"lng":30.6189484},{"lat":46.3336872,"lng":30.6173069},{"lat":46.3342872,"lng":30.6157513},{"lat":46.3355613,"lng":30.6149573},{"lat":46.3368465,"lng":30.6143887},{"lat":46.3370021,"lng":30.6142063},{"lat":46.3371799,"lng":30.6138576},{"lat":46.3375354,"lng":30.6138576},{"lat":46.3377095,"lng":30.6135572},{"lat":46.3381539,"lng":30.6132353},{"lat":46.3389983,"lng":30.6130208},{"lat":46.3398983,"lng":30.6128545},{"lat":46.3407427,"lng":30.6126077},{"lat":46.340913,"lng":30.6125004},{"lat":46.341276,"lng":30.6124682},{"lat":46.3417167,"lng":30.6120552},{"lat":46.3425573,"lng":30.6118191},{"lat":46.3296387,"lng":30.6072969},{"lat":46.3299424,"lng":30.6139917},{"lat":46.3266679,"lng":30.6142278},{"lat":46.3268457,"lng":30.6172104},{"lat":46.327005,"lng":30.6190289},{"lat":46.3218483,"lng":30.6194581},{"lat":46.3213148,"lng":30.6195654},{"lat":46.3215316,"lng":30.6248267},{"lat":46.3213222,"lng":30.6248547},{"lat":46.3211221,"lng":30.6342424},{"lat":46.3200998,"lng":30.6381492},{"lat":46.3212476,"lng":30.6430576},{"lat":46.3210031,"lng":30.6465444},{"lat":46.3214938,"lng":30.6474357},{"lat":46.3218346,"lng":30.6478005},{"lat":46.3230794,"lng":30.6483477},{"lat":46.3283249,"lng":30.6504076},{"lat":46.3296732,"lng":30.6501716},{"lat":46.3332736,"lng":30.6494957},{"lat":46.3357477,"lng":30.6481224},{"lat":46.338007,"lng":30.647071},{"lat":46.3383847,"lng":30.6471997}]');
+							zone = new google.maps.Polygon({
+								path: zone_coordinates,
+								strokeColor: "#66bb6a",
+								fillColor: "#66bb6a",
+								fillOpacity: 0.3,
+								strokeOpacity: 1,
+								strokeWeight: 1,
+							});
+							zone.setMap(map);
+
+														//var center = JSON.parse('');
+								//console.log(center);
+								// var marker = new google.maps.Marker(
+									// {
+										// position: center[0],
+										// map:map,
+										// title: "Цена доставки:500"									// }
+								// );
+								var infowindow = new google.maps.InfoWindow({
+									content: "При заказе от 500 грн - доставка бесплатно. При заказе меньше  500 грн - доставка по тарифам такси ",
+								 });
+								// marker.setMap(map);
+								google.maps.event.addListener(zone, 'click', function(event) {
+									infowindow.setContent("Цена доставки:500");
+									infowindow.setPosition(event.latLng);
+									infowindow.open(map);
+								});
+														zone_coordinates = JSON.parse('[{"lat":46.3497543,"lng":30.6143316},{"lat":46.3451089,"lng":30.6126467},{"lat":46.3440128,"lng":30.61402},{"lat":46.3421464,"lng":30.6154792},{"lat":46.3399243,"lng":30.6153504},{"lat":46.3370503,"lng":30.6171529},{"lat":46.3371985,"lng":30.6192128},{"lat":46.3381763,"lng":30.6200282},{"lat":46.3392133,"lng":30.6192128},{"lat":46.342413,"lng":30.618097},{"lat":46.3439239,"lng":30.6189982},{"lat":46.3454644,"lng":30.620629},{"lat":46.3459384,"lng":30.6234185},{"lat":46.3452571,"lng":30.6255213},{"lat":46.3443091,"lng":30.6275384},{"lat":46.3432722,"lng":30.6266371},{"lat":46.3414649,"lng":30.624663},{"lat":46.3402206,"lng":30.6227748},{"lat":46.3386207,"lng":30.6244056},{"lat":46.3387985,"lng":30.6250493},{"lat":46.3365984,"lng":30.6259222},{"lat":46.3372321,"lng":30.6300992},{"lat":46.3388281,"lng":30.6320016},{"lat":46.3421908,"lng":30.6338255},{"lat":46.3429315,"lng":30.6352417},{"lat":46.3443683,"lng":30.6373016},{"lat":46.3445757,"lng":30.6372802},{"lat":46.3450497,"lng":30.6375806},{"lat":46.34542,"lng":30.6385891},{"lat":46.346368,"lng":30.6398551},{"lat":46.3478048,"lng":30.6402628},{"lat":46.3486151,"lng":30.6402925},{"lat":46.349015,"lng":30.6413439},{"lat":46.3495779,"lng":30.6408504},{"lat":46.3499778,"lng":30.6407645},{"lat":46.3500814,"lng":30.6410006},{"lat":46.350585,"lng":30.6425026},{"lat":46.3511034,"lng":30.642288},{"lat":46.3517551,"lng":30.6421593},{"lat":46.3524364,"lng":30.6415799},{"lat":46.3530732,"lng":30.6414726},{"lat":46.3540507,"lng":30.641022},{"lat":46.3546875,"lng":30.6405929},{"lat":46.3550133,"lng":30.6406358},{"lat":46.3555021,"lng":30.6408718},{"lat":46.3557983,"lng":30.640786},{"lat":46.3561685,"lng":30.6403783},{"lat":46.3571163,"lng":30.6400779},{"lat":46.3593376,"lng":30.6394556},{"lat":46.3626547,"lng":30.6393912},{"lat":46.3636468,"lng":30.6399277},{"lat":46.3640762,"lng":30.6398848},{"lat":46.3652312,"lng":30.6353787},{"lat":46.3642687,"lng":30.6310442},{"lat":46.3628102,"lng":30.6276003},{"lat":46.3627805,"lng":30.6260982},{"lat":46.3632988,"lng":30.6237808},{"lat":46.3643501,"lng":30.6219354},{"lat":46.3647647,"lng":30.6205836},{"lat":46.3647499,"lng":30.6194463},{"lat":46.3628694,"lng":30.6133738},{"lat":46.362588,"lng":30.6120649}]');
+							zone = new google.maps.Polygon({
+								path: zone_coordinates,
+								strokeColor: "#7B68EE",
+								fillColor: "#7B68EE",
+								fillOpacity: 0.3,
+								strokeOpacity: 1,
+								strokeWeight: 1,
+							});
+							zone.setMap(map);
+
+														//var center = JSON.parse('');
+								//console.log(center);
+								// var marker = new google.maps.Marker(
+									// {
+										// position: center[0],
+										// map:map,
+										// title: "Цена доставки:900"									// }
+								// );
+								var infowindow = new google.maps.InfoWindow({
+									content: "При заказе от 900 грн - доставка бесплатно. При заказе меньше  900 грн - доставка по тарифам такси ",
+								 });
+								// marker.setMap(map);
+								google.maps.event.addListener(zone, 'click', function(event) {
+									infowindow.setContent("Цена доставки:900");
+									infowindow.setPosition(event.latLng);
+									infowindow.open(map);
+								});
+														zone_coordinates = JSON.parse('[{"lat":46.3225984,"lng":30.5841394},{"lat":46.3314444,"lng":30.5851157},{"lat":46.3307406,"lng":30.5859526},{"lat":46.3285181,"lng":30.5901046},{"lat":46.3285403,"lng":30.5919715},{"lat":46.3262141,"lng":30.596908},{"lat":46.3218797,"lng":30.6046422},{"lat":46.3497543,"lng":30.6143316},{"lat":46.352124,"lng":30.5975088},{"lat":46.3591734,"lng":30.5916294},{"lat":46.3589661,"lng":30.5848058},{"lat":46.3589218,"lng":30.5728629},{"lat":46.3567794,"lng":30.5700991},{"lat":46.3487278,"lng":30.5601769},{"lat":46.343251,"lng":30.5556064},{"lat":46.3409401,"lng":30.5563359},{"lat":46.3334735,"lng":30.5359941},{"lat":46.3288508,"lng":30.5362516},{"lat":46.3237536,"lng":30.547195},{"lat":46.323798,"lng":30.5580955},{"lat":46.3233535,"lng":30.5705624}]');
+							zone = new google.maps.Polygon({
+								path: zone_coordinates,
+								strokeColor: "#7B68EE",
+								fillColor: "#7B68EE",
+								fillOpacity: 0.3,
+								strokeOpacity: 1,
+								strokeWeight: 1,
+							});
+							zone.setMap(map);
+
+														//var center = JSON.parse('');
+								//console.log(center);
+								// var marker = new google.maps.Marker(
+									// {
+										// position: center[0],
+										// map:map,
+										// title: "Цена доставки:900"									// }
+								// );
+								var infowindow = new google.maps.InfoWindow({
+									content: "При заказе от 900 грн - доставка бесплатно. При заказе меньше  900 грн - доставка по тарифам такси ",
+								 });
+								// marker.setMap(map);
+								google.maps.event.addListener(zone, 'click', function(event) {
+									infowindow.setContent("Цена доставки:900");
+									infowindow.setPosition(event.latLng);
+									infowindow.open(map);
+								});
+														zone_coordinates = JSON.parse('[{"lat":46.3258711,"lng":30.6660678},{"lat":46.3252635,"lng":30.6675698},{"lat":46.3255747,"lng":30.6695868},{"lat":46.3271454,"lng":30.6708743},{"lat":46.3283308,"lng":30.6707884},{"lat":46.3310274,"lng":30.6701233},{"lat":46.3352054,"lng":30.6705309},{"lat":46.3376943,"lng":30.6690289},{"lat":46.3391461,"lng":30.6678273},{"lat":46.3422643,"lng":30.668278},{"lat":46.3453825,"lng":30.6666686},{"lat":46.354758,"lng":30.6648661},{"lat":46.3543433,"lng":30.6459834},{"lat":46.3533066,"lng":30.6463052},{"lat":46.3521958,"lng":30.6458975},{"lat":46.3517663,"lng":30.6455971},{"lat":46.3515738,"lng":30.6442024},{"lat":46.3508925,"lng":30.6437089},{"lat":46.3506703,"lng":30.642872},{"lat":46.350537,"lng":30.6435801},{"lat":46.3499446,"lng":30.6440951},{"lat":46.3496483,"lng":30.6447603},{"lat":46.3498113,"lng":30.645404},{"lat":46.3483153,"lng":30.6462194},{"lat":46.3470119,"lng":30.6463482},{"lat":46.345975,"lng":30.647936},{"lat":46.3451455,"lng":30.6490518},{"lat":46.3459454,"lng":30.652485},{"lat":46.3436643,"lng":30.6556608},{"lat":46.3434569,"lng":30.6571628},{"lat":46.3423015,"lng":30.6584074},{"lat":46.3418571,"lng":30.6575491},{"lat":46.3406127,"lng":30.6587936},{"lat":46.340672,"lng":30.6593944},{"lat":46.3390721,"lng":30.661111},{"lat":46.339398,"lng":30.662141},{"lat":46.3378573,"lng":30.6629135},{"lat":46.3367906,"lng":30.6634285},{"lat":46.3339758,"lng":30.6635143},{"lat":46.3331165,"lng":30.6613685},{"lat":46.332672,"lng":30.661626},{"lat":46.3326127,"lng":30.6627418},{"lat":46.3283456,"lng":30.6628706}]');
+							zone = new google.maps.Polygon({
+								path: zone_coordinates,
+								strokeColor: "#7B68EE",
+								fillColor: "#7B68EE",
+								fillOpacity: 0.3,
+								strokeOpacity: 1,
+								strokeWeight: 1,
+							});
+							zone.setMap(map);
+
+														//var center = JSON.parse('');
+								//console.log(center);
+								// var marker = new google.maps.Marker(
+									// {
+										// position: center[0],
+										// map:map,
+										// title: "Цена доставки:900"									// }
+								// );
+								var infowindow = new google.maps.InfoWindow({
+									content: "При заказе от 900 грн - доставка бесплатно. При заказе меньше  900 грн - доставка по тарифам такси ",
+								 });
+								// marker.setMap(map);
+								google.maps.event.addListener(zone, 'click', function(event) {
+									infowindow.setContent("Цена доставки:900");
+									infowindow.setPosition(event.latLng);
+									infowindow.open(map);
+								});
+														zone_coordinates = JSON.parse('[{"lat":46.2740992,"lng":30.6294852},{"lat":46.2699462,"lng":30.6300431},{"lat":46.2643094,"lng":30.6276828},{"lat":46.263894,"lng":30.6187134},{"lat":46.2566247,"lng":30.6196576},{"lat":46.2570104,"lng":30.6242924},{"lat":46.2485233,"lng":30.6205588},{"lat":46.2454368,"lng":30.617941},{"lat":46.2441903,"lng":30.6213742},{"lat":46.2447542,"lng":30.6221038},{"lat":46.2430031,"lng":30.626567},{"lat":46.2715288,"lng":30.6456376},{"lat":46.2737536,"lng":30.6369043},{"lat":46.2737536,"lng":30.6361318},{"lat":46.2741096,"lng":30.6345869}]');
+							zone = new google.maps.Polygon({
+								path: zone_coordinates,
+								strokeColor: "#7B68EE",
+								fillColor: "#7B68EE",
+								fillOpacity: 0.3,
+								strokeOpacity: 1,
+								strokeWeight: 1,
+							});
+							zone.setMap(map);
+
+														//var center = JSON.parse('');
+								//console.log(center);
+								// var marker = new google.maps.Marker(
+									// {
+										// position: center[0],
+										// map:map,
+										// title: "Цена доставки:900"									// }
+								// );
+								var infowindow = new google.maps.InfoWindow({
+									content: "При заказе от 900 грн - доставка бесплатно. При заказе меньше  900 грн - доставка по тарифам такси ",
+								 });
+								// marker.setMap(map);
+								google.maps.event.addListener(zone, 'click', function(event) {
+									infowindow.setContent("Цена доставки:900");
+									infowindow.setPosition(event.latLng);
+									infowindow.open(map);
+								});
+														zone_coordinates = JSON.parse('[{"lat":46.2430031,"lng":30.626567},{"lat":46.2447542,"lng":30.6221038},{"lat":46.2441903,"lng":30.6213742},{"lat":46.2454368,"lng":30.617941},{"lat":46.2416592,"lng":30.614624},{"lat":46.2421341,"lng":30.6119203},{"lat":46.2422528,"lng":30.6081867},{"lat":46.240739,"lng":30.5995607},{"lat":46.2345353,"lng":30.6012344},{"lat":46.2353071,"lng":30.603981},{"lat":46.2290433,"lng":30.6032085},{"lat":46.2260447,"lng":30.6038093},{"lat":46.2210864,"lng":30.594604},{"lat":46.2145091,"lng":30.5991101},{"lat":46.2287464,"lng":30.6140875},{"lat":46.2349508,"lng":30.6198811},{"lat":46.2424902,"lng":30.6258034}]');
+							zone = new google.maps.Polygon({
+								path: zone_coordinates,
+								strokeColor: "#7B68EE",
+								fillColor: "#7B68EE",
+								fillOpacity: 0.3,
+								strokeOpacity: 1,
+								strokeWeight: 1,
+							});
+							zone.setMap(map);
+
+														//var center = JSON.parse('');
+								//console.log(center);
+								// var marker = new google.maps.Marker(
+									// {
+										// position: center[0],
+										// map:map,
+										// title: "Цена доставки:900"									// }
+								// );
+								var infowindow = new google.maps.InfoWindow({
+									content: "При заказе от 900 грн - доставка бесплатно. При заказе меньше  900 грн - доставка по тарифам такси ",
+								 });
+								// marker.setMap(map);
+								google.maps.event.addListener(zone, 'click', function(event) {
+									infowindow.setContent("Цена доставки:900");
+									infowindow.setPosition(event.latLng);
+									infowindow.open(map);
+								});
+												}
+			</script>
+	</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+

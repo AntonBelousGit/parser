@@ -9,39 +9,39 @@ use Illuminate\Contracts\Container\BindingResolutionException;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\ParseTestCase;
 
-class ParseZharPizzaTest extends ParseTestCase
+class VdhBarParseTest extends ParseTestCase
 {
     use RefreshDatabase;
 
     /**
      * @throws BindingResolutionException
      */
-    public function testZharPizzaParse()
+    public function testVdhBarParse()
     {
-        $config = config('parsers.zharPizza');
-        $response = $this->parse($config, 'zharPizza');
+        $config = config('parsers.vdhBar');
+        $response = $this->parse($config, 'vdhBar');
         $this->assertNotEmpty($response);
         $this->assertNotEmpty($response->products[0]);
         $this->assertNotNull($response->attributes->sizes[0]);
         $this->assertNotNull($response->attributes->toppings[0]);
     }
 
-    public function testZharPizzaWrongTypeParse()
+    public function testVdhBarWrongTypeParse()
     {
-        $config = config('parsers.zharPizza');
+        $config = config('parsers.vdhBar');
         try {
-            $this->parse($config, 'zharPizza', 'DiDom');
+            $this->parse($config, 'vdhBar', 'DiDom');
         } catch (Exception $exception) {
             $message = $exception->getMessage();
             $this->assertStringContainsString('Attempt to read property "products" on null', $message);
         }
     }
 
-    public function testZharPizzaValidationProblemParse()
+    public function testVdhBarValidationProblemParse()
     {
-        $config = config('parsers.zharPizza');
+        $config = config('parsers.vdhBar');
         try {
-            $this->parse($config, 'corruptFile/zharPizzaValidation');
+            $this->parse($config, 'corruptFile/vdhBarValidation');
         } catch (Exception $exception) {
             $message = $exception->getMessage();
             $this->assertStringContainsString('Parse data is invalid', $message);
@@ -51,11 +51,11 @@ class ParseZharPizzaTest extends ParseTestCase
     /**
      * Removed part of the code
      */
-    public function testParserDominoCorruptedFileParse()
+    public function testVdhBarCorruptedFileParse()
     {
-        $config = config('parsers.zharPizza');
+        $config = config('parsers.vdhBar');
         try {
-            $this->parse($config, 'corruptFile/zharPizzaCorrupted');
+            $this->parse($config, 'corruptFile/vdhBarCorrupted');
         } catch (Exception $exception) {
             $message = $exception->getMessage();
             $this->assertStringContainsString('Attempt to read property "products" on null', $message);

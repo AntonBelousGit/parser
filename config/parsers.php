@@ -5,6 +5,7 @@ use App\Services\ParserManager\Drivers\DominoParseDriver;
 use App\Services\ParserManager\Drivers\OrigamiPizzaParseDriver;
 use App\Services\ParserManager\Drivers\SushiBossParseDriver;
 use App\Services\ParserManager\Drivers\VdhPizzaParseDriver;
+use App\Services\ParserManager\Drivers\VkusnoDomParseDriver;
 use App\Services\ParserManager\Drivers\ZharPizzaParseDriver;
 
 /**
@@ -31,6 +32,10 @@ return [
     'sushiboss' => [
         'driver' => SushiBossParseDriver::class,
         'url' => 'https://chernomorsk.sushiboss.od.ua/picca-c27/',
+    ],
+    'vkusnoDom' => [
+        'driver' => VkusnoDomParseDriver::class,
+        'url' => 'https://vkusno-dom.com/pizza/',
     ],
 ];
 
