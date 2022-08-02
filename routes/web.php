@@ -15,5 +15,6 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    $class =  app()->make(\App\Services\ParserManager\Drivers\BeerlinParseDriver::class);
+    $products = $class->parseProduct('http://www.beerlin.od.ua/product-category/piczcza/');
 });

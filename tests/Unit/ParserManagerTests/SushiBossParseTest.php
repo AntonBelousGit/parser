@@ -16,7 +16,7 @@ class SushiBossParseTest extends ParseTestCase
     /**
      * @throws BindingResolutionException
      */
-    public function testParserDominoParse()
+    public function testParserSushiBossParse()
     {
         $config = config('parsers.sushiboss');
         $response = $this->parse($config, 'sushiboss', 'DiDom');
@@ -27,7 +27,7 @@ class SushiBossParseTest extends ParseTestCase
         $this->assertNotNull($response->attributes->flavors[0]);
     }
 
-    public function testParserDominoValidationProblemParse()
+    public function testParserSushiBossValidationProblemParse()
     {
         $config = config('parsers.sushiboss');
         try {

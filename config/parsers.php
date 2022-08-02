@@ -1,6 +1,7 @@
 <?php
 declare(strict_types=1);
 
+use App\Services\ParserManager\Drivers\BeerlinParseDriver;
 use App\Services\ParserManager\Drivers\DominoParseDriver;
 use App\Services\ParserManager\Drivers\OrigamiPizzaParseDriver;
 use App\Services\ParserManager\Drivers\SushiBossParseDriver;
@@ -36,6 +37,10 @@ return [
     'vkusnoDom' => [
         'driver' => VkusnoDomParseDriver::class,
         'url' => 'https://vkusno-dom.com/pizza/',
+    ],
+    'beerlin' => [
+        'driver' => BeerlinParseDriver::class,
+        'url' => 'http://www.beerlin.od.ua/product-category/piczcza/',
     ],
 ];
 

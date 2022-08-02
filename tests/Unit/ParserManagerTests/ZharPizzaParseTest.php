@@ -51,7 +51,7 @@ class ZharPizzaParseTest extends ParseTestCase
     /**
      * Removed part of the code
      */
-    public function testParserDominoCorruptedFileParse()
+    public function testParserZharPizzaCorruptedFileParse()
     {
         $config = config('parsers.zharPizza');
         try {

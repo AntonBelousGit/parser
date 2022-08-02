@@ -17,7 +17,7 @@ use DiDom\Exceptions\InvalidSelectorException;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Str;
 
-class VkusnoDomParseDriver extends BaseDriver
+class BeerlinParseDriver extends BaseDriver
 {
     /**
      * OrigamiPizzaParseDriver constructor.
@@ -39,28 +39,30 @@ class VkusnoDomParseDriver extends BaseDriver
     public function parseProduct(string $url): ParserProductDataDTO
     {
         $productsParse = new Document($this->getHtml($url));
-        $parsedData = $productsParse->find('.row-catalog > .product-in-row > div > .product-wrapper');
+        $parsedData = $productsParse->find('.woocommerce-loop-product__title > a');
         $collectTopping = collect();
         $products = collect();
         foreach ($parsedData as $product) {
-            $data = $this->prepareParsedProducts($product);
+            $url = $product->attr('href');
+            $xml = new Document($this->getHtml($url));
+            $data = $this->prepareParsedProducts($xml->first('.nm-single-product'));
+            $data['url'] = $url;
+            $topping = $this->parseTopping($data['topping']);
             $product = $this->parseValidatorContract->validate($data, $this->validationRules());
-            $topping = $this->parseTopping($product['topping']);
             $products->push(new ProductDTO(
                 id: $product['url'],
                 name: $product['name'],
                 images: [$product['image']],
                 imagesMobile: [$product['image']],
                 toppings: $topping,
-                sizes: collect(),
+                sizes: collect([new SizeDTO(id: '30sm', name: "30см")]),
                 flavors: collect(),
                 attributes: new ProductAttributeDTO(
-                    attributes: collect([['size_id' => 'standartna', 'flavor_id' => '','topping_id' => '', 'price' => (float)str_replace('грн', '', $product['price'])]]),
+                    attributes: collect([['size_id' => '30sm', 'flavor_id' => '', 'topping_id' => '', 'price' => (float)str_replace('грн', '', $product['price'])]]),
                 )
             ));
             $collectTopping->push($topping);
         }
-
         $parseAttribute = $this->parseAttribute($collectTopping);
 
         return new ParserProductDataDTO(
@@ -78,20 +80,24 @@ class VkusnoDomParseDriver extends BaseDriver
      */
     protected function prepareParsedProducts(Element $product): array
     {
-        $productContent = $product->first('.product-content');
-        $name = $productContent->first('div > a')->text();
-        $url = 'https://vkusno-dom.com'.$productContent->first('div > a')->attr('href');
-        $topping = $productContent->first('.description > p')->text();
-        $priceRaw = $productContent->first('.price > div')->text();
+        $image = $product->first('.woocommerce-product-gallery__image > a')->attr('href');
+        $imageMobile = $product->first('.woocommerce-product-gallery__image > a > img')->attr('src');
+        $productContent = $product->first('.summary');
+        $name = $productContent->first('h1')->text();
+        $toppingTemp1 = $productContent->find('.woocommerce-product-details__short-description > p');
+        $toppingTemp2 = $product->find('.nm-tabs-panel-inner');
+        $topping = [];
+        if (!empty($toppingTemp1)) $topping = $toppingTemp1;
+        if (!empty($toppingTemp2)) $topping = $toppingTemp2;
+        $priceRaw = $productContent->first('.woocommerce-Price-amount')->text();
         preg_match('/\d+/', $priceRaw, $price);
         $price = $price[0];
-        $image = 'https://vkusno-dom.com'. $product->first('.img > a > img')->attr('src');
 
         return [
-            'url' => $url,
+            'url' => '',
             'name' => $name,
             'image' => $image,
-            'image_mobile' => $image,
+            'image_mobile' => $imageMobile,
             'topping' => $topping,
             'price' => $price
         ];
@@ -106,7 +112,7 @@ class VkusnoDomParseDriver extends BaseDriver
     protected function parseAttribute(Collection $topping): AttributeDTO
     {
         return new AttributeDTO(
-            sizes: collect([new SizeDTO(id: 'standartna', name: 'Стандартна')]),
+            sizes: collect([new SizeDTO(id: '30sm', name: '30cм')]),
             flavors: collect(),
             toppings: $this->removeDuplicates($topping->flatten(1), 'id')
         );
@@ -115,16 +121,26 @@ class VkusnoDomParseDriver extends BaseDriver
     /**
      * Parse attribute topping
      *
-     * @param string $data
+     * @param array $data
      * @return Collection
      */
-    protected function parseTopping(string $data): Collection
+    protected function parseTopping(array $data): Collection
     {
         $tempCollect = collect();
-        $array = array_map('trim', explode(',', $data));
-        foreach ($array as $topping) {
-            $cleanValueHtml = trim(strip_tags($topping));
-            $tempCollect->push(new ToppingDTO(id: Str::slug($cleanValueHtml), name: Str::ucfirst($cleanValueHtml)));
+        if ($data) {
+            array_pop($data);
+            if (count($data) === 1) {
+                $data = preg_replace('/Состав- /', '', $data[0]->text());
+                $array = array_map('trim', explode(',', $data));
+                foreach ($array as $topping) {
+                    $tempCollect->push(new ToppingDTO(id: Str::slug($topping), name: Str::ucfirst($topping)));
+                }
+            } else {
+                foreach ($data as $item) {
+                    $data = preg_replace('/-/', '', $item->text());
+                    $tempCollect->push(new ToppingDTO(id: Str::slug($data), name: Str::ucfirst($data)));
+                }
+            }
         }
 
         return $tempCollect;
@@ -142,7 +158,7 @@ class VkusnoDomParseDriver extends BaseDriver
             'name' => ['required', 'string', 'max:50'],
             'image' => ['required', 'string'],
             'image_mobile' => ['required', 'string'],
-            'topping' => ['required', 'string'],
+            'topping' => ['nullable'],
             'price' => ['required', 'string', 'max:10']
         ];
     }

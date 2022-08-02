@@ -10,42 +10,39 @@ use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\ParseTestCase;
 use Throwable;
 
-class VkusnoDomParseTest extends ParseTestCase
+class BeerlinParseTest extends ParseTestCase
 {
     use RefreshDatabase;
 
     /**
      * @throws BindingResolutionException
      */
-    public function testOrigamiParse()
+    public function testBeerlinParse()
     {
-        $config = config('parsers.vkusnoDom');
-        $response = $this->parse($config, 'vkusnoDom', 'DiDom');
+        $config = config('parsers.beerlin');
+        $response = $this->parseTwo($config, 'beerlin', 'beerlinSingle', 'DiDom');
         $this->assertNotEmpty($response);
         $this->assertNotEmpty($response->products[0]);
         $this->assertNotNull($response->attributes->sizes[0]);
         $this->assertNotNull($response->attributes->toppings[0]);
     }
 
-    public function testVkusnoDomValidationProblemParse()
+    public function testBeerlinParseValidationProblemParse()
     {
-        $config = config('parsers.vkusnoDom');
+        $config = config('parsers.beerlin');
         try {
-            $this->parse($config, 'corruptFile/vkusnoDomValidation', 'DiDom');
+            $this->parseTwo($config, 'beerlin', 'corruptFile/beerlinSingleValidation', 'DiDom');
         } catch (Exception $exception) {
             $message = $exception->getMessage();
             $this->assertStringContainsString('Parse data is invalid', $message);
         }
     }
 
-    /**
-     * Change tag p to span
-     */
-    public function testVkusnoDomCorruptedFileParse()
+    public function testBeerlinParseCorrupted()
     {
-        $config = config('parsers.vkusnoDom');
+        $config = config('parsers.beerlin');
         try {
-            $this->parse($config, 'corruptFile/vkusnoDomCorruptedParse', 'DiDom');
+            $this->parseTwo($config, 'beerlin', 'corruptFile/beerlinSingleCorruptedParse', 'DiDom');
         } catch (Throwable $exception) {
             $message = $exception->getMessage();
             $this->assertStringContainsString('Call to a member function text() on null', $message);
